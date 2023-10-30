@@ -17,7 +17,8 @@ public:
 	static void Initialize();
 	static void Finalize();
 
-	static uint32_t LoadTexture(const std::string& filePath);
+	static uint32_t LoadTexture(const string& filePath);
+	static void UnLoadTexture(const string& filePath);
 
 private:
 
@@ -25,7 +26,6 @@ private:
 
 	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);
 
-	static void UploadTexData(const DirectX::ScratchImage& mipImage);
 
 	static D3D12_RESOURCE_DESC SettingResource(const DirectX::TexMetadata& metadata);
 

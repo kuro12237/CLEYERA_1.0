@@ -17,7 +17,7 @@ void TextureManager::Finalize()
 	TextureManager::GetInstance()->texDatas_.clear();
 }
 
-uint32_t TextureManager::LoadTexture(const std::string& filePath)
+uint32_t TextureManager::LoadTexture(const string& filePath)
 {
 	//texのファイルの名前が被った場合は入らない
 	if (CheckTexDatas(filePath))
@@ -80,6 +80,11 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath)
 	return TextureManager::GetInstance()->texDatas_[filePath]->GetTexHandle();
 }
 
+void TextureManager::UnLoadTexture(const string& filePath)
+{
+	TextureManager::GetInstance()->texDatas_[filePath]->texRelease();
+}
+
 bool TextureManager::CheckTexDatas(string filePath)
 {
 	if (TextureManager::GetInstance()->texDatas_.find(filePath)==TextureManager::GetInstance()->texDatas_.end())
@@ -88,7 +93,6 @@ bool TextureManager::CheckTexDatas(string filePath)
 	}
 	return false;
 }
-
 
 DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath)
 {
@@ -102,9 +106,7 @@ DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath
 	hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImage);
 
 	return mipImage;
-
 }
-
 
 D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& metadata)
 {
