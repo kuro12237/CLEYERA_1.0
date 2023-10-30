@@ -58,6 +58,7 @@
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
     <ClCompile Include="CLEYERA\Input\Input.cpp" />
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.h" />
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TextureManager.h" />
     <ClInclude Include="CLEYERA\Input\Input.h" />
     <ClInclude Include="CLEYERA\math\Matrix2x2.h" />

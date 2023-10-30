@@ -272,6 +272,9 @@
       <Filter>CLEYERA\Model\Cube</Filter>
     </ClCompile>
     <ClCompile Include="Project\GameObject\StartCount\StartCount.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.cpp">
+      <Filter>CLEYERA\Graphics\TextureManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -446,6 +449,9 @@
       <Filter>CLEYERA\Model\Cube</Filter>
     </ClInclude>
     <ClInclude Include="Project\GameObject\StartCount\StartCount.h" />
+    <ClInclude Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.h">
+      <Filter>CLEYERA\Graphics\TextureManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

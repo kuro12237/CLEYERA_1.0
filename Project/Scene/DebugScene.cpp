@@ -12,11 +12,17 @@ void DebugScene::Initialize()
 	sprite_ = make_unique<Sprite>();
 
 	SpriteTexHandle = TextureManager::LoadTexture("Resources/mob.png");
+
+	uint32_t SpriteTexHandlem = TextureManager::LoadTexture("Resources/mob.png");
+
+	SpriteTexHandle = TextureManager::LoadTexture("Resources/CLEYERA.png");
+
+
 	sprite_->SetTexHandle(SpriteTexHandle);
 	sprite_->Initialize(new SpriteBoxState,{0,0},{320,320});
 	
 	sprite2_ = make_unique<Sprite>();
-	sprite2_->SetTexHandle(SpriteTexHandle);
+	sprite2_->SetTexHandle(SpriteTexHandlem);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
 	
 	

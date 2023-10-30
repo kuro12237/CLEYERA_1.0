@@ -1,4 +1,10 @@
-#include"TextureManager.h"
+#include "TextureManager.h"
+
+TextureManager* TextureManager::GetInstance()
+{
+	static TextureManager instance;
+	return &instance;
+}
 
 void TextureManager::Initialize()
 {
@@ -8,13 +14,81 @@ void TextureManager::Initialize()
 void TextureManager::Finalize()
 {
 	CoUninitialize();
+	TextureManager::GetInstance()->texDatas_.clear();
 }
 
-TextureManager* TextureManager::GetInstance()
+uint32_t TextureManager::LoadTexture(const std::string& filePath)
 {
-	static TextureManager instance;
-	return &instance;
+	//texのファイルの名前が被った場合は入らない
+	if (CheckTexDatas(filePath))
+	{
+		DescriptorManager::IndexIncrement();
+		uint32_t index = DescriptorManager::GetIndex();
+		TexData texData = {};
+		//新しく作る
+		//ハンドル登録
+		texData.index = index;
+
+		DirectX::ScratchImage mipImages = CreateMipImage(filePath);
+		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+		texData.resource = CreateTexResource(metadata);
+	
+		for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
+		{
+			const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
+			texData.resource->
+				WriteToSubresource(
+					UINT(mipLevel),
+					nullptr,
+					img->pixels,
+					UINT(img->rowPitch),
+					UINT(img->slicePitch)
+				);
+		}
+
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = metadata.format;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+
+		//Despcripter
+		DescriptorManager::SetCPUDescripterHandle(
+			DescriptorManager::GetCPUDescriptorHandle(
+				DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+				DescriptorManager::GetDescripterSize().SRV, index),
+			index
+		);
+
+		DescriptorManager::SetGPUDescripterHandle(
+			DescriptorManager::GetGPUDescriptorHandle(
+				DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+				DescriptorManager::GetDescripterSize().SRV, index),
+			index
+		);
+
+		DescriptorManager::CGHandlePtr();
+		DescriptorManager::CreateShaderResourceView(
+			texData.resource.Get(),
+			srvDesc,
+			index);
+
+		//保存
+		TextureManager::GetInstance()->texDatas_[filePath] = make_unique<TexDataResource>(filePath, texData);
+	}
+
+	return TextureManager::GetInstance()->texDatas_[filePath]->GetTexHandle();
 }
+
+bool TextureManager::CheckTexDatas(string filePath)
+{
+	if (TextureManager::GetInstance()->texDatas_.find(filePath)==TextureManager::GetInstance()->texDatas_.end())
+	{
+		return true;
+	}
+	return false;
+}
+
 
 DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath)
 {
@@ -26,25 +100,11 @@ DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath
 	//ミップマップの作成
 	DirectX::ScratchImage mipImage{};
 	hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImage);
+
 	return mipImage;
+
 }
 
-void TextureManager::UploadTexData( const DirectX::ScratchImage& mipImage)
-{
-	const DirectX::TexMetadata& metadata = mipImage.GetMetadata();
-	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
-	{
-		const DirectX::Image* img = mipImage.GetImage(mipLevel, 0, 0);
-		TextureManager::GetInstance()->Resource[DescriptorManager::GetIndex()]->
-		WriteToSubresource(
-			UINT(mipLevel),
-			nullptr,
-			img->pixels,
-			UINT(img->rowPitch),
-			UINT(img->slicePitch)
-		);
-	}
-}
 
 D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& metadata)
 {
@@ -56,19 +116,15 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 	resourceDesc.Format = metadata.format;
 	resourceDesc.SampleDesc.Count = 1;
 	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION(metadata.dimension);
-
 	return resourceDesc;
-
 }
 
 D3D12_HEAP_PROPERTIES TextureManager::SettingHeap()
 {
 	D3D12_HEAP_PROPERTIES heapProperties{};
-
 	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;
 	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
 	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
 	return heapProperties;
 }
 
@@ -92,56 +148,3 @@ ComPtr<ID3D12Resource> TextureManager::CreateTexResource(const DirectX::TexMetad
 		IID_PPV_ARGS(&Resource));
 	return Resource;
 }
-
-uint32_t TextureManager::LoadTexture(const std::string& filePath)
-{
-	
-	DescriptorManager::IndexIncrement();
-	const uint32_t index = DescriptorManager::GetIndex();
-	TextureManager::GetInstance()->NumLoadTextureIndex++;
-
-	DirectX::ScratchImage mipImages = CreateMipImage(filePath);
-	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
-	TextureManager::GetInstance()->Resource[index] = CreateTexResource(metadata);
-	UploadTexData(mipImages);
-
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = metadata.format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
-
-   //Desp\cripter
-	DescriptorManager::SetCPUDescripterHandle(
-		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
-			DescriptorManager::GetDescripterSize().SRV,index),
-		index
-	);
-
-	DescriptorManager::SetGPUDescripterHandle(
-		DescriptorManager::GetGPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
-			DescriptorManager::GetDescripterSize().SRV, index),
-		index
-	);
-	DescriptorManager::CGHandlePtr();
-	DescriptorManager::CreateShaderResourceView(
-		TextureManager::GetInstance()->Resource[index].Get(),
-		srvDesc,
-		index);
-	
-	return index;
-}
-
-void TextureManager::AllUnTexture()
-{
-	for (int i = DescriptorManager::GetIndex(); i > 0; i--)
-	{
-	   TextureManager::GetInstance()->Resource[i].Reset();
-	}
-	TextureManager::GetInstance()->NumLoadTextureIndex = 0;
-}
-
-
-

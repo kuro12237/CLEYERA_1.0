@@ -11,8 +11,7 @@
 #include<sstream>
 #include<chrono>
 #include<random>
-#include<math.h>
-#define _USE_MATH_DEFINES
+#include<map>
 
 #include<Windows.h>
 #pragma comment(lib,"winmm.lib")
@@ -28,6 +27,7 @@
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
+
 
 #define DIRECTINPUT_VERSION 0x0800//DirectInputのバージョン指定
 #include <dinput.h>
