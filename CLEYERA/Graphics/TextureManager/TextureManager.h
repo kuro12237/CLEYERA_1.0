@@ -4,9 +4,7 @@
 #include"WinApp.h"
 #include"CreateResource.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
-#include"Graphics/TextureManager/CreateTextureResource.h"
-#define TEXTURE_LOAD_MAX 64
-
+#include"Graphics/TextureManager/TexDataResource.h"
 
 class TextureManager
 {
@@ -19,6 +17,7 @@ public:
 
 	static uint32_t LoadTexture(const string& filePath);
 	static void UnLoadTexture(const string& filePath);
+	static void AllUnLoadTexture();
 
 private:
 
@@ -26,11 +25,15 @@ private:
 
 	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);
 
-
 	static D3D12_RESOURCE_DESC SettingResource(const DirectX::TexMetadata& metadata);
 
 	static D3D12_HEAP_PROPERTIES SettingHeap();
 
+	static void UploadMipImage(const DirectX::TexMetadata& metadata, DirectX::ScratchImage &mipImages, TexData texData);
+
+	static D3D12_SHADER_RESOURCE_VIEW_DESC SrcDescSetting(const DirectX::TexMetadata& metadata);
+
+	static void AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc,ID3D12Resource *resource);
 
 	static bool CheckTexDatas(string filePath);
 

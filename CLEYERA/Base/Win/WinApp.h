@@ -15,10 +15,11 @@ public:
 
 	static void Finalize();
 
+	static void SetTiTleName(LPCWSTR  name) { SetWindowText(WinApp::GetInstance()->hwnd_, name); }
+
 #pragma region get
 	static HWND GetHwnd() { return WinApp::GetInstance()->hwnd_; }
 	static WNDCLASS GetWc() { return WinApp::GetInstance()->wc_; }
-
 
 	static int32_t GetkCilientWidth() { return WinApp::GetInstance()->kWindowWidth; }
 	static int32_t GetkCilientHeight() { return WinApp::GetInstance()->kWindowHeight; }

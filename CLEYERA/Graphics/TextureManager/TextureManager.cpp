@@ -1,4 +1,4 @@
-#include "TextureManager.h"
+ï»¿#include "TextureManager.h"
 
 TextureManager* TextureManager::GetInstance()
 {
@@ -14,69 +14,37 @@ void TextureManager::Initialize()
 void TextureManager::Finalize()
 {
 	CoUninitialize();
-	TextureManager::GetInstance()->texDatas_.clear();
+	//ã‚³ãƒ³ãƒ†ãƒŠã®ä¸­ã®Resourceã‚’ã™ã¹ã¦å‰Šé™¤
+	AllUnLoadTexture();
 }
 
 uint32_t TextureManager::LoadTexture(const string& filePath)
 {
-	//tex‚Ìƒtƒ@ƒCƒ‹‚Ì–¼‘O‚ª”í‚Á‚½ê‡‚Í“ü‚ç‚È‚¢
+	//texã®ãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰ãŒè¢«ã£ãŸå ´åˆã¯å…¥ã‚‰ãªã„
 	if (CheckTexDatas(filePath))
 	{
-		DescriptorManager::IndexIncrement();
-		uint32_t index = DescriptorManager::GetIndex();
+		//æ–°ã—ãä½œã‚‹
 		TexData texData = {};
-		//V‚µ‚­ì‚é
-		//ƒnƒ“ƒhƒ‹“o˜^
-		texData.index = index;
-
+		//DescripterIndexã‚’åŠ ç®—ã—ãšã‚‰ã™
+		DescriptorManager::IndexIncrement();
+		//Descripterã®Indexã‚’å–å¾—
+		uint32_t index = DescriptorManager::GetIndex();
+		//ãƒãƒ³ãƒ‰ãƒ«ç™»éŒ²
+     	texData.index = index;
+		//MipImageã‚’ä½œã‚‹
 		DirectX::ScratchImage mipImages = CreateMipImage(filePath);
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 		texData.resource = CreateTexResource(metadata);
-	
-		for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
-		{
-			const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
-			texData.resource->
-				WriteToSubresource(
-					UINT(mipLevel),
-					nullptr,
-					img->pixels,
-					UINT(img->rowPitch),
-					UINT(img->slicePitch)
-				);
-		}
-
+		//MipImageã‚’ç™»éŒ²
+		UploadMipImage(metadata,mipImages, texData);
+		//srcè¨­å®š
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-		srvDesc.Format = metadata.format;
-		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
-
-		//Despcripter
-		DescriptorManager::SetCPUDescripterHandle(
-			DescriptorManager::GetCPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvHeap().Get(),
-				DescriptorManager::GetDescripterSize().SRV, index),
-			index
-		);
-
-		DescriptorManager::SetGPUDescripterHandle(
-			DescriptorManager::GetGPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvHeap().Get(),
-				DescriptorManager::GetDescripterSize().SRV, index),
-			index
-		);
-
-		DescriptorManager::CGHandlePtr();
-		DescriptorManager::CreateShaderResourceView(
-			texData.resource.Get(),
-			srvDesc,
-			index);
-
-		//•Û‘¶
+		srvDesc = SrcDescSetting(metadata);
+		//Descripterã‚’ãšã‚‰ã™
+		AddDescripter(index, srvDesc, texData.resource.Get());
+		//ã‚³ãƒ³ãƒ†ãƒŠã«ä¿å­˜
 		TextureManager::GetInstance()->texDatas_[filePath] = make_unique<TexDataResource>(filePath, texData);
 	}
-
 	return TextureManager::GetInstance()->texDatas_[filePath]->GetTexHandle();
 }
 
@@ -85,9 +53,14 @@ void TextureManager::UnLoadTexture(const string& filePath)
 	TextureManager::GetInstance()->texDatas_[filePath]->texRelease();
 }
 
+void TextureManager::AllUnLoadTexture()
+{
+	TextureManager::GetInstance()->texDatas_.clear();
+}
+
 bool TextureManager::CheckTexDatas(string filePath)
 {
-	if (TextureManager::GetInstance()->texDatas_.find(filePath)==TextureManager::GetInstance()->texDatas_.end())
+	if (TextureManager::GetInstance()->texDatas_.find(filePath) == TextureManager::GetInstance()->texDatas_.end())
 	{
 		return true;
 	}
@@ -96,15 +69,14 @@ bool TextureManager::CheckTexDatas(string filePath)
 
 DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath)
 {
-	//ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İƒvƒƒOƒ‰ƒ€‚Åˆµ‚¦‚é‚æ‚¤‚É‚·‚é
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§æ‰±ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
 	DirectX::ScratchImage image{};
 	std::wstring filePathW = LogManager::ConvertString(filePath);
 	HRESULT hr = DirectX::LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
 	assert(SUCCEEDED(hr));
-	//ƒ~ƒbƒvƒ}ƒbƒv‚Ìì¬
+	//ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ã®ä½œæˆ
 	DirectX::ScratchImage mipImage{};
 	hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImage);
-
 	return mipImage;
 }
 
@@ -130,17 +102,65 @@ D3D12_HEAP_PROPERTIES TextureManager::SettingHeap()
 	return heapProperties;
 }
 
+void TextureManager::UploadMipImage(const DirectX::TexMetadata& metadata, DirectX::ScratchImage &mipImages,TexData texData)
+{
+	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
+	{
+		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
+		texData.resource->
+			WriteToSubresource(
+				UINT(mipLevel),
+				nullptr,
+				img->pixels,
+				UINT(img->rowPitch),
+				UINT(img->slicePitch)
+			);
+	}
+}
+
+D3D12_SHADER_RESOURCE_VIEW_DESC TextureManager::SrcDescSetting(const DirectX::TexMetadata& metadata)
+{
+	D3D12_SHADER_RESOURCE_VIEW_DESC resultSrvDesc{};
+	resultSrvDesc.Format = metadata.format;
+	resultSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	resultSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	resultSrvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+	return resultSrvDesc;
+}
+
+void TextureManager::AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, ID3D12Resource *resource)
+{
+	//Despcripter
+	DescriptorManager::SetCPUDescripterHandle(
+		DescriptorManager::GetCPUDescriptorHandle(
+			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+			DescriptorManager::GetDescripterSize().SRV, index),
+		index
+	);
+
+	DescriptorManager::SetGPUDescripterHandle(
+		DescriptorManager::GetGPUDescriptorHandle(
+			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+			DescriptorManager::GetDescripterSize().SRV, index),
+		index
+	);
+
+	DescriptorManager::CGHandlePtr();
+	DescriptorManager::CreateShaderResourceView(
+		resource,
+		srvDesc,
+		index);
+}
+
 ComPtr<ID3D12Resource> TextureManager::CreateTexResource(const DirectX::TexMetadata& metadata)
 {
 	ComPtr<ID3D12Resource> Resource;
 	D3D12_RESOURCE_DESC resourceDesc{};
 	D3D12_HEAP_PROPERTIES heapProperties{};
-
-	//ƒŠƒ\[ƒX‚Ìİ’è
+	//ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š
 	resourceDesc = SettingResource(metadata);
 	heapProperties = SettingHeap();
-
-	//–{‘Ì‚ğì‚é
+	//æœ¬ä½“ã‚’ä½œã‚‹
 	DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,

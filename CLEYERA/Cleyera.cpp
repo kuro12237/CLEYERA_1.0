@@ -20,12 +20,12 @@ void Cleyera::Initialize()
 	ImGuiManager::Initialize();
 	
 	Input::Initialize();
-	Audio::Initialize();
+	AudioManager::Initialize();
 }
 
 void Cleyera::Finalize()
 {
-	Audio::Finalize();
+	AudioManager::Finalize();
 	TextureManager::Finalize();
 	ImGuiManager::Finalize();
 	DirectXCommon::Finalize();

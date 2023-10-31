@@ -20,13 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
-    <None Include="cpp.hint" />
     <None Include="Resources\Shader\Harf_LambertLightObject.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
     <None Include="Resources\Shader\SpriteObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CLEYERA\Audio\Audio.cpp" />
+    <ClCompile Include="CLEYERA\Audio\AudioManager.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
@@ -58,11 +57,10 @@
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
     <ClCompile Include="CLEYERA\Input\Input.cpp" />
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
-    <ClCompile Include="CLEYERA\math\PerlinNoise\PerlinNoise.cpp" />
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelCubeState.cpp" />
@@ -82,11 +80,10 @@
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
-    <ClCompile Include="Project\GameObject\StartCount\StartCount.cpp" />
     <ClCompile Include="Project\Scene\DebugScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CLEYERA\Audio\Audio.h" />
+    <ClInclude Include="CLEYERA\Audio\AudioManager.h" />
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
@@ -106,14 +103,13 @@
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />
-    <ClInclude Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.h" />
+    <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h" />
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TextureManager.h" />
     <ClInclude Include="CLEYERA\Input\Input.h" />
     <ClInclude Include="CLEYERA\math\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\math\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\math\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\math\MatrixTransform.h" />
-    <ClInclude Include="CLEYERA\math\PerlinNoise\PerlinNoise.h" />
     <ClInclude Include="CLEYERA\math\Vector2.h" />
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />
@@ -142,7 +138,6 @@
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
-    <ClInclude Include="Project\GameObject\StartCount\StartCount.h" />
     <ClInclude Include="Project\Scene\DebugScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
   </ItemGroup>
@@ -210,6 +205,7 @@
     <ProjectGuid>{9c85ed0b-b160-4715-a6ac-58dcfbdd56e2}</ProjectGuid>
     <RootNamespace>DirectX12TriangleClassGit</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>CLEYERA</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -2,7 +2,7 @@
 
 DebugScene::~DebugScene()
 {
-	Audio::SoundUnLoad();	
+	AudioManager::SoundUnLoad();	
 }
 
 void DebugScene::Initialize()

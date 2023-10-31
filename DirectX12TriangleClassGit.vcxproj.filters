@@ -118,9 +118,6 @@
     <Filter Include="CLEYERA\Particle">
       <UniqueIdentifier>{efaa3838-3aa8-48b6-8460-43d30a48c24c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\math\PerlinNoise">
-      <UniqueIdentifier>{b4848b44-4792-43c6-9986-2b4ddf306c9c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Particle\ParticleSprite">
       <UniqueIdentifier>{7fe1395e-b8f2-41d0-85c8-6946004dd205}</UniqueIdentifier>
     </Filter>
@@ -144,7 +141,6 @@
     <None Include="Resources\Shader\ParticleObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
-    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -240,7 +236,7 @@
     <ClCompile Include="CLEYERA\Input\Input.cpp">
       <Filter>CLEYERA\Input</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Audio\Audio.cpp">
+    <ClCompile Include="CLEYERA\Audio\AudioManager.cpp">
       <Filter>CLEYERA\Audio</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\DebugTools\Camera\DebugCamera.cpp">
@@ -262,17 +258,13 @@
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp">
       <Filter>CLEYERA\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\math\PerlinNoise\PerlinNoise.cpp">
-      <Filter>CLEYERA\math\PerlinNoise</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp">
       <Filter>CLEYERA\Particle\ParticlePlane</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Model\State\ModelCubeState.cpp">
       <Filter>CLEYERA\Model\Cube</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\StartCount\StartCount.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.cpp">
+    <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -409,7 +401,7 @@
     <ClInclude Include="CLEYERA\Input\Input.h">
       <Filter>CLEYERA\Input</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Audio\Audio.h">
+    <ClInclude Include="CLEYERA\Audio\AudioManager.h">
       <Filter>CLEYERA\Audio</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\DebugTools\Camera\DebugCamera.h">
@@ -439,17 +431,13 @@
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h">
       <Filter>CLEYERA\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\PerlinNoise\PerlinNoise.h">
-      <Filter>CLEYERA\math\PerlinNoise</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h">
       <Filter>CLEYERA\Particle\ParticlePlane</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
       <Filter>CLEYERA\Model\Cube</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\StartCount\StartCount.h" />
-    <ClInclude Include="CLEYERA\Graphics\TextureManager\CreateTextureResource.h">
+    <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClInclude>
   </ItemGroup>

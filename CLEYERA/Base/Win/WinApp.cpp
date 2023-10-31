@@ -22,7 +22,7 @@ void WinApp::Initialize()
 	
 	WinApp::GetInstance()->hwnd_=CreateWindow(
 		WinApp::GetInstance()->wc_.lpszClassName,
-		L"2128_突撃",
+		L"CLEYERA",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
