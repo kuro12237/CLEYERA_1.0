@@ -6,7 +6,6 @@
 class CollisionManager {
 public:
 
-
 	void CheckAllCollision();
 
 	void ClliderPush(Collider* collider) { colliders_.push_back(collider); }
@@ -14,7 +13,7 @@ public:
 
 private:
 	void CheckCollisionPair(Collider* cA, Collider* cB);
-	bool CheckBallCollision(Vector3 v1, float radius1, Vector3 velocity1, Vector3 v2, float radius2, Vector3 velocity2);
+	bool CheckBallCollosion(Vector3 v1, float vr1, Vector3 v2, float vr2);
 
 	std::list<Collider*> colliders_;
 };

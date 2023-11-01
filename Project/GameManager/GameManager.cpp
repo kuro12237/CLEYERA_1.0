@@ -34,8 +34,6 @@ void GameManager::Run()
 void GameManager::ChangeState(IScene *newScene)
 {
 	DebugTools::ClearCommand();
-	
-	DescriptorManager::Clear();
 
 	delete Scene_;
 	Scene_ = newScene;

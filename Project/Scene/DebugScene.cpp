@@ -7,6 +7,10 @@ DebugScene::~DebugScene()
 
 void DebugScene::Initialize()
 {
+	DebugCamera* debugCamera = new DebugCamera();
+	debugCamera->Initialize();
+	DebugTools::addCommand(debugCamera,"DebugCamera");
+
 	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
 
 	sprite_ = make_unique<Sprite>();
@@ -17,7 +21,9 @@ void DebugScene::Initialize()
 
 	SpriteTexHandle = TextureManager::LoadTexture("Resources/CLEYERA.png");
 
-
+	Audiohandle = AudioManager::SoundLoadWave("Resources/SelectBGM.wav");
+	Audiohandle2 = AudioManager::SoundLoadWave("Resources/hit.wav");
+	
 	sprite_->SetTexHandle(SpriteTexHandle);
 	sprite_->Initialize(new SpriteBoxState,{0,0},{320,320});
 	
@@ -35,6 +41,7 @@ void DebugScene::Initialize()
 	particle_->SetTexHandle(SpriteTexHandle);
 	particle_->Initialize(new ParticlePlaneState,20);
 
+	
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -59,6 +66,34 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Checkbox("Screen", &ScreenFlag);
 	ImGui::End();
 
+	if (Input::GetInstance()->PushKeyPressed(DIK_S))
+	{
+		AudioManager::AudioPlayWave(Audiohandle);
+		Flag = true;
+	}
+	if (Flag)
+	{
+		count++;
+		//AudioManager::AudioVolumeControl(Audiohandle, count*2);
+	}
+	if (count>180)
+	{
+		count = 0;
+		AudioManager::AudioStopWave(Audiohandle);
+		Flag = false;
+	}
+	if (Input::GetInstance()->PushKeyPressed(DIK_D))
+	{
+		AudioManager::AudioPlayWave(Audiohandle2);
+
+	}
+	if (Input::GetInstance()->PushKeyPressed(DIK_R))
+	{
+		Model * model = new Model();
+		model->CreateFromObj("MapGround");
+		modelWorldTransform_.Initialize();
+		models_.push_back(model);
+	}
 
 #pragma region 
 	{
@@ -112,6 +147,8 @@ void DebugScene::Update(GameManager* Scene)
 	sprite2WorldTransform_.UpdateMatrix();
 	Testparticle();
 
+	
+	DebugTools::UpdateExecute(0);
 	viewProjection.UpdateMatrix();
 	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
 
@@ -124,6 +161,10 @@ void DebugScene::Back2dSpriteDraw()
 void DebugScene::Object3dDraw()
 {
 	particle_->Draw(viewProjection);
+	for (Model* &model : models_)
+	{
+		model->Draw(modelWorldTransform_, viewProjection);
+	}
 }
 void DebugScene::Flont2dSpriteDraw()
 {

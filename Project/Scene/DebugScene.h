@@ -51,5 +51,13 @@ private:
 	
 	Vector3 TestParticlesTranslate = {};
 	Vector4 TestParticleColor = {1,1,1,1};
+
+	uint32_t Audiohandle = 0;
+	uint32_t Audiohandle2 = 0;
 	
+	WorldTransform modelWorldTransform_;
+
+	list<Model*>models_;
+	bool Flag = false;
+	float count = 0;
 };

@@ -15,7 +15,6 @@ void AudioManager::Initialize()
 	}
 	else {
 		LogManager::Log("Audio::Initialize_ERROR\n");
-
 		assert(0);
 	}
 
@@ -33,86 +32,164 @@ void AudioManager::Finalize()
 
 uint32_t AudioManager::SoundLoadWave(const char* filename)
 {
-	//HRESULT result{};
-	AudioManager::GetInstance()->soundDataCount_++;
-	ifstream file;
-	file.open(filename, std::ios_base::binary);
-	assert(SUCCEEDED(file.is_open()));
+	uint32_t index = 0;
+	if (ChackAudioDatas(filename))
+	{
+		AudioManager::GetInstance()->AudioIndex++;
 
-	//fileがRiffに一致するかTypeがWaveか
-	RiffHeader riff = {};
-	file.read((char*)&riff, sizeof(riff));
-	if (strncmp(riff.chunk.id,"RIFF",4) != 0)
-	{assert(0);}
-	if (strncmp(riff.Type, "WAVE", 4) != 0)
-	{assert(0);}
+		ifstream file;
+		file.open(filename, std::ios_base::binary);
+		assert(SUCCEEDED(file.is_open()));
 
-	//Formatのチャンク読み込み
-	FormatChunk format = {};
-	//チャンクヘッダーの確認
-	file.read((char*)&format, sizeof(ChunkHeader));
-	if (strncmp(format.chunk.id, "fmt ", 4) != 0) {
-		assert(0);
-	}
+		RiffHeader riff = {};
+		file.read((char*)&riff, sizeof(riff));
 
-	assert(format.chunk.size <= sizeof(format.fmt));
-	file.read((char*)&format.fmt, format.chunk.size);
-	
-	//Dataチャンクの読み込み
-	ChunkHeader data = {};
-	file.read((char*)&data, sizeof(data));
-	if (strncmp(data.id,"JUNK",4) == 0){
+		//fileがRiffに一致するかTypeがWaveか	
+		if (strncmp(riff.chunk.id, "RIFF", 4) != 0)
+		{
+			LogManager::Log("RIFF_ERROR");
+			assert(0);
+		}
+		if (strncmp(riff.Type, "WAVE", 4) != 0)
+		{
+			LogManager::Log("WAVE_ERROR");
+			assert(0);
+		}
 
-		file.seekg(data.size, ios_base::cur);
+		//Formatのチャンク読み込み
+		FormatChunk format = {};
+		//チャンクヘッダーの確認
+		file.read((char*)&format, sizeof(ChunkHeader));
+		if (strncmp(format.chunk.id, "fmt ", 4) != 0) {
+			assert(0);
+		}
+
+		assert(format.chunk.size <= sizeof(format.fmt));
+		file.read((char*)&format.fmt, format.chunk.size);
+
+		//Dataチャンクの読み込み
+		ChunkHeader data = {};
 		file.read((char*)&data, sizeof(data));
-	}
-	if (strncmp(data.id, "data", 4) != 0)
-	{assert(0);}
-	char* pBuffer = new char[data.size];
-	file.read(pBuffer, data.size);
-	file.close();
-	//代入
-	AudioManager::GetInstance()->soundData_[AudioManager::GetInstance()->soundDataCount_].wfex = format.fmt;
-	AudioManager::GetInstance()->soundData_[AudioManager::GetInstance()->soundDataCount_].pBuffer = reinterpret_cast<BYTE*>(pBuffer);
-	AudioManager::GetInstance()->soundData_[AudioManager::GetInstance()->soundDataCount_].bufferSize = data.size;
+		if (strncmp(data.id, "JUNK", 4) == 0) {
 
-	return AudioManager::GetInstance()->soundDataCount_;
+			file.seekg(data.size, ios_base::cur);
+			file.read((char*)&data, sizeof(data));
+		}
+		if (strncmp(data.id, "data", 4) != 0)
+		{
+			assert(0);
+		}
+		char* pBuffer = new char[data.size];
+		file.read(pBuffer, data.size);
+		file.close();
+
+		//型変換
+		soundData soundData;
+		soundData.wfex = format.fmt;
+		soundData.pBuffer = reinterpret_cast<BYTE*>(pBuffer);
+		soundData.bufferSize = data.size;
+		soundData.index = AudioManager::GetInstance()->AudioIndex;
+		AudioManager::GetInstance()->AudioDatas_[filename] = make_unique<AudioDataResource>(filename, soundData);
+
+		index = AudioManager::GetInstance()->AudioIndex;
+	}
+	else
+	{
+		index = AudioManager::GetInstance()->AudioDatas_[filename].get()->GetSoundData().index;
+	}
+
+	return index;
 }
 
-void AudioManager::SoundUnLoad()
+void AudioManager::SoundAllUnLoad()
 {
-	for (int i = AudioManager::GetInstance()->soundDataCount_; i >0 ; i--)
-	{
-		delete[] AudioManager::GetInstance()->soundData_[i].pBuffer;
-		AudioManager::GetInstance()->soundData_[i].pBuffer = 0;
-		AudioManager::GetInstance()->soundData_[i].bufferSize = 0;
-		AudioManager::GetInstance()->soundData_[i].wfex = {};
-	}
-	AudioManager::GetInstance()->soundDataCount_ = 0;
+	AudioManager::GetInstance()->AudioDatas_.clear();
 }
 
 void AudioManager::AudioPlayWave(uint32_t soundHandle)
-{
-	HRESULT result{};
- 
-	result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&AudioManager::GetInstance()->pSourcevoice[soundHandle], &AudioManager::GetInstance()->soundData_[soundHandle].wfex);
-	assert(SUCCEEDED(result));
+{ 
+	for (const auto& [key, s] : AudioManager::GetInstance()->AudioDatas_)
+	{
+		key;
+		if (s.get()->GetSoundData().index == soundHandle)
+		{
+		
+			HRESULT result{};
+			IXAudio2SourceVoice* pSourcevoice = {};
+			
+			WAVEFORMATEX wfex = s.get()->GetSoundData().wfex;
+			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice,&wfex);
+			assert(SUCCEEDED(result));
+			s.get()->SetsoundResource(pSourcevoice);
+			s.get()->SetsoundWfex(wfex);
 
-	XAUDIO2_BUFFER buf{};
-	buf.pAudioData = AudioManager::GetInstance()->soundData_[soundHandle].pBuffer;
-	buf.AudioBytes = AudioManager::GetInstance()->soundData_[soundHandle].bufferSize;
-	buf.Flags = XAUDIO2_END_OF_STREAM;
+			XAUDIO2_BUFFER buf{};
+			buf.pAudioData = s.get()->GetSoundData().pBuffer;
+			buf.AudioBytes = s.get()->GetSoundData().bufferSize;
+			buf.Flags = XAUDIO2_END_OF_STREAM;
+			result = s.get()->GetSoundData().pSourcevoice->SubmitSourceBuffer(&buf);
+			result = s.get()->GetSoundData().pSourcevoice->SetVolume(1.0f);
+			result = s.get()->GetSoundData().pSourcevoice->Start();
 
-	result = AudioManager::GetInstance()->pSourcevoice[soundHandle]->SubmitSourceBuffer(&buf);
-	result = AudioManager::GetInstance()->pSourcevoice[soundHandle]->Start();
-
-	assert(SUCCEEDED(result));
+			assert(SUCCEEDED(result));
+		}
+	}
 }
 
 void AudioManager::AudioStopWave(uint32_t soundHandle)
 {
-	HRESULT result{};
-	result = AudioManager::GetInstance()->pSourcevoice[soundHandle]->Stop();
+	for (const auto& [key, s] : AudioManager::GetInstance()->AudioDatas_)
+	{
+		key;
+		if (s.get()->GetSoundData().index == soundHandle)
+		{
+			HRESULT result{};
+			
+			result = s.get()->GetSoundData().pSourcevoice->Stop();
+			assert(SUCCEEDED(result));
+		
+		}
+	}
+	
+}
 
-	assert(SUCCEEDED(result));
+void AudioManager::AudioVolumeControl(UINT soundHandle, float volume)
+{
+	for (const auto& [key, s] : AudioManager::GetInstance()->AudioDatas_)
+	{
+		key;
+		if (s.get()->GetSoundData().index == soundHandle)
+		{
+			HRESULT result{};
+
+			result = s.get()->GetSoundData().pSourcevoice->SetVolume(volume);
+			assert(SUCCEEDED(result));
+
+		}
+	}
+}
+
+bool AudioManager::ChackAudioDatas(string filepath)
+{
+	if (AudioManager::GetInstance()->AudioDatas_.find(filepath)==AudioManager::GetInstance()->AudioDatas_.end())
+	{
+		return true;
+	}
+	return false;
+}
+
+bool AudioManager::ChackRiff(RiffHeader &riff)
+{
+	bool flag = true;
+	if (strncmp(riff.chunk.id, "RIFF", 4) != 0)
+	{
+		LogManager::Log("RIFF_ERROR");
+		flag = false;
+	}
+	if (strncmp(riff.Type, "WAVE", 4) != 0)
+	{
+		LogManager::Log("WAVE_ERROR");
+		flag = false;
+	}
+	return flag;
 }

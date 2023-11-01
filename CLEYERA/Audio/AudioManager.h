@@ -1,6 +1,7 @@
 #pragma once
 #include"Pch.h"
 #include"LogManager.h"
+#include"Audio/AudioDataResource.h"
 
 struct ChunkHeader
 {
@@ -20,13 +21,6 @@ struct FormatChunk
 	WAVEFORMATEX fmt;
 };
 
-struct soundData
-{
-	WAVEFORMATEX wfex;
-	BYTE* pBuffer;
-	unsigned int bufferSize;
-};
-
 class AudioManager
 {
 public:
@@ -42,20 +36,28 @@ public:
 
 	static void SoundUnLoad();
 
+	/// <summary>
+	/// ’·‚¢‰¹Šy‚Íˆê‰ñ‚Å‚Í‚È‚¢‚ÆƒoƒO‚é
+	/// </summary>
+	/// <param name="soundHandle"></param>
 	static void AudioPlayWave(uint32_t soundHandle);
 	static void AudioStopWave(uint32_t soundHandle);
-
+	static void AudioVolumeControl(UINT soundHandle, float volume);
 private:
+
+	static bool ChackAudioDatas(string filepath);
+
+	static bool ChackRiff(RiffHeader &riff);
 
 	ComPtr<IXAudio2> xAudio=nullptr;
 	IXAudio2MasteringVoice* masterVoice = nullptr;
 	uint32_t soundDataCount_{};
 
-	static const uint32_t kSoundDataMax = 64;
-	IXAudio2SourceVoice* pSourcevoice[kSoundDataMax] = {};
-
-	soundData soundData_[kSoundDataMax]{};
 	bool InitializeFlag = false;
+
+	uint32_t AudioIndex = 0;
+	uint32_t AudioIndex2 = 0;
+	map<string, unique_ptr<AudioDataResource>>AudioDatas_;
 
 #pragma region Singleton
 	AudioManager() = default;

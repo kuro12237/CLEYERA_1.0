@@ -27,6 +27,7 @@ void Cleyera::Finalize()
 {
 	AudioManager::Finalize();
 	TextureManager::Finalize();
+	DescriptorManager::Clear();
 	ImGuiManager::Finalize();
 	DirectXCommon::Finalize();
 	WinApp::Finalize();
