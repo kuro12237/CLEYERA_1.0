@@ -279,6 +279,12 @@
     <ClCompile Include="Project\GameObject\DemoObject\DemoPlayer.cpp">
       <Filter>Project\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Project\GameObject\DemoObject\DemoEnemy.cpp">
+      <Filter>Project\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\DemoObject\DemoPlayerBullet.cpp">
+      <Filter>Project\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -459,6 +465,12 @@
       <Filter>CLEYERA</Filter>
     </ClInclude>
     <ClInclude Include="Project\GameObject\DemoObject\DemoPlayer.h">
+      <Filter>Project\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\DemoObject\DemoEnemy.h">
+      <Filter>Project\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\DemoObject\DemoPlayerBullet.h">
       <Filter>Project\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
