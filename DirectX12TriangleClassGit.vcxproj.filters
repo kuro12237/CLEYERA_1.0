@@ -91,12 +91,6 @@
     <Filter Include="CLEYERA\Sprite\state">
       <UniqueIdentifier>{ba0140f6-2613-4cf0-beae-b806b72b32e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project">
-      <UniqueIdentifier>{387c7c14-6a86-4f80-8065-ebfe3a2a4364}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene">
-      <UniqueIdentifier>{0c802be9-ee57-4ecc-a25c-5d726d7ef52b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Input">
       <UniqueIdentifier>{0594f166-5a6b-43b3-8c36-5010288e57ce}</UniqueIdentifier>
     </Filter>
@@ -126,6 +120,15 @@
     </Filter>
     <Filter Include="CLEYERA\Model\Cube">
       <UniqueIdentifier>{e412e551-47a5-42ed-ae39-05603aeb4f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{387c7c14-6a86-4f80-8065-ebfe3a2a4364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{0c802be9-ee57-4ecc-a25c-5d726d7ef52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject">
+      <UniqueIdentifier>{e6c962cd-fcc4-4e45-9870-1c278152fe09}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -270,13 +273,16 @@
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
       <Filter>CLEYERA\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Scene\DemoScene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\DemoObject\DemoPlayer.cpp">
+      <Filter>Project\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
       <Filter>CLEYERA\Utility\Pch</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Cleyera.h">
-      <Filter>CLEYERA</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h">
       <Filter>CLEYERA\base\Win</Filter>
@@ -445,6 +451,15 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
       <Filter>CLEYERA\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\DemoScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Cleyera.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\DemoObject\DemoPlayer.h">
+      <Filter>Project\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
