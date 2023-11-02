@@ -127,6 +127,9 @@
     <Filter Include="CLEYERA\Model\Cube">
       <UniqueIdentifier>{e412e551-47a5-42ed-ae39-05603aeb4f80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\PostProcess">
+      <UniqueIdentifier>{6d6171be-1fb6-46b2-ba34-134c2a39ec2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
       <Filter>CLEYERA\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\PostProcess\PeraPolygon.cpp">
+      <Filter>CLEYERA\PostProcess</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -445,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
       <Filter>CLEYERA\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\PostProcess\PeraPolygon.h">
+      <Filter>CLEYERA\PostProcess</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

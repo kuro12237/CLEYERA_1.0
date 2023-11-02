@@ -71,6 +71,7 @@
     <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Particle.cpp" />
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
+    <ClCompile Include="CLEYERA\PostProcess\PeraPolygon.cpp" />
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp" />
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp" />
     <ClCompile Include="CLEYERA\Transform\ViewProjection.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="CLEYERA\Particle\SParticle.h" />
     <ClInclude Include="CLEYERA\Particle\state\IParticleState.h" />
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h" />
+    <ClInclude Include="CLEYERA\PostProcess\PeraPolygon.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />
     <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h" />
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h" />

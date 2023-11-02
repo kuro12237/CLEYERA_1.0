@@ -21,6 +21,8 @@ void Cleyera::Initialize()
 	
 	Input::Initialize();
 	AudioManager::Initialize();
+
+	PeraPolygon::Initialize();
 }
 
 void Cleyera::Finalize()

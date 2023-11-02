@@ -38,6 +38,9 @@ public:
 	/// </summary>
 	static void IndexIncrement() { DescriptorManager::GetInstance()->index++; }
 
+
+	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
+
 #pragma region set
 
 	static void SetCPUDescripterHandle(D3D12_CPU_DESCRIPTOR_HANDLE CpuDescripterHandle, uint32_t index)

@@ -1,8 +1,7 @@
 #include "DebugScene.h"
 
 DebugScene::~DebugScene()
-{
-	AudioManager::SoundUnLoad();	
+{	
 }
 
 void DebugScene::Initialize()

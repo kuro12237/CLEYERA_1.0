@@ -48,6 +48,12 @@ public:
 	static void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 
 #pragma region get
+
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(const ComPtr<ID3D12DescriptorHeap>& descriptorHeap, const uint32_t descriptorSize, uint32_t index);
+
+	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(const ComPtr<ID3D12DescriptorHeap>& descriptorHeap, const uint32_t descriptorSize, uint32_t index);
+
+
 	Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
 	ComPtr<ID3D12Device>GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_; }
 	ComPtr<ID3D12DescriptorHeap>GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap;}
