@@ -18,13 +18,13 @@ void Cleyera::Initialize()
 	
 	TextureManager::Initialize();
 	ImGuiManager::Initialize();
-	
 	Input::Initialize();
 	AudioManager::Initialize();
 }
 
 void Cleyera::Finalize()
 {
+	DebugTools::ClearCommand();
 	AudioManager::Finalize();
 	TextureManager::Finalize();
 	DescriptorManager::Clear();

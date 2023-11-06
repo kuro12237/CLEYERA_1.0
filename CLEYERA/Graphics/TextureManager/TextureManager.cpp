@@ -20,8 +20,15 @@ void TextureManager::Finalize()
 
 uint32_t TextureManager::LoadTexture(const string& filePath)
 {
+	string FilePath = "Resources/" + filePath;
+	if (TextureManager::GetInstance()->isCreateObjectLoad_)
+	{
+		FilePath = filePath;
+		TextureManager::GetInstance()->isCreateObjectLoad_ = false;
+	}
+
 	//texのファイルの名前が被った場合は入らない
-	if (CheckTexDatas(filePath))
+	if (CheckTexDatas(FilePath))
 	{
 		//新しく作る
 		TexData texData = {};
@@ -32,7 +39,7 @@ uint32_t TextureManager::LoadTexture(const string& filePath)
 		//ハンドル登録
      	texData.index = index;
 		//MipImageを作る
-		DirectX::ScratchImage mipImages = CreateMipImage(filePath);
+		DirectX::ScratchImage mipImages = CreateMipImage(FilePath);
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 		texData.resource = CreateTexResource(metadata);
 		//MipImageを登録
@@ -43,14 +50,16 @@ uint32_t TextureManager::LoadTexture(const string& filePath)
 		//Descripterをずらす
 		AddDescripter(index, srvDesc, texData.resource.Get());
 		//コンテナに保存
-		TextureManager::GetInstance()->texDatas_[filePath] = make_unique<TexDataResource>(filePath, texData);
+		TextureManager::GetInstance()->texDatas_[FilePath] =
+			make_unique<TexDataResource>(FilePath, texData);
 	}
-	return TextureManager::GetInstance()->texDatas_[filePath]->GetTexHandle();
+	return TextureManager::GetInstance()->texDatas_[FilePath]->GetTexHandle();
 }
 
 void TextureManager::UnLoadTexture(const string& filePath)
 {
 	TextureManager::GetInstance()->texDatas_[filePath]->texRelease();
+	TextureManager::GetInstance()->texDatas_.erase(filePath);
 }
 
 void TextureManager::AllUnLoadTexture()

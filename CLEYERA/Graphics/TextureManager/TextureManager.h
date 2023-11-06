@@ -18,6 +18,11 @@ public:
 	static uint32_t LoadTexture(const string& filePath);
 	static void UnLoadTexture(const string& filePath);
 	static void AllUnLoadTexture();
+	
+	/// <summary>
+	/// Žg‚Á‚Ä‚Í‚¢‚¯‚È‚¢
+	/// </summary>
+	static void ObjctStateLoadTexFlag(bool Flag) { TextureManager::GetInstance()->isCreateObjectLoad_ = Flag; }
 
 private:
 
@@ -38,6 +43,8 @@ private:
 	static bool CheckTexDatas(string filePath);
 
 	map<string, unique_ptr<TexDataResource>>texDatas_;
+
+	bool isCreateObjectLoad_ = false;
 
 #pragma region 
 	//Singleton

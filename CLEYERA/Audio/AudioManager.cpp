@@ -27,6 +27,7 @@ void AudioManager::Initialize()
 
 void AudioManager::Finalize()
 {
+	SoundAllUnLoad();
 	AudioManager::GetInstance()->xAudio.Reset();
 }
 

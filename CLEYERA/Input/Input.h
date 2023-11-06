@@ -14,13 +14,13 @@ public:
 
 	static void BeginFlame();
 
-	bool PushKey(uint8_t keyNum);
+	static bool PushKey(uint8_t keyNum);
 
-	bool PushKeyPressed(uint32_t keyNum);
+	static bool PushKeyPressed(uint32_t keyNum);
 
 	static void NoneJoyState(XINPUT_STATE& state);
 
-	bool GetJoystickState(XINPUT_STATE& state);
+	static bool GetJoystickState(XINPUT_STATE& state);
 
 private:
 
@@ -34,8 +34,6 @@ private:
 	XINPUT_STATE state_{};
 
 	bool isInitialize=false;
-
-
 
 	//0x80=‰Ÿ‚µ‚Ä‚¢‚éó‘Ô
 	//0x00=‰Ÿ‚µ‚Ä‚È‚¢ó‘Ô

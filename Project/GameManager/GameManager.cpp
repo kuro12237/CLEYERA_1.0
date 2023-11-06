@@ -9,7 +9,6 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	DebugTools::ClearCommand();
 	delete Scene_;
 	Cleyera::Finalize();
 }
@@ -19,7 +18,6 @@ void GameManager::Run()
 	while (WinApp::WinMsg())
 	{
 		Cleyera::BeginFlame();
-	
 	
 		Scene_->Update(this);
 		

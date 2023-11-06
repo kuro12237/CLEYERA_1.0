@@ -2,7 +2,6 @@
 
 DebugScene::~DebugScene()
 {
-	AudioManager::SoundAllUnLoad();	
 }
 
 void DebugScene::Initialize()
@@ -13,22 +12,18 @@ void DebugScene::Initialize()
 
 	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
 
-	sprite_ = make_unique<Sprite>();
-
-	SpriteTexHandle = TextureManager::LoadTexture("Resources/mob.png");
-
-	uint32_t SpriteTexHandle = TextureManager::LoadTexture("Resources/mob.png");
-
-	SpriteTexHandle = TextureManager::LoadTexture("Resources/CLEYERA.png");
+	uint32_t SpritemobTexHandle = TextureManager::LoadTexture("mob.png");
+	uint32_t SpriteCLEYERATexHandle = TextureManager::LoadTexture("CLEYERA.png");
 
 	Audiohandle = AudioManager::SoundLoadWave("Resources/SelectBGM.wav");
 	Audiohandle2 = AudioManager::SoundLoadWave("Resources/hit.wav");
-	
-	sprite_->SetTexHandle(SpriteTexHandle);
+
+	sprite_ = make_unique<Sprite>();
+	sprite_->SetTexHandle(SpritemobTexHandle);
 	sprite_->Initialize(new SpriteBoxState,{0,0},{320,320});
 	
 	sprite2_ = make_unique<Sprite>();
-	sprite2_->SetTexHandle(SpriteTexHandle);
+	sprite2_->SetTexHandle(SpriteCLEYERATexHandle);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
 	//テクスチャの切り抜き
 	sprite2_->SetSrc({ 0.5f,0 }, { 0.5f,0.5f }, { 0.0f,0.0f }, { 0,0.5f });
@@ -37,12 +32,10 @@ void DebugScene::Initialize()
 	spriteWorldTransform_.Initialize();
 	sprite2WorldTransform_.parent= &spriteWorldTransform_;
 
-
 	particle_ = make_unique<Particle>();
-	particle_->SetTexHandle(SpriteTexHandle);
+	particle_->SetTexHandle(SpritemobTexHandle);
 	particle_->Initialize(new ParticlePlaneState,20);
 
-	
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -67,7 +60,7 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Checkbox("Screen", &ScreenFlag);
 	ImGui::End();
 
-	if (Input::GetInstance()->PushKeyPressed(DIK_S))
+	if (Input::PushKeyPressed(DIK_S))
 	{
 		AudioManager::AudioPlayWave(Audiohandle);
 		Flag = true;
@@ -83,12 +76,12 @@ void DebugScene::Update(GameManager* Scene)
 		AudioManager::AudioStopWave(Audiohandle);
 		Flag = false;
 	}
-	if (Input::GetInstance()->PushKeyPressed(DIK_D))
+	if (Input::PushKeyPressed(DIK_D))
 	{
 		AudioManager::AudioPlayWave(Audiohandle2);
 
 	}
-	if (Input::GetInstance()->PushKeyPressed(DIK_R))
+	if (Input::PushKeyPressed(DIK_R))
 	{
 		Model * model = new Model();
 		model->CreateFromObj("MapGround");

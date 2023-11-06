@@ -40,7 +40,6 @@ public:
 
 private:
 
-
 	D3DResourceLeakChecker leakCheck;
 };
 
