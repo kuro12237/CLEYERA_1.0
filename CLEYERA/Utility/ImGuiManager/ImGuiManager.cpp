@@ -14,10 +14,10 @@ void ImGuiManager::Initialize()
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init(WinApp::GetInstance()->GetHwnd());
 	ImGui_ImplDX12_Init(
-		DirectXCommon::GetInstance()->GetDevice().Get(),
+		DirectXCommon::GetInstance()->GetDevice(),
 		DirectXCommon::GetInstance()->GetswapChain().swapChainDesc.BufferCount,
 		DirectXCommon::GetInstance()->GetRtv().rtvDesc.Format,
-		DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+		DirectXCommon::GetInstance()->GetSrvHeap(),
 		DirectXCommon::GetInstance()->GetSrvHeap()->GetCPUDescriptorHandleForHeapStart(),
 		DirectXCommon::GetInstance()->GetSrvHeap()->GetGPUDescriptorHandleForHeapStart()
 
@@ -31,7 +31,7 @@ void ImGuiManager::BeginFlame()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ID3D12DescriptorHeap* descripterHeap[] = { DirectXCommon::GetInstance()->GetSrvHeap().Get()};
+	ID3D12DescriptorHeap* descripterHeap[] = { DirectXCommon::GetInstance()->GetSrvHeap()};
 	DirectXCommon::GetInstance()->GetCommands().m_pList->SetDescriptorHeaps(1, descripterHeap);
 
 }

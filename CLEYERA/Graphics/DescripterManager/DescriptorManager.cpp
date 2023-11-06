@@ -46,14 +46,14 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<I
 
 	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index] = 
 		GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+			DirectXCommon::GetInstance()->GetSrvHeap(),
 			DescriptorManager::GetInstance()->descripterSize_.SRV, 
 			DescriptorManager::GetInstance()->index
 		);
 
 	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index] =
 		GetGPUDescriptorHandle(
-		    DirectXCommon::GetInstance()->GetSrvHeap().Get(), 
+		    DirectXCommon::GetInstance()->GetSrvHeap(), 
 			DescriptorManager::GetInstance()->descripterSize_.SRV,
 			DescriptorManager::GetInstance()->index
  	    );
