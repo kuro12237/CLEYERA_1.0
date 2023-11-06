@@ -13,42 +13,42 @@ public:
 	static DebugTools* GetInstance();
 
 	/// <summary>
-	/// ƒRƒ}ƒ“ƒh‚ğ’Ç‰Á‚·‚é
+	/// ã‚³ãƒãƒ³ãƒ‰ã‚’è¿½åŠ ã™ã‚‹
 	/// </summary>
 	static void addCommand(ICommand* command,const string &log=0);
 	
 	/// <summary>
-    /// “o˜^‚µ‚½ƒRƒ}ƒ“ƒh‚ğ‚·‚×‚ÄÁ‚· 
+    /// ç™»éŒ²ã—ãŸã‚³ãƒãƒ³ãƒ‰ã‚’ã™ã¹ã¦æ¶ˆã™ 
 	/// </summary>
 	static void ClearCommand();
 
 	/// <summary>
-	/// DebugTool‚ğg‚¤ê‡‚ÍScene‚ÌUpdate‚ÌÅŒã‚É•K‚¸‚Í‚³‚Ş
+	/// DebugToolã‚’ä½¿ã†å ´åˆã¯Sceneã®Updateã®æœ€å¾Œã«å¿…ãšã¯ã•ã‚€
 	/// </summary>
 	static ViewProjection ConvertViewProjection(ViewProjection& viewProjection);
 
 	/// <summary>
-	/// “o˜^‚µ‚½ƒRƒ}ƒ“ƒh‚ÌXVˆ—
+	/// ç™»éŒ²ã—ãŸã‚³ãƒãƒ³ãƒ‰ã®æ›´æ–°å‡¦ç†
 	/// </summary>
 	static void UpdateExecute(int commandNumber);
 
 	/// <summary>
-	/// “o˜^‚µ‚½ƒRƒ}ƒ“ƒh‚Ì•`‰æˆ—
+	/// ç™»éŒ²ã—ãŸã‚³ãƒãƒ³ãƒ‰ã®æç”»å‡¦ç†
 	/// </summary>
 	static void DrawExecute(int commandNumber);
 
 	/// <summary>
-	/// gameScene‚Ì“à‚Å‚Íg‚í‚È‚¢
+	/// gameSceneã®å†…ã§ã¯ä½¿ã‚ãªã„
 	/// </summary>
 	static void SetViewProjection(ViewProjection viewProjection) { DebugTools::GetInstance()->viewProjection_ = viewProjection; }
 
 	/// <summary>
-	/// gameScene‚Ì“à‚Å‚Íg‚í‚È‚¢
+	/// gameSceneã®å†…ã§ã¯ä½¿ã‚ãªã„
 	/// </summary>
 	static void SetIsviewProjectionReWrite(bool Flag) { DebugTools::GetInstance()->isViewProjectionReWrite = Flag; }
 
 	/// <summary>
-	/// gameScene‚Ì“à‚Å‚Íg‚í‚È‚¢
+	/// gameSceneã®å†…ã§ã¯ä½¿ã‚ãªã„
 	/// </summary>
 	static ViewProjection GetViewProjection() { return DebugTools::GetInstance()->viewProjection_; }
 

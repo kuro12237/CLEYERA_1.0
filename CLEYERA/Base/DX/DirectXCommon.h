@@ -83,7 +83,7 @@ private:
 	static void CreateFixFPS();
 	static void UpdateFixFPS();
 
-	//DXGI+ID3D12‚ÍŠî–{Comptr‚É•Ï‚¦‚é
+	//DXGI+ID3D12ã¯åŸºæœ¬Comptrã«å¤‰ãˆã‚‹
 
     ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 	ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;

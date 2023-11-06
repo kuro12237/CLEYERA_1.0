@@ -13,7 +13,7 @@ void CollisionManager::CheckAllCollision()
 		itrB++;
 		for (; itrB != colliders_.end(); ++itrB) {
 			Collider* colliderB = *itrB;
-			//“–‚½‚è”»’èˆ—
+			//å½“ãŸã‚Šåˆ¤å®šå‡¦ç†
 			CheckCollisionPair(colliderA, colliderB);
 		}
 	}
@@ -21,12 +21,12 @@ void CollisionManager::CheckAllCollision()
 
 void CollisionManager::CheckCollisionPair(Collider* cA, Collider* cB) {
 
-	//ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	//ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0) {
 		return;
 	}
-	//“–‚½‚è”»’è‚ÌŒvŽZŠJŽn
+	//å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—é–‹å§‹
 	Vector3 cApos = cA->GetWorldPosition();
 	Vector3 cBpos = cB->GetWorldPosition();
 

@@ -37,7 +37,7 @@ public:
 	static void SoundAllUnLoad();
 
 	/// <summary>
-	/// ’·‚¢‰¹Šy‚Íˆê‰ñ‚Å‚Í‚È‚¢‚ÆƒoƒO‚é
+	/// é•·ã„éŸ³æ¥½ã¯ä¸€å›ã§ã¯ãªã„ã¨ãƒã‚°ã‚‹
 	/// </summary>
 	/// <param name="soundHandle"></param>
 	static void AudioPlayWave(uint32_t soundHandle);

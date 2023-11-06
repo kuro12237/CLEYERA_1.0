@@ -19,9 +19,9 @@ public:
 
 private:
 
-	//Ž©•ª
+	//è‡ªåˆ†
 	uint32_t collisionAttribute_ = 0xffffffff;
-	//‘ŠŽè
+	//ç›¸æ‰‹
 	uint32_t CollisionMask_ = 0xffffffff;
 
 	float radious_ = 0.5f;

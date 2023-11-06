@@ -4,7 +4,7 @@ void ParticlePlaneState::Initialize(Particle* state)
 {
 	if (NumInstansing)
 	{
-		//NumInstansingInitialize‚ª“ñ‰ñŒÄ‚Ño‚³‚ê‚½‚çError‚ğo‚·
+		//NumInstansingInitializeãŒäºŒå›å‘¼ã³å‡ºã•ã‚ŒãŸã‚‰Errorã‚’å‡ºã™
 		LogManager::Log("Particle Instansing Error");
 		assert(0);
 	}
@@ -56,7 +56,7 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param,ViewProj
 	materialData->color = testColor;
 	materialData->uvTransform = MatrixTransform::AffineMatrix({1,1,1}, {0,0,0},{0,0,0});
 	
-	//Billbord‚ÌŒvZ
+	//Billbordã®è¨ˆç®—
 	CarmeraBillbord(viewprojection);
 	
 	NumDrawInstansing = 0;
@@ -64,17 +64,17 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param,ViewProj
 	for (list<Particle_param>::iterator particleIterator = param.begin();
 		particleIterator != param.end(); ++particleIterator){
 
-		//ƒXƒP[ƒ‹‚ğo‚·
+		//ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å‡ºã™
 		sMat = MatrixTransform::ScaleMatrix((*particleIterator).worldTransform_.scale);
-		//•½sˆÚ“®ˆÚ“®
+		//å¹³è¡Œç§»å‹•ç§»å‹•
 		tMat = MatrixTransform::TranslateMatrix((*particleIterator).worldTransform_.translate);
-		//Affine•ÏŠ·
+		//Affineå¤‰æ›
 		Matrix4x4 matWorld = MatrixTransform::Multiply(sMat, MatrixTransform::Multiply(billboardMatrix, tMat));
-		//view•ÏŠ·
+		//viewå¤‰æ›
 		matWorld = MatrixTransform::Multiply(matWorld, MatrixTransform::Multiply(viewprojection.matView_, viewprojection.matProjection_));
-		//uv‚ÌAffine
+		//uvã®Affine
 		(*particleIterator).uvTransform_.UpdateMatrix();
-		//‘ã“ü
+		//ä»£å…¥
 		instansingData[NumDrawInstansing].WVP = matWorld;
 		instansingData[NumDrawInstansing].world = MatrixTransform::Identity();
 		instansingData[NumDrawInstansing].color = (*particleIterator).color_;
@@ -88,7 +88,7 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param,ViewProj
 
 void ParticlePlaneState::CarmeraBillbord(ViewProjection view)
 {
-	//‰ñ“]
+	//å›è»¢
 	Matrix4x4 backToFrontMatrix = MatrixTransform::Identity();
 	Matrix4x4 rm = MatrixTransform::RotateXYZMatrix(view.rotation_.x, view.rotation_.y, view.rotation_.z);
 
@@ -109,10 +109,10 @@ void ParticlePlaneState::CommandCall(uint32_t TexHandle,Particle *state)
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//Œ`ó‚ğİ’èBPSO‚Éİ’è‚µ‚Ä‚¢‚é‚à‚Ì‚Æ‚Í‚Ü‚½•ÊB“¯‚¶‚à‚Ì‚ğİ’è‚·‚é‚Æl‚¦‚Ä‚¨‚¯‚Î—Ç‚¢
+	//å½¢çŠ¶ã‚’è¨­å®šã€‚PSOã«è¨­å®šã—ã¦ã„ã‚‹ã‚‚ã®ã¨ã¯ã¾ãŸåˆ¥ã€‚åŒã˜ã‚‚ã®ã‚’è¨­å®šã™ã‚‹ã¨è€ƒãˆã¦ãŠã‘ã°è‰¯ã„
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//ƒ}ƒeƒŠƒAƒ‹CBuffer‚ÌêŠ‚ğİ’è
+	//ãƒãƒ†ãƒªã‚¢ãƒ«CBufferã®å ´æ‰€ã‚’è¨­å®š
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	DescriptorManager::rootParamerterCommand(1, dsvIndex);

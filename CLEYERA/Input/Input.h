@@ -37,8 +37,8 @@ private:
 
 
 
-	//0x80=‰Ÿ‚µ‚Ä‚¢‚éó‘Ô
-	//0x00=‰Ÿ‚µ‚Ä‚È‚¢ó‘Ô
+	//0x80=æŠ¼ã—ã¦ã„ã‚‹çŠ¶æ…‹
+	//0x00=æŠ¼ã—ã¦ãªã„çŠ¶æ…‹
 	Input() = default;
 	~Input() = default;
 	Input(const Input&) = delete;

@@ -15,7 +15,7 @@ void PeraPolygon::Initialize()
 void PeraPolygon::CreateVertex()
 {
 	//Position_Texcoord PeraBox{};
-	const uint32_t PeraBoxMaxSize = 6;
+	//const uint32_t PeraBoxMaxSize = 6;
 	//1
 	//11
 	//Position_Texcoord PeraBox_leftBottom = { -1.0f,-1.0f,1.0f,1.0f,0.0f,1.0f };
@@ -28,22 +28,22 @@ void PeraPolygon::CreateVertex()
 	//Position_Texcoord PeraBox_rightTop = { 1.0f,1.0f,1.0f,1.0f,1.0f,0.0f };
 	//Position_Texcoord PeraBox_rightBottom = { 1.0f,-1.0f,1.0f,1.0f,1.0f,1.0f };
 
-	//’¸“_‚ÆBufferView‚Ìì¬
+	//é ‚ç‚¹ã¨BufferViewã®ä½œæˆ
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;//UploadHeap‚ğg‚¤
-	//’¸“_ƒŠƒ\[ƒX‚Ìİ’è
+	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;//UploadHeapã‚’ä½¿ã†
+	//é ‚ç‚¹ãƒªã‚½ãƒ¼ã‚¹ã®è¨­å®š
 	D3D12_RESOURCE_DESC resourceDesc{};
-	//ƒoƒbƒtƒ@ƒŠƒ\[ƒXBƒeƒNƒXƒ`ƒƒ‚Ìê‡‚Í‚Ü‚½•Ê‚Ìİ’è‚ğ‚·‚é
+	//ãƒãƒƒãƒ•ã‚¡ãƒªã‚½ãƒ¼ã‚¹ã€‚ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å ´åˆã¯ã¾ãŸåˆ¥ã®è¨­å®šã‚’ã™ã‚‹
 	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	resourceDesc.Width = sizeof(Position_Texcoord);
-	//ƒoƒbƒtƒ@‚Ìê‡‚Í‚±‚ê‚ç‚Í‚P‚É‚·‚éŒˆ‚Ü‚è
+	//ãƒãƒƒãƒ•ã‚¡ã®å ´åˆã¯ã“ã‚Œã‚‰ã¯ï¼‘ã«ã™ã‚‹æ±ºã¾ã‚Š
 	resourceDesc.Height = 1;
 	resourceDesc.DepthOrArraySize = 1;
 	resourceDesc.MipLevels = 1;
 	resourceDesc.SampleDesc.Count = 1;
-	//ƒoƒbƒtƒ@‚Ìê‡‚Í‚±‚ê‚É‚·‚éŒˆ‚Ü‚è
+	//ãƒãƒƒãƒ•ã‚¡ã®å ´åˆã¯ã“ã‚Œã«ã™ã‚‹æ±ºã¾ã‚Š
 	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-	//ÀÛ‚É’¸“_ƒŠƒ\[ƒX‚ğì‚é
+	//å®Ÿéš›ã«é ‚ç‚¹ãƒªã‚½ãƒ¼ã‚¹ã‚’ä½œã‚‹
 	Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
 	HRESULT hr = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
 		&resourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
@@ -56,7 +56,7 @@ void PeraPolygon::CreateMultiPathDescripterHeap()
 {
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
 	heapDesc.NumDescriptors = 1;
-	//MultiPass—p‚ÌRTVì¬
+	//MultiPassç”¨ã®RTVä½œæˆ
 	HRESULT result{};
 	result = 
 		DirectXCommon::GetInstance()->GetDevice().Get()->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(PeraPolygon::GetInstance()->m_pPeraRTVHeap.ReleaseAndGetAddressOf()));
@@ -78,7 +78,7 @@ void PeraPolygon::CreateMultiPathDescripterHeap()
 		&rtvDesc,
 		rtvHandle
 	);
-	////MultiPass—p‚ÌSRV‚ğì¬
+	////MultiPassç”¨ã®SRVã‚’ä½œæˆ
 	//heapDesc.NumDescriptors = 1;
 	//heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	//heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;

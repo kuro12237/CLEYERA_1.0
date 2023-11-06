@@ -16,7 +16,7 @@ void DebugScene::Initialize()
 
 	SpriteTexHandle = TextureManager::LoadTexture("Resources/mob.png");
 
-	uint32_t SpriteTexHandle = TextureManager::LoadTexture("Resources/mob.png");
+	SpriteTexHandle = TextureManager::LoadTexture("Resources/mob.png");
 
 	SpriteTexHandle = TextureManager::LoadTexture("Resources/CLEYERA.png");
 

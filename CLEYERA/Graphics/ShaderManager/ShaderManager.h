@@ -37,7 +37,7 @@ public:
 private:
 
 	/// <summary>
-	/// シェーダーのコンパイル関数
+	/// 繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｮ繧ｳ繝ｳ繝代う繝ｫ髢｢謨ｰ
 	/// </summary>
 	static IDxcBlob* CompilerShaderFanc(
 		const std::wstring& filePath,

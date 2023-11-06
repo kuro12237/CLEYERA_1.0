@@ -46,15 +46,15 @@ void ModelLineState::CommandCall()
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//Œ`ó‚ðÝ’èBPSO‚ÉÝ’è‚µ‚Ä‚¢‚é‚à‚Ì‚Æ‚Í‚Ü‚½•ÊB“¯‚¶‚à‚Ì‚ðÝ’è‚·‚é‚Æl‚¦‚Ä‚¨‚¯‚Î—Ç‚¢
+	//å½¢çŠ¶ã‚’è¨­å®šã€‚PSOã«è¨­å®šã—ã¦ã„ã‚‹ã‚‚ã®ã¨ã¯ã¾ãŸåˆ¥ã€‚åŒã˜ã‚‚ã®ã‚’è¨­å®šã™ã‚‹ã¨è€ƒãˆã¦ãŠã‘ã°è‰¯ã„
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 
-	//ƒ}ƒeƒŠƒAƒ‹CBuffer‚ÌêŠ‚ðÝ’è
+	//ãƒžãƒ†ãƒªã‚¢ãƒ«CBufferã®å ´æ‰€ã‚’è¨­å®š
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-	//wvp—p‚ÌCBuffer‚ÌêŠ‚ðÝ’è
+	//wvpç”¨ã®CBufferã®å ´æ‰€ã‚’è¨­å®š
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 
-	//•`‰æ(DrawCall/ƒhƒ[ƒR[ƒ‹)B
+	//æç”»(DrawCall/ãƒ‰ãƒ­ãƒ¼ã‚³ãƒ¼ãƒ«)ã€‚
 	commands.m_pList->DrawInstanced(VertexSize, 1, 0, 0);
 }

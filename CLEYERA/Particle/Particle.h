@@ -13,16 +13,16 @@ public:
 	~Particle() { delete state_; }
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="new Œ`ó‘I‘ğ"></param>
-	/// <param name="ƒCƒ“ƒXƒ^ƒ“ƒXÅ‘å”"></param>
+	/// <param name="new å½¢çŠ¶é¸æŠ"></param>
+	/// <param name="ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹æœ€å¤§æ•°"></param>
 	void Initialize(IParticleState *state ,const uint32_t NumInstance = 1);
 
 	void Draw(ViewProjection viewProjection);
 
 	/// <summary>
-	/// particle‚ÌXVˆ—‚ÌÅ‰‚É•K‚¸‘‚­
+	/// particleã®æ›´æ–°å‡¦ç†ã®æœ€åˆã«å¿…ãšæ›¸ã
 	/// </summary>
 	list<Particle_param>begin();
 
@@ -34,7 +34,7 @@ public:
 	void SetBlendMode(BlendMode blend) { blendMode_ = blend; }
 
 	/// <summary>
-	/// ƒŠƒXƒg‚É“o˜^
+	/// ãƒªã‚¹ãƒˆã«ç™»éŒ²
 	/// </summary>
 	void PushList(Particle_param particle) { particles_.push_back(particle);}
 
@@ -50,12 +50,12 @@ public:
 	uint32_t GetTexhandle() { return texhandle; }
 	
 	/// <summary>
-	/// “¯‚É•\¦‚Å‚«‚éÅ‘å”
+	/// åŒæ™‚ã«è¡¨ç¤ºã§ãã‚‹æœ€å¤§æ•°
 	/// </summary>
 	const uint32_t GetNumInstancing() const{ return NumInstance_; }
 	
 	/// <summary>
-    /// ƒŠƒXƒg‚ÌGet
+    /// ãƒªã‚¹ãƒˆã®Get
 	/// </summary>
 	list<Particle_param> GetParticles() { return particles_; }
 

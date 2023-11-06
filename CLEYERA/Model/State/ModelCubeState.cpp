@@ -113,7 +113,7 @@ void ModelCubeState::CommandCall(Model* state)
 
 	PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
 
-	//ƒeƒNƒXƒ`ƒƒ‚ª‚ ‚éê‡
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒã‚ã‚‹å ´åˆ
 	if (!state->GetTexHandle() == 0) {
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
 	}

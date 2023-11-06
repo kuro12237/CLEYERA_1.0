@@ -3,7 +3,7 @@
 void Particle::Initialize(IParticleState* state, const uint32_t NumInstance)
 {
 	if (InitializeLock){
-		//Initialize�����Ăяo����Ă���
+		//Initializeが二回呼び出されている
 		LogManager::Log("Particle Initialize ERROR " + name_+"\n");
 		assert(0);
 	}
@@ -17,7 +17,7 @@ void Particle::Draw(ViewProjection viewProjection)
 {
 	if (particles_.size() >= NumInstance_ )
 	{
-		//Instance�̐���胊�X�g�̐���������ƃG���[
+		//Instanceの数よりリストの数が増えるとエラー
 		LogManager::Log("Particle Draw ERROR "+ name_+"\n");
 		assert(0);
 	}
@@ -27,7 +27,7 @@ void Particle::Draw(ViewProjection viewProjection)
 
 list<Particle_param> Particle::begin()
 {
-	//�����t���O��true�ɂȂ����烊�X�g������
+	//生存フラグがtrueになったらリストから解放
 	for (list<Particle_param>::iterator p=particles_.begin(); p != particles_.end();)
 	{
 		if ((*p).isAlive)
@@ -38,8 +38,8 @@ list<Particle_param> Particle::begin()
 			++p;
 		}
 	}
-	//�����X�g�ɓo�^���Ă��镨�������ă��X�g������
-	//�܂��o�^���Ȃ���
+	//今リストに登録してある物をうつしてリストを消去
+	//また登録しなおす
 	list<Particle_param> p = particles_;
 	particles_.clear();
 	return p;

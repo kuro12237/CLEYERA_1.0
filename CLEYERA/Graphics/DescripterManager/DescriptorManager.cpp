@@ -19,8 +19,8 @@ void DescriptorManager::BeginFlame()
 {
 	if (DescriptorManager::GetInstance()->index >= DESCRIPTER_MAX)
 	{
-		//DescripterIndexの数が上限を超えた
-		//#define DescripterMax の数を増やすかテクスチャ・Particleの利用数を減す
+		//DescripterIndex縺ｮ謨ｰ縺御ｸ企剞繧定ｶ�縺医◆
+		//#define DescripterMax 縺ｮ謨ｰ繧貞｢励ｄ縺吶°繝�繧ｯ繧ｹ繝√Ε繝ｻParticle縺ｮ蛻ｩ逕ｨ謨ｰ繧呈ｸ帙☆
 		LogManager::Log("DescripterManager index Overflow");
 		assert(0);
 	}

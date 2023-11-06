@@ -24,17 +24,17 @@ public:
 	static void Clear();
 
 	/// <summary>
-	/// Instancing‚ÌSRV‚ðì¬
+	/// Instancingã®SRVã‚’ä½œæˆ
 	/// </summary>
 	static uint32_t CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size);
 
 	/// <summary>
-    /// CPU‚ÆGPU‚Ìptr‚ð‚¸‚ç‚·
+    /// CPUã¨GPUã®ptrã‚’ãšã‚‰ã™
     /// </summary>
 	static void CGHandlePtr();
 
 	/// <summary>
-	/// index‚ðƒCƒ“ƒNƒŠƒƒ“ƒg‚µ‚Ädescripter‚ð‚¸‚ç‚·
+	/// indexã‚’ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã—ã¦descripterã‚’ãšã‚‰ã™
 	/// </summary>
 	static void IndexIncrement() { DescriptorManager::GetInstance()->index++; }
 
@@ -69,7 +69,7 @@ public:
 #pragma region Command
 
 	/// <summary> 
-	/// rootParameter‚ÌƒRƒ}ƒ“ƒhÏ‚Þ
+	/// rootParameterã®ã‚³ãƒžãƒ³ãƒ‰ç©ã‚€
     /// </summary>
 	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle);
 

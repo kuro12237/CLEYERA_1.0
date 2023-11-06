@@ -62,7 +62,7 @@ SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
 		s >> identifier;
 
 		if (identifier == "v")
-		{   //v’¸“_ˆÊ’u
+		{   //vé ‚ç‚¹ä½ç½®
 			Vector4 position = {};
 			s >> position.x >> position.y >> position.z;
 
@@ -71,7 +71,7 @@ SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
 			positions.push_back(position);
 		}
 		else if (identifier == "vt")
-		{	//vt’¸“_ƒeƒNƒXƒ`ƒƒ‚ÌÀ•W
+		{	//vté ‚ç‚¹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®åº§æ¨™
 			Vector2 texcoord = {};
 			s >> texcoord.x >> texcoord.y;
 			texcoord.y *= -1.0f;
@@ -79,7 +79,7 @@ SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
 			texcoords.push_back(texcoord);
 		}
 		else if (identifier == "vn")
-		{   //vn’¸“_–@ü
+		{   //vné ‚ç‚¹æ³•ç·š
 			Vector3 normal = {};
 
 			s >> normal.x >> normal.y >> normal.z;
@@ -91,7 +91,7 @@ SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
 			for (int32_t faceVertex = 0; faceVertex < 3; ++faceVertex) {
 				string vertexDefinition = {};
 				s >> vertexDefinition;
-				//•ª‰ğ‚µ‚ÄIndex‚ğGet
+				//åˆ†è§£ã—ã¦Indexã‚’Get
 				istringstream v(vertexDefinition);
 				uint32_t elementIndices[3] = {};
 				for (int32_t element = 0; element < 3; ++element) {
@@ -105,7 +105,7 @@ SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
 				Vector3 normal = normals[elementIndices[2] - 1];
 				triangle[faceVertex] = { position,texcoord,normal };
 			}
-			//’¸“_‚ğ‹t‡‚Å“o˜^‚·‚é‚±‚Æ‚ÅA‰ñ‚è‡‚ğ‹t‚É‚·‚é
+			//é ‚ç‚¹ã‚’é€†é †ã§ç™»éŒ²ã™ã‚‹ã“ã¨ã§ã€å›ã‚Šé †ã‚’é€†ã«ã™ã‚‹
 			modelData.vertices.push_back(triangle[2]);
 			modelData.vertices.push_back(triangle[1]);
 			modelData.vertices.push_back(triangle[0]);

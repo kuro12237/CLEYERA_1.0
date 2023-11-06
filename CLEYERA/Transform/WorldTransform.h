@@ -21,7 +21,7 @@ struct WorldTransform
 	const WorldTransform* parent = {};
 
 	/// <summary>
-	/// ’PˆÊs—ñ‚Å‰Šú‰»
+	/// å˜ä½è¡Œåˆ—ã§åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 

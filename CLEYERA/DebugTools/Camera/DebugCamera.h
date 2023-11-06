@@ -14,7 +14,7 @@ public:
 
 	static DebugCamera* GetInstance();
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Initialize();
 
 

@@ -59,7 +59,7 @@ private:
 	);
 
 	/// <summary>
-	/// InputElement‚Ìİ’è
+	/// InputElementã®è¨­å®š
 	/// </summary>
 	/// <param name="inputElementDescs"></param>
 	/// <param name="SemanticName"></param>
@@ -75,7 +75,7 @@ private:
 		);
 
 	/// <summary>
-	/// ƒuƒŒƒ“ƒhƒ‚[ƒh‚Ìİ’è
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
 	/// </summary>
 	/// <param name="blenddesc"></param>
 	/// <param name="mode"></param>
@@ -84,11 +84,11 @@ private:
 		BlendMode mode);
 
 	/// <summary>
-	/// ƒ‰ƒXƒ^ƒ‰ƒCƒU[‚Ìİ’è
+	/// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã®è¨­å®š
 	/// </summary>
 	/// <param name="rasterizerDesc"></param>
-	/// <param name="CullMode : ‚Ç‚ÌŒü‚«‚É•\¦‚·‚é‚©"></param>
-	/// <param name="FillMode : “h‚è‚Â‚Ô‚·‚©"></param>
+	/// <param name="CullMode : ã©ã®å‘ãã«è¡¨ç¤ºã™ã‚‹ã‹"></param>
+	/// <param name="FillMode : å¡—ã‚Šã¤ã¶ã™ã‹"></param>
 	static void SettingRasterizer(
 		D3D12_RASTERIZER_DESC& rasterizerDesc,
 		D3D12_CULL_MODE CullMode,
@@ -96,7 +96,7 @@ private:
 	);
 
 	/// <summary>
-	/// [“x‚Ìİ’è
+	/// æ·±åº¦ã®è¨­å®š
 	/// </summary>
 	/// <param name="despthStencilDesc"></param>
 	/// <param name="EnableFlag"></param>

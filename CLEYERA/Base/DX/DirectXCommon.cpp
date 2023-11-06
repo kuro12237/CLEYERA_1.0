@@ -67,7 +67,7 @@ D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kCli
 {
 	D3D12_VIEWPORT viewport = {};
 
-	//ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ÌƒTƒCƒY‚ğˆê‚É‚µ‚Ä‰æ–Ê‘S‘Ì‚É•\¦
+	//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®ã‚µã‚¤ã‚ºã‚’ä¸€ç·’ã«ã—ã¦ç”»é¢å…¨ä½“ã«è¡¨ç¤º
 	viewport.Width = float(kClientWidth);
 	viewport.Height = float(kClientHeight);
 	viewport.TopLeftX = 0;
@@ -80,10 +80,10 @@ D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kCli
 
 D3D12_RECT DirectXCommon::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
 {
-	//ƒVƒU[‹éŒ`
+	//ã‚·ã‚¶ãƒ¼çŸ©å½¢
 	D3D12_RECT scissorRect{};
 
-	//Šî–{“I‚Éƒrƒ…[ƒ|[ƒg‚Æ“¯‚¶‹éŒ`‚ª\¬‚³‚ê‚é‚æ‚¤‚É‚·‚é
+	//åŸºæœ¬çš„ã«ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã¨åŒã˜çŸ©å½¢ãŒæ§‹æˆã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹
 	scissorRect.left = 0;
 	scissorRect.right = kClientWidth;
 	scissorRect.top = 0;
@@ -96,11 +96,11 @@ void DirectXCommon::ScissorViewCommand(const int32_t kClientWidth, const int32_t
 {
 	D3D12_VIEWPORT viewport{};
 	viewport = viewportSetting(kClientWidth, kClientHeight);
-	//ƒVƒU[‹éŒ`
+	//ã‚·ã‚¶ãƒ¼çŸ©å½¢
 	D3D12_RECT scissorRect{};
 	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
 
-	//ƒRƒ}ƒ“ƒh‚ğÏ‚Ş
+	//ã‚³ãƒãƒ³ãƒ‰ã‚’ç©ã‚€
 	Commands commands = DirectXCommon::GetInstance()->commands;
 	commands.m_pList->RSSetViewports(1, &viewport);
 	commands.m_pList->RSSetScissorRects(1, &scissorRect);
@@ -119,7 +119,7 @@ void DirectXCommon::EndFlame()
 	commands.m_pList->ResourceBarrier(1, &barrier);
 	HRESULT hr = commands.m_pList->Close();
 	assert(SUCCEEDED(hr));
-	//ƒRƒ}ƒ“ƒhÀs
+	//ã‚³ãƒãƒ³ãƒ‰å®Ÿè¡Œ
 	ID3D12CommandList* commandLists[] = { commands.m_pList.Get() };
 	commands.m_pQueue->ExecuteCommandLists(1, commandLists);
 
@@ -134,7 +134,7 @@ void DirectXCommon::EndFlame()
 		WaitForSingleObject(fenceEvent, INFINITE);
 		CloseHandle(fenceEvent);
 	}
-	//ƒRƒ}ƒ“ƒhƒŠƒZƒbƒg
+	//ã‚³ãƒãƒ³ãƒ‰ãƒªã‚»ãƒƒãƒˆ
 	hr = commands.m_pAllocator->Reset();
 	assert(SUCCEEDED(hr));
 	hr = commands.m_pList->Reset(commands.m_pAllocator.Get(), nullptr);
@@ -218,7 +218,7 @@ void DirectXCommon::CreateDebugLayer()
 void DirectXCommon::CreateFactory()
 {
 
-	//DXGIƒtƒ@ƒNƒgƒŠ[‚Ì¶¬
+	//DXGIãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ã®ç”Ÿæˆ
 	ComPtr<IDXGIFactory7>dxgiFactory = nullptr;
 	ComPtr<	IDXGIAdapter4>useAdapter = nullptr;
 
@@ -388,25 +388,25 @@ void DirectXCommon::CreateFixFPS()
 
 void DirectXCommon::UpdateFixFPS()
 {
-	//1/60‚Ò‚Á‚½‚ÌŠÔ
+	//1/60ã´ã£ãŸã®æ™‚é–“
 	const microseconds kMinTime(uint64_t(1000000.0f / 60.0f));
-	//ã‚æ‚è­‚µ’Z‚¢ŠÔ
+	//ä¸Šã‚ˆã‚Šå°‘ã—çŸ­ã„æ™‚é–“
 	const microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f));
-	//Œ»İŠÔ‚Ìget
+	//ç¾åœ¨æ™‚é–“ã®get
 	steady_clock::time_point now = steady_clock::now();
-	//‘O‰ñ‚©‚ç‚ÌŒo‰ßŠÔ
+	//å‰å›ã‹ã‚‰ã®çµŒéæ™‚é–“
 	microseconds elapsed =
 		duration_cast<microseconds>(now - DirectXCommon::GetInstance()->reference_);
-	//1/60•b@Œo‚Á‚Ä‚¢‚È‚¢ê‡
+	//1/60ç§’ã€€çµŒã£ã¦ã„ãªã„å ´åˆ
 	if (elapsed < kMinTime)
 	{
-		//ŠÔ‚É’B‚·‚é‚Ü‚Åƒ‹[ƒv‚ğ‹ø—ÇƒGƒX
+		//æ™‚é–“ã«é”ã™ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—ã‚’ä¸²è‰¯ã‚¨ã‚¹
 		while (steady_clock::now() - DirectXCommon::GetInstance()->reference_ < kMinCheckTime)
 		{
 			this_thread::sleep_for(microseconds(1));
 		}
 	}
-	//Œ»İ‚ÌŠÔ‚ğ‹L˜^
+	//ç¾åœ¨ã®æ™‚é–“ã‚’è¨˜éŒ²
 	DirectXCommon::GetInstance()->reference_ = steady_clock::now();
 }
 
