@@ -22,7 +22,7 @@ public:
 	/// <summary>
 	/// Žg‚Á‚Ä‚Í‚¢‚¯‚È‚¢
 	/// </summary>
-	static void ModeObjctStateLoadTexture() { TextureManager::GetInstance()->isCreateObjectLoad_ = true; }
+	static void ModeSelectObjctState() { TextureManager::GetInstance()->isCreateObjectLoad_ = true; }
 
 private:
 
