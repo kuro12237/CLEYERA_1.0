@@ -2,7 +2,7 @@
 
 DebugScene::~DebugScene()
 {
-	AudioManager::SoundUnLoad();	
+	AudioManager::SoundAllUnLoad();	
 }
 
 void DebugScene::Initialize()
@@ -30,8 +30,7 @@ void DebugScene::Initialize()
 	sprite2_ = make_unique<Sprite>();
 	sprite2_->SetTexHandle(SpriteTexHandle);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
-	
-	
+	sprite2_->SetSrc({ 0.5f,0 }, { 0.5f,0.5f }, { 0.0f,0.0f }, { 0,0.5f });
 	sprite2WorldTransform_.Initialize();
 	spriteWorldTransform_.Initialize();
 	sprite2WorldTransform_.parent= &spriteWorldTransform_;
