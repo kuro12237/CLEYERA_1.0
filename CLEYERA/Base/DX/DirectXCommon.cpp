@@ -34,7 +34,6 @@ void DirectXCommon::Finalize()
 
 void DirectXCommon::BeginFlame()
 {
-	UpdateFixFPS();
 	SwapChain swapChain = DirectXCommon::GetInstance()->swapChain;
 	Commands commands = DirectXCommon::GetInstance()->commands;
 
@@ -134,6 +133,10 @@ void DirectXCommon::EndFlame()
 		WaitForSingleObject(fenceEvent, INFINITE);
 		CloseHandle(fenceEvent);
 	}
+
+
+	UpdateFixFPS();
+
 	//コマンドリセット
 	hr = commands.m_pAllocator->Reset();
 	assert(SUCCEEDED(hr));
