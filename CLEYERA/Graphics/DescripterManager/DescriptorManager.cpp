@@ -73,6 +73,7 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<I
 	return DescriptorManager::GetInstance()->index;
 }
 
+
 void DescriptorManager::rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle)
 {
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
@@ -123,4 +124,35 @@ Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>  DescriptorManager::CreateDescripto
 	HRESULT hr = DirectXCommon::GetInstance()->GetDevice().Get()->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptorHeap));
 	assert(SUCCEEDED(hr));
 	return descriptorHeap;
+}
+
+void DescriptorManager::CreateSRVDescripter(uint32_t index, ID3D12Resource* resource, DXGI_FORMAT format)
+{
+	//場所決め
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Format = format;
+	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	//cpuずらし
+	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index] =
+		GetCPUDescriptorHandle(
+			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+			DescriptorManager::GetInstance()->descripterSize_.SRV,
+			index
+		);
+	//gpuずらし
+	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index] =
+		GetGPUDescriptorHandle(
+			DirectXCommon::GetInstance()->GetSrvHeap().Get(),
+			DescriptorManager::GetInstance()->descripterSize_.SRV,
+			index
+		);
+
+	//作成
+	DescriptorManager::CreateShaderResourceView(
+		resource,
+		srvDesc,
+		index
+	);
 }

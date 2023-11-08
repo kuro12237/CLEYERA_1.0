@@ -19,6 +19,9 @@ public:
 	static void UnLoadTexture(const string& filePath);
 	static void AllUnLoadTexture();
 
+	static uint32_t CreatePostProsessTex(DXGI_FORMAT format, const float clearColor[],string name);
+
+	static ID3D12Resource* textursDataResource(uint32_t index,string name);
 private:
 
 	static ComPtr<ID3D12Resource> CreateTexResource(const DirectX::TexMetadata& metadata);

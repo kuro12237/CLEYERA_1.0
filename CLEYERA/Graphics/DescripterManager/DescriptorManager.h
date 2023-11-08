@@ -3,7 +3,6 @@
 #include"DirectXCommon.h"
 #define DESCRIPTER_MAX 64
 
-
 struct DescriptorSize
 {
 	uint32_t SRV;
@@ -28,6 +27,8 @@ public:
 	/// </summary>
 	static uint32_t CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size);
 
+	static uint32_t CreateMultipassSrvTexResource(DXGI_FORMAT format, const float clearColor[]);
+
 	/// <summary>
     /// CPUとGPUのptrをずらす
     /// </summary>
@@ -40,6 +41,9 @@ public:
 
 
 	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
+
+	static void CreateSRVDescripter(uint32_t index, ID3D12Resource* resource, DXGI_FORMAT format);
+
 
 #pragma region set
 

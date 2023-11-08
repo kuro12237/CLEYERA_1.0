@@ -3,6 +3,7 @@
 #include"IScene.h"
 #include"DebugScene.h"
 #include"../DebugTools/Camera/DebugCamera.h"
+#include"PostProcess/PeraPolygon.h"
 
 class GameManager
 {

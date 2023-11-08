@@ -57,6 +57,8 @@ public:
 	Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
 	ComPtr<ID3D12Device>GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_; }
 	ComPtr<ID3D12DescriptorHeap>GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap;}
+	ID3D12DescriptorHeap* GetDsvHeap() { return DirectXCommon::GetInstance()->m_pDsvDescripterHeap.Get(); }
+
 	SwapChain GetswapChain() { return DirectXCommon::GetInstance()->swapChain; }
 	RTV GetRtv() { return DirectXCommon::GetInstance()->rtv; }
 #pragma endregion

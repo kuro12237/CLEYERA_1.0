@@ -13,6 +13,7 @@ public:
 	~TexDataResource();
 
 	uint32_t GetTexHandle() { return texData_.index; }
+	ID3D12Resource* GetResource() { return texData_.resource.Get(); }
 	void texRelease() { texData_.resource.Reset(); }
 
 private:

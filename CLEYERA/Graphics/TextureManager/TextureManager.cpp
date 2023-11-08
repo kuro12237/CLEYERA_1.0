@@ -58,6 +58,61 @@ void TextureManager::AllUnLoadTexture()
 	TextureManager::GetInstance()->texDatas_.clear();
 }
 
+uint32_t TextureManager::CreatePostProsessTex(DXGI_FORMAT format, const float clearColor[],string name)
+{
+	DescriptorManager::IndexIncrement();
+	uint32_t index = DescriptorManager::GetIndex();
+
+	TexData texData;
+	
+	//ヒープの設定
+	D3D12_HEAP_PROPERTIES heapProperties{};
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+	
+	//リソースDescの設定
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	resourceDesc.Width = WinApp::GetkCilientWidth();
+	resourceDesc.Height = WinApp::GetkCilientHeight();
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.Format = format;
+	resourceDesc.SampleDesc.Count = 1;
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
+
+	D3D12_CLEAR_VALUE clearData;
+	clearData.Format = format;
+	clearData.Color[0] = clearColor[0];
+	clearData.Color[1] = clearColor[1];
+	clearData.Color[2] = clearColor[2];
+	clearData.Color[3] = clearColor[3];
+
+	//リソースの作成
+	HRESULT hr = DirectXCommon::GetInstance()->GetDevice().Get()->CreateCommittedResource(
+		&heapProperties,
+		D3D12_HEAP_FLAG_NONE,
+		&resourceDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		&clearData,
+		IID_PPV_ARGS(&texData.resource)
+	);
+	assert(SUCCEEDED(hr));
+
+	DescriptorManager::CreateSRVDescripter(index, texData.resource.Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
+
+	TextureManager::GetInstance()->texDatas_[name] = make_unique<TexDataResource>(name, texData);
+
+	return index;
+}
+
+ID3D12Resource* TextureManager::textursDataResource(uint32_t index, string name)
+{
+	index;
+	
+	return TextureManager::GetInstance()->texDatas_[name].get()->GetResource();
+}
+
 bool TextureManager::CheckTexDatas(string filePath)
 {
 	if (TextureManager::GetInstance()->texDatas_.find(filePath) == TextureManager::GetInstance()->texDatas_.end())

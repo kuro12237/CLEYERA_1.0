@@ -12,21 +12,82 @@ void PeraPolygon::Initialize()
 	CreateMultiPathDescripterHeap();
 }
 
+void PeraPolygon::PreDraw()
+{
+	//barrierを張る
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	
+	barrier.Transition.pResource = TextureManager::GetInstance()->textursDataResource(0, "peraTex");
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->ResourceBarrier(
+		1, &barrier);
+
+	auto rtvHeappointer = PeraPolygon::GetInstance()->m_pPeraRTVHeap.Get()->GetCPUDescriptorHandleForHeapStart();
+	
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = 
+		DirectXCommon::GetInstance()->GetCPUDescriptorHandle(
+		DirectXCommon::GetInstance()->GetDsvHeap()
+		, DescriptorManager::GetInstance()->GetDescripterSize().DSV, 0);
+	
+
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->OMSetRenderTargets(
+		2, &rtvHeappointer, false,
+		&dsvHandle
+	);
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
+	rtvHandles[0] = DescriptorManager::GetCPUDescriptorHandle(DirectXCommon::GetInstance()->GetRtv().m_pDescritorHeap.Get(), DescriptorManager::GetInstance()->GetDescripterSize().RTV, 0);
+	rtvHandles[1] = DescriptorManager::GetCPUDescriptorHandle(DirectXCommon::GetInstance()->GetRtv().m_pDescritorHeap.Get(), DescriptorManager::GetInstance()->GetDescripterSize().RTV, 1);
+	
+	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->ClearRenderTargetView(rtvHandles[0], clearColor, 0, nullptr);
+	float clearDepthColor[] = { 1.0f,0.0f,0.0f,0.0f };
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->ClearRenderTargetView(rtvHandles[1], clearDepthColor, 0, nullptr);
+}
+
+void PeraPolygon::PostDraw()
+{
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	//通常
+	barrier.Transition.pResource = TextureManager::GetInstance()->textursDataResource(0,"peraTex");
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->ResourceBarrier(1, &barrier);
+
+	//RTV用ディスクリプタヒープのハンドルを取得
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
+	rtvHandles[0] = DescriptorManager::GetCPUDescriptorHandle(DirectXCommon::GetInstance()->GetRtv().m_pDescritorHeap.Get(), DescriptorManager::GetInstance()->GetDescripterSize().RTV, 0);
+	rtvHandles[1] = DescriptorManager::GetCPUDescriptorHandle(DirectXCommon::GetInstance()->GetRtv().m_pDescritorHeap.Get(), DescriptorManager::GetInstance()->GetDescripterSize().RTV, 1);
+	//DSV用ディスクリプターのハンドルを取得
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DescriptorManager::GetCPUDescriptorHandle(DirectXCommon::GetInstance()->GetDsvHeap(), DescriptorManager::GetInstance()->GetDescripterSize().DSV, 0);
+	//描画先のRTVを設定する
+
+	UINT backBufferIndex = DirectXCommon::GetInstance()->GetswapChain().m_pSwapChain->GetCurrentBackBufferIndex();
+	DirectXCommon::GetInstance()->GetCommands().m_pList.Get()->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, &dsvHandle);
+}
+
 void PeraPolygon::CreateVertex()
 {
-	//Position_Texcoord PeraBox{};
+	Position_Texcoord PeraBox{};
 	//const uint32_t PeraBoxMaxSize = 6;
 	//1
 	//11
-	//Position_Texcoord PeraBox_leftBottom = { -1.0f,-1.0f,1.0f,1.0f,0.0f,1.0f };
-	//Position_Texcoord PeraBox_leftTop = { -1.0f,1.0f,1.0f,1.0f,0.0f,0.0f };
-	//Position_Texcoord PeraBox_rightBottom = { 1.0f,-1.0f,1.0f,1.0f,1.0f,1.0f };
+	Position_Texcoord PeraBox_leftBottom1 = { -1.0f,-1.0f,1.0f,1.0f,0.0f,1.0f };
+	Position_Texcoord PeraBox_leftTop1 = { -1.0f,1.0f,1.0f,1.0f,0.0f,0.0f };
+	Position_Texcoord PeraBox_rightBottom1 = { 1.0f,-1.0f,1.0f,1.0f,1.0f,1.0f };
 	//PeraBox_leftBottom, PeraBox_leftTop, PeraBox_leftbottom;
-	////11
-	//// 1
-	//Position_Texcoord PeraBox_RigTop = { -1.0f,1.0f,1.0f,1.0f,0.0f,0.0f };
-	//Position_Texcoord PeraBox_rightTop = { 1.0f,1.0f,1.0f,1.0f,1.0f,0.0f };
-	//Position_Texcoord PeraBox_rightBottom = { 1.0f,-1.0f,1.0f,1.0f,1.0f,1.0f };
+	//11
+	// 1
+	Position_Texcoord PeraBox_RigftTop2 = { -1.0f,1.0f,1.0f,1.0f,0.0f,0.0f };
+	Position_Texcoord PeraBox_leftTop2 = { 1.0f,1.0f,1.0f,1.0f,1.0f,0.0f };
+	Position_Texcoord PeraBox_rightBottom2 = { 1.0f,-1.0f,1.0f,1.0f,1.0f,1.0f };
 
 	//頂点とBufferViewの作成
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
@@ -79,25 +140,20 @@ void PeraPolygon::CreateMultiPathDescripterHeap()
 		rtvHandle
 	);
 	////MultiPass用のSRVを作成
-	//heapDesc.NumDescriptors = 1;
-	//heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	//heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	heapDesc.NumDescriptors = 1;
+	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 
-	//result = DirectXCommon::GetInstance()->GetDevice().Get()->CreateDescriptorHeap(
-	//	&heapDesc,
-	//	IID_PPV_ARGS(PeraPolygon::GetInstance()->m_pPeraSRVHeap.ReleaseAndGetAddressOf())
-	//);
+	result = DirectXCommon::GetInstance()->GetDevice().Get()->CreateDescriptorHeap(
+		&heapDesc,
+		IID_PPV_ARGS(PeraPolygon::GetInstance()->m_pPeraSRVHeap.ReleaseAndGetAddressOf())
+	);
 
-	//D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	//srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	//srvDesc.Format = rtvDesc.Format;
-	//srvDesc.Texture2D.MipLevels = 1;
-	//srvDesc.Shader4ComponentMapping =
-	//	D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	//DirectXCommon::GetInstance()->GetDevice().Get()->CreateShaderResourceView(
-	//	PeraPolygon::GetInstance()->resource_.Get(),
-	//	&srvDesc,
-	//	PeraPolygon::GetInstance()->m_pPeraSRVHeap->GetCPUDescriptorHandleForHeapStart()
-	//);
+	//srvの確保
+	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
+	uint32_t PeraResourceIndex = TextureManager::CreatePostProsessTex(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor,"peraTex");
+
+	PeraResourceIndex;
+
 
 }

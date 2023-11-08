@@ -2,6 +2,7 @@
 #include"DirectXCommon.h"
 #include"CreateResource.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
+#include"Graphics/TextureManager/TextureManager.h"
 
 class PeraPolygon
 {
@@ -19,6 +20,10 @@ public:
 	static PeraPolygon* GetInstance();
 
 	static void Initialize();
+
+	static void PreDraw();
+
+	static void PostDraw();
 
 private:
 
