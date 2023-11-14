@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include"Pch.h"
 #include"WinApp.h"
 #include"LogManager.h"
@@ -77,7 +77,7 @@ private:
 	static void CreateFixFPS();
 	static void UpdateFixFPS();
 
-	//DXGI+ID3D12‚ÍŠî–{Comptr‚É•Ï‚¦‚é
+	//DXGI+ID3D12ï¿½ÍŠï¿½{Comptrï¿½É•Ï‚ï¿½ï¿½ï¿½
 
     ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 	ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;

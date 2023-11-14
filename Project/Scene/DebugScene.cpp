@@ -25,7 +25,7 @@ void DebugScene::Initialize()
 	sprite2_ = make_unique<Sprite>();
 	sprite2_->SetTexHandle(SpriteCLEYERATexHandle);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
-	//ƒeƒNƒXƒ`ƒƒ‚ÌØ‚è”²‚«
+	//ï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½ÌØ‚è”²ï¿½ï¿½
 	sprite2_->SetSrc({ 0.5f,0 }, { 0.5f,0.5f }, { 0.0f,0.0f }, { 0,0.5f });
 
 	sprite2WorldTransform_.Initialize();

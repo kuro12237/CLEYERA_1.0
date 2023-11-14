@@ -20,10 +20,12 @@ public:
 	static void AllUnLoadTexture();
 	
 	/// <summary>
-	/// g‚Á‚Ä‚Í‚¢‚¯‚È‚¢
+	/// ï¿½gï¿½ï¿½ï¿½Ä‚Í‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 	/// </summary>
 	static void ModeSelectObjctState() { TextureManager::GetInstance()->isCreateObjectLoad_ = true; }
 
+
+	//ã‚ã„ã†
 private:
 
 	static ComPtr<ID3D12Resource> CreateTexResource(const DirectX::TexMetadata& metadata);
