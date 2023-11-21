@@ -1,7 +1,9 @@
 #include "WorldTransform.h"
 
-void WorldTransform::CreateBuuffer()
+void WorldTransform::CreateBuffer()
 {
+	buffer_ = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
+
 }
 
 void WorldTransform::Initialize()
@@ -46,5 +48,10 @@ void WorldTransform::TransfarMatrix(ComPtr<ID3D12Resource>& wvpResource, ViewPro
 	}
 	wvp->WVP = matWorld;
 	wvp->world = MatrixTransform::Identity();
+	
+}
+
+void WorldTransform::TransfarMatrix()
+{
 	
 }
