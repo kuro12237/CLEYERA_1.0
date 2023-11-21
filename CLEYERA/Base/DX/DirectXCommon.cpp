@@ -389,7 +389,8 @@ void DirectXCommon::UpdateFixFPS()
 {
 	const microseconds kMinTime(uint64_t(1000000.0f / 60.0f));
 	
-	const microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f);
+	const microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f));
+
 	steady_clock::time_point now = steady_clock::now();
 
 	microseconds elapsed =

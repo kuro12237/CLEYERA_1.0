@@ -62,6 +62,7 @@
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
     <ClCompile Include="CLEYERA\Input\Input.cpp" />
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp" />
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelCubeState.cpp" />
@@ -83,6 +84,7 @@
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene.cpp" />
+    <ClCompile Include="Project\Scene\MTScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h" />
@@ -113,6 +115,7 @@
     <ClInclude Include="CLEYERA\math\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\math\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\math\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h" />
     <ClInclude Include="CLEYERA\math\Vector2.h" />
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />
@@ -144,6 +147,7 @@
     <ClInclude Include="Project\Scene\CreatePhongModelScene.h" />
     <ClInclude Include="Project\Scene\DebugScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
+    <ClInclude Include="Project\Scene\MTScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Harf_LambertLightObject.PS.hlsl">

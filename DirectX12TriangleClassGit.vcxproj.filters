@@ -276,6 +276,12 @@
     <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp">
       <Filter>Project\Scene\CreatePhongModelScene</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp">
+      <Filter>CLEYERA\math</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\MTScene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -454,6 +460,12 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\CreatePhongModelScene.h">
       <Filter>Project\Scene\CreatePhongModelScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h">
+      <Filter>CLEYERA\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\MTScene.h">
+      <Filter>Project\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

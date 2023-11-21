@@ -20,9 +20,10 @@ struct WorldTransform
 	Matrix4x4 matWorld = {};
 	const WorldTransform* parent = {};
 
-	/// <summary>
-	/// �P�ʍs��ŏ�����
-	/// </summary>
+	ComPtr<ID3D12Resource> buffer_ = nullptr;
+
+	void CreateBuffer();
+
 	void Initialize();
 
 	void SRTSetting(Vector3 s = { 1,1,1 }, Vector3 r = { 0,0,0 }, Vector3 t = {0,0,0});
@@ -31,5 +32,6 @@ struct WorldTransform
 
 	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection viewProjection, Projection Flag=PerspectiveFov);
 
+	void TransfarMatrix();
 };
 
