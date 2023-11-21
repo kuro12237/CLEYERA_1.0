@@ -2,10 +2,9 @@
 
 Matrix4x4 Quaternion::MakeRotateAxisAngle(const Vector3& axis, float angle)
 {
+	Matrix4x4 result{};
 	float cosAngle = cosf(angle);
 	float sinAngle = sinf(angle);
-
-	Matrix4x4 result{};
 
 	result = MatrixTransform::Identity();
 
