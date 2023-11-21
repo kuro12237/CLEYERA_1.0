@@ -1,5 +1,9 @@
 #include "WorldTransform.h"
 
+void WorldTransform::CreateBuuffer()
+{
+}
+
 void WorldTransform::Initialize()
 {
 	matWorld = MatrixTransform::Identity();
