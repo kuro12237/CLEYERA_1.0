@@ -1,4 +1,4 @@
-﻿#include"AudioDataResource.h"
+#include"AudioDataResource.h"
 
 AudioDataResource::AudioDataResource(string filepath, soundData soundData)
 {

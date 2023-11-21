@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include"Pch.h"
 #include"WinApp.h"
 #include"LogManager.h"

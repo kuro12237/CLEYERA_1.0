@@ -127,6 +127,9 @@
     <Filter Include="CLEYERA\Model\Cube">
       <UniqueIdentifier>{e412e551-47a5-42ed-ae39-05603aeb4f80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Scene\CreatePhongModelScene">
+      <UniqueIdentifier>{920f8ac2-e3af-4d13-b3b4-6e11c801e5d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
       <Filter>CLEYERA\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp">
+      <Filter>Project\Scene\CreatePhongModelScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -445,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
       <Filter>CLEYERA\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\CreatePhongModelScene.h">
+      <Filter>Project\Scene\CreatePhongModelScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

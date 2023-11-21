@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include"Pch.h"
 #include"LogManager.h"
 #include"Audio/AudioDataResource.h"
@@ -37,7 +37,7 @@ public:
 	static void SoundAllUnLoad();
 
 	/// <summary>
-	/// �������y�͈��ł͂Ȃ��ƃo�O��
+	/// 音再生
 	/// </summary>
 	/// <param name="soundHandle"></param>
 	static void AudioPlayWave(uint32_t soundHandle);

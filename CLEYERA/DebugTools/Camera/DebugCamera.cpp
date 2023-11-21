@@ -1,4 +1,4 @@
-﻿#include "DebugCamera.h"
+#include "DebugCamera.h"
 
 DebugCamera* DebugCamera::GetInstance()
 {

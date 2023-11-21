@@ -66,7 +66,6 @@ D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kCli
 {
 	D3D12_VIEWPORT viewport = {};
 
-	//�N���C�A���g�̈�̃T�C�Y��ꏏ�ɂ��ĉ�ʑS�̂ɕ\��
 	viewport.Width = float(kClientWidth);
 	viewport.Height = float(kClientHeight);
 	viewport.TopLeftX = 0;
@@ -79,10 +78,8 @@ D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kCli
 
 D3D12_RECT DirectXCommon::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
 {
-	//�V�U�[��`
+	
 	D3D12_RECT scissorRect{};
-
-	//��{�I�Ƀr���[�|�[�g�Ɠ�����`���\�������悤�ɂ���
 	scissorRect.left = 0;
 	scissorRect.right = kClientWidth;
 	scissorRect.top = 0;
@@ -93,13 +90,14 @@ D3D12_RECT DirectXCommon::scissorRectSetting(int32_t kClientWidth, int32_t kClie
 
 void DirectXCommon::ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight)
 {
+	//view
 	D3D12_VIEWPORT viewport{};
 	viewport = viewportSetting(kClientWidth, kClientHeight);
-	//�V�U�[��`
+	//scissor
 	D3D12_RECT scissorRect{};
 	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
 
-	//�R�}���h��ς�
+	//Commandセット
 	Commands commands = DirectXCommon::GetInstance()->commands;
 	commands.m_pList->RSSetViewports(1, &viewport);
 	commands.m_pList->RSSetScissorRects(1, &scissorRect);
@@ -118,7 +116,7 @@ void DirectXCommon::EndFlame()
 	commands.m_pList->ResourceBarrier(1, &barrier);
 	HRESULT hr = commands.m_pList->Close();
 	assert(SUCCEEDED(hr));
-	//�R�}���h���s
+	
 	ID3D12CommandList* commandLists[] = { commands.m_pList.Get() };
 	commands.m_pQueue->ExecuteCommandLists(1, commandLists);
 
@@ -137,7 +135,7 @@ void DirectXCommon::EndFlame()
 
 	UpdateFixFPS();
 
-	//�R�}���h���Z�b�g
+	//コマンドリセット
 	hr = commands.m_pAllocator->Reset();
 	assert(SUCCEEDED(hr));
 	hr = commands.m_pList->Reset(commands.m_pAllocator.Get(), nullptr);
@@ -220,8 +218,6 @@ void DirectXCommon::CreateDebugLayer()
 
 void DirectXCommon::CreateFactory()
 {
-
-	//DXGI�t�@�N�g���[�̐���
 	ComPtr<IDXGIFactory7>dxgiFactory = nullptr;
 	ComPtr<	IDXGIAdapter4>useAdapter = nullptr;
 
@@ -391,25 +387,22 @@ void DirectXCommon::CreateFixFPS()
 
 void DirectXCommon::UpdateFixFPS()
 {
-	//1/60�҂����̎���
 	const microseconds kMinTime(uint64_t(1000000.0f / 60.0f));
-	//���菭���Z������
-	const microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f));
-	//���ݎ��Ԃ�get
+	
+	const microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f);
 	steady_clock::time_point now = steady_clock::now();
-	//�O�񂩂�̌o�ߎ���
+
 	microseconds elapsed =
 		duration_cast<microseconds>(now - DirectXCommon::GetInstance()->reference_);
-	//1/60�b�@�o���Ă��Ȃ��ꍇ
+	//1/60
 	if (elapsed < kMinTime)
 	{
-		//���ԂɒB����܂Ń��[�v����ǃG�X
+		
 		while (steady_clock::now() - DirectXCommon::GetInstance()->reference_ < kMinCheckTime)
 		{
 			this_thread::sleep_for(microseconds(1));
 		}
 	}
-	//���݂̎��Ԃ�L�^
 	DirectXCommon::GetInstance()->reference_ = steady_clock::now();
 }
 

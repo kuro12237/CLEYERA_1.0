@@ -1,4 +1,4 @@
-﻿#include "WinApp.h"
+#include "WinApp.h"
 #include<wchar.h>
 WinApp *WinApp::GetInstance()
 {
