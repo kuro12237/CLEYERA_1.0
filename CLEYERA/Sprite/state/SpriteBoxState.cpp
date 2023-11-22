@@ -106,14 +106,15 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 
 	//wvp�p��CBuffer�̏ꏊ��ݒ�
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
-	commands.m_pList->SetGraphicsRootConstantBufferView(3, view.buffer_->GetGPUVirtualAddress());
 
 
 	if (!texHandle == 0)
 	{
 		DescriptorManager::rootParamerterCommand(2, texHandle);
 	}
-
+	//view
+	commands.m_pList->SetGraphicsRootConstantBufferView(3, view.buffer_->GetGPUVirtualAddress());
+	
 	//�`��(DrawCall/�h���[�R�[��)�B
 	commands.m_pList->DrawIndexedInstanced(IndexSize, 1, 0, 0, 0);
 
