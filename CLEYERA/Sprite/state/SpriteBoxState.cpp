@@ -98,13 +98,13 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//�`���ݒ�BPSO�ɐݒ肵�Ă����̂Ƃ͂܂��ʁB������̂�ݒ肷��ƍl���Ă����Ηǂ�
+	//hyぷ時の仕方を設定
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//�}�e���A��CBuffer�̏ꏊ��ݒ�
+	//materialDataをGPUへ
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-	//wvp�p��CBuffer�̏ꏊ��ݒ�
+	//worldTransformの行列をgpuへ
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 
 	if (!texHandle == 0)
@@ -121,6 +121,4 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 	
 
 	commands.m_pList->DrawIndexedInstanced(IndexSize, 1, 0, 0, 0);
-
-
 }

@@ -3,7 +3,6 @@
 void WorldTransform::CreateBuffer()
 {
 	buffer_ = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
-
 }
 
 void WorldTransform::Map()
@@ -28,7 +27,7 @@ void WorldTransform::SRTSetting(Vector3 s, Vector3 r, Vector3 t)
 	scale = s;
 	rotation = r;
 	translate = t;
-	//UpdateMatrix();
+	UpdateMatrix();
 }
 
 void WorldTransform::UpdateMatrix()

@@ -21,7 +21,6 @@ void ViewProjection::UpdateMatrix()
 	OrthographicMatrix_ = MatrixTransform::OrthographicMatrix(
 		0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f
 	);
-
 	TransfarMatrix();
 }
 
@@ -33,13 +32,11 @@ void ViewProjection::CreateBuffer()
 void ViewProjection::Map()
 {
 	buffer_->Map(0, nullptr, reinterpret_cast<void**>(&BufferMatrix_));
-
 }
 
 void ViewProjection::UnMap()
 {
 	buffer_->Unmap(0, nullptr);
-
 }
 
 void ViewProjection::TransfarMatrix()
