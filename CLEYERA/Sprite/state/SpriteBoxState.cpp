@@ -108,10 +108,6 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 		DescriptorManager::rootParamerterCommand(2, texHandle);
 	}
 
-	//viewModeの切り替え
-	view.Map();
-	view.BufferMatrix_->Mode = 1;
-	view.UnMap();
 	
 	commands.m_pList->SetGraphicsRootConstantBufferView(3, view.buffer_->GetGPUVirtualAddress());
 	

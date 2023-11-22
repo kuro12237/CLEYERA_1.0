@@ -43,5 +43,5 @@ void ViewProjection::TransfarMatrix()
 	BufferMatrix_->view = matView_;
 	BufferMatrix_->viewProjection = matProjection_;
 	BufferMatrix_->orthographic = OrthographicMatrix_;
-	//UnMap();
+	UnMap();
 }

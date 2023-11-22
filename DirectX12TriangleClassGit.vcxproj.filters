@@ -144,6 +144,12 @@
     <None Include="Resources\Shader\ParticleObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
+    <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SpriteObject2d.hlsli">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -479,6 +485,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\ParticleObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

@@ -151,9 +151,6 @@ void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, V
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-	viewprojection.Map();
-	viewprojection.BufferMatrix_->Mode = 0;
-	//viewprojection.UnMap();
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(3, viewprojection.buffer_->GetGPUVirtualAddress());

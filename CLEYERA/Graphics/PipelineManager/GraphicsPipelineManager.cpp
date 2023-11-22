@@ -144,19 +144,19 @@ void GraphicsPipelineManager::Create2dSpritePSOs(SPSO &pso)
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
 
-	pso.Sprite2d.none = CreateSprite2dNone(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.none = CreateSprite2dNone(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dNonePSO");
 
-	pso.Sprite2d.Add = CreateSprite2dAdd(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Add = CreateSprite2dAdd(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dAddPSO");
 
-	pso.Sprite2d.Subtruct = CreateSprite2dSubtract(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Subtruct = CreateSprite2dSubtract(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dSubtractPSO");
 
-	pso.Sprite2d.Multiply = CreateSprite2dMultiply(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Multiply = CreateSprite2dMultiply(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dMultiplyPSO");
 	
-	pso.Sprite2d.Screen = CreateSprite2dScreen(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Screen = CreateSprite2dScreen(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dScreenPSO");
 }
 
@@ -166,7 +166,7 @@ void GraphicsPipelineManager::Create3dSpritePSOs(SPSO& pso)
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
 
-	pso.Sprite3d.none = CreateSprite3dNone(device.Get(), commands, shader.sprite);
+	pso.Sprite3d.none = CreateSprite3dNone(device.Get(), commands, shader.sprite3d);
 	LogManager::CompliteLog("CreateSpritePSO");
 }
 

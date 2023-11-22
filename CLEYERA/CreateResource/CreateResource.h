@@ -21,8 +21,7 @@ struct  TransformationViewMatrix
 	Matrix4x4 view;
 	Matrix4x4 viewProjection;
 	Matrix4x4 orthographic;
-    int32_t Mode;
-	float patting[3];
+ 
 };
 
 struct TransformationMatrix {

@@ -128,9 +128,7 @@ void ModelCubeState::CommandCall(Model* state, WorldTransform worldTransform, Vi
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
-	viewprojection.Map();
-	viewprojection.BufferMatrix_->Mode = 0;
-	viewprojection.UnMap();
+	
 	commands.m_pList->SetGraphicsRootConstantBufferView(3, viewprojection.buffer_->GetGPUVirtualAddress());
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 

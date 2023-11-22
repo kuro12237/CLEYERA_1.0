@@ -16,7 +16,8 @@ struct SDXCProperty
 struct SShaders
 {
 	SShaderMode shape;
-	SShaderMode sprite;
+	SShaderMode sprite3d;
+	SShaderMode sprite2d;
 	SShaderMode light;
 	SShaderMode Particle;
 
@@ -50,7 +51,8 @@ private:
 	static void ShaderComples();
 
 	static void ShapeShader();
-	static void SpriteShader();
+	static void Sprite3dShader();
+	static void Sprite2dShader();
 	static void LightShader();
 	static void ParticleShader();
 
