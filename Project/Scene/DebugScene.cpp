@@ -127,8 +127,8 @@ void DebugScene::Update(GameManager* Scene)
 	sprite_->SetColor(color);
 	Scene;
 
-	spriteWorldTransform_.UpdateMatrix(viewProjection,OrthographicMatrix);
-	sprite2WorldTransform_.UpdateMatrix(viewProjection,OrthographicMatrix);
+	spriteWorldTransform_.UpdateMatrix();
+	sprite2WorldTransform_.UpdateMatrix();
 	
 	
 	DebugTools::UpdateExecute(0);

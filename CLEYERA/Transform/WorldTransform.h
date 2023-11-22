@@ -36,7 +36,7 @@ struct WorldTransform
 
 	void SRTSetting(Vector3 s = { 1,1,1 }, Vector3 r = { 0,0,0 }, Vector3 t = {0,0,0});
 
-	void UpdateMatrix( ViewProjection viewProjection, Projection Flag = PerspectiveFov);
+	void UpdateMatrix();
 
 	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection viewProjection, Projection Flag=PerspectiveFov);
 

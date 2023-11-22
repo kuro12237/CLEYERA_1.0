@@ -20,6 +20,7 @@ struct ViewProjection {
 	Vector3 translation_ = { 0.0f,0.0f,-15.0f };
 	Matrix4x4 matView_{};
 	Matrix4x4 matProjection_{};
+	Matrix4x4 OrthographicMatrix_{};
 
 	float fov_ = 0.45f;
 	float aspectRatio_ = float(WinApp::GetkCilientWidth()) / float(WinApp::GetkCilientHeight());
