@@ -130,6 +130,12 @@
     <Filter Include="Project\Scene\CreatePhongModelScene">
       <UniqueIdentifier>{920f8ac2-e3af-4d13-b3b4-6e11c801e5d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\math\Quaternion">
+      <UniqueIdentifier>{d1cf5c41-681a-4ff6-92df-656d7304e1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math\Vector">
+      <UniqueIdentifier>{3cb29394-5a40-4ddb-a173-7994b23f6ecf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -221,9 +227,6 @@
     <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp">
       <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
-      <Filter>CLEYERA\math</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp">
       <Filter>CLEYERA\Model\Sphere</Filter>
     </ClCompile>
@@ -282,6 +285,15 @@
     <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp">
       <Filter>Project\Scene\CreatePhongModelScene</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Scene\MTScene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp">
+      <Filter>CLEYERA\math\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -313,15 +325,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h">
       <Filter>CLEYERA\Model\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\math\Vector4.h">
-      <Filter>CLEYERA\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\math\Vector3.h">
-      <Filter>CLEYERA\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\math\Vector2.h">
-      <Filter>CLEYERA\math</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Transform\WorldTransform.h">
       <Filter>CLEYERA\Transform</Filter>
@@ -382,9 +385,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h">
       <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\math\VectorTransform.h">
-      <Filter>CLEYERA\math</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h">
       <Filter>CLEYERA\Model\Sphere</Filter>
@@ -457,6 +457,24 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\CreatePhongModelScene.h">
       <Filter>Project\Scene\CreatePhongModelScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\MTScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h">
+      <Filter>CLEYERA\math\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector2.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector3.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector4.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\VectorTransform.h">
+      <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
       <Filter>CLEYERA\Model\Cube</Filter>
