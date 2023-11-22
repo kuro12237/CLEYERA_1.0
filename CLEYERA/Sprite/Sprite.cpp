@@ -11,9 +11,9 @@ void Sprite::Initialize(ISpriteState* state, Vector2 pos, Vector2 size)
 
 }
 
-void Sprite::Draw(WorldTransform worldTransform)
+void Sprite::Draw(WorldTransform worldTransform, ViewProjection view)
 {
-	state_->Draw(this, worldTransform);
+	state_->Draw(this, worldTransform,view);
 }
 
 void Sprite::SetSrc(Vector2 TR, Vector2 BR, Vector2 TL, Vector2 BL)

@@ -32,9 +32,6 @@ void DebugScene::Initialize()
 	spriteWorldTransform_.Initialize();
 	sprite2WorldTransform_.parent= &spriteWorldTransform_;
 
-	particle_ = make_unique<Particle>();
-	particle_->SetTexHandle(SpritemobTexHandle);
-	particle_->Initialize(new ParticlePlaneState,20);
 
 }
 
@@ -81,14 +78,7 @@ void DebugScene::Update(GameManager* Scene)
 		AudioManager::AudioPlayWave(Audiohandle2);
 
 	}
-	if (Input::PushKeyPressed(DIK_R))
-	{
-		Model * model = new Model();
-		model->CreateFromObj("MapGround");
-		modelWorldTransform_.Initialize();
-		models_.push_back(model);
-	}
-
+	
 #pragma region 
 	{
 		if (NoneFlag)
@@ -137,10 +127,9 @@ void DebugScene::Update(GameManager* Scene)
 	sprite_->SetColor(color);
 	Scene;
 
-	spriteWorldTransform_.UpdateMatrix();
-	sprite2WorldTransform_.UpdateMatrix();
-	Testparticle();
-
+	spriteWorldTransform_.UpdateMatrix(viewProjection,OrthographicMatrix);
+	sprite2WorldTransform_.UpdateMatrix(viewProjection,OrthographicMatrix);
+	
 	
 	DebugTools::UpdateExecute(0);
 	viewProjection.UpdateMatrix();
@@ -154,17 +143,13 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
-	particle_->Draw(viewProjection);
-	for (Model* &model : models_)
-	{
-		model->Draw(modelWorldTransform_, viewProjection);
-	}
+	
 }
 void DebugScene::Flont2dSpriteDraw()
 {
 
-	sprite_->Draw(spriteWorldTransform_);
-	sprite2_->Draw(sprite2WorldTransform_);
+	sprite_->Draw(spriteWorldTransform_,viewProjection);
+	sprite2_->Draw(sprite2WorldTransform_,viewProjection);
 }
 
 void DebugScene::Testparticle()

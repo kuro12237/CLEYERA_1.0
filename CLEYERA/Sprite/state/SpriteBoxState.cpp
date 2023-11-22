@@ -4,14 +4,14 @@ void SpriteBoxState::Initialize(Sprite* state)
 {
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize);
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
-	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
+
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * VertexSize, resource_.Vertex.Get(), VertexSize);
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * IndexSize);
 	resource_.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * IndexSize, resource_.Index.Get());
 	state;
 }
 
-void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform)
+void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform, ViewProjection view)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -45,9 +45,8 @@ void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform)
 
 	ViewProjection viewprojection = {};
 
-	worldTransform.TransfarMatrix(resource_.wvpResource,viewprojection,OrthographicMatrix);
 
-	CommandCall(state->GetTexHandle(),state);
+	CommandCall(state->GetTexHandle(),state,worldTransform,view);
 
 }
 SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
@@ -77,7 +76,7 @@ SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
 	}
 	return PSO;
 }
-void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state)
+void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransform worldTransform,ViewProjection view)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
@@ -106,7 +105,9 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state)
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	//wvp�p��CBuffer�̏ꏊ��ݒ�
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(3, view.buffer_->GetGPUVirtualAddress());
+
 
 	if (!texHandle == 0)
 	{

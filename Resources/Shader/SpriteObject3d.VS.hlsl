@@ -5,7 +5,11 @@ struct TransformationMatrix {
 };
 ConstantBuffer<TransformationMatrix > gTransformationMatrix  : register(b0);
 
-
+struct TransformationViewMatrix {
+	float32_t4x4 view;
+	float32_t4x4 projection;
+};
+ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
 
 struct VertexShaderInput {
 	float32_t4 position : POSITION0;
@@ -14,6 +18,9 @@ struct VertexShaderInput {
 
 VertexShaderOutput main(VertexShaderInput input) {
 	VertexShaderOutput output;
+
+
+
 	output.position = mul(input.position, gTransformationMatrix.WVP);
 	output.texcoord = input.texcoord;
 	return output;

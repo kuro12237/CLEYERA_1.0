@@ -44,11 +44,11 @@ void Grid::UpdateExecute()
 {
 	for (int i = 0; i < XYGridLine_Max; i++)
 	{
-		XworldTransform_[i].UpdateMatrix();
-		ZworldTransform_[i].UpdateMatrix();
+		//XworldTransform_[i].UpdateMatrix();
+		//ZworldTransform_[i].UpdateMatrix();
 	}
-	YworldTransform_.UpdateMatrix();
-	CenterWorldTransform_.UpdateMatrix();
+	//YworldTransform_.UpdateMatrix();
+	//CenterWorldTransform_.UpdateMatrix();
 }
 
 void Grid::DrawExecute(ViewProjection viewProjection)
