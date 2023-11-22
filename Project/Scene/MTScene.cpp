@@ -16,7 +16,6 @@ void MTScene::Update(GameManager* Scene)
 	rotateMatrix_ = Quaternion::MakeRotateAxisAngle(axis_, angle);
 	axis_ = VectorTransform::Normalize(axis_);
 
-
 	ImGui::Begin("MT_01_01");
 	ImGui::SliderFloat3("Nomalize::x,y,z", &axis_.x,0.0f,1.0f);
 
@@ -25,9 +24,6 @@ void MTScene::Update(GameManager* Scene)
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][1], rotateMatrix_.m[1][1], rotateMatrix_.m[2][1], rotateMatrix_.m[3][1]);
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][2], rotateMatrix_.m[1][2], rotateMatrix_.m[2][2], rotateMatrix_.m[3][2]);
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][3], rotateMatrix_.m[1][3], rotateMatrix_.m[2][3], rotateMatrix_.m[3][3]);
-
-
-
 	ImGui::End();
 
 	
