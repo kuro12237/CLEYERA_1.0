@@ -21,7 +21,6 @@ VertexShaderOutput main(VertexShaderInput input) {
 	VertexShaderOutput output;
 	float32_t4x4 resultMatrix;
 
-	float32_t4x4 Identity = { {1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1} };
 	resultMatrix = mul(gTransformationMatrix.WVP, gTransformationViewMatrix.orthographic);
 
 	output.position = mul(input.position, resultMatrix);
