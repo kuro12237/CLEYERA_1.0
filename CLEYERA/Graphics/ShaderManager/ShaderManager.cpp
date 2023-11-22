@@ -124,6 +124,7 @@ void ShaderManager::Sprite3dShader()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/SpriteObject3d.PS.hlsl",
 			L"ps_6_0");
+
 	ShaderManager::Getinstance()->shaders_.sprite3d = shaders;
 }
 
@@ -139,6 +140,7 @@ void ShaderManager::Sprite2dShader()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/SpriteObject2d.PS.hlsl",
 			L"ps_6_0");
+
 	ShaderManager::Getinstance()->shaders_.sprite2d = shaders;
 }
 
