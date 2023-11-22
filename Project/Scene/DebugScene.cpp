@@ -38,8 +38,8 @@ void DebugScene::Initialize()
 	model_ = make_unique<Model>();
 	model_->UseLight(HARF_LAMBERT);
 	model_->SetTexHandle(uvTex);
-	//model_->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
-	model_->CreateFromObj("axis");
+	model_->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
+	//model_->CreateFromObj("axis");
 }
 
 void DebugScene::Update(GameManager* Scene)
