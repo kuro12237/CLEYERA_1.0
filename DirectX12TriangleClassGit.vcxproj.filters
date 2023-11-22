@@ -150,6 +150,12 @@
     <None Include="Resources\Shader\ParticleObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
+    <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SpriteObject2d.hlsli">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -443,9 +449,6 @@
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h">
       <Filter>CLEYERA\Particle\ParticlePlane</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
-      <Filter>CLEYERA\Model\Cube</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClInclude>
@@ -473,6 +476,9 @@
     <ClInclude Include="CLEYERA\math\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
+      <Filter>CLEYERA\Model\Cube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -497,6 +503,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\ParticleObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

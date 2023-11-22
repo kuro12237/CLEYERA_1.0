@@ -6,7 +6,6 @@ void ModelCubeState::Initialize(Model* state)
 	int v = VertexNum;
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * v);
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
-	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * v, resource_.Vertex.Get(), v);
 	if (state->GetUseLight() != NONE)
 	{
@@ -87,7 +86,6 @@ void ModelCubeState::Draw(Model* state, WorldTransform worldTransform, ViewProje
 	indexData[30] = 5; indexData[31] = 2; indexData[32] = 6;
 	indexData[33] = 2; indexData[34] = 1; indexData[35] = 6;
 
-	worldTransform.TransfarMatrix(resource_.wvpResource, viewprojection);
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 	if (state->GetUseLight() != NONE)
@@ -98,13 +96,13 @@ void ModelCubeState::Draw(Model* state, WorldTransform worldTransform, ViewProje
 		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 		lightData->direction = { 0.0f,-1.0f,0.0f };
 		lightData->intensity = 1.0f;
-
+	
 	}
 
-	CommandCall(state);
+	CommandCall(state,worldTransform,viewprojection);
 }
 
-void ModelCubeState::CommandCall(Model* state)
+void ModelCubeState::CommandCall(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -113,13 +111,13 @@ void ModelCubeState::CommandCall(Model* state)
 
 	PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
 
-	//ƒeƒNƒXƒ`ƒƒ‚ª‚ ‚éê‡
+	//ï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
 	if (!state->GetTexHandle() == 0) {
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
 	}
 	if (state->GetUseLight() == HARF_LAMBERT)
 	{
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
+		//PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
 	}
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
@@ -130,15 +128,22 @@ void ModelCubeState::CommandCall(Model* state)
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+	
+	commands.m_pList->SetGraphicsRootConstantBufferView(3, viewprojection.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 
 	if (!state->GetTexHandle() == 0)
 	{
 		DescriptorManager::rootParamerterCommand(2, state->GetTexHandle());
 	}
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
+
+
+
+
+
 	if (state->GetUseLight() != NONE)
 	{
-		commands.m_pList->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
+		//commands.m_pList->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
 	}
 
 	commands.m_pList->DrawIndexedInstanced(36 , 1, 0, 0, 0);

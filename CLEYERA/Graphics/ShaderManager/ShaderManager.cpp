@@ -92,7 +92,8 @@ void ShaderManager::includeHandlerSetting()
 void ShaderManager::ShaderComples()
 {
 	ShapeShader();
-	SpriteShader();
+	Sprite3dShader();
+	Sprite2dShader();
 	LightShader();
 	ParticleShader();
 }
@@ -111,7 +112,7 @@ void ShaderManager::ShapeShader()
 	ShaderManager::Getinstance()->shaders_.shape = shaders;
 }
 
-void ShaderManager::SpriteShader()
+void ShaderManager::Sprite3dShader()
 {
 	SShaderMode shaders;
 	shaders.vertexBlob =
@@ -123,7 +124,24 @@ void ShaderManager::SpriteShader()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/SpriteObject3d.PS.hlsl",
 			L"ps_6_0");
-	ShaderManager::Getinstance()->shaders_.sprite = shaders;
+
+	ShaderManager::Getinstance()->shaders_.sprite3d = shaders;
+}
+
+void ShaderManager::Sprite2dShader()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SpriteObject2d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SpriteObject2d.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.sprite2d = shaders;
 }
 
 void ShaderManager::LightShader()

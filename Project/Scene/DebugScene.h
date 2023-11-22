@@ -55,7 +55,9 @@ private:
 	uint32_t Audiohandle = 0;
 	uint32_t Audiohandle2 = 0;
 	
-	WorldTransform modelWorldTransform_;
+	
+	unique_ptr <Model>model_ = nullptr;
+	WorldTransform modelWorldTransform_{};
 
 	list<Model*>models_;
 	bool Flag = false;

@@ -13,13 +13,13 @@ public:
 	~SpriteBoxState() {};
 
 	void Initialize(Sprite* state)override;
-	void Draw(Sprite* state, WorldTransform worldTransform)override;
+	void Draw(Sprite* state, WorldTransform worldTransform, ViewProjection view)override;
 
 private:
 
 	SPSOProperty Get2dSpritePipeline(Sprite* state);
 
-	void CommandCall(uint32_t texHandle, Sprite* state);
+	void CommandCall(uint32_t texHandle,Sprite* state,WorldTransform worldTransform, ViewProjection view);
 
 	ResourcePeroperty resource_ = {};
 

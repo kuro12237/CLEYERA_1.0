@@ -16,7 +16,8 @@ struct SDXCProperty
 struct SShaders
 {
 	SShaderMode shape;
-	SShaderMode sprite;
+	SShaderMode sprite3d;
+	SShaderMode sprite2d;
 	SShaderMode light;
 	SShaderMode Particle;
 
@@ -37,7 +38,7 @@ public:
 private:
 
 	/// <summary>
-	/// ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹ŠÖ”
+	/// ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ÌƒRï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Öï¿½
 	/// </summary>
 	static IDxcBlob* CompilerShaderFanc(
 		const std::wstring& filePath,
@@ -50,7 +51,8 @@ private:
 	static void ShaderComples();
 
 	static void ShapeShader();
-	static void SpriteShader();
+	static void Sprite3dShader();
+	static void Sprite2dShader();
 	static void LightShader();
 	static void ParticleShader();
 

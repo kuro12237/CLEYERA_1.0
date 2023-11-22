@@ -1,4 +1,4 @@
-#include"spriteObject3d.hlsli"
+#include"spriteObject2d.hlsli"
 
 struct TransformationMatrix {
 	float32_t4x4 WVP;
@@ -9,7 +9,6 @@ struct TransformationViewMatrix {
 	float32_t4x4 view;
 	float32_t4x4 projection;
 	float32_t4x4 orthographic;
-	
 };
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
 
@@ -21,9 +20,8 @@ struct VertexShaderInput {
 VertexShaderOutput main(VertexShaderInput input) {
 	VertexShaderOutput output;
 	float32_t4x4 resultMatrix;
-	
-	float32_t4x4 CameraMatrix = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
-	resultMatrix = mul(gTransformationMatrix.WVP,CameraMatrix);
+
+	resultMatrix = mul(gTransformationMatrix.WVP, gTransformationViewMatrix.orthographic);
 
 	output.position = mul(input.position, resultMatrix);
 	output.texcoord = input.texcoord;

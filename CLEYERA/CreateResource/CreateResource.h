@@ -16,6 +16,13 @@ struct LightData
 
 };
 
+struct  TransformationViewMatrix
+{
+	Matrix4x4 view;
+	Matrix4x4 viewProjection;
+	Matrix4x4 orthographic;
+ 
+};
 
 struct TransformationMatrix {
 	Matrix4x4 WVP;

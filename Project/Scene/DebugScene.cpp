@@ -14,16 +14,17 @@ void DebugScene::Initialize()
 
 	uint32_t SpritemobTexHandle = TextureManager::LoadTexture("mob.png");
 	uint32_t SpriteCLEYERATexHandle = TextureManager::LoadTexture("CLEYERA.png");
+	uint32_t uvTex = TextureManager::LoadTexture("uvChecker.png");
 
 	Audiohandle = AudioManager::SoundLoadWave("Resources/SelectBGM.wav");
 	Audiohandle2 = AudioManager::SoundLoadWave("Resources/hit.wav");
-
+	SpriteCLEYERATexHandle;
 	sprite_ = make_unique<Sprite>();
 	sprite_->SetTexHandle(SpritemobTexHandle);
 	sprite_->Initialize(new SpriteBoxState,{0,0},{320,320});
 	
 	sprite2_ = make_unique<Sprite>();
-	sprite2_->SetTexHandle(SpriteCLEYERATexHandle);
+	sprite2_->SetTexHandle(uvTex);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
 	//�e�N�X�`���̐؂蔲��
 	sprite2_->SetSrc({ 0.5f,0 }, { 0.5f,0.5f }, { 0.0f,0.0f }, { 0,0.5f });
@@ -32,10 +33,12 @@ void DebugScene::Initialize()
 	spriteWorldTransform_.Initialize();
 	sprite2WorldTransform_.parent= &spriteWorldTransform_;
 
-	particle_ = make_unique<Particle>();
-	particle_->SetTexHandle(SpritemobTexHandle);
-	particle_->Initialize(new ParticlePlaneState,20);
+	modelWorldTransform_.Initialize();
 
+	model_ = make_unique<Model>();
+	model_->SetTexHandle(uvTex);
+	model_->Initialize(new ModelSphereState);
+	
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -48,6 +51,10 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Begin("key");
 	ImGui::Text("0 Pushkey PlayAudio");
 	ImGui::Text("9 Pushkey StateChange");
+	ImGui::End();
+
+	ImGui::Begin("Cube");
+	ImGui::DragFloat3("t", &modelWorldTransform_.translate.x, -0.5f, 0.5f);
 	ImGui::End();
 
 	ImGui::Begin("Sprite");
@@ -81,14 +88,7 @@ void DebugScene::Update(GameManager* Scene)
 		AudioManager::AudioPlayWave(Audiohandle2);
 
 	}
-	if (Input::PushKeyPressed(DIK_R))
-	{
-		Model * model = new Model();
-		model->CreateFromObj("MapGround");
-		modelWorldTransform_.Initialize();
-		models_.push_back(model);
-	}
-
+	
 #pragma region 
 	{
 		if (NoneFlag)
@@ -139,12 +139,11 @@ void DebugScene::Update(GameManager* Scene)
 
 	spriteWorldTransform_.UpdateMatrix();
 	sprite2WorldTransform_.UpdateMatrix();
-	Testparticle();
-
+	modelWorldTransform_.UpdateMatrix();
 	
 	DebugTools::UpdateExecute(0);
 	viewProjection.UpdateMatrix();
-	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
+	//viewProjection = DebugTools::ConvertViewProjection(viewProjection);
 
 }
 
@@ -154,34 +153,17 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
-	particle_->Draw(viewProjection);
-	for (Model* &model : models_)
-	{
-		model->Draw(modelWorldTransform_, viewProjection);
-	}
+	model_->Draw(modelWorldTransform_, viewProjection);
+
 }
 void DebugScene::Flont2dSpriteDraw()
 {
-
-	sprite_->Draw(spriteWorldTransform_);
-	sprite2_->Draw(sprite2WorldTransform_);
+	sprite_->Draw(spriteWorldTransform_,viewProjection);
+	sprite2_->Draw(sprite2WorldTransform_,viewProjection);
 }
 
 void DebugScene::Testparticle()
 {
-	ImGui::Begin("SpownParticle");
-	ImGui::SliderFloat3("translate", &TestParticlesTranslate.x, 3.0f, -3.0f);
-	ImGui::SliderFloat4("color", &TestParticleColor.x, 1.0f, -0.0f);
-	ImGui::End();
-
-	if (Input::GetInstance()->PushKeyPressed(DIK_P))
-	{
-		Particle_param p1{};
-		p1.worldTransform_.Initialize();
-		p1.worldTransform_.translate = TestParticlesTranslate;
-		p1.color_ = TestParticleColor;
-		particle_->PushList(p1);
-	}
 
 }
 

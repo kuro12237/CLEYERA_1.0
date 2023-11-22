@@ -20,18 +20,21 @@ struct WorldTransform
 	Matrix4x4 matWorld = {};
 	const WorldTransform* parent = {};
 
+
 	ComPtr<ID3D12Resource> buffer_ = nullptr;
 
-	void CreateBuffer();
+	/// <summary>
+	/// GPUに送る用
+	/// </summary>
+	TransformationMatrix* BufferMatrix_ = nullptr;
 
 	void Initialize();
-
 	void SRTSetting(Vector3 s = { 1,1,1 }, Vector3 r = { 0,0,0 }, Vector3 t = {0,0,0});
-
 	void UpdateMatrix();
-
-	void TransfarMatrix(ComPtr<ID3D12Resource>&wvpResource, ViewProjection viewProjection, Projection Flag=PerspectiveFov);
-
+  
+	void CreateBuffer();
+	void Map();
+	void UnMap();
 	void TransfarMatrix();
 };
 

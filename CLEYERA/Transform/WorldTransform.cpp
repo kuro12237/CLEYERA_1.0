@@ -3,13 +3,23 @@
 void WorldTransform::CreateBuffer()
 {
 	buffer_ = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
+}
 
+void WorldTransform::Map()
+{
+	buffer_->Map(0, nullptr, reinterpret_cast<void**>(&BufferMatrix_));
+}
+
+void WorldTransform::UnMap()
+{
+	buffer_->Unmap(0,nullptr);
 }
 
 void WorldTransform::Initialize()
 {
+	CreateBuffer();
 	matWorld = MatrixTransform::Identity();
-	
+	TransfarMatrix();
 }
 
 void WorldTransform::SRTSetting(Vector3 s, Vector3 r, Vector3 t)
@@ -23,10 +33,12 @@ void WorldTransform::SRTSetting(Vector3 s, Vector3 r, Vector3 t)
 void WorldTransform::UpdateMatrix()
 {
 	matWorld = MatrixTransform::AffineMatrix(scale, rotation, translate);
-	
+
 	if (parent) {
 		matWorld = MatrixTransform::Multiply(matWorld, parent->matWorld);
 	}
+	
+	TransfarMatrix();
 }
 
 void WorldTransform::TransfarMatrix(ComPtr<ID3D12Resource>& wvpResource, ViewProjection viewProjection, Projection Flag )
@@ -53,5 +65,8 @@ void WorldTransform::TransfarMatrix(ComPtr<ID3D12Resource>& wvpResource, ViewPro
 
 void WorldTransform::TransfarMatrix()
 {
-	
+	Map();
+	BufferMatrix_->WVP = matWorld;
+	BufferMatrix_->world = MatrixTransform::Identity();
+	UnMap();
 }
