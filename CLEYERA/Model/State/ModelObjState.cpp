@@ -7,7 +7,10 @@ void ModelObjState::Initialize(Model* state)
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
 
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * ModelData_.vertices.size(), resource_.Vertex,int( ModelData_.vertices.size()));
-
+	if (state->GetUseLight() != NONE)
+	{
+		resource_.Light = CreateResources::CreateBufferResource(sizeof(LightData));
+	}
 }
 
 void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
@@ -22,9 +25,23 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
+	if (state->GetUseLight() != NONE)
+	{
+		LightData* lightData = nullptr;
+		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+
+		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
+		lightData->direction = { 0.0f,-1.0f,0.0f };
+		lightData->intensity = 1.0f;
+
+	}
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
+	if (state->GetUseLight() == HARF_LAMBERT)
+	{
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
+	}
 
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
@@ -34,10 +51,14 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
-
-	DescriptorManager::rootParamerterCommand(2, state->GetTexHandle());
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
-	commands.m_pList->SetGraphicsRootConstantBufferView(3, viewprojection.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
+	DescriptorManager::rootParamerterCommand(3, state->GetTexHandle());
+	if (state->GetUseLight() != NONE)
+	{
+		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
+	}
+
 	commands.m_pList->DrawInstanced(UINT(ModelData_.vertices.size()), 1, 0, 0);
 
 }

@@ -6,16 +6,12 @@ void ModelLineState::Initialize(Model* state)
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData)*VertexSize);
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * VertexSize, resource_.Vertex.Get(), VertexSize);
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Vector4));
-	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
-	state;
 
+	state;
 }
 
 void ModelLineState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
 {
-
-	worldTransform;
-	state;
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
 
@@ -27,14 +23,11 @@ void ModelLineState::Draw(Model* state, WorldTransform worldTransform, ViewProje
 	vertexData[1].position = {state->GetEndPos().x,state->GetEndPos().y,state->GetEndPos().z,state->GetEndPos().w};
 
 	*materialData = state->GetColor();
-	worldTransform.TransfarMatrix();
 
-	CommandCall();
-
-
+	CommandCall(worldTransform,viewprojection);
 }
 
-void ModelLineState::CommandCall()
+void ModelLineState::CommandCall(WorldTransform worlTransform,ViewProjection viewProjection)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Line;
@@ -46,15 +39,11 @@ void ModelLineState::CommandCall()
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//�`���ݒ�BPSO�ɐݒ肵�Ă����̂Ƃ͂܂��ʁB������̂�ݒ肷��ƍl���Ă����Ηǂ�
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 
-	//�}�e���A��CBuffer�̏ꏊ��ݒ�
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(1, worlTransform.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewProjection.buffer_->GetGPUVirtualAddress());
 
-	//wvp�p��CBuffer�̏ꏊ��ݒ�
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
-
-	//�`��(DrawCall/�h���[�R�[��)�B
 	commands.m_pList->DrawInstanced(VertexSize, 1, 0, 0);
 }

@@ -8,7 +8,6 @@ void ModelPlaneState::Initialize(Model* state)
 {
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize);
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
-	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * VertexSize, resource_.Vertex.Get(), VertexSize);
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * IndexSize);
 	resource_.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * IndexSize, resource_.Index.Get());
@@ -55,13 +54,11 @@ void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProj
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 
 
-	CommandCall(state->GetTexHandle());
+	CommandCall(state->GetTexHandle(),worldTransform,viewprojection);
 
 }
 
-
-
-void ModelPlaneState::CommandCall(uint32_t texHandle)
+void ModelPlaneState::CommandCall(uint32_t texHandle, WorldTransform worldTransform, ViewProjection viewProjection)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	
@@ -82,18 +79,17 @@ void ModelPlaneState::CommandCall(uint32_t texHandle)
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//�`���ݒ�BPSO�ɐݒ肵�Ă����̂Ƃ͂܂��ʁB������̂�ݒ肷��ƍl���Ă����Ηǂ�
+	
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//�}�e���A��CBuffer�̏ꏊ��ݒ�
-	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
-	//wvp�p��CBuffer�̏ꏊ��ݒ�
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewProjection.buffer_->GetGPUVirtualAddress());
 
 	if (!texHandle==0)
 	{
-		DescriptorManager::rootParamerterCommand(2, texHandle);
+		DescriptorManager::rootParamerterCommand(3, texHandle);
 	}
 
 	//�`��(DrawCall/�h���[�R�[��)�B

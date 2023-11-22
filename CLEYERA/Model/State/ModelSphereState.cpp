@@ -153,15 +153,15 @@ void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, V
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 
-	commands.m_pList->SetGraphicsRootConstantBufferView(3, viewprojection.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 
 	if (!state->GetTexHandle() == 0)
 	{
-		DescriptorManager::rootParamerterCommand(2, state->GetTexHandle());
+		DescriptorManager::rootParamerterCommand(3, state->GetTexHandle());
 	}
 	if (state->GetUseLight()!=NONE)
 	{
-		commands.m_pList->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
+		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
 	}
 
 	commands.m_pList->DrawIndexedInstanced(VertexNum * VertexNum * 6, 1, 0, 0, 0);

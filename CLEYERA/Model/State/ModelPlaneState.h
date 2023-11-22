@@ -17,7 +17,7 @@ public:
 
 private:
 
-	void CommandCall(uint32_t texHandle);
+	void CommandCall(uint32_t texHandle,WorldTransform worldTransform,ViewProjection viewProjection);
 
 	const uint32_t VertexSize = 4;
 	const uint32_t IndexSize = 6;

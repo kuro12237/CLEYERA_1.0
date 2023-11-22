@@ -26,7 +26,7 @@ void DebugScene::Initialize()
 	sprite2_ = make_unique<Sprite>();
 	sprite2_->SetTexHandle(uvTex);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
-	//�e�N�X�`���̐؂蔲��
+	
 	sprite2_->SetSrc({ 0.5f,0 }, { 0.5f,0.5f }, { 0.0f,0.0f }, { 0,0.5f });
 
 	sprite2WorldTransform_.Initialize();
@@ -36,9 +36,10 @@ void DebugScene::Initialize()
 	modelWorldTransform_.Initialize();
 
 	model_ = make_unique<Model>();
+	model_->UseLight(HARF_LAMBERT);
 	model_->SetTexHandle(uvTex);
-	model_->Initialize(new ModelSphereState);
-	
+	//model_->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
+	model_->CreateFromObj("axis");
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -55,6 +56,7 @@ void DebugScene::Update(GameManager* Scene)
 
 	ImGui::Begin("Cube");
 	ImGui::DragFloat3("t", &modelWorldTransform_.translate.x, -0.5f, 0.5f);
+	ImGui::DragFloat3("r", &modelWorldTransform_.rotation.x, -0.5f, 0.5f);
 	ImGui::End();
 
 	ImGui::Begin("Sprite");
@@ -77,6 +79,13 @@ void DebugScene::Update(GameManager* Scene)
 		count++;
 		//AudioManager::AudioVolumeControl(Audiohandle, count*2);
 	}
+	model_->UseLight(HARF_LAMBERT);
+	if (Input::PushKey(DIK_T))
+	{
+		model_->UseLight(NONE);
+	}
+
+
 	if (count>180)
 	{
 		count = 0;

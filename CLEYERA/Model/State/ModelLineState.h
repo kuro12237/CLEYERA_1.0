@@ -15,7 +15,7 @@ public:
 
 private:
 
-	void CommandCall();
+	void CommandCall(WorldTransform worlTransform, ViewProjection viewProjection);
 
 	const int32_t VertexSize= 2;
 

@@ -87,30 +87,28 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 		PSO = Get2dSpritePipeline(state);
 	}
 
-
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	//hyぷ時の仕方を設定
+	//表示の仕方を設定
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	//materialDataをGPUへ
+	//materialDataをgpuへ
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	//worldTransformの行列をgpuへ
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 
+	//view行列をgpu
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, view.buffer_->GetGPUVirtualAddress());
+
 	if (!texHandle == 0)
 	{
-		DescriptorManager::rootParamerterCommand(2, texHandle);
+		DescriptorManager::rootParamerterCommand(3, texHandle);
 	}
-
-	
-	commands.m_pList->SetGraphicsRootConstantBufferView(3, view.buffer_->GetGPUVirtualAddress());
-	
 
 	commands.m_pList->DrawIndexedInstanced(IndexSize, 1, 0, 0, 0);
 }
