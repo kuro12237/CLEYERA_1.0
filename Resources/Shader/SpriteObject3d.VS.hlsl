@@ -22,14 +22,15 @@ VertexShaderOutput main(VertexShaderInput input) {
 	VertexShaderOutput output;
 	float32_t4x4 resultMatrix;
 	//0がModel
-	if(gTransformationViewMatrix.Mode == 0)
+	//if(gTransformationViewMatrix.Mode == 0)
 	{
-	    resultMatrix = (gTransformationMatrix.WVP*gTransformationViewMatrix.view);
+		float32_t4x4 CameraMatrix = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
+	    resultMatrix = mul(gTransformationMatrix.WVP,CameraMatrix);
 	}//1がsprite
-	if (gTransformationViewMatrix.Mode == 1)
+	//else if (gTransformationViewMatrix.Mode == 1)
 	{
-		float32_t4x4 Identity = { {1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1} };
-		resultMatrix = mul(gTransformationMatrix.WVP, mul(gTransformationViewMatrix.view, gTransformationViewMatrix.orthographic));
+		//float32_t4x4 Identity = { {1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1} };
+		//resultMatrix = mul(gTransformationMatrix.WVP, mul(gTransformationViewMatrix.view, gTransformationViewMatrix.orthographic));
 	}
 
 	output.position = mul(input.position, resultMatrix);

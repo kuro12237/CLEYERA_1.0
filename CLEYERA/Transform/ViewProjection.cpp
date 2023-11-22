@@ -17,10 +17,8 @@ void ViewProjection::UpdateMatrix()
 	
 	matView_ = MatrixTransform::Multiply(MatrixTransform::Inverse(translateMatrix), MatrixTransform::Inverse(rotateMatrix));
 	matProjection_ = MatrixTransform::PerspectiveFovMatrix(fov_, aspectRatio_, nearClip_, farClip_);
-	
-	OrthographicMatrix_ = MatrixTransform::OrthographicMatrix(
-		0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f
-	);
+	OrthographicMatrix_ = MatrixTransform::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
+
 	TransfarMatrix();
 }
 
@@ -45,5 +43,5 @@ void ViewProjection::TransfarMatrix()
 	BufferMatrix_->view = matView_;
 	BufferMatrix_->viewProjection = matProjection_;
 	BufferMatrix_->orthographic = OrthographicMatrix_;
-	UnMap();
+	//UnMap();
 }

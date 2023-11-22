@@ -42,13 +42,9 @@ void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform, ViewProj
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 
-
-	ViewProjection viewprojection = {};
-
-
 	CommandCall(state->GetTexHandle(),state,worldTransform,view);
-
 }
+
 SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
 {
 	SPSOProperty PSO = {};

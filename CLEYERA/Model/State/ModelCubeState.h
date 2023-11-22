@@ -19,7 +19,7 @@ public:
 
 private:
 
-	void CommandCall(Model* state);
+	void CommandCall(Model* state, WorldTransform worldTransform, ViewProjection viewprojection);
 
 	const int VertexNum = 8;
 	ResourcePeroperty resource_ = {};

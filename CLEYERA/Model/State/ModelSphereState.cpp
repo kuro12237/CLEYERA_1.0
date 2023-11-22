@@ -7,7 +7,6 @@ void ModelSphereState::Initialize(Model* state)
 	int v = VertexNum * VertexNum * 4;
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * v);
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
-	resource_.wvpResource = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * v, resource_.Vertex.Get(), v);
 	if (state->GetUseLight()!=NONE)
 	{
@@ -108,7 +107,6 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 	}
 #pragma endregion
 
-	worldTransform.TransfarMatrix(resource_.wvpResource,viewprojection);
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 	if (state->GetUseLight()!=NONE)
@@ -122,10 +120,11 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 
 	}
 
-	CommandCall(state);
+
+	CommandCall(state,worldTransform,viewprojection);
 }
 
-void ModelSphereState::CommandCall(Model*state)
+void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, ViewProjection viewprojection)
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -152,11 +151,17 @@ void ModelSphereState::CommandCall(Model*state)
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
+	viewprojection.Map();
+	viewprojection.BufferMatrix_->Mode = 0;
+	//viewprojection.UnMap();
+	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
+
+	commands.m_pList->SetGraphicsRootConstantBufferView(3, viewprojection.buffer_->GetGPUVirtualAddress());
+
 	if (!state->GetTexHandle() == 0)
 	{
 		DescriptorManager::rootParamerterCommand(2, state->GetTexHandle());
 	}
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, resource_.wvpResource->GetGPUVirtualAddress());
 	if (state->GetUseLight()!=NONE)
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());

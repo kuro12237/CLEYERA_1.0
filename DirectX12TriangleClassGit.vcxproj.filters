@@ -443,9 +443,6 @@
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h">
       <Filter>CLEYERA\Particle\ParticlePlane</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
-      <Filter>CLEYERA\Model\Cube</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClInclude>
@@ -454,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\CreatePhongModelScene.h">
       <Filter>Project\Scene\CreatePhongModelScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
+      <Filter>CLEYERA\Model\Cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ void GraphicsPipelineManager::Initialize()
 	Create2dSpritePSOs(pso);
 	LogManager::CompliteLog("Sprite2dPSO");
 	//3d
-	//Create3dSpritePSOs(pso);
+	Create3dSpritePSOs(pso);
 	LogManager::CompliteLog("Sprite3dPSO");
 
 	//Create3dParticlePSOs(pso);
@@ -147,16 +147,16 @@ void GraphicsPipelineManager::Create2dSpritePSOs(SPSO &pso)
 	pso.Sprite2d.none = CreateSprite2dNone(device.Get(), commands, shader.sprite);
 	LogManager::CompliteLog("CreateSprite2dNonePSO");
 
-	//pso.Sprite2d.Add = CreateSprite2dAdd(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Add = CreateSprite2dAdd(device.Get(), commands, shader.sprite);
 	LogManager::CompliteLog("CreateSprite2dAddPSO");
 
-	//pso.Sprite2d.Subtruct = CreateSprite2dSubtract(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Subtruct = CreateSprite2dSubtract(device.Get(), commands, shader.sprite);
 	LogManager::CompliteLog("CreateSprite2dSubtractPSO");
 
-	//pso.Sprite2d.Multiply = CreateSprite2dMultiply(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Multiply = CreateSprite2dMultiply(device.Get(), commands, shader.sprite);
 	LogManager::CompliteLog("CreateSprite2dMultiplyPSO");
 	
-	//pso.Sprite2d.Screen = CreateSprite2dScreen(device.Get(), commands, shader.sprite);
+	pso.Sprite2d.Screen = CreateSprite2dScreen(device.Get(), commands, shader.sprite);
 	LogManager::CompliteLog("CreateSprite2dScreenPSO");
 }
 
@@ -384,23 +384,28 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 {
 	SPSOProperty SpritePSO;
 	
-	//RootSignature�쐬
+	//RootSignature
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
 	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Material�ݒ�
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	//Material
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//Vertex��Transform
+	//Vertex
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
+
+	//view
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[3].Descriptor.ShaderRegister = 1;
 
 	//DescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
@@ -536,6 +541,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dNone(ComPtr<ID3D12Device> de
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
 
+	//view
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[3].Descriptor.ShaderRegister = 1;
@@ -661,16 +667,21 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Material�ݒ�
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	//Material
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//Vertex��Transform
+	//Vertex
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
+
+	//view
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[3].Descriptor.ShaderRegister = 1;
 
 	//DescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
@@ -797,7 +808,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dSubtract(ComPtr<ID3D12Device
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material�ݒ�
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -806,6 +817,11 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dSubtract(ComPtr<ID3D12Device
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
+
+	//view
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[3].Descriptor.ShaderRegister = 1;
 
 	//DescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
@@ -926,7 +942,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dMultiply(ComPtr<ID3D12Device
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material�ݒ�
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -936,6 +952,10 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dMultiply(ComPtr<ID3D12Device
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
 
+	//view
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[3].Descriptor.ShaderRegister = 1;
 	//DescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
 	descriptorRange[0].BaseShaderRegister = 0;
@@ -1050,7 +1070,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dScreen(ComPtr<ID3D12Device> 
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material�ݒ�
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -1059,7 +1079,10 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dScreen(ComPtr<ID3D12Device> 
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
-
+	//view
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[3].Descriptor.ShaderRegister = 1;
 
 	//DescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
