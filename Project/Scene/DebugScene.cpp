@@ -27,7 +27,7 @@ void DebugScene::Initialize()
 	sprite2_->SetTexHandle(uvTex);
 	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
 	
-	sprite2_->SetSrc({ 0.5f,0 }, { 0.5f,0.5f }, { 0.0f,0.0f }, { 0,0.5f });
+	sprite2_->SetSrc({ 0.0f,0.0f }, { 0,0.5f }, { 0.5f,0 }, { 0.5f,0.5f });
 
 	sprite2WorldTransform_.Initialize();
 	spriteWorldTransform_.Initialize();
@@ -39,6 +39,11 @@ void DebugScene::Initialize()
 	model_->UseLight(HARF_LAMBERT);
 	model_->SetTexHandle(uvTex);
 	model_->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
+
+	PlaneModel_ = make_unique<Model>();
+	PlaneModel_->SetTexHandle(uvTex);
+	PlaneModel_->Initialize(new ModelPlaneState, { 0,0,0 }, { 10,0,0 });
+	modelPlaneWorldTranbsform_.Initialize();
 	//model_->CreateFromObj("axis");
 }
 
@@ -54,9 +59,14 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Text("9 Pushkey StateChange");
 	ImGui::End();
 
-	ImGui::Begin("Cube");
+	ImGui::Begin("sphere");
 	ImGui::DragFloat3("t", &modelWorldTransform_.translate.x, -0.5f, 0.5f);
 	ImGui::DragFloat3("r", &modelWorldTransform_.rotation.x, -0.5f, 0.5f);
+	ImGui::End();
+
+	ImGui::Begin("plane");
+	ImGui::DragFloat3("t", &modelPlaneWorldTranbsform_.translate.x,-0.5f, 0.5f);
+	ImGui::DragFloat3("r", &modelPlaneWorldTranbsform_.rotation.x, -0.5f, 0.5f);
 	ImGui::End();
 
 	ImGui::Begin("Sprite");
@@ -149,7 +159,8 @@ void DebugScene::Update(GameManager* Scene)
 	spriteWorldTransform_.UpdateMatrix();
 	sprite2WorldTransform_.UpdateMatrix();
 	modelWorldTransform_.UpdateMatrix();
-	
+	modelPlaneWorldTranbsform_.UpdateMatrix();
+
 	DebugTools::UpdateExecute(0);
 	viewProjection.UpdateMatrix();
 	//viewProjection = DebugTools::ConvertViewProjection(viewProjection);
@@ -163,7 +174,7 @@ void DebugScene::Back2dSpriteDraw()
 void DebugScene::Object3dDraw()
 {
 	model_->Draw(modelWorldTransform_, viewProjection);
-
+	PlaneModel_->Draw(modelPlaneWorldTranbsform_, viewProjection);
 }
 void DebugScene::Flont2dSpriteDraw()
 {

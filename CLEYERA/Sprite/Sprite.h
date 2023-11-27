@@ -20,8 +20,20 @@ public:
 	void SetUvRotate(Vector3 uvRotate) { uvRotate_ = uvRotate; }
 	void SetUvTranslate(Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }
 	void SetColor(Vector4 color) { color_ = color; }
+	
+	/// <summary>
+	/// ブレンド
+	/// </summary>
 	void SetBlendMode(BlendMode blendMode) { blendMode_ = blendMode; }
-	void SetSrc(Vector2 TR, Vector2 BR, Vector2 TL, Vector2 BL);
+	
+	/// <summary>
+	/// tex切り抜き
+	/// </summary>
+	/// <param name="左上"></param>
+	/// <param name="左下"></param>
+	/// <param name="右上"></param>
+	/// <param name="右下"></param>
+	void SetSrc(Vector2 TL, Vector2 BL,Vector2 TR, Vector2 BR);
 
 #pragma endregion 
 
@@ -45,7 +57,7 @@ public:
 	Vector2 GetSize() { return size_; }
 
 	/// <summary>
-	/// �F�R�[�h��Vector4�ɕϊ��֐�
+	/// color16からvec4へ
 	/// </summary>
 	static Vector4 ColorConversion(uint32_t rgbaValue);
 

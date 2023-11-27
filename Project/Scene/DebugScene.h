@@ -57,8 +57,9 @@ private:
 	
 	
 	unique_ptr <Model>model_ = nullptr;
+	unique_ptr<Model>PlaneModel_ = nullptr;
 	WorldTransform modelWorldTransform_{};
-
+	WorldTransform modelPlaneWorldTranbsform_{};
 	list<Model*>models_;
 	bool Flag = false;
 	float count = 0;

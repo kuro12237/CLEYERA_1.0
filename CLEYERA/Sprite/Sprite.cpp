@@ -16,7 +16,7 @@ void Sprite::Draw(WorldTransform worldTransform, ViewProjection view)
 	state_->Draw(this, worldTransform,view);
 }
 
-void Sprite::SetSrc(Vector2 TR, Vector2 BR, Vector2 TL, Vector2 BL)
+void Sprite::SetSrc(Vector2 TL, Vector2 BL,Vector2 TR, Vector2 BR)
 {
 	srcTR = TR;
 	srcBR = BR;

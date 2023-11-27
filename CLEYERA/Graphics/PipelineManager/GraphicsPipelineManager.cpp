@@ -18,7 +18,7 @@ void GraphicsPipelineManager::Initialize()
 	Create3dSpritePSOs(pso);
 	LogManager::CompliteLog("Sprite3dPSO");
 
-	//Create3dParticlePSOs(pso);
+	Create3dParticlePSOs(pso);
 	LogManager::CompliteLog("Particle3dPSO");
 
 	GraphicsPipelineManager::GetInstance()->pso = pso;
