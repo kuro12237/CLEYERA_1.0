@@ -9,6 +9,8 @@ public:
 	
 	static Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float angle);
 	
+	static Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float sin, float cos);
+
 	static Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to);
 
 private:
