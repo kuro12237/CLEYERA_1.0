@@ -22,3 +22,30 @@ Matrix4x4 Quaternion::MakeRotateAxisAngle(const Vector3& axis, float angle)
 
 	return result;
 }
+
+Matrix4x4 Quaternion::DirectionToDirection(const Vector3& from,const Vector3& to)
+{
+	Vector3 fromVec = VectorTransform::Normalize(from);
+	Vector3 toVec = VectorTransform::Normalize(to);
+
+	 Vector3 uvCross = VectorTransform::Cross(fromVec, toVec);
+	 Vector3 n = VectorTransform::Normalize(uvCross);
+	 
+	 float cos = VectorTransform::Dot(fromVec, toVec);
+	 float sin = VectorTransform::Length(VectorTransform::Cross(fromVec, toVec));
+
+	 Matrix4x4 resultR = MatrixTransform::Identity();
+	 resultR.m[0][0] = n.x * n.x * (1 - cos) + cos;
+	 resultR.m[0][1] = n.x * n.y * (1 - cos) - n.z * sin;
+	 resultR.m[0][2] = n.x * n.z * (1 - cos) + n.y * sin;
+
+	 resultR.m[1][0] = n.y * n.x * (1 - cos) + n.z * sin;
+	 resultR.m[1][1] = n.y * n.y * (1 - cos) + cos;
+	 resultR.m[1][2] = n.y * n.z * (1 - cos) - n.x * sin;
+	
+	 resultR.m[2][0] = n.z * n.x * (1 - cos) - n.y * sin;
+	 resultR.m[2][1] = n.z * n.y * (1 - cos) + n.x * sin;
+	 resultR.m[2][2] = n.z * n.z * (1 - cos) + cos;
+	
+	return resultR;
+}

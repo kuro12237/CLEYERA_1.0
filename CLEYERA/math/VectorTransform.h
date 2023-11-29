@@ -22,6 +22,7 @@ public:
 
 	static Vector4 Subtruct(const Vector4& v1, const Vector4& v2);
 
+	static Vector3 Cross(const Vector3 v1, const Vector3 v2);
 
 private:
 

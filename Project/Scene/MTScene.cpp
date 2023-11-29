@@ -13,14 +13,36 @@ void MTScene::Initialize()
 void MTScene::Update(GameManager* Scene)
 {
 	Scene;
-	rotateMatrix_ = Quaternion::MakeRotateAxisAngle(axis_, angle);
-	axis_ = VectorTransform::Normalize(axis_);
+	//rotateMatrix_ = Quaternion::MakeRotateAxisAngle(axis_, angle);
+	//axis_ = VectorTransform::Normalize(axis_);
+
+	Vector3 flom0 = VectorTransform::Normalize({ 1.0f,0.7f,0.5f });
+	Vector3 to0 = VectorTransform::Multiply(flom0, -1.0f);
+
+	Vector3 flom1 = VectorTransform::Normalize({ -0.6f,0.9f,0.2f });
+	Vector3 to1 = VectorTransform::Normalize({0.4f, 0.7f, -0.5f});
+
+	Matrix4x4 rotateMatrix0_ = Quaternion::DirectionToDirection(VectorTransform::Normalize({ 1.0f,0.0f,0.0f }), VectorTransform::Normalize({-1.0f,0.0f,0.0f}));
+	Matrix4x4 rotateMatrix1_ = Quaternion::DirectionToDirection(flom0,to0);
+	rotateMatrix_ = Quaternion::DirectionToDirection(flom1,to1 );
+
+	ImGui::Begin("MT_01_02");
+	
+
+	ImGui::Text("rotate00");
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][0], rotateMatrix0_.m[1][0], rotateMatrix0_.m[2][0], rotateMatrix0_.m[3][0]);
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][1], rotateMatrix0_.m[1][1], rotateMatrix0_.m[2][1], rotateMatrix0_.m[3][1]);
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][2], rotateMatrix0_.m[1][2], rotateMatrix0_.m[2][2], rotateMatrix0_.m[3][2]);
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][3], rotateMatrix0_.m[1][3], rotateMatrix0_.m[2][3], rotateMatrix0_.m[3][3]);
 
 
-	ImGui::Begin("MT_01_01");
-	ImGui::SliderFloat3("Nomalize::x,y,z", &axis_.x,0.0f,1.0f);
+	ImGui::Text("rotate01");
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][0], rotateMatrix0_.m[1][0], rotateMatrix0_.m[2][0], rotateMatrix0_.m[3][0]);
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][1], rotateMatrix0_.m[1][1], rotateMatrix0_.m[2][1], rotateMatrix0_.m[3][1]);
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][2], rotateMatrix0_.m[1][2], rotateMatrix0_.m[2][2], rotateMatrix0_.m[3][2]);
+	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][3], rotateMatrix0_.m[1][3], rotateMatrix0_.m[2][3], rotateMatrix0_.m[3][3]);
 
-	ImGui::SliderFloat("angle::", &angle,0.0f,4.5f);
+	ImGui::Text("rotate02");
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][0], rotateMatrix_.m[1][0], rotateMatrix_.m[2][0], rotateMatrix_.m[3][0] );
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][1], rotateMatrix_.m[1][1], rotateMatrix_.m[2][1], rotateMatrix_.m[3][1]);
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][2], rotateMatrix_.m[1][2], rotateMatrix_.m[2][2], rotateMatrix_.m[3][2]);
