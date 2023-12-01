@@ -20,7 +20,7 @@ void TextureManager::Finalize()
 
 uint32_t TextureManager::LoadTexture(const string& filePath)
 {
-	string FilePath = "Resources/" + filePath;
+	string FilePath = "Resources/textures/" + filePath;
 	if (TextureManager::GetInstance()->isCreateObjectLoad_)
 	{
 		FilePath = filePath;
@@ -49,6 +49,11 @@ uint32_t TextureManager::LoadTexture(const string& filePath)
 		srvDesc = SrcDescSetting(metadata);
 		//Descripterをずらす
 		AddDescripter(index, srvDesc, texData.resource.Get());
+
+		//texのサイズ取得
+		texData.size.x = static_cast<float>(metadata.width);
+		texData.size.y = static_cast<float>(metadata.height);
+
 		//コンテナに保存
 		TextureManager::GetInstance()->texDatas_[FilePath] =
 			make_unique<TexDataResource>(FilePath, texData);
@@ -65,6 +70,22 @@ void TextureManager::UnLoadTexture(const string& filePath)
 void TextureManager::AllUnLoadTexture()
 {
 	TextureManager::GetInstance()->texDatas_.clear();
+}
+
+Vector2 TextureManager::GetTextureSize(uint32_t texHandle)
+{
+	Vector2 result{};
+
+	for (const auto& [key, s] : TextureManager::GetInstance()->texDatas_)
+	{
+		key;
+		if (s.get()->GetTexHandle() == texHandle)
+		{
+			result = s.get()->GetSize();
+			break;
+		}
+	}
+	return result;
 }
 
 bool TextureManager::CheckTexDatas(string filePath)

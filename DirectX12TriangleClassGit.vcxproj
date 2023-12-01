@@ -70,6 +70,7 @@
     <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp" />
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
+    <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelCubeState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelLineState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="CLEYERA\math\Vector4.h" />
     <ClInclude Include="CLEYERA\math\VectorTransform.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
+    <ClInclude Include="CLEYERA\Model\ModelManager.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelLineState.h" />

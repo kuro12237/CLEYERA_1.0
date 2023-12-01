@@ -17,20 +17,22 @@ enum SUseLight
 	HARF_LAMBERT
 };
 
-
-
 class Model
 {
 public:
 	~Model();
+	
 	/// <summary>
-	/// ƒ‚ƒfƒ‹‚Ì‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="ƒ‚[ƒh‘I‘ğ"></param>
+	/// <param name="state"></param>
+	/// <param name="CenterPos"></param>
+	/// <param name="size"></param>
+	/// <param name="color"></param>
 	void Initialize(IModelState* state, Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Vector4 color = { 1,1,1,1 });
 
 	/// <summary>
-	/// DrawLine‚Ì‰Šú‰»
+	/// DrawLineç”¨ã®åˆæœŸåŒ–
 	/// </summary>
 	/// <param name="StertPosition"></param>
 	/// <param name="EndPosition"></param>
@@ -43,7 +45,7 @@ public:
 	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
 
 	/// <summary>
-	/// ƒ‰ƒCƒg‚ğg‚¤‚© : ‰Šú‰»‚Ì‘O‚És‚¤
+	/// ãƒ©ã‚¤ãƒˆã‚’ä½¿ã†ã‹ï¼Ÿ
 	/// </summary>
 	void UseLight(SUseLight use);
 
@@ -87,7 +89,7 @@ public:
 	float GetSize() { return size_; }
 
 	/// <summary>
-	/// FƒR[ƒh‚ğVector4‚É•ÏŠ·ŠÖ”
+	/// Colorå¤‰æ›
 	/// </summary>
 	static Vector4 ColorConversion(uint32_t rgbaValue);
 

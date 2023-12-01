@@ -11,17 +11,22 @@ void DebugScene::Initialize()
 	DebugTools::addCommand(debugCamera,"DebugCamera");
 
 	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
+	TextureManager::UnUsedFilePath();
+	uint32_t SpritemobTexHandle = TextureManager::LoadTexture("Resources/Default/mob.png");
+	TextureManager::UnUsedFilePath();
+	uint32_t SpriteCLEYERATexHandle = TextureManager::LoadTexture("Resources/Default/CLEYERA.png");
+	TextureManager::UnUsedFilePath();
+	uint32_t uvTex = TextureManager::LoadTexture("Resources/Default/uvChecker.png");
 
-	uint32_t SpritemobTexHandle = TextureManager::LoadTexture("mob.png");
-	uint32_t SpriteCLEYERATexHandle = TextureManager::LoadTexture("CLEYERA.png");
-	uint32_t uvTex = TextureManager::LoadTexture("uvChecker.png");
+	Vector2 mobsize = TextureManager::GetTextureSize(SpritemobTexHandle);
+	mobsize;
 
-	Audiohandle = AudioManager::SoundLoadWave("Resources/SelectBGM.wav");
-	Audiohandle2 = AudioManager::SoundLoadWave("Resources/hit.wav");
+	Audiohandle = AudioManager::SoundLoadWave("Resources/Sounds/SelectBGM.wav");
+	Audiohandle2 = AudioManager::SoundLoadWave("Resources/Sounds/hit.wav");
 	SpriteCLEYERATexHandle;
 	sprite_ = make_unique<Sprite>();
 	sprite_->SetTexHandle(SpritemobTexHandle);
-	sprite_->Initialize(new SpriteBoxState,{0,0},{320,320});
+	sprite_->Initialize(new SpriteBoxState,{-16,-16});
 	
 	sprite2_ = make_unique<Sprite>();
 	sprite2_->SetTexHandle(uvTex);
@@ -155,6 +160,20 @@ void DebugScene::Update(GameManager* Scene)
 
 	sprite_->SetColor(color);
 	Scene;
+
+	if (Input::PushKey(DIK_D))
+	{
+		spriteWorldTransform_.translate.x += 32.1f;
+	}
+	if (Input::PushKey(DIK_A))
+	{
+		spriteWorldTransform_.translate.x -= 32.1f;
+	}
+
+	if (Input::PushKey(DIK_R))
+	{
+		spriteWorldTransform_.rotation.z += 0.1f;
+	}
 
 	spriteWorldTransform_.UpdateMatrix();
 	sprite2WorldTransform_.UpdateMatrix();

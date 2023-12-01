@@ -6,9 +6,15 @@ void Sprite::Initialize(ISpriteState* state, Vector2 pos, Vector2 size)
 	state_->Initialize(this);
 
 	Pos_ = pos;
-	size_ = size;
+	if (size.x == 0 && size.y == 0)
+	{
+		size_ = TextureManager::GetTextureSize(texHandle_);
+	}
+	else
+	{
+		size_ = size;
+	}
 	blendMode_ = BlendNone;
-
 }
 
 void Sprite::Draw(WorldTransform worldTransform, ViewProjection view)

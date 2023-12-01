@@ -136,6 +136,9 @@
     <Filter Include="CLEYERA\math\Vector">
       <UniqueIdentifier>{3cb29394-5a40-4ddb-a173-7994b23f6ecf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\ModelManager">
+      <UniqueIdentifier>{466fb35a-7a79-4844-89f2-a7547c81b0aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -293,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
       <Filter>CLEYERA\math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\ModelManager.cpp">
+      <Filter>CLEYERA\ModelManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +484,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
       <Filter>CLEYERA\Model\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\ModelManager.h">
+      <Filter>CLEYERA\ModelManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

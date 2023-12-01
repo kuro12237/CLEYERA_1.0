@@ -137,7 +137,7 @@ SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
 		}
 
 	}
-	TextureManager::ModeSelectObjctState();
+	TextureManager::UnUsedFilePath();
 	uint32_t texHandle = TextureManager::LoadTexture(modelData.material.textureFilePath);
 
 	state->SetTexHandle(texHandle);

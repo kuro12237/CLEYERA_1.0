@@ -10,7 +10,13 @@ public:
 	Sprite() {};
 	~Sprite() { delete state_; };
 
-	void Initialize(ISpriteState* state,Vector2 pos,Vector2 size);
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="表示方法"></param>
+	/// <param name="どこから表示するか"></param>
+	/// <param name="画像サイズ:texを使用する場合使用しない"></param>
+	void Initialize(ISpriteState* state, Vector2 pos = {}, Vector2 size = {});
 
 	void Draw(WorldTransform worldTransform, ViewProjection view);
 

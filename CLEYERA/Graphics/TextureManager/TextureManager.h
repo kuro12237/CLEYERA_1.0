@@ -20,10 +20,14 @@ public:
 	static void AllUnLoadTexture();
 	
 	/// <summary>
-	/// �g���Ă͂����Ȃ�
+	/// pngのsizeを取得
 	/// </summary>
-	static void ModeSelectObjctState() { TextureManager::GetInstance()->isCreateObjectLoad_ = true; }
+	static Vector2 GetTextureSize(uint32_t texHandle);
 
+	/// <summary>
+	/// ファイルパスを一から書くときに使うやつ
+	/// </summary>
+	static void UnUsedFilePath() { TextureManager::GetInstance()->isCreateObjectLoad_ = true; }
 
 	//あいう
 private:
