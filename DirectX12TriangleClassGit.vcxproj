@@ -97,6 +97,7 @@
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />
     <ClInclude Include="CLEYERA\math\VectorTransform.h" />
+    <ClInclude Include="CLEYERA\Model\Manager\ObjFileData.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
     <ClInclude Include="CLEYERA\Model\ModelManager.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />

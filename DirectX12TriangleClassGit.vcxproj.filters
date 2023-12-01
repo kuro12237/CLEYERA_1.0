@@ -64,9 +64,6 @@
     <Filter Include="CLEYERA\Utility\ImGuiManager">
       <UniqueIdentifier>{1310bbed-7a84-468e-8f4f-9dac43a57489}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\externals">
-      <UniqueIdentifier>{94b9a350-e0b5-4cf5-81b1-7ebc1404c377}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\DebugTools">
       <UniqueIdentifier>{0e048dfb-f3ee-43a9-9ed9-7e69565dfa83}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,9 @@
     </Filter>
     <Filter Include="CLEYERA\ModelManager">
       <UniqueIdentifier>{466fb35a-7a79-4844-89f2-a7547c81b0aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\Manager">
+      <UniqueIdentifier>{7b19fbfd-8110-4943-bbda-58bd382d0ccd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\ModelManager.h">
       <Filter>CLEYERA\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Manager\ObjFileData.h">
+      <Filter>CLEYERA\Model\ObjState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

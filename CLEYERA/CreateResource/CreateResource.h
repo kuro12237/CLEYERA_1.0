@@ -13,7 +13,6 @@ struct LightData
 	Vector4 color;
 	Vector3 direction;
 	float intensity;
-
 };
 
 struct  TransformationViewMatrix
@@ -21,7 +20,6 @@ struct  TransformationViewMatrix
 	Matrix4x4 view;
 	Matrix4x4 viewProjection;
 	Matrix4x4 orthographic;
- 
 };
 
 struct TransformationMatrix {
@@ -47,6 +45,8 @@ struct  SModelData
 };
 
 
+
+
 struct ResourcePeroperty
 {
 	D3D12_VERTEX_BUFFER_VIEW BufferView;
@@ -62,7 +62,6 @@ struct ResourcePeroperty
 struct  Material
 {
 	Vector4 color;
-	//float padding[3];
 	Matrix4x4 uvTransform;
 };
 
