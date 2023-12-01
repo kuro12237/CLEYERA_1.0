@@ -28,7 +28,6 @@ void MTScene::Update(GameManager* Scene)
 
 	ImGui::Begin("MT_01_02");
 	
-
 	ImGui::Text("rotate00");
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][0], rotateMatrix0_.m[1][0], rotateMatrix0_.m[2][0], rotateMatrix0_.m[3][0]);
 	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][1], rotateMatrix0_.m[1][1], rotateMatrix0_.m[2][1], rotateMatrix0_.m[3][1]);
