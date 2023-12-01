@@ -97,12 +97,12 @@
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />
     <ClInclude Include="CLEYERA\math\VectorTransform.h" />
-    <ClInclude Include="CLEYERA\Model\Manager\ObjFileData.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
     <ClInclude Include="CLEYERA\Model\ModelManager.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelLineState.h" />
+    <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h" />
@@ -281,7 +281,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -291,6 +291,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalLibraryDirectories>$(ProjectDir)CLEYERA/externals/assimp/lib/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll
@@ -305,7 +307,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -319,6 +321,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalLibraryDirectories>$(ProjectDir)CLEYERA/externals/assimp/lib/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll
