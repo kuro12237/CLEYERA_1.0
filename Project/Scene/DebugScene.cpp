@@ -42,14 +42,19 @@ void DebugScene::Initialize()
 
 	model_ = make_unique<Model>();
 	model_->UseLight(HARF_LAMBERT);
-	model_->SetTexHandle(uvTex);
-	model_->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
+	//model_->SetTexHandle(uvTex);
+	model_->CreateFromObj("SelectModel");
+		//->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
 
 	PlaneModel_ = make_unique<Model>();
 	PlaneModel_->SetTexHandle(uvTex);
 	PlaneModel_->Initialize(new ModelPlaneState, { 0,0,0 }, { 10,0,0 });
 	modelPlaneWorldTranbsform_.Initialize();
 	//model_->CreateFromObj("axis");
+
+	modelHandle_ = ModelManager::LoadObjectFile("Axis");
+	uint32_t modelHandle2 = ModelManager::LoadObjectFile("Axis");
+	modelHandle2;
 }
 
 void DebugScene::Update(GameManager* Scene)

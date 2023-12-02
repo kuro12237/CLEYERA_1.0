@@ -2,15 +2,15 @@
 #include"pch.h"
 #include"CreateResource.h"
 
-class ObjData
+class ModelObjData
 {
 public:
 	
-	ObjData(SModelData modelData, uint32_t index) { modelData_ = modelData, index_ = index; }
-	~ObjData() {};
+	ModelObjData(SModelData modelData, uint32_t index) { modelData_ = modelData, index_ = index; }
+	~ModelObjData() {};
 
 	SModelData GetData() { return modelData_; }
-
+	uint32_t GetIndex() { return index_; }
 
 
 private:

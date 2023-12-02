@@ -6,6 +6,7 @@
 #include"FileLoader.h"
 #include"CollisionManager.h"
 #include"Particle/Particle.h"
+#include"ModelManager.h"
 
 class DebugScene:public IScene
 {
@@ -63,4 +64,6 @@ private:
 	list<Model*>models_;
 	bool Flag = false;
 	float count = 0;
+
+	uint32_t modelHandle_ = 0;
 };

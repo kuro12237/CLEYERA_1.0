@@ -1,6 +1,7 @@
 #pragma once
 #include"Pch.h"
 #include"ModelObjData.h"
+#include"Graphics/TextureManager/TextureManager.h"
 
 class ModelManager
 {
@@ -13,13 +14,15 @@ public:
 
 	static void Finalize();
 
-	static uint32_t LoadObjectFile();
+	static uint32_t LoadObjectFile(string directoryPath);
 
 
 private:
 
-	map<string,SModelData>objModelDatas_;
+	static bool ChackLoadObj(string filePath);
 
+	map<string,unique_ptr<ModelObjData>>objModelDatas_;
+	uint32_t objHandle_ = 0;
 
 };
 

@@ -35,7 +35,8 @@ struct ParticleData{
 };
 struct MaterialData
 {
-	string textureFilePath;
+	uint32_t handle{};
+	string textureFilePath{};
 };
 
 struct  SModelData
