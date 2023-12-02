@@ -1,7 +1,7 @@
 #pragma once
 #include"IModelState.h"
 #include"Model.h"
-
+#include"ModelManager.h"
 
 class ModelObjState :public IModelState
 {
@@ -15,13 +15,6 @@ public:
 
 private:
 
-	SModelData LoadFile(Model *state,const string& directoryPath);
-
-	MaterialData LoadMaterialTemplateFile(const string& directoryPath, const string& filename);
-
 	SModelData ModelData_ = {};
 	ResourcePeroperty resource_ = {};
 };
-
-
-

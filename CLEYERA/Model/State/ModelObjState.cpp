@@ -2,7 +2,10 @@
 
 void ModelObjState::Initialize(Model* state)
 {
-	ModelData_ = LoadFile(state,state->GetObjDirectoryPath());
+
+	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
+	state->SetTexHandle(ModelData_.material.handle);
+
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * ModelData_.vertices.size());
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
 
@@ -61,87 +64,4 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 
 	commands.m_pList->DrawInstanced(UINT(ModelData_.vertices.size()), 1, 0, 0);
 
-}
-
-
-SModelData ModelObjState::LoadFile(Model *state,const string& directoryPath)
-{
-	SModelData modelData = {};
-
-	Assimp::Importer importer;
-	string file("Resources/" + directoryPath + "/" + directoryPath + ".obj");
-	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes());
-
-	//mesh解析
-	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
-	{
-		aiMesh* mesh = scene->mMeshes[meshIndex];
-		assert(mesh->HasNormals());
-		assert(mesh->HasTextureCoords(0));
-		//Fenceの解析
-		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
-		{
-			aiFace& face = mesh->mFaces[faceIndex];
-			assert(face.mNumIndices == 3);
-			//Vertex解析
-			for (uint32_t element = 0; element < face.mNumIndices; ++element)
-			{
-				uint32_t vertexIndex = face.mIndices[element];
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-				VertexData vertex;
-				vertex.position = { position.x,position.y,position.z,1.0f };
-				vertex.normal = { normal.x,normal.y,normal.z };
-				vertex.texcoord = { texcoord.x,texcoord.y };
-				//座標反転
-				vertex.position.x *= -1.0f;
-				vertex.normal.x *= -1.0f;
-				modelData.vertices.push_back(vertex);
-			}
-		}
-	}
-	//materialの解析
-	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; materialIndex++)
-	{
-		aiMaterial* material = scene->mMaterials[materialIndex];
-		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0)
-		{
-			aiString texFilePath;
-			material->GetTexture(aiTextureType_DIFFUSE, 0, &texFilePath);
-			modelData.material.textureFilePath = "Resources/" + directoryPath + "/" + texFilePath.C_Str();
-		}
-	}
-	TextureManager::UnUsedFilePath();
-	uint32_t texHandle = TextureManager::LoadTexture(modelData.material.textureFilePath);
-	
-
-	state->SetTexHandle(texHandle);
-	
-	return modelData;
-}
-
-MaterialData ModelObjState::LoadMaterialTemplateFile(const string& directoryPath, const string& filename)
-{
-	MaterialData materialData;
-	string line;
-	ifstream file("Resources/" + directoryPath + "/" + filename);
-	assert(file.is_open());
-	while (getline(file, line))
-	{
-		string identifier;
-		istringstream s(line);
-		s >> identifier;
-
-		if (identifier == "map_Kd")
-		{
-			string texfilename;
-			s >> texfilename;
-			materialData.textureFilePath = "Resources/" + directoryPath + "/" + texfilename;
-
-		}
-	}
-
-	return materialData;
 }

@@ -43,7 +43,6 @@ void DebugScene::Initialize()
 	model_ = make_unique<Model>();
 	model_->UseLight(HARF_LAMBERT);
 	//model_->SetTexHandle(uvTex);
-	model_->CreateFromObj("SelectModel");
 		//->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
 
 	PlaneModel_ = make_unique<Model>();
@@ -53,8 +52,10 @@ void DebugScene::Initialize()
 	//model_->CreateFromObj("axis");
 
 	modelHandle_ = ModelManager::LoadObjectFile("Axis");
-	uint32_t modelHandle2 = ModelManager::LoadObjectFile("Axis");
-	modelHandle2;
+
+	model_->SetModel(modelHandle_);
+
+
 }
 
 void DebugScene::Update(GameManager* Scene)

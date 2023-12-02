@@ -83,6 +83,22 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 	return ModelManager::GetInstance()->objModelDatas_[directoryPath]->GetIndex();
 }
 
+SModelData ModelManager::GetObjData(uint32_t index)
+{
+	SModelData data{};
+	for (const auto& [key, s] : ModelManager::GetInstance()->objModelDatas_)
+	{
+		key;
+		if (s.get()->GetIndex() == index)
+		{
+			data = s.get()->GetData();
+			break;
+		}
+	}
+
+	return data;
+}
+
 bool ModelManager::ChackLoadObj(string filePath)
 {
 	if (ModelManager::GetInstance()->objModelDatas_.find(filePath) == ModelManager::GetInstance()->objModelDatas_.end())

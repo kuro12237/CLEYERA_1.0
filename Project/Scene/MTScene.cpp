@@ -3,7 +3,7 @@
 void MTScene::Initialize()
 {
 	model_ = make_unique<Model>();
-	model_->CreateFromObj("axis");
+	//model_->CreateFromObj("axis");
 	worldTransform_.Initialize();
 
 	viewProjection_.Initialize({ 0,0,0.0f }, { 0.0f,0.0f,-5.0f });

@@ -39,8 +39,11 @@ public:
 	/// 
 	void Initialize(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 
-
-	void CreateFromObj(const string& directoryFile);
+	/// <summary>
+	/// modelをセット
+	/// </summary>
+	/// <param name="ModelHandle"></param>
+	void SetModel(uint32_t handle);
 
 	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
 
@@ -65,6 +68,7 @@ public:
 	WorldTransform GetWorldTransform() { return worldTransform_; }
 	Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
+	uint32_t GetModelHandle() { return modelHandle_; }
 
 	Vector3 GetuvScale() { return uvScale_; }
 	Vector3 GetuvRotate() { return uvRotate_; }
@@ -93,14 +97,12 @@ public:
 	/// </summary>
 	static Vector4 ColorConversion(uint32_t rgbaValue);
 
-	const string GetObjDirectoryPath() { return directoryPath_; }
+	
 	SUseLight GetUseLight(){return uselight_;}
 #pragma endregion 
 
 private:
 
-
-	
 	Vector4 CenterPos_ = { 0,0,0,1 };
 	float size_=1.5f;
 
@@ -110,11 +112,11 @@ private:
 	Vector4 color_ = { 1,1,1,1 };
 	WorldTransform worldTransform_ = {};
 	uint32_t texHandle_ = 0;
+	uint32_t modelHandle_ = 0;
 	
 	Vector3 uvScale_ = {1,1,1};
 	Vector3 uvRotate_ = {0,0,0};
 	Vector3 uvTranslate_ = {0,0,0};
-	string directoryPath_ = {};
 
 	SUseLight uselight_ = NONE;
 

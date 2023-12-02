@@ -25,14 +25,24 @@ void Model::Initialize(IModelState* state,Vector4 StartPosition, Vector4 EndPosi
 	state->Initialize(this);
 }
 
-void Model::CreateFromObj(const string& directoryFile)
+void Model::SetModel(uint32_t handle)
 {
+	if (state_ != nullptr)
+	{
+		delete state_;
+	}
+	modelHandle_ = handle; 
 	state_ = new ModelObjState();
-    directoryPath_ = directoryFile;
 	state_->Initialize(this);
+
 }
 void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 {
+	if (state_ == nullptr)
+	{
+		LogManager::Log("None SetModel\n");
+		assert(0);
+	}
 	worldTransform_ = worldTransform;
 	state_->Draw(this, worldTransform_,viewprojection);
 }
