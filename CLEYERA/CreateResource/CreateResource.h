@@ -35,6 +35,7 @@ struct ParticleData{
 };
 struct MaterialData
 {
+	uint32_t handle{};
 	string textureFilePath;
 };
 
