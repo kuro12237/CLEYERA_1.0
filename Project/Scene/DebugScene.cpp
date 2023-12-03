@@ -50,6 +50,7 @@ void DebugScene::Initialize()
 	PlaneModel_->Initialize(new ModelPlaneState, { 0,0,0 }, { 10,0,0 });
 	modelPlaneWorldTranbsform_.Initialize();
 	//model_->CreateFromObj("axis");
+
 }
 
 void DebugScene::Update(GameManager* Scene)
