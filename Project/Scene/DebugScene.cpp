@@ -47,14 +47,13 @@ void DebugScene::Initialize()
 
 	PlaneModel_ = make_unique<Model>();
 	PlaneModel_->SetTexHandle(uvTex);
-	PlaneModel_->Initialize(new ModelPlaneState, { 0,0,0 }, { 10,0,0 });
+	PlaneModel_->CreateModel(new ModelLineState, { 0,0,0 }, 1,{ 10,0,0 });
 	modelPlaneWorldTranbsform_.Initialize();
-	//model_->CreateFromObj("axis");
 
 	modelHandle_ = ModelManager::LoadObjectFile("Axis");
 
 	model_->SetModel(modelHandle_);
-
+	modelTexboxHandle_ = ModelManager::LoadObjectFile("TestBox");
 
 }
 
@@ -106,7 +105,17 @@ void DebugScene::Update(GameManager* Scene)
 		model_->UseLight(NONE);
 	}
 
+	model_->SetModel(modelHandle_);
+	TextureManager::UnUsedFilePath();
+	uint32_t uvTex = TextureManager::LoadTexture("Resources/Default/mob.png");
+	if (Input::PushKey(DIK_O))
+	{
+		model_->SetModel(modelTexboxHandle_);
 
+	   
+		model_->SetTexHandle(uvTex);
+	}
+	
 	if (count>180)
 	{
 		count = 0;

@@ -6,17 +6,17 @@ Model::~Model()
 	delete state_;
 }
 
-void Model::Initialize(IModelState* state, Vector4 CenterPos , float size , Vector4 color)
+void Model::CreateModel(IModelState* state, Vector4 CenterPos , float size , Vector4 color)
 {
+	CenterPos_ = CenterPos;
+	size_ = size;
+	color_ = color;
+
 	state_ = state;
 	state_->Initialize(this);
-
-	CenterPos_ = CenterPos;
-	size_=size;
-	color_ = color;
 }
 
-void Model::Initialize(IModelState* state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
+void Model::CreateLine(IModelState* state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
 {
 	state_ = state;
 	StartPos_ = StartPosition;

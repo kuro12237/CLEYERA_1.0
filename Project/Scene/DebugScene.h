@@ -66,4 +66,6 @@ private:
 	float count = 0;
 
 	uint32_t modelHandle_ = 0;
+	uint32_t modelTexboxHandle_ = 0;
+
 };

@@ -29,7 +29,7 @@ public:
 	/// <param name="CenterPos"></param>
 	/// <param name="size"></param>
 	/// <param name="color"></param>
-	void Initialize(IModelState* state, Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Vector4 color = { 1,1,1,1 });
+	void CreateModel(IModelState* state, Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Vector4 color = { 1,1,1,1 });
 
 	/// <summary>
 	/// DrawLine用の初期化
@@ -37,7 +37,7 @@ public:
 	/// <param name="StertPosition"></param>
 	/// <param name="EndPosition"></param>
 	/// 
-	void Initialize(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
+	void CreateLine(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 
 	/// <summary>
 	/// modelをセット
