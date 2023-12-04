@@ -30,9 +30,7 @@
     <None Include="Resources\Shader\SpriteObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
-    </ClCompile>
+    <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp" />
     <ClCompile Include="CLEYERA\Audio\AudioManager.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
     <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp" />
