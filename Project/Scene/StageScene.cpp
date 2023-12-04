@@ -1,6 +1,6 @@
-#include "PgScene.h"
+#include "StageScene.h"
 
-void PgScene::Initialize()
+void StageScene::Initialize()
 {
 	playerInputHandler_ = new PlayerInputHandler();
 	playerInputHandler_->AssignMoveRightCommand2PreessKeyD();
@@ -10,7 +10,7 @@ void PgScene::Initialize()
 	view_.Initialize();
 }
 
-void PgScene::Update(GameManager* Scene)
+void StageScene::Update(GameManager* Scene)
 {
 	Scene;
 	playerCommand_ = playerInputHandler_->HandleInput();
@@ -25,15 +25,15 @@ void PgScene::Update(GameManager* Scene)
 
 }
 
-void PgScene::Back2dSpriteDraw()
+void StageScene::Back2dSpriteDraw()
 {
 }
 
-void PgScene::Object3dDraw()
+void StageScene::Object3dDraw()
 {
 	player_->Draw(view_);
 }
 
-void PgScene::Flont2dSpriteDraw()
+void StageScene::Flont2dSpriteDraw()
 {
 }

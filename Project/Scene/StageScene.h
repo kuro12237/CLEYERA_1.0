@@ -11,11 +11,11 @@
 #include"GameObject/Player/Player.h"
 #include"GameObject/Player/InputHandler/PlayerInputHandler.h"
 
-class PgScene :public IScene
+class StageScene :public IScene
 {
 public:
-    PgScene() {};
-	~PgScene() {};
+	StageScene() {};
+	~StageScene() {};
 
 
 	void Initialize()override;

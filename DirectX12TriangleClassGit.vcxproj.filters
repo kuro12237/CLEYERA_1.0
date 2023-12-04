@@ -282,7 +282,7 @@
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp">
       <Filter>CLEYERA\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\PgScene.cpp">
+    <ClCompile Include="Project\Scene\StageScene.cpp">
       <Filter>Project\Scene\pg</Filter>
     </ClCompile>
     <ClCompile Include="Project\GameObject\Player\Player.cpp">
@@ -464,7 +464,7 @@
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h">
       <Filter>CLEYERA\Model\ObjState</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Scene\PgScene.h">
+    <ClInclude Include="Project\Scene\StageScene.h">
       <Filter>Project\Scene\pg</Filter>
     </ClInclude>
     <ClInclude Include="Project\GameObject\Player\Player.h">

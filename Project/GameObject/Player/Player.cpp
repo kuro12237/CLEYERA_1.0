@@ -3,6 +3,7 @@
 void Player::Initialize()
 {
 	this->model_ = make_unique<Model>();
+	this->model_->UseLight(HARF_LAMBERT);
 	this->model_->CreateModel(new ModelSphereState);
 	this->worldTransform_.Initialize();
 	TextureManager::UnUsedFilePath();

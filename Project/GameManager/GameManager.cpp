@@ -3,7 +3,7 @@
 GameManager::GameManager()
 {
 	Cleyera::Initialize();
-	Scene_ = new PgScene();
+	Scene_ = new StageScene();
 	Scene_->Initialize();
 }
 

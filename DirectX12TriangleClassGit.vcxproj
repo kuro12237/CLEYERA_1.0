@@ -76,7 +76,7 @@
     <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene.cpp" />
     <ClCompile Include="Project\Scene\MTScene.cpp" />
-    <ClCompile Include="Project\Scene\PgScene.cpp" />
+    <ClCompile Include="Project\Scene\StageScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h" />
@@ -139,7 +139,7 @@
     <ClInclude Include="Project\Scene\DebugScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\MTScene.h" />
-    <ClInclude Include="Project\Scene\PgScene.h" />
+    <ClInclude Include="Project\Scene\StageScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Harf_LambertLightObject.PS.hlsl">
