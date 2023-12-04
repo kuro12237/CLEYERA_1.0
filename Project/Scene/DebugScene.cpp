@@ -50,55 +50,29 @@ void DebugScene::Initialize()
 	PlaneModel_->CreateModel(new ModelLineState, { 0,0,0 }, 1,{ 10,0,0 });
 	modelPlaneWorldTranbsform_.Initialize();
 
-	modelHandle_ = ModelManager::LoadObjectFile("Axis");
+	modelHandle_ = ModelManager::LoadObjectFile("House");
 
 	model_->SetModel(modelHandle_);
-	modelTexboxHandle_ = ModelManager::LoadObjectFile("TestBox");
+	modelTexboxHandle_ = ModelManager::LoadObjectFile("package");
 
 }
 
 void DebugScene::Update(GameManager* Scene)
 {
+	Scene;
+
 	ImGui::Begin("MainCamera");
-	ImGui::SliderFloat3("trans", &viewProjection.translation_.x, -15, 15);
-	ImGui::SliderFloat3("rotate", &viewProjection.rotation_.x, -1, 1);
+	ImGui::DragFloat3("trans", &viewProjection.translation_.x, -0.2f, 0.2f);
+	ImGui::DragFloat3("rotate", &viewProjection.rotation_.x, -0.1f, 0.1f);
 	ImGui::End();
 
-	ImGui::Begin("key");
-	ImGui::Text("0 Pushkey PlayAudio");
-	ImGui::Text("9 Pushkey StateChange");
+	ImGui::Begin("ModelTesr");
+
+	ImGui::Text("ChangeModel :: o key");
+
 	ImGui::End();
 
-	ImGui::Begin("sphere");
-	ImGui::DragFloat3("t", &modelWorldTransform_.translate.x, -0.5f, 0.5f);
-	ImGui::DragFloat3("r", &modelWorldTransform_.rotation.x, -0.5f, 0.5f);
-	ImGui::End();
 
-	ImGui::Begin("plane");
-	ImGui::DragFloat3("t", &modelPlaneWorldTranbsform_.translate.x,-0.5f, 0.5f);
-	ImGui::DragFloat3("r", &modelPlaneWorldTranbsform_.rotation.x, -0.5f, 0.5f);
-	ImGui::End();
-
-	ImGui::Begin("Sprite");
-	ImGui::ColorPicker4("color", &color.x);
-	ImGui::DragFloat3("Rotate", &sprite2WorldTransform_.translate.x, 0.1f);
-	ImGui::Checkbox("NONE", &NoneFlag);
-	ImGui::Checkbox("Add", &AddFlag);
-	ImGui::Checkbox("Subtract", &SubtractFlag);
-	ImGui::Checkbox("Multiply", &MultiplyFlag);
-	ImGui::Checkbox("Screen", &ScreenFlag);
-	ImGui::End();
-
-	if (Input::PushKeyPressed(DIK_S))
-	{
-		AudioManager::AudioPlayWave(Audiohandle);
-		Flag = true;
-	}
-	if (Flag)
-	{
-		count++;
-		//AudioManager::AudioVolumeControl(Audiohandle, count*2);
-	}
 	model_->UseLight(HARF_LAMBERT);
 	if (Input::PushKey(DIK_T))
 	{
@@ -107,97 +81,24 @@ void DebugScene::Update(GameManager* Scene)
 
 	model_->SetModel(modelHandle_);
 	TextureManager::UnUsedFilePath();
-	//uint32_t uvTex = TextureManager::LoadTexture("Resources/Default/mob.png");
+
 	if (Input::PushKey(DIK_O))
 	{
 		model_->SetModel(modelTexboxHandle_);
+	}
 
-	   
-		//model_->SetTexHandle(uvTex);
-	}
-	
-	if (count>180)
-	{
-		count = 0;
-		AudioManager::AudioStopWave(Audiohandle);
-		Flag = false;
-	}
-	if (Input::PushKeyPressed(DIK_D))
-	{
-		AudioManager::AudioPlayWave(Audiohandle2);
-
-	}
-	
 #pragma region 
-	{
-		if (NoneFlag)
-		{
-			sprite_->SetBlendMode(BlendNone);
-			AddFlag = false;
-			SubtractFlag = false;
-			MultiplyFlag = false;
-			ScreenFlag = false;
-		}
-		if (AddFlag)
-		{
-			sprite_->SetBlendMode(BlendAdd);
-			NoneFlag = false;
-			SubtractFlag = false;
-			MultiplyFlag = false;
-			ScreenFlag = false;
-		}
-		if (SubtractFlag)
-		{
-			sprite_->SetBlendMode(BlendSubtruct);
-			AddFlag = false;
-			NoneFlag = false;
-			MultiplyFlag = false;
-			ScreenFlag = false;
-		}
-		if (MultiplyFlag)
-		{
-			sprite_->SetBlendMode(BlendMultiply);
-			AddFlag = false;
-			SubtractFlag = false;
-			NoneFlag = false;
-			ScreenFlag = false;
-		}
-		if (ScreenFlag)
-		{
-			sprite_->SetBlendMode(BlendScreen);
-			AddFlag = false;
-			SubtractFlag = false;
-			MultiplyFlag = false;
-			NoneFlag = false;
-		}
-	}
+	
 #pragma endregion
 
-	sprite_->SetColor(color);
-	Scene;
 
-	if (Input::PushKey(DIK_D))
-	{
-		spriteWorldTransform_.translate.x += 32.1f;
-	}
-	if (Input::PushKey(DIK_A))
-	{
-		spriteWorldTransform_.translate.x -= 32.1f;
-	}
-
-	if (Input::PushKey(DIK_R))
-	{
-		spriteWorldTransform_.rotation.z += 0.1f;
-	}
-
-	spriteWorldTransform_.UpdateMatrix();
-	sprite2WorldTransform_.UpdateMatrix();
 	modelWorldTransform_.UpdateMatrix();
 	modelPlaneWorldTranbsform_.UpdateMatrix();
 
 	DebugTools::UpdateExecute(0);
+	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
+
 	viewProjection.UpdateMatrix();
-	//viewProjection = DebugTools::ConvertViewProjection(viewProjection);
 
 }
 
@@ -207,13 +108,14 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
+	DebugTools::DrawExecute(0);
 	model_->Draw(modelWorldTransform_, viewProjection);
 	PlaneModel_->Draw(modelPlaneWorldTranbsform_, viewProjection);
 }
 void DebugScene::Flont2dSpriteDraw()
 {
-	sprite_->Draw(spriteWorldTransform_,viewProjection);
-	sprite2_->Draw(sprite2WorldTransform_,viewProjection);
+	//sprite_->Draw(spriteWorldTransform_,viewProjection);
+	//sprite2_->Draw(sprite2WorldTransform_,viewProjection);
 }
 
 void DebugScene::Testparticle()
