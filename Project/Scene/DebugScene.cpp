@@ -107,13 +107,13 @@ void DebugScene::Update(GameManager* Scene)
 
 	model_->SetModel(modelHandle_);
 	TextureManager::UnUsedFilePath();
-	uint32_t uvTex = TextureManager::LoadTexture("Resources/Default/mob.png");
+	//uint32_t uvTex = TextureManager::LoadTexture("Resources/Default/mob.png");
 	if (Input::PushKey(DIK_O))
 	{
 		model_->SetModel(modelTexboxHandle_);
 
 	   
-		model_->SetTexHandle(uvTex);
+		//model_->SetTexHandle(uvTex);
 	}
 	
 	if (count>180)
