@@ -4,7 +4,7 @@
 #include"DebugScene.h"
 #include"MTScene.h"
 #include"../DebugTools/Camera/DebugCamera.h"
-
+#include"PgScene.h"
 
 class GameManager
 {
