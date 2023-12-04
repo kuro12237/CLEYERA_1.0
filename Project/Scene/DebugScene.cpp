@@ -35,7 +35,6 @@ void DebugScene::Initialize()
 	houseModelHandle_ = ModelManager::LoadObjectFile("House");
 	model_->SetModel(houseModelHandle_);
 	packageModelHandle_ = ModelManager::LoadObjectFile("package");
-
 }
 
 void DebugScene::Update(GameManager* Scene)
