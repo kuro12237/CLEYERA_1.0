@@ -1,5 +1,5 @@
 #pragma once
-#include"./Collider/Collider.h"
+#include"./Collider/SphereCollider.h"
 #include"Pch.h"
 #include "VectorTransform.h"
 
@@ -8,12 +8,12 @@ public:
 
 	void CheckAllCollision();
 
-	void ClliderPush(Collider* collider) { colliders_.push_back(collider); }
-	void ClliderClear() { colliders_.clear(); }
+	void ClliderPush(SphereCollider* collider) { sphereColliders_.push_back(collider); }
+	void ClliderClear() { sphereColliders_.clear(); }
 
 private:
-	void CheckCollisionPair(Collider* cA, Collider* cB);
+	void CheckCollisionPair(SphereCollider* cA, SphereCollider* cB);
 	bool CheckBallCollosion(Vector3 v1, float vr1, Vector3 v2, float vr2);
 
-	std::list<Collider*> colliders_;
+	std::list<SphereCollider*> sphereColliders_;
 };

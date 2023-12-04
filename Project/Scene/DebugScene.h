@@ -24,48 +24,23 @@ public:
 	void Flont2dSpriteDraw()override;
 	
 private:
-	void TestCsvFile();
-
-	void CheckAllCollision();
 	
-	void Testparticle();
 
 	ViewProjection viewProjection{};
 
 	unique_ptr<Sprite>sprite_ = nullptr;
 	WorldTransform spriteWorldTransform_{};
-	
-	unique_ptr<Sprite>sprite2_ = nullptr;
-	WorldTransform sprite2WorldTransform_{};
-
-	uint32_t SpriteTexHandle = 0;
-	Vector4 color = { 1,1,1,1 };
-
-	bool NoneFlag = true;
-	bool AddFlag = false;
-	bool MultiplyFlag = false;
-	bool SubtractFlag = false;
-	bool ScreenFlag = false;
-
-
-	unique_ptr<Particle>particle_ = nullptr;
-	
-	Vector3 TestParticlesTranslate = {};
-	Vector4 TestParticleColor = {1,1,1,1};
+	uint32_t SpritemobTexHandle_ = 0;
+	uint32_t SpriteCLEYERATexHandle_ = 0;
 
 	uint32_t Audiohandle = 0;
 	uint32_t Audiohandle2 = 0;
 	
 	
 	unique_ptr <Model>model_ = nullptr;
-	unique_ptr<Model>PlaneModel_ = nullptr;
 	WorldTransform modelWorldTransform_{};
-	WorldTransform modelPlaneWorldTranbsform_{};
-	list<Model*>models_;
-	bool Flag = false;
-	float count = 0;
 
-	uint32_t modelHandle_ = 0;
-	uint32_t modelTexboxHandle_ = 0;
+	uint32_t houseModelHandle_ = 0;
+	uint32_t packageModelHandle_ = 0;
 
 };

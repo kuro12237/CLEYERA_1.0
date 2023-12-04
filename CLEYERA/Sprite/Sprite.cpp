@@ -22,6 +22,12 @@ void Sprite::Draw(WorldTransform worldTransform, ViewProjection view)
 	state_->Draw(this, worldTransform,view);
 }
 
+void Sprite::SetTexHandle(uint32_t texHandle)
+{
+	texHandle_ = texHandle;
+	size_ = TextureManager::GetTextureSize(texHandle);
+}
+
 void Sprite::SetSrc(Vector2 TL, Vector2 BL,Vector2 TR, Vector2 BR)
 {
 	srcTR = TR;

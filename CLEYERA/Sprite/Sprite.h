@@ -21,7 +21,7 @@ public:
 	void Draw(WorldTransform worldTransform, ViewProjection view);
 
 #pragma region Set
-	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
+	void SetTexHandle(uint32_t texHandle);
 	void SetUvScale(Vector3 uvScale) { uvScale_ = uvScale; }
 	void SetUvRotate(Vector3 uvRotate) { uvRotate_ = uvRotate; }
 	void SetUvTranslate(Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }

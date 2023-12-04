@@ -3,30 +3,30 @@
 
 void CollisionManager::CheckAllCollision()
 {
-	std::list<Collider*>::iterator itrA = colliders_.begin();
+	std::list<SphereCollider*>::iterator itrA = sphereColliders_.begin();
 
-	for (; itrA != colliders_.end(); ++itrA) {
+	for (; itrA != sphereColliders_.end(); ++itrA) {
 
-		Collider* colliderA = *itrA;
+		SphereCollider* colliderA = *itrA;
 
-		std::list<Collider*>::iterator itrB = itrA;
+		std::list<SphereCollider*>::iterator itrB = itrA;
 		itrB++;
-		for (; itrB != colliders_.end(); ++itrB) {
-			Collider* colliderB = *itrB;
-			//当たり判定処理
+		for (; itrB != sphereColliders_.end(); ++itrB) {
+			SphereCollider* colliderB = *itrB;
+		
 			CheckCollisionPair(colliderA, colliderB);
 		}
 	}
 }
 
-void CollisionManager::CheckCollisionPair(Collider* cA, Collider* cB) {
+void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB) {
 
-	//フィルタリング
+	
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0) {
+		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0) 
+	{
 		return;
 	}
-	//当たり判定の計算開始
 	Vector3 cApos = cA->GetWorldPosition();
 	Vector3 cBpos = cB->GetWorldPosition();
 
@@ -34,8 +34,8 @@ void CollisionManager::CheckCollisionPair(Collider* cA, Collider* cB) {
 	float cBradious = cB->GetRadious();
 
 	if (CheckBallCollosion(cApos, cAradious, cBpos, cBradious)) {
-		cA->OnCollision();
-		cB->OnCollision();
+		cA->OnCollision(cB->GetId());
+		cB->OnCollision(cA->GetId());
 	}
 }
 

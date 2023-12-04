@@ -1,6 +1,5 @@
 #include "Model.h"
 
-
 Model::~Model()
 {
 	delete state_;
@@ -34,8 +33,8 @@ void Model::SetModel(uint32_t handle)
 	modelHandle_ = handle; 
 	state_ = new ModelObjState();
 	state_->Initialize(this);
-
 }
+
 void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 {
 	if (state_ == nullptr)
@@ -43,8 +42,8 @@ void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 		LogManager::Log("None SetModel\n");
 		assert(0);
 	}
-	worldTransform_ = worldTransform;
-	state_->Draw(this, worldTransform_,viewprojection);
+	
+	state_->Draw(this, worldTransform,viewprojection);
 }
 
 void Model::UseLight(SUseLight use)

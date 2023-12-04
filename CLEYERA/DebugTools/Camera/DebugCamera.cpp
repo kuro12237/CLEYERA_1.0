@@ -102,7 +102,8 @@ void DebugCamera::UpdateExecute()
 	offset = VectorTransform::TransformNormal(offset, DebugCamera::GetInstance()->matRotate_);
 	DebugCamera::GetInstance()->worldTransform_.translate = offset;
 
-
+	TranslateMove();
+	RotateMove();
 #pragma region 更新処理
 	//Translateの更新
 	Matrix4x4 translateMatrix =
@@ -116,9 +117,8 @@ void DebugCamera::UpdateExecute()
 			MatrixTransform::Inverse(DebugCamera::GetInstance()->matRotate_));
 #pragma endregion 
 
-	TranslateMove();
-	RotateMove();
-
+	DebugCamera::GetInstance()->DebugViewProjection_.UpdateMatrix();
+	DebugCamera::GetInstance()->DebugViewProjection_.TransfarMatrix();
 }
 
 void DebugCamera::DrawExecute(ViewProjection viewProjection)

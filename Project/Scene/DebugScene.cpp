@@ -6,54 +6,33 @@ DebugScene::~DebugScene()
 
 void DebugScene::Initialize()
 {
-	DebugCamera* debugCamera = new DebugCamera();
-	debugCamera->Initialize();
-	DebugTools::addCommand(debugCamera,"DebugCamera");
 
 	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
-	TextureManager::UnUsedFilePath();
-	uint32_t SpritemobTexHandle = TextureManager::LoadTexture("Resources/Default/mob.png");
-	TextureManager::UnUsedFilePath();
-	uint32_t SpriteCLEYERATexHandle = TextureManager::LoadTexture("Resources/Default/CLEYERA.png");
-	TextureManager::UnUsedFilePath();
-	uint32_t uvTex = TextureManager::LoadTexture("Resources/Default/uvChecker.png");
 
-	Vector2 mobsize = TextureManager::GetTextureSize(SpritemobTexHandle);
-	mobsize;
+	//tex
+	TextureManager::UnUsedFilePath();
+	SpritemobTexHandle_ = TextureManager::LoadTexture("Resources/Default/mob.png");
+	TextureManager::UnUsedFilePath();
+	SpriteCLEYERATexHandle_ = TextureManager::LoadTexture("Resources/Default/CLEYERA.png");
 
+	//audio
 	Audiohandle = AudioManager::SoundLoadWave("Resources/Sounds/SelectBGM.wav");
 	Audiohandle2 = AudioManager::SoundLoadWave("Resources/Sounds/hit.wav");
-	SpriteCLEYERATexHandle;
+	
+	//sprite
 	sprite_ = make_unique<Sprite>();
-	sprite_->SetTexHandle(SpritemobTexHandle);
-	sprite_->Initialize(new SpriteBoxState,{-16,-16});
-	
-	sprite2_ = make_unique<Sprite>();
-	sprite2_->SetTexHandle(uvTex);
-	sprite2_->Initialize(new SpriteBoxState,{640,0},{320,320});
-	
-	sprite2_->SetSrc({ 0.0f,0.0f }, { 0,0.5f }, { 0.5f,0 }, { 0.5f,0.5f });
-
-	sprite2WorldTransform_.Initialize();
+	sprite_->SetTexHandle(SpritemobTexHandle_);
+	sprite_->Initialize(new SpriteBoxState);
 	spriteWorldTransform_.Initialize();
-	sprite2WorldTransform_.parent= &spriteWorldTransform_;
 
-	modelWorldTransform_.Initialize();
-
+    //model
 	model_ = make_unique<Model>();
 	model_->UseLight(HARF_LAMBERT);
-	//model_->SetTexHandle(uvTex);
-		//->Initialize(new ModelSphereState,{0,0,0},{10,0,0});
-
-	PlaneModel_ = make_unique<Model>();
-	PlaneModel_->SetTexHandle(uvTex);
-	PlaneModel_->CreateModel(new ModelLineState, { 0,0,0 }, 1,{ 10,0,0 });
-	modelPlaneWorldTranbsform_.Initialize();
-
-	modelHandle_ = ModelManager::LoadObjectFile("House");
-
-	model_->SetModel(modelHandle_);
-	modelTexboxHandle_ = ModelManager::LoadObjectFile("package");
+	modelWorldTransform_.Initialize();
+	
+	houseModelHandle_ = ModelManager::LoadObjectFile("House");
+	model_->SetModel(houseModelHandle_);
+	packageModelHandle_ = ModelManager::LoadObjectFile("package");
 
 }
 
@@ -66,38 +45,37 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat3("rotate", &viewProjection.rotation_.x, -0.1f, 0.1f);
 	ImGui::End();
 
-	ImGui::Begin("ModelTesr");
-
+	ImGui::Begin("ModelTest");
 	ImGui::Text("ChangeModel :: o key");
-
+	ImGui::Text("UseLight :: L key");
 	ImGui::End();
 
+	ImGui::Begin("SpriteTest");
+	ImGui::Text("ChangeTex :: I key");
+	ImGui::End();
 
 	model_->UseLight(HARF_LAMBERT);
-	if (Input::PushKey(DIK_T))
+	if (Input::PushKey(DIK_L))
 	{
 		model_->UseLight(NONE);
 	}
 
-	model_->SetModel(modelHandle_);
-	TextureManager::UnUsedFilePath();
-
+	model_->SetModel(houseModelHandle_);
 	if (Input::PushKey(DIK_O))
 	{
-		model_->SetModel(modelTexboxHandle_);
+		model_->SetModel(packageModelHandle_);
 	}
 
-#pragma region 
-	
-#pragma endregion
+	sprite_->SetTexHandle(SpritemobTexHandle_);
+	if (Input::PushKey(DIK_I))
+	{
+		TextureManager::UnUsedFilePath();
+		sprite_->SetTexHandle(SpriteCLEYERATexHandle_);
+	}
 
 
 	modelWorldTransform_.UpdateMatrix();
-	modelPlaneWorldTranbsform_.UpdateMatrix();
-
-	DebugTools::UpdateExecute(0);
-	viewProjection = DebugTools::ConvertViewProjection(viewProjection);
-
+	spriteWorldTransform_.UpdateMatrix();
 	viewProjection.UpdateMatrix();
 
 }
@@ -108,19 +86,15 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
-	DebugTools::DrawExecute(0);
+	
 	model_->Draw(modelWorldTransform_, viewProjection);
-	PlaneModel_->Draw(modelPlaneWorldTranbsform_, viewProjection);
+
 }
 void DebugScene::Flont2dSpriteDraw()
 {
-	//sprite_->Draw(spriteWorldTransform_,viewProjection);
-	//sprite2_->Draw(sprite2WorldTransform_,viewProjection);
+	sprite_->Draw(spriteWorldTransform_,viewProjection);
 }
 
-void DebugScene::Testparticle()
-{
 
-}
 
 
