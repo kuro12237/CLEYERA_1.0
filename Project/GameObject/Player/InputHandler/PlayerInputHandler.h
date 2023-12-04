@@ -18,6 +18,5 @@ private:
 
 	IPlayerCommand* pressKeyD_;
 	IPlayerCommand* pressKeyA_;
-
 };
 

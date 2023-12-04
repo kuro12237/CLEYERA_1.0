@@ -139,9 +139,6 @@
     <Filter Include="Project\GameObject">
       <UniqueIdentifier>{c4ae11d7-9371-4afd-8d67-e61860dcf2a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\ImputHandler">
-      <UniqueIdentifier>{6e30d36c-e271-420b-84ce-2e37437c6732}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\GameObject\Command">
       <UniqueIdentifier>{3ace7d6c-98d3-45e5-bc36-8429986c3d66}</UniqueIdentifier>
     </Filter>
