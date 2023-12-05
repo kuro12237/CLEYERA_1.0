@@ -28,7 +28,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		SModelData modelData = {};
 
 		Assimp::Importer importer;
-		string file("Resources/" + directoryPath + "/" + directoryPath + ".obj");
+		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".obj");
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes());
 
@@ -69,7 +69,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 			{
 				aiString texFilePath;
 				material->GetTexture(aiTextureType_DIFFUSE, 0, &texFilePath);
-				modelData.material.textureFilePath = "Resources/" + directoryPath + "/" + texFilePath.C_Str();
+				modelData.material.textureFilePath = "Resources/Models/" + directoryPath + "/" + texFilePath.C_Str();
 			}
 		}
 
@@ -109,28 +109,4 @@ bool ModelManager::ChackLoadObj(string filePath)
 		return true;
 	}
 	return false;
-}
-
-MaterialData ModelManager::LoadMaterialTemplateFile(const string& directoryPath, const string& filename)
-{
-	MaterialData materialData;
-	string line;
-	ifstream file("Resources/" + directoryPath + "/" + filename);
-	assert(file.is_open());
-	while (getline(file, line))
-	{
-		string identifier;
-		istringstream s(line);
-		s >> identifier;
-
-		if (identifier == "map_Kd")
-		{
-			string texfilename;
-			s >> texfilename;
-			materialData.textureFilePath = "Resources/" + directoryPath + "/" + texfilename;
-
-		}
-	}
-
-	return materialData;
 }
