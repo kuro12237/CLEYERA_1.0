@@ -7,14 +7,12 @@ class ModelObjState :public IModelState
 {
 public:
 	ModelObjState() {};
-	~ModelObjState() {};
+	~ModelObjState() ;
 
 	void Initialize(Model* state)override;
 
 	void Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)override;
 
 private:
-
-	SModelData ModelData_ = {};
 	ResourcePeroperty resource_ = {};
 };

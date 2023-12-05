@@ -18,6 +18,7 @@ void ModelManager::Finalize()
 
 uint32_t ModelManager::LoadObjectFile(string directoryPath)
 {
+	
 	if (ChackLoadObj(directoryPath))
 	{
 		//始めてだったら加算

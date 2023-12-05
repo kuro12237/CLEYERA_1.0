@@ -1,19 +1,28 @@
 #include "ModelObjState.h"
 
+ModelObjState::~ModelObjState()
+{
+	resource_.Vertex.Reset();
+	resource_.Material.Reset();
+	resource_.Light.Reset();
+	resource_.wvpResource.Reset();
+}
+
 void ModelObjState::Initialize(Model* state)
 {
-
+	SModelData ModelData_ = {};
 	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
 	state->SetTexHandle(ModelData_.material.handle);
 
-	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * ModelData_.vertices.size());
-	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
+	CreateResources::CreateBufferResource(sizeof(VertexData) * ModelData_.vertices.size(),resource_.Vertex);
+    CreateResources::CreateBufferResource(sizeof(Material), resource_.Material);
 
-	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * ModelData_.vertices.size(), resource_.Vertex,int( ModelData_.vertices.size()));
+	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * ModelData_.vertices.size(), resource_.Vertex.Get(), int(ModelData_.vertices.size()));
 	if (state->GetUseLight() != NONE)
 	{
-		resource_.Light = CreateResources::CreateBufferResource(sizeof(LightData));
+	    CreateResources::CreateBufferResource(sizeof(LightData), resource_.Light);
 	}
+	ModelData_.vertices.clear();
 }
 
 void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
@@ -24,8 +33,10 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 
+	SModelData ModelData_ = {};
+	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
 	memcpy(vertexData, ModelData_.vertices.data(), sizeof(VertexData) * ModelData_.vertices.size());
-
+	//ModelData_.vertices.clear();
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 	if (state->GetUseLight() != NONE)

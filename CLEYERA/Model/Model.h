@@ -29,7 +29,7 @@ public:
 	/// <param name="CenterPos"></param>
 	/// <param name="size"></param>
 	/// <param name="color"></param>
-	void CreateModel(IModelState* state, Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Vector4 color = { 1,1,1,1 });
+	void CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Vector4 color = { 1,1,1,1 });
 
 	/// <summary>
 	/// DrawLine用の初期化
@@ -37,7 +37,7 @@ public:
 	/// <param name="StertPosition"></param>
 	/// <param name="EndPosition"></param>
 	/// 
-	void CreateLine(IModelState* state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
+	void CreateLine(unique_ptr<IModelState> state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 
 	/// <summary>
 	/// modelをセット
@@ -112,6 +112,7 @@ private:
 
 	uint32_t texHandle_ = 0;
 	uint32_t modelHandle_ = 0;
+	uint32_t prevModelHandle_ = 0;
 	
 	Vector3 uvScale_ = {1,1,1};
 	Vector3 uvRotate_ = {0,0,0};
@@ -119,6 +120,6 @@ private:
 
 	SUseLight uselight_ = NONE;
 
-	IModelState* state_ = nullptr;
+	unique_ptr<IModelState> state_ = nullptr;
 };
 

@@ -71,12 +71,15 @@ class CreateResources
 public:
 
 	/// <summary>
-	/// Resource��쐬
+	/// Resource作成
 	/// </summary>
 	/// <param name="device"></param>
 	/// <param name="sizeInbyte"></param>
 	/// <returns></returns>
 	static ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInbyte);
+
+	static void CreateBufferResource(size_t sizeInbyte, ComPtr<ID3D12Resource>& Resource);
+
 
 	/// <summary>
 	/// BufferView��쐬
@@ -84,7 +87,7 @@ public:
 	/// <param name="sizeInbyte"></param>
 	/// <param name="Resource"></param>
 	/// <returns></returns>
-	static D3D12_VERTEX_BUFFER_VIEW VertexCreateBufferView(size_t sizeInbyte, ComPtr<ID3D12Resource> Resource, int size);
+	static D3D12_VERTEX_BUFFER_VIEW VertexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size);
 	/// <summary>
 	/// index��BufferView
 	/// </summary>

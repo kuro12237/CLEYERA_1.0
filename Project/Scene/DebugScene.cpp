@@ -31,10 +31,13 @@ void DebugScene::Initialize()
 	model_ = make_unique<Model>();
 	model_->UseLight(HARF_LAMBERT);
 	modelWorldTransform_.Initialize();
+
+	
+	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	houseModelHandle_ = ModelManager::LoadObjectFile("House");
-	model_->SetModel(houseModelHandle_);
 	packageModelHandle_ = ModelManager::LoadObjectFile("package");
+	model_->SetModel(houseModelHandle_);
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -55,16 +58,19 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Text("ChangeTex :: I key");
 	ImGui::End();
 
-	model_->UseLight(HARF_LAMBERT);
+	//model_->UseLight(HARF_LAMBERT);
 	if (Input::PushKey(DIK_L))
 	{
-		model_->UseLight(NONE);
+		//model_->UseLight(NONE);
 	}
 
-	model_->SetModel(houseModelHandle_);
+
 	if (Input::PushKey(DIK_O))
 	{
 		model_->SetModel(packageModelHandle_);
+	}else
+	{
+		model_->SetModel(houseModelHandle_);
 	}
 
 	sprite_->SetTexHandle(SpritemobTexHandle_);
@@ -73,9 +79,13 @@ void DebugScene::Update(GameManager* Scene)
 		TextureManager::UnUsedFilePath();
 		sprite_->SetTexHandle(SpriteCLEYERATexHandle_);
 	}
+	else
+	{
+
+	}
 
 
-	modelWorldTransform_.UpdateMatrix();
+    modelWorldTransform_.UpdateMatrix();
 	spriteWorldTransform_.UpdateMatrix();
 	viewProjection.UpdateMatrix();
 
