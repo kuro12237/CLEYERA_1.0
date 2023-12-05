@@ -37,6 +37,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
 	memcpy(vertexData, ModelData_.vertices.data(), sizeof(VertexData) * ModelData_.vertices.size());
 	//ModelData_.vertices.clear();
+	materialData->shininess = 70.0f;
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 	if (state->GetUseLight() != NONE)
@@ -71,6 +72,8 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	if (state->GetUseLight() != NONE)
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
+		commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());
+
 	}
 
 	commands.m_pList->DrawInstanced(UINT(ModelData_.vertices.size()), 1, 0, 0);

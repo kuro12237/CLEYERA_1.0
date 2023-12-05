@@ -179,9 +179,6 @@
     <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp">
       <Filter>CLEYERA\Model\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp">
-      <Filter>CLEYERA\Transform</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp">
       <Filter>CLEYERA\math\Matrix</Filter>
     </ClCompile>
@@ -272,6 +269,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp">
       <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp">
+      <Filter>CLEYERA\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

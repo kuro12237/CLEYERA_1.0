@@ -20,6 +20,7 @@ struct  TransformationViewMatrix
 	Matrix4x4 view;
 	Matrix4x4 viewProjection;
 	Matrix4x4 orthographic;
+	Vector3 position;
 };
 
 struct TransformationMatrix {
@@ -64,6 +65,7 @@ struct  Material
 {
 	Vector4 color;
 	Matrix4x4 uvTransform;
+	float shininess;
 };
 
 class CreateResources

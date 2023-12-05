@@ -107,17 +107,25 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 	}
 #pragma endregion
 
+	ImGui::Begin("direction");
+	ImGui::SliderFloat3("t", &testLightDirection.x, -1.0f, 1.0f);
+	ImGui::SliderFloat("shininess", &shininess, -1.0f, 20.0f);
+	ImGui::End();
+
 	materialData->color = state->GetColor();
+	materialData->shininess = shininess;
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 	if (state->GetUseLight()!=NONE)
 	{
 		LightData* lightData = nullptr;
 		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 		
-		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
-		lightData->direction = { 0.0f,-1.0f,0.0f };
-		lightData->intensity = 1.0f;
+		
 
+		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
+		lightData->direction = testLightDirection;
+		lightData->intensity = 1.0f;
+	
 	}
 
 
@@ -163,6 +171,8 @@ void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, V
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
 	}
+
+	commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());
 
 	commands.m_pList->DrawIndexedInstanced(VertexNum * VertexNum * 6, 1, 0, 0, 0);
 }

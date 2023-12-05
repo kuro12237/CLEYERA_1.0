@@ -27,11 +27,13 @@ void DebugScene::Initialize()
 	sprite_->Initialize(new SpriteBoxState);
 	spriteWorldTransform_.Initialize();
 
+	uint32_t ballTexHandle = TextureManager::LoadTexture("testBall.png");
     //model
 	model_ = make_unique<Model>();
-	model_->UseLight(HARF_LAMBERT);
+	//model_->UseLight(HARF_LAMBERT);
 	modelWorldTransform_.Initialize();
-
+	model_->SetTexHandle(ballTexHandle);
+	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	//model_->CreateModel(make_unique<ModelSphereState>());
 	
@@ -67,11 +69,18 @@ void DebugScene::Update(GameManager* Scene)
 
 	if (Input::PushKey(DIK_O))
 	{
-		model_->SetModel(packageModelHandle_);
+		//model_->SetModel(packageModelHandle_);
 	}else
 	{
-		model_->SetModel(houseModelHandle_);
+		//model_->SetModel(houseModelHandle_);
 	}
+
+	ImGui::Begin("TestSphere");
+	ImGui::SliderFloat3("t", &modelWorldTransform_.translate.x, -2.0f, 2.0f);
+
+	ImGui::SliderFloat3("r", &modelWorldTransform_.rotation.x, -2.0f, 2.0f);
+
+	ImGui::End();
 
 	sprite_->SetTexHandle(SpritemobTexHandle_);
 	if (Input::PushKey(DIK_I))

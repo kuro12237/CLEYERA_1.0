@@ -47,6 +47,6 @@ void WorldTransform::TransfarMatrix()
 {
 	Map();
 	BufferMatrix_->WVP = matWorld;
-	BufferMatrix_->world = MatrixTransform::Identity();
+	BufferMatrix_->world = matWorld;//MatrixTransform::Identity();
 	UnMap();
 }
