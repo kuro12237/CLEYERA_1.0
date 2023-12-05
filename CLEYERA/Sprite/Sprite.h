@@ -44,7 +44,6 @@ public:
 #pragma endregion 
 
 #pragma region get
-	WorldTransform GetWorldTransform() { return worldTransform_; }
 	Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 
@@ -79,7 +78,6 @@ private:
 	Vector2 size_ = {};
 	Vector4 color_ = { 1,1,1,1 };
 
-	WorldTransform worldTransform_ = {};
 	uint32_t texHandle_ = 0;
 
 	Vector3 uvScale_ = { 1,1,1 };

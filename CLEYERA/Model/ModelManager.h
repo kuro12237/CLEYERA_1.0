@@ -26,8 +26,7 @@ public:
 	static SModelData GetObjData(uint32_t index);
 
 private:
-	static MaterialData LoadMaterialTemplateFile(const string& directoryPath, const string& filename);
-
+	
 	static bool ChackLoadObj(string filePath);
 
 	map<string,unique_ptr<ModelObjData>>objModelDatas_;

@@ -2,37 +2,37 @@
 
 Model::~Model()
 {
-	delete state_;
 }
 
-void Model::CreateModel(IModelState* state, Vector4 CenterPos , float size , Vector4 color)
+void Model::CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos , float size , Vector4 color)
 {
 	CenterPos_ = CenterPos;
 	size_ = size;
 	color_ = color;
 
-	state_ = state;
+	state_.swap(state);
 	state_->Initialize(this);
 }
 
-void Model::CreateLine(IModelState* state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
+void Model::CreateLine(unique_ptr<IModelState> state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
 {
-	state_ = state;
+	state_.swap(state);
 	StartPos_ = StartPosition;
 	EndPos_ = EndPosition;
 	color_ = Color;
-	state->Initialize(this);
+	state_->Initialize(this);
 }
 
 void Model::SetModel(uint32_t handle)
 {
-	if (state_ != nullptr)
+	prevModelHandle_ = modelHandle_;
+	modelHandle_ = handle;
+
+	if (prevModelHandle_ != modelHandle_)
 	{
-		delete state_;
+		state_.reset(new ModelObjState);
+		state_->Initialize(this);
 	}
-	modelHandle_ = handle; 
-	state_ = new ModelObjState();
-	state_->Initialize(this);
 }
 
 void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)

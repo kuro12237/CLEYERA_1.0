@@ -5,6 +5,8 @@
 #include"CreateResource.h"
 
 struct ViewProjection {
+	
+	~ViewProjection() {};
 
 	/// <summary>
 	/// 定数バッファ

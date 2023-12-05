@@ -2,11 +2,11 @@
 
 void SpriteBoxState::Initialize(Sprite* state)
 {
-	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize);
-	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
+	CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize,resource_.Vertex);
+	CreateResources::CreateBufferResource(sizeof(Material),resource_.Material);
 
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * VertexSize, resource_.Vertex.Get(), VertexSize);
-	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * IndexSize);
+	CreateResources::CreateBufferResource(sizeof(uint32_t) * IndexSize, resource_.Index);
 	resource_.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * IndexSize, resource_.Index.Get());
 	state;
 }
