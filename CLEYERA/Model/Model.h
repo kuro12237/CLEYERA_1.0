@@ -40,7 +40,7 @@ public:
 	void CreateLine(unique_ptr<IModelState> state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
 
 	/// <summary>
-	/// modelをセット
+	/// modelをセット(初期化の時にしか使わないように)
 	/// </summary>
 	/// <param name="ModelHandle"></param>
 	void SetModel(uint32_t handle);
