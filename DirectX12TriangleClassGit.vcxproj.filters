@@ -133,6 +133,9 @@
     <Filter Include="CLEYERA\Model\Manager">
       <UniqueIdentifier>{7b19fbfd-8110-4943-bbda-58bd382d0ccd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Light">
+      <UniqueIdentifier>{fa6556f0-e893-424a-ac19-2af4803be191}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -272,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp">
       <Filter>CLEYERA\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Light\Light.cpp">
+      <Filter>CLEYERA\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h">
       <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Light\Light.h">
+      <Filter>CLEYERA\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

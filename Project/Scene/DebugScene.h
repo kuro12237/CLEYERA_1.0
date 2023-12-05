@@ -7,6 +7,8 @@
 #include"CollisionManager.h"
 #include"Particle/Particle.h"
 #include"ModelManager.h"
+#include"Light/Light.h"
+
 
 class DebugScene:public IScene
 {
@@ -43,4 +45,11 @@ private:
 	uint32_t houseModelHandle_ = 0;
 	uint32_t packageModelHandle_ = 0;
 
+	unique_ptr<Model>BallModel_ = nullptr;
+	WorldTransform ballModelWorldTransform_ = {};
+
+	unique_ptr<Model>testSkyDome_ = nullptr;
+	WorldTransform testSkyDomeWorldTransform_ = {};
+
+	Light pointLight_{};
 };

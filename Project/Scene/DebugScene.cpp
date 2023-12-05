@@ -9,7 +9,7 @@ void DebugScene::Initialize()
 	//winTitleの設定
 	WinApp::SetTiTleName(L"2023/12/05/20:31 CLEYERA");
 
-	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
+	viewProjection.Initialize({0,0,0.0f }, { 0.0f,2.0f,-12.0f });
 
 	//tex
 	TextureManager::UnUsedFilePath();
@@ -33,13 +33,29 @@ void DebugScene::Initialize()
 	model_->UseLight(HARF_LAMBERT);
 	modelWorldTransform_.Initialize();
 	model_->SetTexHandle(ballTexHandle);
-	model_->CreateModel(make_unique<ModelSphereState>());
+	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	houseModelHandle_ = ModelManager::LoadObjectFile("House");
-	packageModelHandle_ = ModelManager::LoadObjectFile("package");
-	//model_->SetModel(houseModelHandle_);
+	packageModelHandle_ = ModelManager::LoadObjectFile("TestGround");
+	uint32_t testSkydomeModelHandle_= ModelManager::LoadObjectFile("TestSkyDome");
+	model_->SetModel(packageModelHandle_);
+
+	BallModel_ = make_unique<Model>();
+	BallModel_->UseLight(HARF_LAMBERT);
+	BallModel_->CreateModel(make_unique<ModelSphereState>());
+	BallModel_->SetTexHandle(ballTexHandle);
+
+	ballModelWorldTransform_.Initialize();
+
+	testSkyDome_ = make_unique<Model>();
+	testSkyDome_->UseLight(HARF_LAMBERT);
+	testSkyDome_->SetModel(testSkydomeModelHandle_);
+	testSkyDomeWorldTransform_.Initialize();
+	testSkyDomeWorldTransform_.scale = { 10,10,10 };
+	testSkyDomeWorldTransform_.UpdateMatrix();
+	pointLight_.Initialize();
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -76,9 +92,9 @@ void DebugScene::Update(GameManager* Scene)
 	}
 
 	ImGui::Begin("TestSphere");
-	ImGui::SliderFloat3("t", &modelWorldTransform_.translate.x, -2.0f, 2.0f);
+	ImGui::SliderFloat3("t", &ballModelWorldTransform_.translate.x, -3.0f, 3.0f);
 
-	ImGui::SliderFloat3("r", &modelWorldTransform_.rotation.x, -2.0f, 2.0f);
+	ImGui::SliderFloat3("r", &ballModelWorldTransform_.rotation.x, -3.0f, 3.0f);
 
 	ImGui::End();
 
@@ -92,8 +108,25 @@ void DebugScene::Update(GameManager* Scene)
 	{
 
 	}
+	
+	ImGui::Begin("Light");
+	ImGui::ColorPicker3("color", &pointLight_.color_.x);
+
+	ImGui::DragFloat3("pos", &pointLight_.position_.x, -1.0f, 1.0f);
+	ImGui::DragFloat("intensity", &pointLight_.intencity_, -1.0f, 1.0f);
 
 
+
+	ImGui::End();
+	
+	pointLight_.TransfarData();
+
+	BallModel_->SetLight(pointLight_);
+	model_->SetLight(pointLight_);
+	testSkyDome_->SetLight(pointLight_);
+
+	testSkyDomeWorldTransform_.UpdateMatrix();
+	ballModelWorldTransform_.UpdateMatrix();
     modelWorldTransform_.UpdateMatrix();
 	spriteWorldTransform_.UpdateMatrix();
 	viewProjection.UpdateMatrix();
@@ -106,9 +139,9 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
-	
+	BallModel_->Draw(ballModelWorldTransform_, viewProjection);
 	model_->Draw(modelWorldTransform_, viewProjection);
-
+	testSkyDome_->Draw(testSkyDomeWorldTransform_, viewProjection);
 }
 void DebugScene::Flont2dSpriteDraw()
 {

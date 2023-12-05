@@ -45,6 +45,7 @@
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
     <ClCompile Include="CLEYERA\Input\Input.cpp" />
+    <ClCompile Include="CLEYERA\Light\Light.cpp" />
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp" />
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h" />
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TextureManager.h" />
     <ClInclude Include="CLEYERA\Input\Input.h" />
+    <ClInclude Include="CLEYERA\Light\Light.h" />
     <ClInclude Include="CLEYERA\math\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\math\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\math\Matrix4x4.h" />
