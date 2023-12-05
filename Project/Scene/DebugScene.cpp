@@ -7,7 +7,7 @@ DebugScene::~DebugScene()
 void DebugScene::Initialize()
 {
 	//winTitleの設定
-	WinApp::SetTiTleName(L"2023/12/05/00:01 CLEYERA");
+	WinApp::SetTiTleName(L"2023/12/05/14:03 CLEYERA");
 
 	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
 
