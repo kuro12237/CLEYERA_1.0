@@ -37,6 +37,10 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
 	memcpy(vertexData, ModelData_.vertices.data(), sizeof(VertexData) * ModelData_.vertices.size());
 	//ModelData_.vertices.clear();
+	ImGui::Begin("direction");
+	ImGui::SliderFloat3("t", &testLightDirection.x, -1.0f, 1.0f);
+	ImGui::End();
+
 	materialData->shininess = 70.0f;
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
@@ -46,7 +50,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 
 		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
-		lightData->direction = { 0.0f,-1.0f,0.0f };
+		lightData->direction = testLightDirection;
 		lightData->intensity = 1.0f;
 
 	}

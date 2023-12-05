@@ -109,7 +109,7 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 
 	ImGui::Begin("direction");
 	ImGui::SliderFloat3("t", &testLightDirection.x, -1.0f, 1.0f);
-	ImGui::SliderFloat("shininess", &shininess, -1.0f, 20.0f);
+	ImGui::SliderFloat("shininess", &shininess, 1.0f, 70.0f);
 	ImGui::End();
 
 	materialData->color = state->GetColor();

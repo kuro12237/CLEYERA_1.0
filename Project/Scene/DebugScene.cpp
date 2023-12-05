@@ -7,7 +7,7 @@ DebugScene::~DebugScene()
 void DebugScene::Initialize()
 {
 	//winTitleの設定
-	WinApp::SetTiTleName(L"2023/12/05/14:03 CLEYERA");
+	WinApp::SetTiTleName(L"2023/12/05/20:31 CLEYERA");
 
 	viewProjection.Initialize({0,0,0.0f }, { 0.0f,0.0f,-10.0f });
 
@@ -30,16 +30,16 @@ void DebugScene::Initialize()
 	uint32_t ballTexHandle = TextureManager::LoadTexture("testBall.png");
     //model
 	model_ = make_unique<Model>();
-	//model_->UseLight(HARF_LAMBERT);
+	model_->UseLight(HARF_LAMBERT);
 	modelWorldTransform_.Initialize();
 	model_->SetTexHandle(ballTexHandle);
-	//model_->CreateModel(make_unique<ModelSphereState>());
+	model_->CreateModel(make_unique<ModelSphereState>());
 	
 	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	houseModelHandle_ = ModelManager::LoadObjectFile("House");
 	packageModelHandle_ = ModelManager::LoadObjectFile("package");
-	model_->SetModel(houseModelHandle_);
+	//model_->SetModel(houseModelHandle_);
 }
 
 void DebugScene::Update(GameManager* Scene)
