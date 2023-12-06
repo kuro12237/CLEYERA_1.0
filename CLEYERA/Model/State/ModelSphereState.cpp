@@ -120,10 +120,9 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 		LightData* lightData = nullptr;
 		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 		
-		
 
 		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
-		lightData->direction = testLightDirection;
+		lightData->direction = state->GetLight().position_;
 		lightData->intensity = 1.0f;
 	
 	}
@@ -170,10 +169,10 @@ void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, V
 	if (state->GetUseLight()!=NONE)
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
+		commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());
+		commands.m_pList->SetGraphicsRootConstantBufferView(6, state->GetLight().buffer_->GetGPUVirtualAddress());
+
 	}
-
-	commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());
-	commands.m_pList->SetGraphicsRootConstantBufferView(6, state->GetLight().buffer_->GetGPUVirtualAddress());
-
+	
 	commands.m_pList->DrawIndexedInstanced(VertexNum * VertexNum * 6, 1, 0, 0, 0);
 }

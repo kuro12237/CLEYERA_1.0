@@ -44,8 +44,9 @@ void DebugScene::Initialize()
 
 	BallModel_ = make_unique<Model>();
 	BallModel_->UseLight(HARF_LAMBERT);
-	BallModel_->CreateModel(make_unique<ModelSphereState>());
-	BallModel_->SetTexHandle(ballTexHandle);
+	BallModel_->SetModel(houseModelHandle_);
+	//BallModel_->CreateModel(make_unique<ModelSphereState>());
+	//BallModel_->SetTexHandle(ballTexHandle);
 
 	ballModelWorldTransform_.Initialize();
 
@@ -114,7 +115,8 @@ void DebugScene::Update(GameManager* Scene)
 
 	ImGui::DragFloat3("pos", &pointLight_.position_.x, -1.0f, 1.0f);
 	ImGui::DragFloat("intensity", &pointLight_.intencity_, -1.0f, 1.0f);
-
+	ImGui::DragFloat("radious", &pointLight_.radious_, -1.0f, 1.0f);
+	ImGui::DragFloat("decay", &pointLight_.decay_, -1.0f, 1.0f);
 
 
 	ImGui::End();

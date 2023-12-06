@@ -2,6 +2,7 @@
 #include"IModelState.h"
 #include"Model.h"
 #include"ModelManager.h"
+#include"VectorTransform.h"
 
 class ModelObjState :public IModelState
 {
