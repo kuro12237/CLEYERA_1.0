@@ -20,6 +20,7 @@ void Cleyera::Initialize()
 	ImGuiManager::Initialize();
 	Input::Initialize();
 	AudioManager::Initialize();
+	LightingManager::Initialize();
 }
 
 void Cleyera::Finalize()

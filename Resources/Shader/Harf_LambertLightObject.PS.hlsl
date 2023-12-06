@@ -22,12 +22,17 @@ struct PointLight
 	float decay;
 };
 
+struct NowLightTotal
+{
+	int count;
+};
 
 ConstantBuffer<Material>gMaterial :register(b0);
 
 ConstantBuffer<DirectionalLight> gDirectionalLight : register(b1);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
 ConstantBuffer<PointLight> gPointLight : register(b3);
+ConstantBuffer<NowLightTotal> gNowLightTotal:register(b4);
 
 Texture2D<float32_t4>gTexture : register(t0);
 SamplerState gSampler : register(s0);

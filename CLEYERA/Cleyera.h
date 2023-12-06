@@ -12,6 +12,7 @@
 #include"Input.h"
 #include"AudioManager.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
+#include"Light/LightingManager.h"
 
 #ifdef _DEBUG
  

@@ -78,6 +78,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
 		commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());
 		commands.m_pList->SetGraphicsRootConstantBufferView(6, state->GetLight().buffer_->GetGPUVirtualAddress());
+		commands.m_pList->SetGraphicsRootConstantBufferView(7, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 
 	}
 

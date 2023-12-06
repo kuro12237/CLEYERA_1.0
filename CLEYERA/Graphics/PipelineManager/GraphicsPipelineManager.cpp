@@ -1216,7 +1216,7 @@ SPSOProperty GraphicsPipelineManager::CreateHerf_Lambert(ComPtr<ID3D12Device> de
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material
-	D3D12_ROOT_PARAMETER rootParameters[7] = {};
+	D3D12_ROOT_PARAMETER rootParameters[8] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -1255,6 +1255,10 @@ SPSOProperty GraphicsPipelineManager::CreateHerf_Lambert(ComPtr<ID3D12Device> de
 	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[6].Descriptor.ShaderRegister = 3;
+	//今のLightの個数
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[7].Descriptor.ShaderRegister = 4;
 
 
 	//Sampler�̐ݒ�
@@ -1390,7 +1394,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//Vertex
+	//Instansing
 	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
 	descriptorRangeForInstancing[0].BaseShaderRegister = 0;
 	descriptorRangeForInstancing[0].NumDescriptors = 1;

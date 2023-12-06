@@ -21,6 +21,8 @@ void GameManager::Run()
 	
 		Scene_->Update(this);
 		
+		LightingManager::TransfarBuffers();
+
 		Scene_->Back2dSpriteDraw();
 		Scene_->Object3dDraw();
 		Scene_->Flont2dSpriteDraw();

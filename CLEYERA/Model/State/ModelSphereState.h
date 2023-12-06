@@ -4,6 +4,7 @@
 #include"CreateResource.h"
 #include"WorldTransform.h"
 #include"GraphicsPipelineManager.h"
+#include"Light/LightingManager.h"
 
 class ModelSphereState :public IModelState
 {
