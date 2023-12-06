@@ -52,13 +52,16 @@ PixelShaderOutput main(VertexShaderOutput input) {
 
 	float32_t3 pTotalSpecular = 0;
 	float32_t3 pTotalDffuse = 0;
-	
+
+	//atten 0.5,0.6,0.0
+	float32_t atten = 0;
 	for (int32_t i = 0; i < gNowLightTotal.count; i++)
 	{
 		//点光源
 
 		float32_t distance = length(gPointLight[i].position - input.worldPosition);
 		float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
+
 
 		float32_t3 pLightDirection = normalize(input.worldPosition - gPointLight[i].position);
 		float32_t3 pRefrectLight = reflect(pLightDirection, normalize(input.normal));
@@ -80,7 +83,8 @@ PixelShaderOutput main(VertexShaderOutput input) {
 	}
 
 
-	output.color.rgb =  pTotalDffuse + pTotalSpecular;
+	output.color.rgb =  pTotalDffuse + pTotalSpecular+ atten;
+	//output.color.rgb -= atten;
 	output.color.a = gMaterial.color.a * textureColor.a;
 
 	return output;

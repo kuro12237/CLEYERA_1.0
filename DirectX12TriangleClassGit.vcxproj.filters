@@ -136,6 +136,12 @@
     <Filter Include="CLEYERA\Light">
       <UniqueIdentifier>{fa6556f0-e893-424a-ac19-2af4803be191}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\MulitiPass">
+      <UniqueIdentifier>{a2ca512a-1a6d-4cb5-adcf-d78c00b802ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject">
+      <UniqueIdentifier>{87e2db38-109f-4101-b6bd-93d041c05a8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -281,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Light\LightingManager.cpp">
       <Filter>CLEYERA\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\FireParticles\FireParticle.cpp">
+      <Filter>Project\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h">
       <Filter>CLEYERA\math\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\FireParticles\FireParticle.h">
+      <Filter>Project\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

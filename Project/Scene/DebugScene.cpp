@@ -69,6 +69,9 @@ void DebugScene::Initialize()
 	pointLight_.color = { 1.0f,0.0f,0.0f,1.0f };
 	pointLightB_.color = { 0.0f,1.0f,0.0f,1.0f };
 	pointLightC_.color = { 0.0f,0.0f,1.0f,1.0f };
+
+	fireParticle_ = make_unique<FireParticle>();
+	fireParticle_->Initialize(pointFireLightPosition_);
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -132,9 +135,11 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::ColorPicker3("colorB", &pointLightB_.color.x);
 
 	ImGui::DragFloat3("posB", &pointLightB_.position.x, -1.0f, 1.0f);
+	ImGui::DragFloat3("posFirePosB", &pointFireLightPosition_.x, -0.1f, 0.1f);
 	ImGui::DragFloat("intensityB", &pointLightB_.intencity, -1.0f, 1.0f);
 	ImGui::DragFloat("radiousB", &pointLightB_.radious, -1.0f, 1.0f);
 	ImGui::DragFloat("decayB", &pointLightB_.decay, -1.0f, 1.0f);
+
 	ImGui::End();
 
 	ImGui::Begin("LightC");
@@ -146,10 +151,13 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat("decayC", &pointLightC_.decay, -1.0f, 1.0f);
 	ImGui::End();
 
+	fireParticle_->Update(pointFireLightPosition_);
+
 	LightingManager::ClearList();
+	pointLightB_.position = pointFireLightPosition_;
 	LightingManager::AddList(pointLightB_);
-	LightingManager::AddList(pointLight_);
-	LightingManager::AddList(pointLightC_);
+	//LightingManager::AddList(pointLight_);
+	//LightingManager::AddList(pointLightC_);
 	LightingManager::TransfarBuffers();
 
 
@@ -167,9 +175,11 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
+	
 	BallModel_->Draw(ballModelWorldTransform_, viewProjection);
 	model_->Draw(modelWorldTransform_, viewProjection);
 	testSkyDome_->Draw(testSkyDomeWorldTransform_, viewProjection);
+	fireParticle_->Draw(viewProjection);
 }
 void DebugScene::Flont2dSpriteDraw()
 {

@@ -9,6 +9,7 @@
 #include"ModelManager.h"
 #include"Light/Light.h"
 
+#include"GameObject/FireParticles/FireParticle.h"
 
 class DebugScene:public IScene
 {
@@ -54,4 +55,8 @@ private:
     PointLight_param pointLight_{};
 	PointLight_param pointLightB_{};
 	PointLight_param pointLightC_{};
+
+	unique_ptr<FireParticle>fireParticle_ = nullptr;
+
+	Vector3 pointFireLightPosition_ = { 0,0,0 };
 };

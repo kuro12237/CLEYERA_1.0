@@ -73,7 +73,12 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param,ViewProj
 		//view�ϊ�
 		matWorld = MatrixTransform::Multiply(matWorld, MatrixTransform::Multiply(viewprojection.matView_, viewprojection.matProjection_));
 		//uv��Affine
-		(*particleIterator).uvTransform_.UpdateMatrix();
+		(*particleIterator).uvTransform_.matWorld=MatrixTransform::AffineMatrix(
+			(*particleIterator).uvTransform_.scale,
+			(*particleIterator).uvTransform_.rotation, 
+			(*particleIterator).uvTransform_.translate
+		);
+
 		//���
 		instansingData[NumDrawInstansing].WVP = matWorld;
 		instansingData[NumDrawInstansing].world = MatrixTransform::Identity();
