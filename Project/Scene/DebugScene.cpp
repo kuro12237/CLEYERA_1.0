@@ -124,7 +124,6 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat("radiousB", &pointLightB_.radious, -1.0f, 1.0f);
 	ImGui::DragFloat("decayB", &pointLightB_.decay, -1.0f, 1.0f);
 
-
 	ImGui::End();
 
 
