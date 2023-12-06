@@ -55,7 +55,7 @@ PixelShaderOutput main(VertexShaderOutput input) {
 	float32_t3 pTotalSpecular = 0;
 	float32_t3 pTotalDffuse = 0;
 	int32_t i = 0;
-	for (; i < gNowLightTotal.count;i++)
+	for (; i < gNowLightTotal.count; i++)
 	{
 		//点光源
 
@@ -78,7 +78,7 @@ PixelShaderOutput main(VertexShaderOutput input) {
 		float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
 		float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 		pTotalSpecular = pTotalSpecular + pSpecular;
-		
+
 	}
 
 

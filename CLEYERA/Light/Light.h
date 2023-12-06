@@ -5,7 +5,7 @@
 struct PointLight_param
 {
 	Vector4 color = {1.0f,1.0f,1.0f,1.0f};
-	Vector3 position = {0.0f,2.0f,0.0f};
+	Vector3 position = {0.0f,0.0f,0.0f};
 	/// <summary>
 	/// 強さ
 	/// </summary>
@@ -13,7 +13,7 @@ struct PointLight_param
 	/// <summary>
 	/// 最大半径
 	/// </summary>
-	float radious = 10.0f;
+	float radious = 1.0f;
 	/// <summary>
 	/// 減衰率
 	/// </summary>

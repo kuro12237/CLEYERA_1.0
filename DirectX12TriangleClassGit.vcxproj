@@ -48,7 +48,7 @@
     <ClCompile Include="CLEYERA\Light\Light.cpp" />
     <ClCompile Include="CLEYERA\Light\LightingManager.cpp" />
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
-    <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp" />
+    <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp" />
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
@@ -97,6 +97,7 @@
     <ClInclude Include="CLEYERA\math\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\math\MatrixTransform.h" />
     <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h" />
+    <ClInclude Include="CLEYERA\math\Quaternion\QuaternionTransform.h" />
     <ClInclude Include="CLEYERA\math\Vector2.h" />
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />

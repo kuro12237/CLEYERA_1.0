@@ -3,7 +3,7 @@
 void MTScene::Initialize()
 {
 	model_ = make_unique<Model>();
-	//model_->CreateFromObj("axis");
+	model_;
 	worldTransform_.Initialize();
 
 	viewProjection_.Initialize({ 0,0,0.0f }, { 0.0f,0.0f,-5.0f });
@@ -16,37 +16,27 @@ void MTScene::Update(GameManager* Scene)
 	//rotateMatrix_ = Quaternion::MakeRotateAxisAngle(axis_, angle);
 	//axis_ = VectorTransform::Normalize(axis_);
 
-	Vector3 flom0 = VectorTransform::Normalize({ 1.0f,0.7f,0.5f });
-	Vector3 to0 = { -flom0.x,-flom0.y,-flom0.z };
-
-	Vector3 flom1 = VectorTransform::Normalize({ -0.6f,0.9f,0.2f });
-	Vector3 to1 = VectorTransform::Normalize({0.4f, 0.7f, -0.5f});
-
-	Matrix4x4 rotateMatrix0_ = Quaternion::DirectionToDirection(VectorTransform::Normalize({ 1.0f,0.0f,0.0f }), VectorTransform::Normalize({-1.0f,0.0f,0.0f}));
-	Matrix4x4 rotateMatrix1_ = Quaternion::DirectionToDirection(flom0,to0);
-	rotateMatrix_ = Quaternion::DirectionToDirection(flom1,to1 );
-
-	ImGui::Begin("MT_01_02");
-	
-
-	ImGui::Text("rotate00");
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][0], rotateMatrix0_.m[1][0], rotateMatrix0_.m[2][0], rotateMatrix0_.m[3][0]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][1], rotateMatrix0_.m[1][1], rotateMatrix0_.m[2][1], rotateMatrix0_.m[3][1]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][2], rotateMatrix0_.m[1][2], rotateMatrix0_.m[2][2], rotateMatrix0_.m[3][2]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix0_.m[0][3], rotateMatrix0_.m[1][3], rotateMatrix0_.m[2][3], rotateMatrix0_.m[3][3]);
+	Quaternion q1 = { 2.0f,3.0f,4.0f,1.0f };
+	Quaternion q2 = { 1.0f,3.0f,5.0f,2.0f };
 
 
-	ImGui::Text("rotate01");
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix1_.m[0][0], rotateMatrix1_.m[1][0], rotateMatrix1_.m[2][0], rotateMatrix1_.m[3][0]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix1_.m[0][1], rotateMatrix1_.m[1][1], rotateMatrix1_.m[2][1], rotateMatrix1_.m[3][1]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix1_.m[0][2], rotateMatrix1_.m[1][2], rotateMatrix1_.m[2][2], rotateMatrix1_.m[3][2]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix1_.m[0][3], rotateMatrix1_.m[1][3], rotateMatrix1_.m[2][3], rotateMatrix1_.m[3][3]);
+	Quaternion AnsIdentity = QuaternionTransform::IdentityQuaternion();
+	Quaternion AnsConj = QuaternionTransform::Conjugation(q1);
+	Quaternion AnsInverse = QuaternionTransform::Inverse(q1);
+	Quaternion AnsNormalize = QuaternionTransform::Normalize(q1);
+	Quaternion AnsMul1 = QuaternionTransform::Multiply(q1, q2);
+	Quaternion AnsMul2 = QuaternionTransform::Multiply(q2, q1);
+	float AnsNorm = QuaternionTransform::Norm(q1);
+	ImGui::Begin("MT_01_03");
 
-	ImGui::Text("rotate02");
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][0], rotateMatrix_.m[1][0], rotateMatrix_.m[2][0], rotateMatrix_.m[3][0] );
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][1], rotateMatrix_.m[1][1], rotateMatrix_.m[2][1], rotateMatrix_.m[3][1]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][2], rotateMatrix_.m[1][2], rotateMatrix_.m[2][2], rotateMatrix_.m[3][2]);
-	ImGui::Text("%0.3f,%0.3f,%0.3f,%0.3f", rotateMatrix_.m[0][3], rotateMatrix_.m[1][3], rotateMatrix_.m[2][3], rotateMatrix_.m[3][3]);
+	ImGui::Text("Identity : %0.2f %0.2f %0.2f %0.2f", AnsIdentity.x, AnsIdentity.y, AnsIdentity.z, AnsIdentity.w);
+	ImGui::Text("Conjugation: %0.2f %0.2f %0.2f %0.2f", AnsConj.x, AnsConj.y, AnsConj.z, AnsConj.w);
+	ImGui::Text("Inverse: %0.2f %0.2f %0.2f %0.2f", AnsInverse.x, AnsInverse.y, AnsInverse.z, AnsInverse.w);
+	ImGui::Text("AnsNormalize: %0.2f %0.2f %0.2f %0.2f", AnsNormalize.x, AnsNormalize.y, AnsNormalize.z, AnsNormalize.w);
+	ImGui::Text("mul1: %0.2f %0.2f %0.2f %0.2f",AnsMul1.x, AnsMul1.y,AnsMul1.z,AnsMul1.w);
+	ImGui::Text("mul2: %0.2f %0.2f %0.2f %0.2f", AnsMul2.x, AnsMul2.y, AnsMul2.z, AnsMul2.w);
+	ImGui::Text("norm: %0.2f", AnsNorm);
+
 
 	ImGui::End();
 
@@ -71,7 +61,7 @@ void MTScene::Back2dSpriteDraw()
 
 void MTScene::Object3dDraw()
 {
-	model_->Draw(worldTransform_, viewProjection_);
+	//model_->Draw(worldTransform_, viewProjection_);
 }
 
 void MTScene::Flont2dSpriteDraw()

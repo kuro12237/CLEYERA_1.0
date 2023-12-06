@@ -264,7 +264,7 @@
     <ClCompile Include="Project\Scene\MTScene.cpp">
       <Filter>Project\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\math\Quaternion\Quaternion.cpp">
+    <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp">
       <Filter>CLEYERA\math\Quaternion</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
@@ -425,7 +425,7 @@
     <ClInclude Include="Project\Scene\MTScene.h">
       <Filter>Project\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h">
+    <ClInclude Include="CLEYERA\math\Quaternion\QuaternionTransform.h">
       <Filter>CLEYERA\math\Quaternion</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\math\Vector2.h">
@@ -454,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Light\LightingManager.h">
       <Filter>CLEYERA\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h">
+      <Filter>CLEYERA\math\Quaternion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
