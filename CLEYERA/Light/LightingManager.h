@@ -2,6 +2,12 @@
 #include"Light.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
 
+struct LightCount
+{
+	int32_t count;
+	float padding[2];
+};
+
 class LightingManager
 {
 public:
@@ -10,9 +16,14 @@ public:
 
 	static void Initialize();
 
-	static void AddList(Light* instance);
+	static void ClearList()
+	{
+		LightingManager::GetInstance()->LightDatas_.clear();
+		LightingManager::GetInstance()->NowTotalLightData_ = 0;
+	}
+	static void AddList(PointLight_param&instance);
 
-	static list<Light*> GetLightData();
+	static list<PointLight_param> GetLightData();
 
 	static uint32_t dsvHandle() {return LightingManager::GetInstance()->dsvHandle_; }
 	static ID3D12Resource* GetBuffer() {return LightingManager::GetInstance()->buffer_.Get();}
@@ -44,6 +55,6 @@ private:
 
 	uint32_t dsvHandle_ = 0;
 
-	list<Light*>LightDatas_;
+	list<PointLight_param>LightDatas_;
 
 };

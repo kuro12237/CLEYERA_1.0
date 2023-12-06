@@ -279,7 +279,9 @@
     <ClCompile Include="CLEYERA\Light\Light.cpp">
       <Filter>CLEYERA\Light</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Light\LightingManager.cpp" />
+    <ClCompile Include="CLEYERA\Light\LightingManager.cpp">
+      <Filter>CLEYERA\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">

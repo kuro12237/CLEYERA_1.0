@@ -122,7 +122,7 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 		
 
 		lightData->color = { 1.0f,1.0f,1.0f,1.0f };
-		lightData->direction = state->GetLight().position_;
+		lightData->direction = {0,1,0};
 		lightData->intensity = 1.0f;
 	
 	}
@@ -170,7 +170,7 @@ void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, V
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
 		commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());
-		commands.m_pList->SetGraphicsRootConstantBufferView(6, state->GetLight().buffer_->GetGPUVirtualAddress());
+		DescriptorManager::rootParamerterCommand(6, LightingManager::dsvHandle());
 		commands.m_pList->SetGraphicsRootConstantBufferView(7, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 	}
 	

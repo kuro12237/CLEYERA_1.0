@@ -51,5 +51,6 @@ private:
 	unique_ptr<Model>testSkyDome_ = nullptr;
 	WorldTransform testSkyDomeWorldTransform_ = {};
 
-	Light pointLight_{};
+    PointLight_param pointLight_{};
+	PointLight_param pointLightB_{};
 };

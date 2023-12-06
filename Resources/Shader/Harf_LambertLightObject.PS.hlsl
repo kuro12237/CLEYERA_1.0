@@ -24,15 +24,15 @@ struct PointLight
 
 struct NowLightTotal
 {
-	int count;
+	int32_t count;
 };
 
 ConstantBuffer<Material>gMaterial :register(b0);
 
 ConstantBuffer<DirectionalLight> gDirectionalLight : register(b1);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
-ConstantBuffer<PointLight> gPointLight : register(b3);
-ConstantBuffer<NowLightTotal> gNowLightTotal:register(b4);
+StructuredBuffer<PointLight> gPointLight : register(t1);
+ConstantBuffer<NowLightTotal> gNowLightTotal : register(b4);
 
 Texture2D<float32_t4>gTexture : register(t0);
 SamplerState gSampler : register(s0);
@@ -50,46 +50,39 @@ PixelShaderOutput main(VertexShaderOutput input) {
 
 	float32_t3 toEye = normalize(gTransformationViewMatrix.CameraPosition - input.worldPosition);
 
-	float32_t distance = length(gPointLight.position - input.worldPosition);
-	float32_t factor = pow(saturate(-distance / gPointLight.radious + 1.0f), gPointLight.decay);
-		//1.0f / (distance * distance);
-
-	//float NdotL = dot(normalize(input.normal), -normalize(gDirectionalLight.direction));
-	//float cos = pow(NdotL * 0.5f + 0.5f,2.0f);
-	////拡散
-	//float32_t3 diffuse = gMaterial.color.rgb * textureColor.rgb * gDirectionalLight.color.rgb * cos * gDirectionalLight.intensity * factor;
-
-	////鏡面
-	
-	//float32_t3 reflectLight = reflect(normalize(gDirectionalLight.direction), normalize(input.normal));
-	//float RdoE = dot(reflectLight, toEye);
-
-	//
-	//float32_t3 halfVector = normalize(-gDirectionalLight.direction + toEye);
-	//float NDotH = dot(normalize(input.normal), halfVector);
-
-	//float specularPow = pow(saturate(NDotH), gMaterial.shininess);
-	//float32_t3 specular = gDirectionalLight.color.rgb * gDirectionalLight.intensity * factor * specularPow * float32_t3(1.0f, 1.0f, 1.0f);
-	//
-
-	//点光源
-
-	float32_t3 pLightDirection = normalize(input.worldPosition - gPointLight.position);
-	float32_t3 pRefrectLight = reflect(pLightDirection, normalize(input.normal));
-	float32_t3 pHalfVector = normalize(-pLightDirection + toEye);
 
 
-	float pNdotL = dot(normalize(input.normal), -normalize(pLightDirection));
-	float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
-	float pNdotH = dot(normalize(input.normal), pHalfVector);
-	//拡散
-	float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight.color.rgb * pCos * gPointLight.intensity * factor;
-	//鏡面
-	float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
-	float32_t3 pSpecular = gPointLight.color.rgb * gPointLight.intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
+	float32_t3 pTotalSpecular = 0;
+	float32_t3 pTotalDffuse = 0;
+	int32_t i = 0;
+	for (; i < gNowLightTotal.count;i++)
+	{
+		//点光源
+
+		float32_t distance = length(gPointLight[i].position - input.worldPosition);
+		float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
+
+		float32_t3 pLightDirection = normalize(input.worldPosition - gPointLight[i].position);
+		float32_t3 pRefrectLight = reflect(pLightDirection, normalize(input.normal));
+		float32_t3 pHalfVector = normalize(-pLightDirection + toEye);
 
 
-	output.color.rgb =  pDiffuse + pSpecular;
+		float pNdotL = dot(normalize(input.normal), -normalize(pLightDirection));
+		float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
+		float pNdotH = dot(normalize(input.normal), pHalfVector);
+
+		//拡散
+		float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
+		pTotalDffuse = pDiffuse + pDiffuse;
+		//鏡面
+		float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
+		float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
+		pTotalSpecular = pTotalSpecular + pSpecular;
+		
+	}
+
+
+	output.color.rgb =  pTotalDffuse + pTotalSpecular;
 	output.color.a = gMaterial.color.a * textureColor.a;
 
 	//output.color = gMaterial.color * textureColor*gDirectionalLight.color* cos* gDirectionalLight.intensity;

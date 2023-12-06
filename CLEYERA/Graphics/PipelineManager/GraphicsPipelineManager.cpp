@@ -1252,9 +1252,19 @@ SPSOProperty GraphicsPipelineManager::CreateHerf_Lambert(ComPtr<ID3D12Device> de
 	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[5].Descriptor.ShaderRegister = 2;
 	//LightData
-	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
+	descriptorRangeForInstancing[0].BaseShaderRegister = 1;
+	descriptorRangeForInstancing[0].NumDescriptors = 1;
+	descriptorRangeForInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeForInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	
+	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[6].Descriptor.ShaderRegister = 3;
+	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
+	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
+
 	//今のLightの個数
 	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;

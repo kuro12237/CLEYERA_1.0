@@ -61,7 +61,7 @@ public:
 	void SetUvTranslate(Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }
 	void SetColor(Vector4 color) { color_ = color; }
 	//void SetBlendMode(BlendMode blendMode) { blendMode_ = blendMode; }
-	void SetLight(Light light) { testLight_ = light; }
+	//void SetLight(Light light) { testLight_ = light; }
 
 #pragma endregion 
 
@@ -101,7 +101,7 @@ public:
 	
 	SUseLight GetUseLight(){return uselight_;}
 
-	Light GetLight() { return testLight_; }
+	//Light GetLight() { return testLight_; }
 #pragma endregion 
 
 private:
@@ -126,6 +126,5 @@ private:
 
 	unique_ptr<IModelState> state_ = nullptr;
 
-	Light testLight_{};
 };
 

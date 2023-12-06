@@ -9,8 +9,10 @@ LightingManager* LightingManager::GetInstance()
 void LightingManager::Initialize()
 {
     //Buffer生成
-    LightingManager::GetInstance()->buffer_ = CreateResources::CreateBufferResource(sizeof(uint32_t));
-    LightingManager::GetInstance()->structureBuffer_ = CreateResources::CreateBufferResource(sizeof(PointLight_param) * LightingManager::GetInstance()->NumLight_);
+    LightingManager::GetInstance()->buffer_ = 
+        CreateResources::CreateBufferResource(sizeof(LightCount));
+    LightingManager::GetInstance()->structureBuffer_ = 
+        CreateResources::CreateBufferResource(sizeof(PointLight_param)* LightingManager::GetInstance()->NumLight_);
 
     //descripter生成
     LightingManager::GetInstance()->dsvHandle_ = DescriptorManager::CreateInstancingSRV(
@@ -20,14 +22,16 @@ void LightingManager::Initialize()
     );
 }
 
-void LightingManager::AddList(Light* instance)
+void LightingManager::AddList(PointLight_param& instance)
 {
     LightingManager::GetInstance()->LightDatas_.push_back(instance);
     LightingManager::GetInstance()->NowTotalLightData_++;
 }
-list<Light*> LightingManager::GetLightData()
+
+
+list<PointLight_param> LightingManager::GetLightData()
 {
-    list<Light*>result =LightingManager::GetInstance()->LightDatas_;
+    list<PointLight_param>result =LightingManager::GetInstance()->LightDatas_;
     LightingManager::GetInstance()->LightDatas_.clear();
     return result;
 }
@@ -40,9 +44,9 @@ void LightingManager::TransfarBuffers()
 
 void LightingManager::TransfarBuffer()
 {
-    uint32_t* TotalLight;
+    LightCount* TotalLight;
     LightingManager::GetInstance()->buffer_->Map(0, nullptr, reinterpret_cast<void**>(&TotalLight));
-    *TotalLight = LightingManager::GetInstance()->NowTotalLightData_;
+    TotalLight->count = LightingManager::GetInstance()->NowTotalLightData_;
     LightingManager::GetInstance()->buffer_->Unmap(0, nullptr);
 }
 
@@ -52,19 +56,17 @@ void LightingManager::TransfarStructureBuffer()
     LightingManager::GetInstance()->structureBuffer_->Map(0, nullptr, reinterpret_cast<void**>(&param));
 
     uint32_t count = 0;
-    for (Light* instance : LightingManager::GetInstance()->LightDatas_)
+    for(PointLight_param p : LightingManager::GetInstance()->LightDatas_)
     {
-        param[count].color = instance->color_;
-        param[count].decay = instance->decay_;
-        param[count].intencity = instance->intencity_;
-        param[count].position = instance->position_;
-        param[count].radious = instance->radious_;
-        count++;
-        //上限に達したら
-        if (count==LightingManager::GetInstance()->NumLight_)
-        {
-            break;
-        }
+      
+  
+        param[count].color = p.color;
+        param[count].decay = p.decay;
+        param[count].intencity = p.intencity;
+        param[count].position = p.position;
+        param[count].radious = p.radious;
+       
+        count ++;
     }
-    LightingManager::GetInstance()->structureBuffer_->Unmap(0, nullptr);
+   // LightingManager::GetInstance()->structureBuffer_->Unmap(0, nullptr);
 }

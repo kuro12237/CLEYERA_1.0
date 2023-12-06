@@ -56,7 +56,7 @@ void DebugScene::Initialize()
 	testSkyDomeWorldTransform_.Initialize();
 	testSkyDomeWorldTransform_.scale = { 10,10,10 };
 	testSkyDomeWorldTransform_.UpdateMatrix();
-	pointLight_.Initialize();
+	
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -105,27 +105,35 @@ void DebugScene::Update(GameManager* Scene)
 		TextureManager::UnUsedFilePath();
 		sprite_->SetTexHandle(SpriteCLEYERATexHandle_);
 	}
-	else
-	{
 
-	}
 	
 	ImGui::Begin("Light");
-	ImGui::ColorPicker3("color", &pointLight_.color_.x);
+	ImGui::ColorPicker3("color", &pointLight_.color.x);
 
-	ImGui::DragFloat3("pos", &pointLight_.position_.x, -1.0f, 1.0f);
-	ImGui::DragFloat("intensity", &pointLight_.intencity_, -1.0f, 1.0f);
-	ImGui::DragFloat("radious", &pointLight_.radious_, -1.0f, 1.0f);
-	ImGui::DragFloat("decay", &pointLight_.decay_, -1.0f, 1.0f);
+	ImGui::DragFloat3("pos", &pointLight_.position.x, -1.0f, 1.0f);
+	ImGui::DragFloat("intensity", &pointLight_.intencity, -1.0f, 1.0f);
+	ImGui::DragFloat("radious", &pointLight_.radious, -1.0f, 1.0f);
+	ImGui::DragFloat("decay", &pointLight_.decay, -1.0f, 1.0f);
+	ImGui::End();
+	
+	ImGui::Begin("LightB");
+	ImGui::ColorPicker3("colorB", &pointLightB_.color.x);
+
+	ImGui::DragFloat3("posB", &pointLightB_.position.x, -1.0f, 1.0f);
+	ImGui::DragFloat("intensityB", &pointLightB_.intencity, -1.0f, 1.0f);
+	ImGui::DragFloat("radiousB", &pointLightB_.radious, -1.0f, 1.0f);
+	ImGui::DragFloat("decayB", &pointLightB_.decay, -1.0f, 1.0f);
 
 
 	ImGui::End();
-	
-	pointLight_.TransfarData();
 
-	BallModel_->SetLight(pointLight_);
-	model_->SetLight(pointLight_);
-	testSkyDome_->SetLight(pointLight_);
+
+	LightingManager::ClearList();
+	LightingManager::AddList(pointLightB_);
+	LightingManager::AddList(pointLight_);
+
+	LightingManager::TransfarBuffers();
+
 
 	testSkyDomeWorldTransform_.UpdateMatrix();
 	ballModelWorldTransform_.UpdateMatrix();
