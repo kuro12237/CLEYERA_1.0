@@ -133,31 +133,41 @@ void DebugScene::Update(GameManager* Scene)
 	
 	ImGui::Begin("LightB");
 	ImGui::ColorPicker3("colorB", &pointLightB_.color.x);
-
 	ImGui::DragFloat3("posB", &pointLightB_.position.x, -1.0f, 1.0f);
-	ImGui::DragFloat3("posFirePosB", &pointFireLightPosition_.x, -0.1f, 0.1f);
 	ImGui::DragFloat("intensityB", &pointLightB_.intencity, -1.0f, 1.0f);
 	ImGui::DragFloat("radiousB", &pointLightB_.radious, -1.0f, 1.0f);
 	ImGui::DragFloat("decayB", &pointLightB_.decay, -1.0f, 1.0f);
-
 	ImGui::End();
 
 	ImGui::Begin("LightC");
 	ImGui::ColorPicker3("colorC", &pointLightC_.color.x);
-
 	ImGui::DragFloat3("posC", &pointLightC_.position.x, -1.0f, 1.0f);
 	ImGui::DragFloat("intensityC", &pointLightC_.intencity, -1.0f, 1.0f);
 	ImGui::DragFloat("radiousC", &pointLightC_.radious, -1.0f, 1.0f);
 	ImGui::DragFloat("decayC", &pointLightC_.decay, -1.0f, 1.0f);
 	ImGui::End();
 
+
+	ImGui::Begin("Sun");
+	ImGui::ColorPicker3("colorB", &sunLight_.color.x);
+	ImGui::DragFloat3("posB", &sunLight_.position.x, -1.0f, 1.0f);
+	ImGui::DragFloat("intensityB", &sunLight_.intencity, -1.0f, 1.0f);
+	ImGui::DragFloat("radiousB", &sunLight_.radious, -1.0f, 1.0f);
+	ImGui::DragFloat("decayB", &sunLight_.decay, -1.0f, 1.0f);
+	ImGui::End();
+
+	ImGui::Begin("particle");
+	ImGui::DragFloat3("pos", &pointFireLightPosition_.x);
+	ImGui::End();
+
 	fireParticle_->Update(pointFireLightPosition_);
 
 	LightingManager::ClearList();
-	pointLightB_.position = pointFireLightPosition_;
+	
 	LightingManager::AddList(pointLightB_);
-	//LightingManager::AddList(pointLight_);
-	//LightingManager::AddList(pointLightC_);
+	LightingManager::AddList(pointLight_);
+	LightingManager::AddList(pointLightC_);
+	LightingManager::AddList(sunLight_);
 	LightingManager::TransfarBuffers();
 
 

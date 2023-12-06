@@ -1,7 +1,7 @@
 #pragma once
 #include"Light.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
-#define LIGHT_MAX 30
+#define LIGHT_MAX 300
 
 struct LightCount
 {

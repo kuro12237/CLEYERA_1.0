@@ -146,7 +146,7 @@ void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, V
 	}
 	if (state->GetUseLight() == HARF_LAMBERT)
 	{
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Lighting;
 	}
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());

@@ -59,7 +59,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
 	if (state->GetUseLight() == HARF_LAMBERT)
 	{
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Lighting;
 	}
 
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());

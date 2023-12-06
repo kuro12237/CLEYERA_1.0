@@ -55,6 +55,7 @@ private:
     PointLight_param pointLight_{};
 	PointLight_param pointLightB_{};
 	PointLight_param pointLightC_{};
+	PointLight_param sunLight_{};
 
 	unique_ptr<FireParticle>fireParticle_ = nullptr;
 

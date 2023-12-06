@@ -132,7 +132,7 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 	pso.Line = CreateLine(device.Get(), commands, shader.shape);
 	LogManager::CompliteLog("CreateLinePSO");
 
-	pso.Herf_Lambert = CreateHerf_Lambert(device.Get(), commands, shader.light);
+	pso.Lighting = CreateLighting(device.Get(), commands, shader.light);
 	LogManager::CompliteLog("CreateHerf_LightPSO");
 
 
@@ -1204,7 +1204,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dScreen(ComPtr<ID3D12Device> 
 	return SpritePSO;
 }
 
-SPSOProperty GraphicsPipelineManager::CreateHerf_Lambert(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
+SPSOProperty GraphicsPipelineManager::CreateLighting(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
 {
 	SPSOProperty DirectionalLightPSO;
 

@@ -29,7 +29,7 @@ struct SPSO
 	SBlendPSO Sprite2d;
 	SBlendPSO Sprite3d;
 	SBlendPSO Particle3d;
-	SPSOProperty Herf_Lambert;
+	SPSOProperty Lighting;
 };
 
 enum  BlendMode
@@ -125,7 +125,7 @@ private:
 	static SPSOProperty CreateSprite2dMultiply(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 	static SPSOProperty CreateSprite2dScreen(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
-	static SPSOProperty CreateHerf_Lambert(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
+	static SPSOProperty CreateLighting(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
 	static SPSOProperty CreateParticle3dNone(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 	static SPSOProperty CreateParticle3dAdd(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
