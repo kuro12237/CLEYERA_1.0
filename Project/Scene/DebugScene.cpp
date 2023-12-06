@@ -44,9 +44,10 @@ void DebugScene::Initialize()
 
 	BallModel_ = make_unique<Model>();
 	BallModel_->UseLight(HARF_LAMBERT);
-	BallModel_->SetModel(houseModelHandle_);
+	BallModel_->CreateModel(make_unique<ModelSphereState>());
+
 	//BallModel_->CreateModel(make_unique<ModelSphereState>());
-	//BallModel_->SetTexHandle(ballTexHandle);
+	BallModel_->SetTexHandle(ballTexHandle);
 
 	ballModelWorldTransform_.Initialize();
 
@@ -56,7 +57,18 @@ void DebugScene::Initialize()
 	testSkyDomeWorldTransform_.Initialize();
 	testSkyDomeWorldTransform_.scale = { 10,10,10 };
 	testSkyDomeWorldTransform_.UpdateMatrix();
-	
+
+	pointLight_.position = { -1.0f,2.0f,1.0f };
+	pointLightB_.position = { 1.0f,2.0f,1.0f };
+	pointLightC_.position = { 0.0f,2.0f,-1.0f };
+
+	pointLight_.radious = 3.0f;
+	pointLightB_.radious = 3.0f;
+	pointLightC_.radious = 3.0f;
+
+	pointLight_.color = { 1.0f,0.0f,0.0f,1.0f };
+	pointLightB_.color = { 0.0f,1.0f,0.0f,1.0f };
+	pointLightC_.color = { 0.0f,0.0f,1.0f,1.0f };
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -123,15 +135,21 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat("intensityB", &pointLightB_.intencity, -1.0f, 1.0f);
 	ImGui::DragFloat("radiousB", &pointLightB_.radious, -1.0f, 1.0f);
 	ImGui::DragFloat("decayB", &pointLightB_.decay, -1.0f, 1.0f);
-
-
 	ImGui::End();
 
+	ImGui::Begin("LightC");
+	ImGui::ColorPicker3("colorC", &pointLightC_.color.x);
+
+	ImGui::DragFloat3("posC", &pointLightC_.position.x, -1.0f, 1.0f);
+	ImGui::DragFloat("intensityC", &pointLightC_.intencity, -1.0f, 1.0f);
+	ImGui::DragFloat("radiousC", &pointLightC_.radious, -1.0f, 1.0f);
+	ImGui::DragFloat("decayC", &pointLightC_.decay, -1.0f, 1.0f);
+	ImGui::End();
 
 	LightingManager::ClearList();
 	LightingManager::AddList(pointLightB_);
 	LightingManager::AddList(pointLight_);
-
+	LightingManager::AddList(pointLightC_);
 	LightingManager::TransfarBuffers();
 
 

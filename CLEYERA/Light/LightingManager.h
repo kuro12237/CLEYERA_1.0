@@ -1,6 +1,7 @@
 #pragma once
 #include"Light.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
+#define LIGHT_MAX 30
 
 struct LightCount
 {
@@ -49,7 +50,7 @@ private:
 	/// </summary>
 	ComPtr<ID3D12Resource>structureBuffer_ = nullptr;
 
-	const uint32_t NumLight_ = 10;
+	const uint32_t NumLight_ = LIGHT_MAX;
 
 	uint32_t NowTotalLightData_ = 0;
 

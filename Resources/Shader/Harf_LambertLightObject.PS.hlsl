@@ -50,12 +50,10 @@ PixelShaderOutput main(VertexShaderOutput input) {
 
 	float32_t3 toEye = normalize(gTransformationViewMatrix.CameraPosition - input.worldPosition);
 
-
-
 	float32_t3 pTotalSpecular = 0;
 	float32_t3 pTotalDffuse = 0;
-	int32_t i = 0;
-	for (; i < gNowLightTotal.count; i++)
+	
+	for (int32_t i = 0; i < gNowLightTotal.count; i++)
 	{
 		//点光源
 
@@ -70,12 +68,12 @@ PixelShaderOutput main(VertexShaderOutput input) {
 		float pNdotL = dot(normalize(input.normal), -normalize(pLightDirection));
 		float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
 		float pNdotH = dot(normalize(input.normal), pHalfVector);
+		float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
 
 		//拡散
 		float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
-		pTotalDffuse = pDiffuse + pDiffuse;
+		pTotalDffuse = pTotalDffuse + pDiffuse;
 		//鏡面
-		float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
 		float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 		pTotalSpecular = pTotalSpecular + pSpecular;
 
@@ -84,9 +82,6 @@ PixelShaderOutput main(VertexShaderOutput input) {
 
 	output.color.rgb =  pTotalDffuse + pTotalSpecular;
 	output.color.a = gMaterial.color.a * textureColor.a;
-
-	//output.color = gMaterial.color * textureColor*gDirectionalLight.color* cos* gDirectionalLight.intensity;
-	// gMaterial.color * textureColor;
 
 	return output;
 }

@@ -53,4 +53,5 @@ private:
 
     PointLight_param pointLight_{};
 	PointLight_param pointLightB_{};
+	PointLight_param pointLightC_{};
 };

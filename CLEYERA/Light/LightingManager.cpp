@@ -58,15 +58,8 @@ void LightingManager::TransfarStructureBuffer()
     uint32_t count = 0;
     for(PointLight_param p : LightingManager::GetInstance()->LightDatas_)
     {
-      
-  
-        param[count].color = p.color;
-        param[count].decay = p.decay;
-        param[count].intencity = p.intencity;
-        param[count].position = p.position;
-        param[count].radious = p.radious;
-       
+        param[count] = p; 
         count ++;
     }
-   // LightingManager::GetInstance()->structureBuffer_->Unmap(0, nullptr);
+   LightingManager::GetInstance()->structureBuffer_->Unmap(0, nullptr);
 }
