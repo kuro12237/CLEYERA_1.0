@@ -40,7 +40,6 @@ void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB
 }
 
 
-
 bool CollisionManager::CheckBallCollosion(Vector3 v1, float vr1, Vector3 v2, float vr2) {
 	float x = (v2.x - v1.x);
 	float y = (v2.y - v1.y);
