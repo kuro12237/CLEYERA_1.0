@@ -35,11 +35,6 @@ void FireParticle::Update(Vector3 pos)
 			continue;
 		}
 
-		PointLight_param p;
-
-
-		LightingManager::AddList(p);
-		
 		count++;
 		particle_->PushList(particle);
 	}
