@@ -149,12 +149,12 @@ void ShaderManager::LightShader()
 	SShaderMode shaders;
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Harf_LambertLightObject.VS.hlsl",
+			L"Resources/Shader/LightingObject3d.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Harf_LambertLightObject.PS.hlsl",
+			L"Resources/Shader/LightingObject3d.PS.hlsl",
 			L"ps_6_0");
 	ShaderManager::Getinstance()->shaders_.light = shaders;
 }

@@ -30,6 +30,7 @@ struct SPSO
 	SBlendPSO Sprite3d;
 	SBlendPSO Particle3d;
 	SPSOProperty Lighting;
+	SBlendPSO LightingParticle3d;
 };
 
 enum  BlendMode
@@ -129,6 +130,8 @@ private:
 
 	static SPSOProperty CreateParticle3dNone(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 	static SPSOProperty CreateParticle3dAdd(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
+
+	static SPSOProperty CreateLightingParticle3dNone(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
 	SPSO pso = {};
 

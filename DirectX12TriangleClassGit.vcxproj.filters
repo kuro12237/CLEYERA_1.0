@@ -150,7 +150,7 @@
     <None Include="Resources\Shader\SpriteObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
-    <None Include="Resources\Shader\Harf_LambertLightObject.hlsli">
+    <None Include="Resources\Shader\LightingObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
     <None Include="Resources\Shader\ParticleObject3d.hlsli">
@@ -484,10 +484,10 @@
     <FxCompile Include="Resources\Shader\SpriteObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Harf_LambertLightObject.PS.hlsl">
+    <FxCompile Include="Resources\Shader\LightingObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Harf_LambertLightObject.VS.hlsl">
+    <FxCompile Include="Resources\Shader\LightingObject3d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\ParticleObject3d.PS.hlsl">

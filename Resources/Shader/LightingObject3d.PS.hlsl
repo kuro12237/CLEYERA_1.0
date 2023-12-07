@@ -1,4 +1,4 @@
-#include"Harf_LambertLightObject.hlsli"
+#include"LightingObject3d.hlsli"
 
 
 struct Material

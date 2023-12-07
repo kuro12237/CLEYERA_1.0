@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
-    <None Include="Resources\Shader\Harf_LambertLightObject.hlsli" />
+    <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
     <None Include="Resources\Shader\SpriteObject2d.hlsli" />
     <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
@@ -136,11 +136,11 @@
     <ClInclude Include="Project\Scene\MTScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\Shader\Harf_LambertLightObject.PS.hlsl">
+    <FxCompile Include="Resources\Shader\LightingObject3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Harf_LambertLightObject.VS.hlsl">
+    <FxCompile Include="Resources\Shader\LightingObject3d.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
