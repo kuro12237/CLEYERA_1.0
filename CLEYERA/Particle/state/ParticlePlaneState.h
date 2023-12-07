@@ -24,7 +24,7 @@ private:
 
 	void CarmeraBillbord(ViewProjection view);
 
-	void CommandCall(uint32_t TexHandle, Particle* state);
+	void CommandCall(uint32_t TexHandle, Particle* state, ViewProjection view);
 	
 	uint32_t NumInstansing = 0;
 	uint32_t NumDrawInstansing = 0;

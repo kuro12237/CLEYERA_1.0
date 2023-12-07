@@ -19,6 +19,8 @@ void ParticlePlaneState::Initialize(Particle* state)
 	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * IndexSize);
 	resource_.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * IndexSize, resource_.Index.Get());
+	//resource_.Light = CreateResources::CreateBufferResource(sizeof(LightData));
+	
 }
 
 void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param,ViewProjection viewprojection)
@@ -87,7 +89,13 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param,ViewProj
 		NumDrawInstansing++;
 	}
 
-	CommandCall(state->GetTexhandle(),state);
+	//LightData* lightData = nullptr;
+	//resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+
+	//lightData->color = { 1.0f,1.0f,1.0f,1.0f };
+	//lightData->direction = { 0,-1,0 };
+	//lightData->intensity = 1.0f;
+	CommandCall(state->GetTexhandle(),state, viewprojection);
 }
 
 
@@ -103,11 +111,12 @@ void ParticlePlaneState::CarmeraBillbord(ViewProjection view)
 	billboardMatrix.m[3][2] = 0.0f;
 }
 
-void ParticlePlaneState::CommandCall(uint32_t TexHandle,Particle *state)
+void ParticlePlaneState::CommandCall(uint32_t TexHandle,Particle *state,ViewProjection view)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty pso = Get3dParticlePipeline(state);
-	
+	state;
+	//pso = GraphicsPipelineManager::GetInstance()->GetPso().LightingParticle3d.none;
 	commands.m_pList->SetGraphicsRootSignature(pso.rootSignature.Get());
 	commands.m_pList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
@@ -122,6 +131,16 @@ void ParticlePlaneState::CommandCall(uint32_t TexHandle,Particle *state)
 
 	DescriptorManager::rootParamerterCommand(1, dsvIndex);
 	DescriptorManager::rootParamerterCommand(2, TexHandle);
+
+	//commands.m_pList->SetGraphicsRootConstantBufferView(3, resource_.Light->GetGPUVirtualAddress());
+	//commands.m_pList->SetGraphicsRootConstantBufferView(4, view.buffer_->GetGPUVirtualAddress());
+	//DescriptorManager::rootParamerterCommand(5, LightingManager::dsvHandle());
+	//commands.m_pList->SetGraphicsRootConstantBufferView(6, LightingManager::GetBuffer()->GetGPUVirtualAddress());
+
+
+
+
+
 	
 	commands.m_pList->DrawIndexedInstanced(IndexSize,NumDrawInstansing, 0, 0, 0);
 }

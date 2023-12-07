@@ -96,6 +96,7 @@ void ShaderManager::ShaderComples()
 	Sprite2dShader();
 	LightShader();
 	ParticleShader();
+	LightParticleShader();
 }
 
 void ShaderManager::ShapeShader()
@@ -174,5 +175,21 @@ void ShaderManager::ParticleShader()
 			L"ps_6_0");
 	ShaderManager::Getinstance()->shaders_.Particle = shaders;
 
+}
+
+void ShaderManager::LightParticleShader()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/LightingParticleObject3d.VS.hlsl",
+			L"vs_6_0"
+		);
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/LightingParticleObject3d.PS.hlsl",
+			L"ps_6_0"
+		);
+	ShaderManager::Getinstance()->shaders_.LightParticle = shaders;
 }
 

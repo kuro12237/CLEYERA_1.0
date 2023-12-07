@@ -20,6 +20,7 @@ void FireParticle::Update(Vector3 pos)
 	ImGui::Text("%d", particle_->GetParticles().size());
 	ImGui::End();
 	particleList_ = particle_->begin();
+	int  count = 0;
 	for (Particle_param particle : particleList_)
 	{
 	    particle.color_.w -= 0.01f;
@@ -28,12 +29,18 @@ void FireParticle::Update(Vector3 pos)
 		particle.worldTransform_.translate.y += particle.Velocity.y;
 		particle.worldTransform_.translate.x += particle.Velocity.x;
 
-	
 		if (particle.color_.w <= 0.0f)
 		{
 			//particle.worldTransform_.buffer_.Reset();
 			continue;
 		}
+
+		PointLight_param p;
+
+
+		LightingManager::AddList(p);
+		
+		count++;
 		particle_->PushList(particle);
 	}
 
@@ -62,9 +69,12 @@ void FireParticle::Update(Vector3 pos)
 			uniform_real_distribution<float>distributionVelocityY(0.0f, 0.03f);
 			p1.Velocity.x = distributionVelocityX(randomEngine);
 			p1.Velocity.y = distributionVelocityY(randomEngine);
+			
+	
 			particle_->PushList(p1);
 		}
 		spownTimer_ = 0;
+
 	}
 
 }

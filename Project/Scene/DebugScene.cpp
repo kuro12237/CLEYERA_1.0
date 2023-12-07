@@ -70,6 +70,10 @@ void DebugScene::Initialize()
 	pointLightB_.color = { 0.0f,1.0f,0.0f,1.0f };
 	pointLightC_.color = { 0.0f,0.0f,1.0f,1.0f };
 
+	pointLight_.intencity = 0;
+	pointLightB_.intencity = 0;
+	pointLightC_.intencity = 0;
+
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize(pointFireLightPosition_);
 }
@@ -160,16 +164,21 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat3("pos", &pointFireLightPosition_.x);
 	ImGui::End();
 
-	fireParticle_->Update(pointFireLightPosition_);
-
+	
 	LightingManager::ClearList();
+
 	
 	LightingManager::AddList(pointLightB_);
 	LightingManager::AddList(pointLight_);
 	LightingManager::AddList(pointLightC_);
 	LightingManager::AddList(sunLight_);
+	fireParticle_->Update(pointFireLightPosition_);
+
 	LightingManager::TransfarBuffers();
 
+	ImGui::Begin("LightNum");
+	ImGui::Text("%d", LightingManager::GetNowLight());
+	ImGui::End();
 
 	testSkyDomeWorldTransform_.UpdateMatrix();
 	ballModelWorldTransform_.UpdateMatrix();

@@ -115,6 +115,7 @@ private:
 	static void Create2dSpritePSOs(SPSO &pso);
 	static void Create3dSpritePSOs(SPSO& pso);
 	static void Create3dParticlePSOs(SPSO& pso);
+	static void CreateLighting3dParticlePSOs(SPSO& pso);
 
 	static SPSOProperty CreateShape(ComPtr<ID3D12Device>device,Commands command,SShaderMode shader);
 	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
