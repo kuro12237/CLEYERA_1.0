@@ -1,42 +1,51 @@
 #pragma once
+
 #include"Pch.h"
 
-class SphereCollider {
+
+// ü•ª
+struct Segment {
+	Vector3 origin;	// !< n“_
+	Vector3 diff;   // !< I“_‚Ö‚Ì·•ªƒxƒNƒgƒ‹
+};
+
+
+class SegmentCollider {
 public:
 
 	/// <summary>
-	/// è¡çªæ™‚ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
+	/// Õ“ËƒR[ƒ‹ƒoƒbƒNŠÖ”
 	/// </summary>
 	virtual void OnCollision(uint32_t id) = 0;
 
 	/// <summary>
-	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã®å–å¾—
+	/// ƒ[ƒ‹ƒhÀ•W‚Ìæ“¾
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
-#pragma region Radius
+#pragma region Segment
 
 	/// <summary>
-	/// Radiusã®å–å¾—
+	/// Radius‚Ìæ“¾
 	/// </summary>
-	float GetRadius() { return radius_; }
+	Segment GetSegments() { return segment_; }
 
 	/// <summary>
-	/// Radiusã®è¨­å®š
+	/// Radius‚Ìİ’è
 	/// </summary>
-	void SetRadius(float radius) { radius_ = radius; }
+	void SetRadius(Segment segment) { segment_ = segment; }
 
 #pragma endregion 
 
 #pragma region ID
 
 	/// <summary>
-	/// IDã®å–å¾—
+	/// ID‚Ìæ“¾
 	/// </summary>
 	uint32_t GetID() { return id_; }
 
 	/// <summary>
-	/// IDã®è¨­å®š
+	/// ID‚Ìİ’è
 	/// </summary>
 	void SetID(uint32_t id) { id_ = id; }
 
@@ -45,12 +54,12 @@ public:
 #pragma region CollisionAttribute
 
 	/// <summary>
-	/// collisionAttributeã®å–å¾—
+	/// collisionAttribute‚Ìæ“¾
 	/// </summary>
 	uint32_t GetCollosionAttribute() const { return collisionAttribute_; }
 
 	/// <summary>
-	/// collisionAttributeã®è¨­å®š
+	/// collisionAttribute‚Ìİ’è
 	/// </summary>
 	void SetCollosionAttribute(uint32_t collisionAttribute) { collisionAttribute_ = collisionAttribute; }
 
@@ -59,12 +68,12 @@ public:
 #pragma region CollisionMask
 
 	/// <summary>
-	/// CollisionMaskã®å–å¾—
+	/// CollisionMask‚Ìæ“¾
 	/// </summary>
 	uint32_t GetCollisionMask() const { return CollisionMask_; }
 
 	/// <summary>
-	/// CollisionMaskã®è¨­å®š
+	/// CollisionMask‚Ìİ’è
 	/// </summary>
 	void SetCollisionMask(uint32_t collisionMask) { CollisionMask_ = collisionMask; }
 
@@ -78,5 +87,5 @@ private:
 
 	uint32_t id_ = 0xffffffff;
 
-	float radius_ = 0.5f;
+	Segment segment_{};
 };

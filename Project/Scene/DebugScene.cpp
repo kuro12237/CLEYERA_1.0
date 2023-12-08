@@ -72,6 +72,14 @@ void DebugScene::Initialize()
 
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize(pointFireLightPosition_);
+
+	player_ = make_unique<Player>();
+	player_->Initialize();
+
+	enemy_ = make_unique<Enemy>();
+	enemy_->Initialize();
+
+	collisionManager = make_unique<CollisionManager>();
 }
 
 void DebugScene::Update(GameManager* Scene)
@@ -162,6 +170,10 @@ void DebugScene::Update(GameManager* Scene)
 
 	fireParticle_->Update(pointFireLightPosition_);
 
+	player_->Update();
+	enemy_->Update();
+	Collisions();
+
 	LightingManager::ClearList();
 	
 	LightingManager::AddList(pointLightB_);
@@ -185,8 +197,9 @@ void DebugScene::Back2dSpriteDraw()
 
 void DebugScene::Object3dDraw()
 {
-	
-	BallModel_->Draw(ballModelWorldTransform_, viewProjection);
+	player_->Draw(viewProjection);
+	enemy_->Draw(viewProjection);
+	//BallModel_->Draw(ballModelWorldTransform_, viewProjection);
 	model_->Draw(modelWorldTransform_, viewProjection);
 	testSkyDome_->Draw(testSkyDomeWorldTransform_, viewProjection);
 	fireParticle_->Draw(viewProjection);
@@ -194,6 +207,14 @@ void DebugScene::Object3dDraw()
 void DebugScene::Flont2dSpriteDraw()
 {
 	sprite_->Draw(spriteWorldTransform_,viewProjection);
+}
+
+void DebugScene::Collisions()
+{
+	collisionManager->ClliderClear();
+	collisionManager->ClliderAABBPush(player_.get());
+	collisionManager->ClliderAABBPush(enemy_.get());
+	collisionManager->CheckAllCollision();
 }
 
 

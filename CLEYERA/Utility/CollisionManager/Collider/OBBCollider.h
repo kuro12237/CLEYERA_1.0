@@ -1,42 +1,52 @@
 #pragma once
-#include"Pch.h"
 
-class SphereCollider {
+#include "Pch.h"
+
+
+// OBB
+struct OBB {
+	Vector3 center;			   // !< ’†S“_
+	Vector3 orientations[3]{}; // !< À•W²B³‹K‰»E’¼Œğ•K{
+	Vector3 size;			   // !< À•W²•ûŒü‚Ì’·‚³‚Ì”¼•ªB’†S‚©‚ç–Ê‚Ü‚Å‚Ì‹——£
+};
+
+class OBBCollider {
+
 public:
 
 	/// <summary>
-	/// è¡çªæ™‚ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
+	/// Õ“ËƒR[ƒ‹ƒoƒbƒNŠÖ”
 	/// </summary>
 	virtual void OnCollision(uint32_t id) = 0;
 
 	/// <summary>
-	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã®å–å¾—
+	/// ƒ[ƒ‹ƒhÀ•W‚Ìæ“¾
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
-#pragma region Radius
+#pragma region Size
 
 	/// <summary>
-	/// Radiusã®å–å¾—
+	/// OBB‚Ìæ“¾
 	/// </summary>
-	float GetRadius() { return radius_; }
+	Vector3 GetSize() { return size_; }
 
 	/// <summary>
-	/// Radiusã®è¨­å®š
+	/// OBB‚Ìİ’è
 	/// </summary>
-	void SetRadius(float radius) { radius_ = radius; }
+	void SetSize(Vector3 size) { size_ = size; }
 
 #pragma endregion 
 
 #pragma region ID
 
 	/// <summary>
-	/// IDã®å–å¾—
+	/// ID‚Ìæ“¾
 	/// </summary>
 	uint32_t GetID() { return id_; }
 
 	/// <summary>
-	/// IDã®è¨­å®š
+	/// ID‚Ìİ’è
 	/// </summary>
 	void SetID(uint32_t id) { id_ = id; }
 
@@ -45,12 +55,12 @@ public:
 #pragma region CollisionAttribute
 
 	/// <summary>
-	/// collisionAttributeã®å–å¾—
+	/// collisionAttribute‚Ìæ“¾
 	/// </summary>
 	uint32_t GetCollosionAttribute() const { return collisionAttribute_; }
 
 	/// <summary>
-	/// collisionAttributeã®è¨­å®š
+	/// collisionAttribute‚Ìİ’è
 	/// </summary>
 	void SetCollosionAttribute(uint32_t collisionAttribute) { collisionAttribute_ = collisionAttribute; }
 
@@ -59,24 +69,27 @@ public:
 #pragma region CollisionMask
 
 	/// <summary>
-	/// CollisionMaskã®å–å¾—
+	/// CollisionMask‚Ìæ“¾
 	/// </summary>
 	uint32_t GetCollisionMask() const { return CollisionMask_; }
 
 	/// <summary>
-	/// CollisionMaskã®è¨­å®š
+	/// CollisionMask‚Ìİ’è
 	/// </summary>
 	void SetCollisionMask(uint32_t collisionMask) { CollisionMask_ = collisionMask; }
 
 #pragma endregion
 
+
 private:
+
+	OBB obb_{};
+
+	uint32_t id_ = 0xffffffff;
 
 	uint32_t collisionAttribute_ = 0xffffffff;
 
 	uint32_t CollisionMask_ = 0xffffffff;
 
-	uint32_t id_ = 0xffffffff;
-
-	float radius_ = 0.5f;
+	Vector3 size_ = { 1.0f, 1.0f ,1.0f };
 };

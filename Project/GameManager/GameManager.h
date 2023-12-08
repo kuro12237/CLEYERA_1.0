@@ -2,6 +2,8 @@
 #include"Cleyera.h"
 #include"IScene.h"
 #include"DebugScene.h"
+#include "DemoScene.h"
+#include "Game/GameScene.h"
 #include"MTScene.h"
 #include"../DebugTools/Camera/DebugCamera.h"
 

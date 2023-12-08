@@ -10,6 +10,10 @@
 #include"Light/Light.h"
 
 #include"GameObject/FireParticles/FireParticle.h"
+#include"GameObject/Player/Player.h"
+#include "GameObject/Enemy/Enemy.h"
+#include "CollisionManager.h"
+
 
 class DebugScene:public IScene
 {
@@ -28,6 +32,7 @@ public:
 	
 private:
 	
+	void Collisions();
 
 	ViewProjection viewProjection{};
 
@@ -60,4 +65,8 @@ private:
 	unique_ptr<FireParticle>fireParticle_ = nullptr;
 
 	Vector3 pointFireLightPosition_ = { 0,0,0 };
+
+	unique_ptr<Player>player_ = nullptr;
+	unique_ptr<Enemy>enemy_ = nullptr;
+	unique_ptr<CollisionManager> collisionManager = nullptr;
 };
