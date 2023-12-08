@@ -46,10 +46,6 @@ void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 	state_->Draw(this, worldTransform,viewprojection);
 }
 
-void Model::UseLight(SUseLight use)
-{
-	uselight_ = use;
-}
 
 Vector4 Model::ColorConversion(uint32_t rgbaValue)
 {

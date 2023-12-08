@@ -30,7 +30,7 @@ void DebugScene::Initialize()
 	uint32_t ballTexHandle = TextureManager::LoadTexture("testBall.png");
     //model
 	model_ = make_unique<Model>();
-	model_->UseLight(HARF_LAMBERT);
+	model_->UseLight();
 	modelWorldTransform_.Initialize();
 	model_->SetTexHandle(ballTexHandle);
 	//model_->CreateModel(make_unique<ModelSphereState>());
@@ -43,7 +43,7 @@ void DebugScene::Initialize()
 	model_->SetModel(packageModelHandle_);
 
 	BallModel_ = make_unique<Model>();
-	BallModel_->UseLight(HARF_LAMBERT);
+	BallModel_->UseLight();
 	BallModel_->CreateModel(make_unique<ModelSphereState>());
 
 	//BallModel_->CreateModel(make_unique<ModelSphereState>());
@@ -52,7 +52,7 @@ void DebugScene::Initialize()
 	ballModelWorldTransform_.Initialize();
 
 	testSkyDome_ = make_unique<Model>();
-	testSkyDome_->UseLight(HARF_LAMBERT);
+	testSkyDome_->UseLight();
 	testSkyDome_->SetModel(testSkydomeModelHandle_);
 	testSkyDomeWorldTransform_.Initialize();
 	testSkyDomeWorldTransform_.scale = { 10,10,10 };
@@ -167,13 +167,14 @@ void DebugScene::Update(GameManager* Scene)
 	
 	LightingManager::ClearList();
 
+	fireParticle_->Update(pointFireLightPosition_);
+
 	
 	LightingManager::AddList(pointLightB_);
 	LightingManager::AddList(pointLight_);
 	LightingManager::AddList(pointLightC_);
 	LightingManager::AddList(sunLight_);
-	fireParticle_->Update(pointFireLightPosition_);
-
+	
 	LightingManager::TransfarBuffers();
 
 	ImGui::Begin("LightNum");

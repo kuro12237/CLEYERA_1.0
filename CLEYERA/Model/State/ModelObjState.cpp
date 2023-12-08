@@ -18,7 +18,7 @@ void ModelObjState::Initialize(Model* state)
     CreateResources::CreateBufferResource(sizeof(Material), resource_.Material);
 
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * ModelData_.vertices.size(), resource_.Vertex.Get(), int(ModelData_.vertices.size()));
-	if (state->GetUseLight() != NONE)
+	if (state->GetUseLight())
 	{
 	    CreateResources::CreateBufferResource(sizeof(LightData), resource_.Light);
 	}
@@ -44,7 +44,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	materialData->shininess = 70.0f;
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
-	if (state->GetUseLight() != NONE)
+	if (state->GetUseLight())
 	{
 		LightData* lightData = nullptr;
 		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
@@ -57,7 +57,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
-	if (state->GetUseLight() == HARF_LAMBERT)
+	if (state->GetUseLight())
 	{
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Lighting;
 	}
@@ -73,7 +73,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 	DescriptorManager::rootParamerterCommand(3, state->GetTexHandle());
-	if (state->GetUseLight() != NONE)
+	if (state->GetUseLight())
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
 		commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());

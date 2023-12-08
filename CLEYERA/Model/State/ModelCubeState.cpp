@@ -115,7 +115,7 @@ void ModelCubeState::CommandCall(Model* state, WorldTransform worldTransform, Vi
 	if (!state->GetTexHandle() == 0) {
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
 	}
-	if (state->GetUseLight() == HARF_LAMBERT)
+	if (state->GetUseLight())
 	{
 		//PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
 	}
