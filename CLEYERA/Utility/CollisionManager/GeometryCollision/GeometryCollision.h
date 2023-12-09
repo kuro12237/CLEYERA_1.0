@@ -5,6 +5,7 @@
 #include "MatrixTransform.h"
 #include "CollisionStructures/CollisionStructures.h"
 #include "./Collider/OBBCollider.h"
+#include "./Collider/AABBCollider.h"
 
 #include <array>
 
@@ -25,4 +26,7 @@ namespace GeometryCollision {
 
 	// OBBÇÃê›íË
 	OBB SettingOBBProperties(OBBCollider* c);
+
+	// AABBÇÃê›íË
+	AABB SettingAABBProperties(AABBCollider* c);
 }

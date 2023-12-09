@@ -31,6 +31,20 @@ public:
 
 #pragma endregion 
 
+#pragma region Size
+
+	/// <summary>
+	/// Size‚Ìæ“¾
+	/// </summary>
+	Vector3 GetSize() { return size_; }
+
+	/// <summary>
+	/// Size‚Ìİ’è
+	/// </summary>
+	void SetSize(Vector3 size) { size_ = size; }
+
+#pragma endregion
+
 #pragma region ID
 
 	/// <summary>
@@ -83,4 +97,6 @@ private:
 	uint32_t collisionAttribute_ = 0xffffffff;
 
 	uint32_t CollisionMask_ = 0xffffffff;
+
+	Vector3 size_ = { 1.0f, 1.0f ,1.0f };
 };

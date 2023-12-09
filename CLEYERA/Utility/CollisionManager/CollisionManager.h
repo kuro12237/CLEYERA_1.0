@@ -14,12 +14,13 @@
 class CollisionManager {
 public:
 
+
 	void CheckAllCollision();
 
 	void ClliderSpherePush(SphereCollider* collider) { sphereColliders_.push_back(collider); }
 	void ClliderAABBPush(AABBCollider* collider) { aabbColliders_.push_back(collider); }
-	
-	void ClliderClear() 
+
+	void ClliderClear()
 	{
 		sphereColliders_.clear();
 		aabbColliders_.clear();
@@ -27,33 +28,40 @@ public:
 
 private:
 
-	// コリジョンペア
-	void CheckCollisionPair(SphereCollider* cA, SphereCollider* cB);
-	void CheckCollisionPair(AABBCollider* cA, AABBCollider* cB);
-	void CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB);
-	void CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB);
-	void CheckCollisionPair(OBBCollider* cA, OBBCollider* cB);
+    // -------------------------------------------------------------------------
+    // 衝突検出メソッド
+    // -------------------------------------------------------------------------
+    // 各種コライダー同士の衝突検出メソッド
+    // -------------------------------------------------------------------------
+    void DetectSphere2SphereList(list<SphereCollider*>::iterator itrA);
+    void DetectAABB2AABBList(list<AABBCollider*>::iterator itrA);
+    void DetectAABB2SphereList(list<AABBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB);
+    void DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB);
+    void DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB);
+    void DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB);
+    void DetectOBB2OBBList(list<OBBCollider*>::iterator itrA);
 
-	// 球と球
-	void DetectAllCollisionsInSphere2SphereList(std::list<SphereCollider*>::iterator itrA);
 
-	// AABBとAABB
-	void DetectAllCollisionsInAABB2AABBList(std::list<AABBCollider*>::iterator itrA);
-
-	// AABBとSegment
-	void DetectAllCollisionsInAABBSegmentList(std::list<OBBCollider*>::iterator itrA);
-
-	// OBBとOBB
-	void DetectAllCollisionsInOBB2OBBList(std::list<SegmentCollider*>::iterator itrA);
-
+    // -------------------------------------------------------------------------
+    // 衝突検出と応答メソッド
+    // -------------------------------------------------------------------------
+    // 2つのコライダーの衝突検出と応答メソッド
+    // -------------------------------------------------------------------------
+    void CheckCollisionPair(SphereCollider* cA, SphereCollider* cB);
+    void CheckCollisionPair(AABBCollider* cA, AABBCollider* cB);
+    void CheckCollisionPair(AABBCollider* cA, SphereCollider* cB);
+    void CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB);
+    void CheckCollisionPair(OBBCollider* cA, SphereCollider* cB);
+    void CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB);
+    void CheckCollisionPair(OBBCollider* cA, OBBCollider* cB);
 
 private:
 
 	// コライダーリスト
-	std::list<SphereCollider*> sphereColliders_;
-	std::list<AABBCollider*> aabbColliders_;
-	std::list<OBBCollider*> obbColliders_;
-	std::list<SegmentCollider*> segmentColliders_;
+	list<SphereCollider*> sphereColliders_;
+	list<AABBCollider*> aabbColliders_;
+	list<OBBCollider*> obbColliders_;
+	list<SegmentCollider*> segmentColliders_;
 
 };
 
