@@ -22,7 +22,7 @@ public:
 	/// <summary>
 	/// Sizeの取得
 	/// </summary>
-	Vector3 GetSize() { return size_; }
+	virtual Vector3 GetSize() = 0;
 
 	/// <summary>
 	/// Sizeの設定

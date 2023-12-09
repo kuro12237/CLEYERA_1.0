@@ -28,7 +28,7 @@ public:
 	Vector3 GetRotate() { return this->worldTransform_.rotation; }
 
 	// Sizeの取得
-	Vector3 GetSize() { return this->size_; }
+	Vector3 GetSize() override { return this->size_; }
 
 #pragma endregion 
 
