@@ -7,24 +7,24 @@ class SegmentCollider {
 public:
 
 	/// <summary>
-	/// Õ“ËƒR[ƒ‹ƒoƒbƒNŠÖ”
+	/// è¡çªæ™‚ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
 	/// </summary>
 	virtual void OnCollision(uint32_t id) = 0;
 
 	/// <summary>
-	/// ƒ[ƒ‹ƒhÀ•W‚Ìæ“¾
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã®å–å¾—
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
 #pragma region Segment
 
 	/// <summary>
-	/// Radius‚Ìæ“¾
+	/// Radiusã®å–å¾—
 	/// </summary>
 	Segment GetSegments() { return segment_; }
 
 	/// <summary>
-	/// Radius‚Ìİ’è
+	/// Radiusã®è¨­å®š
 	/// </summary>
 	void SetRadius(Segment segment) { segment_ = segment; }
 
@@ -33,12 +33,12 @@ public:
 #pragma region ID
 
 	/// <summary>
-	/// ID‚Ìæ“¾
+	/// IDã®å–å¾—
 	/// </summary>
 	uint32_t GetID() { return id_; }
 
 	/// <summary>
-	/// ID‚Ìİ’è
+	/// IDã®è¨­å®š
 	/// </summary>
 	void SetID(uint32_t id) { id_ = id; }
 
@@ -47,12 +47,12 @@ public:
 #pragma region CollisionAttribute
 
 	/// <summary>
-	/// collisionAttribute‚Ìæ“¾
+	/// collisionAttributeã®å–å¾—
 	/// </summary>
 	uint32_t GetCollosionAttribute() const { return collisionAttribute_; }
 
 	/// <summary>
-	/// collisionAttribute‚Ìİ’è
+	/// collisionAttributeã®è¨­å®š
 	/// </summary>
 	void SetCollosionAttribute(uint32_t collisionAttribute) { collisionAttribute_ = collisionAttribute; }
 
@@ -61,12 +61,12 @@ public:
 #pragma region CollisionMask
 
 	/// <summary>
-	/// CollisionMask‚Ìæ“¾
+	/// CollisionMaskã®å–å¾—
 	/// </summary>
 	uint32_t GetCollisionMask() const { return CollisionMask_; }
 
 	/// <summary>
-	/// CollisionMask‚Ìİ’è
+	/// CollisionMaskã®è¨­å®š
 	/// </summary>
 	void SetCollisionMask(uint32_t collisionMask) { CollisionMask_ = collisionMask; }
 

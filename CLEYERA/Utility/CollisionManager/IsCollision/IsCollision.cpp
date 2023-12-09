@@ -4,24 +4,24 @@
 
 namespace Collision {
 
-	// ‹…‚Æ‹…‚Ì“–‚½‚è”»’è
+	// çƒã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const Sphere& s1, const Sphere& s2) {
 
-		// ’†S‚©‚ç‚Ì‹——£
+		// ä¸­å¿ƒã‹ã‚‰ã®è·é›¢
 		float distance = VectorTransform::Length(VectorTransform::Subtruct(s2.center, s1.center));
 
-		// ‹——£‚Æ”¼Œa‚ğ”ä‚×‚é
+		// è·é›¢ã¨åŠå¾„ã‚’æ¯”ã¹ã‚‹
 		if (distance <= s1.radius + s2.radius) {
 
-			// “–‚½‚Á‚Ä‚é
+			// å½“ãŸã£ã¦ã‚‹
 			return true;
 		}
-		// “–‚½‚Á‚Ä‚È‚¢
+		// å½“ãŸã£ã¦ãªã„
 		return false;
 	}
 
 
-	// AABB‚ÆAABB‚Ì“–‚½‚è”»’è
+	// AABBã¨AABBã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const AABB& aabb1, const AABB& aabb2) {
 
 		if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
@@ -29,40 +29,40 @@ namespace Collision {
 			(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
 			) {
 
-			// “–‚½‚Á‚Ä‚¢‚é
+			// å½“ãŸã£ã¦ã„ã‚‹
 			return true;
 		}
-		// “–‚½‚Á‚Ä‚È‚¢
+		// å½“ãŸã£ã¦ãªã„
 		return false;
 	}
 
 
-	// AABB‚Æ‹…‚Ì“–‚½‚è”»’è
+	// AABBã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const AABB& aabb, const Sphere& s) {
 
-		// Å‹ßÚ“_‚ğ‹‚ß‚é
+		// æœ€è¿‘æ¥ç‚¹ã‚’æ±‚ã‚ã‚‹
 		const Vector3 ClosestPoint = {
 			std::clamp(s.center.x, aabb.min.x, aabb.max.x),
 			std::clamp(s.center.y, aabb.min.y, aabb.max.y),
 			std::clamp(s.center.z, aabb.min.z, aabb.max.z), };
 
-		// Å‹ßÚ“_‚Æ‹…‚Ì’†S‚Æ‹——£‚ğ‹‚ß‚é
+		// æœ€è¿‘æ¥ç‚¹ã¨çƒã®ä¸­å¿ƒã¨è·é›¢ã‚’æ±‚ã‚ã‚‹
 		float dist = VectorTransform::Length(VectorTransform::Subtruct(ClosestPoint, s.center));
 
-		// ‹——£‚ª”¼Œa‚æ‚è‚à¬‚³‚¯‚ê‚ÎÕ“Ë
+		// è·é›¢ãŒåŠå¾„ã‚ˆã‚Šã‚‚å°ã•ã‘ã‚Œã°è¡çª
 		if (dist <= s.radius) {
 
-			// “–‚½‚Á‚Ä‚é
+			// å½“ãŸã£ã¦ã‚‹
 			return true;
 		}
 		else {
-			// “–‚½‚Á‚Ä‚È‚¢
+			// å½“ãŸã£ã¦ãªã„
 			return false;
 		}
 	}
 
 
-	// AABB‚Æü‚Ì“–‚½‚è”»’è
+	// AABBã¨ç·šã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const AABB& aabb, const Segment& s) {
 
 		Vector3 tMin = {
@@ -95,9 +95,9 @@ namespace Collision {
 			.z = max(tMin.z, tMax.z),
 		};
 
-		// AABB‚Æ‚ÌÕ“Ë“_(ŠÑ’Ê“_)‚Ìt‚ª¬‚³‚¢‚Ù‚¤
+		// AABBã¨ã®è¡çªç‚¹(è²«é€šç‚¹)ã®tãŒå°ã•ã„ã»ã†
 		float ntMin = max(max(tNear.x, tNear.y), tNear.z);
-		// AABB‚Æ‚ÌÕ“Ë“_(ŠÑ’Ê“_)‚Ìt‚ª‘å‚«‚¢‚Ù‚¤
+		// AABBã¨ã®è¡çªç‚¹(è²«é€šç‚¹)ã®tãŒå¤§ãã„ã»ã†
 		float ntMax = min(min(tFar.x, tFar.y), tFar.z);
 
 
@@ -107,18 +107,18 @@ namespace Collision {
 
 		if (ntMin < ntMax) {
 
-			// “–‚½‚Á‚Ä‚é
+			// å½“ãŸã£ã¦ã‚‹
 			return true;
 		}
 		else {
 
-			// “–‚½‚Á‚Ä‚È‚¢
+			// å½“ãŸã£ã¦ãªã„
 			return false;
 		}
 	}
 
 
-	// OBB‚Æ‹…‚Ì“–‚½‚è”»’è
+	// OBBã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const OBB& obb, const Sphere& s) {
 
 		Vector3 centerInOBBLocalSpace = {
@@ -134,21 +134,21 @@ namespace Collision {
 			s.radius
 		};
 
-		// ƒ[ƒJƒ‹À•W‚ÅÕ“Ë”»’è
+		// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã§è¡çªåˆ¤å®š
 		if (Collision::IsCollision(abbOBBLocal, sphereOBBLocal)) {
 
-			// “–‚½‚Á‚Ä‚é
+			// å½“ãŸã£ã¦ã‚‹
 			return true;
 		}
 		else {
 
-			// “–‚½‚Á‚Ä‚È‚¢
+			// å½“ãŸã£ã¦ãªã„
 			return false;
 		}
 
 	}
 
-	// OBB‚Æü‚Ì“–‚½‚è”»’è
+	// OBBã¨ç·šã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const OBB& obb, const Segment& s) {
 
 		Matrix4x4 obbInverse = MatrixTransform::Inverse(CreateOBBWorldMatrix(obb));
@@ -168,24 +168,24 @@ namespace Collision {
 		};
 
 
-		// AABB‚ÆSegment‚Ì“–‚½‚è”»’è‚ğg‚¤
+		// AABBã¨Segmentã®å½“ãŸã‚Šåˆ¤å®šã‚’ä½¿ã†
 		if (IsCollision(aabbOBBLocal, localSegment)) {
 
-			// “–‚½‚Á‚Ä‚é
+			// å½“ãŸã£ã¦ã‚‹
 			return true;
 		}
 		else {
 
-			// “–‚½‚Á‚Ä‚È‚¢
+			// å½“ãŸã£ã¦ãªã„
 			return false;
 		}
 	}
 
 
-	// OBB‚ÆOBB‚Ì“–‚½‚è”»’è
+	// OBBã¨OBBã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const OBB& obb1, const OBB& obb2) {
 
-		// •ª—£²ƒeƒXƒg
+		// åˆ†é›¢è»¸ãƒ†ã‚¹ãƒˆ
 		for (const auto& axis : obb1.orientations) {
 			if (!TestAxis(axis, obb1, obb2)) {
 				return false;
@@ -198,7 +198,7 @@ namespace Collision {
 			}
 		}
 
-		// OBB1‚Ì²‚ÆOBB2‚Ì²‚É‚’¼‚È²‚ğƒeƒXƒg
+		// OBB1ã®è»¸ã¨OBB2ã®è»¸ã«å‚ç›´ãªè»¸ã‚’ãƒ†ã‚¹ãƒˆ
 		for (const auto& axis : {
 				Vector3{obb1.orientations[1].x * obb2.orientations[2].x - obb1.orientations[2].x * obb2.orientations[1].x,
 						obb1.orientations[1].y * obb2.orientations[2].y - obb1.orientations[2].y * obb2.orientations[1].y,

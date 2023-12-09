@@ -10,24 +10,24 @@ using namespace GeometryCollision;
 
 namespace Collision {
 
-	// ‹…‚Æ‹…‚Ì“–‚½‚è”»’è
+	// çƒã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const Sphere& s1, const Sphere& s2);
 
-	// AABB‚ÆAABB‚Ì“–‚½‚è”»’è
+	// AABBã¨AABBã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const AABB& aabb1, const AABB& aabb2);
 
-	// AABB‚Æ‹…‚Ì“–‚½‚è”»’è
+	// AABBã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const AABB& aabb, const Sphere& s);
 
-	// AABB‚Æü‚Ì“–‚½‚è”»’è
+	// AABBã¨ç·šã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const AABB& aabb, const Segment& s);
 
-	// OBB‚Æ‹…‚Ì“–‚½‚è”»’è
+	// OBBã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const OBB& obb, const Sphere& s);
 
-	// OBB‚Æü‚Ì“–‚½‚è”»’è
+	// OBBã¨ç·šã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const OBB& obb, const Segment& s);
 
-	// OBB‚ÆOBB‚Ì“–‚½‚è”»’è
+	// OBBã¨OBBã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsCollision(const OBB& obb1, const OBB& obb2);
 }

@@ -1,57 +1,57 @@
 #pragma once
 #include "Vector3.h"
 
-// ‹…
+// çƒ
 struct Sphere {
 	Vector3 center;
 	float radius;
 };
 
 
-// ’¼ü
+// ç›´ç·š
 struct Line {
-	Vector3 origin;	// !< n“_
-	Vector3 diff;   // !< I“_‚Ö‚Ì·•ªƒxƒNƒgƒ‹
+	Vector3 origin;	// !< å§‹ç‚¹
+	Vector3 diff;   // !< çµ‚ç‚¹ã¸ã®å·®åˆ†ãƒ™ã‚¯ãƒˆãƒ«
 };
 
 
-// ”¼’¼ü
+// åŠç›´ç·š
 struct Ray {
-	Vector3 origin;	// !< n“_
-	Vector3 diff;   // !< I“_‚Ö‚Ì·•ªƒxƒNƒgƒ‹
+	Vector3 origin;	// !< å§‹ç‚¹
+	Vector3 diff;   // !< çµ‚ç‚¹ã¸ã®å·®åˆ†ãƒ™ã‚¯ãƒˆãƒ«
 };
 
 
-// ü•ª
+// ç·šåˆ†
 struct Segment {
-	Vector3 origin;	// !< n“_
-	Vector3 diff;   // !< I“_‚Ö‚Ì·•ªƒxƒNƒgƒ‹
+	Vector3 origin;	// !< å§‹ç‚¹
+	Vector3 diff;   // !< çµ‚ç‚¹ã¸ã®å·®åˆ†ãƒ™ã‚¯ãƒˆãƒ«
 };
 
 
-// •½–Ê
+// å¹³é¢
 struct Plane {
-	Vector3 normal;	// !< –@ü
-	float distance; // !< ‹——£
+	Vector3 normal;	// !< æ³•ç·š
+	float distance; // !< è·é›¢
 };
 
 
-// OŠpŒ`
+// ä¸‰è§’å½¢
 struct Triangle {
-	Vector3 vertices[3]; // !< ’¸“_
+	Vector3 vertices[3]; // !< é ‚ç‚¹
 };
 
 
 // AABB
 struct AABB {
-	Vector3 min; // !< Å­“_
-	Vector3 max; // !< Å‘å“_
+	Vector3 min; // !< æœ€å°‘ç‚¹
+	Vector3 max; // !< æœ€å¤§ç‚¹
 };
 
 
 // OBB
 struct OBB {
-	Vector3 center;			   // !< ’†S“_
-	Vector3 orientations[3]{}; // !< À•W²B³‹K‰»E’¼Œğ•K{
-	Vector3 halfSize;          // !< À•W²•ûŒü‚Ì’·‚³‚Ì”¼•ªB’†S‚©‚ç–Ê‚Ü‚Å‚Ì‹——£
+	Vector3 center;			   // !< ä¸­å¿ƒç‚¹
+	Vector3 orientations[3]{}; // !< åº§æ¨™è»¸ã€‚æ­£è¦åŒ–ãƒ»ç›´äº¤å¿…é ˆ
+	Vector3 halfSize;          // !< åº§æ¨™è»¸æ–¹å‘ã®é•·ã•ã®åŠåˆ†ã€‚ä¸­å¿ƒã‹ã‚‰é¢ã¾ã§ã®è·é›¢
 };

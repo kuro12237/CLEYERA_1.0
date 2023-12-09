@@ -3,7 +3,7 @@
 
 namespace GeometryCollision {
 
-	// OBB‚Ìƒ[ƒ‹ƒhƒ}ƒgƒŠƒbƒNƒXì¬
+	// OBBã®ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªãƒƒã‚¯ã‚¹ä½œæˆ
 	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb) {
 
 		Matrix4x4 worldMatrix{};
@@ -25,34 +25,34 @@ namespace GeometryCollision {
 	}
 
 
-	// Ë‰e‚Ìd•¡ƒ`ƒFƒbƒN
+	// å°„å½±ã®é‡è¤‡ãƒã‚§ãƒƒã‚¯
 	bool TestAxis(const Vector3& axis, const OBB& obb1, const OBB& obb2) {
 
-		// OBB‚ÌË‰e‚ğŒvZ
+		// OBBã®å°„å½±ã‚’è¨ˆç®—
 		auto projection1 = obbProjection(obb1, axis);
 		auto projection2 = obbProjection(obb2, axis);
 
-		// Ë‰e‚ªd‚È‚Á‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+		// å°„å½±ãŒé‡ãªã£ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 		return projectionOverlap(projection1, projection2);
 	}
 
 
-	// ÀÛ‚Éd‚È‚Á‚Ä‚é‚©‚ÌŒvZ
+	// å®Ÿéš›ã«é‡ãªã£ã¦ã‚‹ã‹ã®è¨ˆç®—
 	bool projectionOverlap(const std::pair<float, float>& projection1, const std::pair<float, float>& projection2) {
 
-		// Ë‰e‚ªd‚È‚Á‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+		// å°„å½±ãŒé‡ãªã£ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 		return projection1.second >= projection2.first && projection2.second >= projection1.first;
 	}
 
 
-	// ’¸“_‚ğ²‚ÉË‰e
+	// é ‚ç‚¹ã‚’è»¸ã«å°„å½±
 	std::pair<float, float> obbProjection(const OBB& obb, const Vector3& axis) {
 
-		float val = std::sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z); // ³‹K‰»
+		float val = std::sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z); // æ­£è¦åŒ–
 		float newAxis = 0.0f;
 		newAxis = newAxis / val;
 
-		// OBBã‚Ì’¸“_‚ğæ“¾
+		// OBBä¸Šã®é ‚ç‚¹ã‚’å–å¾—
 		std::array<Vector3, 8> vertices{};
 		for (int i = 0; i < 8; ++i) {
 			Vector3 sign = { (i & 1) ? 1.0f : -1.0f, (i & 2) ? 1.0f : -1.0f, (i & 4) ? 1.0f : -1.0f };
@@ -69,7 +69,7 @@ namespace GeometryCollision {
 			};
 		}
 
-		// ’¸“_‚ğ²‚ÉË‰e
+		// é ‚ç‚¹ã‚’è»¸ã«å°„å½±
 		std::array<float, 8> projections{};
 		for (int i = 0; i < 8; ++i) {
 			projections[i] = vertices[i].x * axis.x + vertices[i].y * axis.y + vertices[i].z * axis.z;
@@ -80,7 +80,7 @@ namespace GeometryCollision {
 	}
 
 
-	// OBB‚Ìİ’è
+	// OBBã®è¨­å®š
 	OBB SettingOBBProperties(OBBCollider* c) {
 
 		OBB result{};
@@ -107,7 +107,7 @@ namespace GeometryCollision {
 		return result;
 	}
 
-	// AABB‚Ìİ’è
+	// AABBã®è¨­å®š
 	AABB SettingAABBProperties(AABBCollider* c) {
 
 		AABB result{};

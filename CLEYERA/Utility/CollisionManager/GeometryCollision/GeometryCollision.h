@@ -12,21 +12,21 @@
 
 namespace GeometryCollision {
 
-	// OBB‚Ìƒ[ƒ‹ƒhƒ}ƒgƒŠƒbƒNƒXì¬
+	// OBBã®ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªãƒƒã‚¯ã‚¹ä½œæˆ
 	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb);
 
-	// Ë‰e‚Ìd•¡ƒ`ƒFƒbƒN
+	// å°„å½±ã®é‡è¤‡ãƒã‚§ãƒƒã‚¯
 	bool TestAxis(const Vector3& axis, const OBB& obb1, const OBB& obb2);
 
-	// ÀÛ‚Éd‚È‚Á‚Ä‚é‚©‚ÌŒvZ
+	// å®Ÿéš›ã«é‡ãªã£ã¦ã‚‹ã‹ã®è¨ˆç®—
 	bool projectionOverlap(const std::pair<float, float>& projection1, const std::pair<float, float>& projection2);
 
-	// ’¸“_‚ğ²‚ÉË‰e
+	// é ‚ç‚¹ã‚’è»¸ã«å°„å½±
 	std::pair<float, float> obbProjection(const OBB& obb, const Vector3& axis);
 
-	// OBB‚Ìİ’è
+	// OBBã®è¨­å®š
 	OBB SettingOBBProperties(OBBCollider* c);
 
-	// AABB‚Ìİ’è
+	// AABBã®è¨­å®š
 	AABB SettingAABBProperties(AABBCollider* c);
 }

@@ -8,24 +8,24 @@ class OBBCollider {
 public:
 
 	/// <summary>
-	/// �Փˎ��R�[���o�b�N�֐�
+	/// 衝突時コールバック関数
 	/// </summary>
 	virtual void OnCollision(uint32_t id) = 0;
 
 	/// <summary>
-	/// ���[���h���W�̎擾
+	/// ワールド座標の取得
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
 #pragma region Size
 
 	/// <summary>
-	/// Size�̎擾
+	/// Sizeの取得
 	/// </summary>
 	Vector3 GetSize() { return size_; }
 
 	/// <summary>
-	/// Size�̐ݒ�
+	/// Sizeの設定
 	/// </summary>
 	void SetSize(Vector3 size) { size_ = size; }
 
@@ -34,12 +34,12 @@ public:
 #pragma region Rotate
 
 	/// <summary>
-	/// Rotate�̎擾
+	/// Rotateの取得
 	/// </summary>
 	Vector3 GetRotate() { return rotate_; }
 
 	/// <summary>
-	/// Rotate�̐ݒ�
+	/// Rotateの設定
 	/// </summary>
 	void SetRotate(Vector3 rotate) { rotate_ = rotate; }
 
@@ -48,12 +48,12 @@ public:
 #pragma region ID
 
 	/// <summary>
-	/// ID�̎擾
+	/// IDの取得
 	/// </summary>
 	uint32_t GetID() { return id_; }
 
 	/// <summary>
-	/// ID�̐ݒ�
+	/// IDの設定
 	/// </summary>
 	void SetID(uint32_t id) { id_ = id; }
 
@@ -62,12 +62,12 @@ public:
 #pragma region CollisionAttribute
 
 	/// <summary>
-	/// collisionAttribute�̎擾
+	/// collisionAttributeの取得
 	/// </summary>
 	uint32_t GetCollosionAttribute() const { return collisionAttribute_; }
 
 	/// <summary>
-	/// collisionAttribute�̐ݒ�
+	/// collisionAttributeの設定
 	/// </summary>
 	void SetCollosionAttribute(uint32_t collisionAttribute) { collisionAttribute_ = collisionAttribute; }
 
@@ -76,12 +76,12 @@ public:
 #pragma region CollisionMask
 
 	/// <summary>
-	/// CollisionMask�̎擾
+	/// CollisionMaskの取得
 	/// </summary>
 	uint32_t GetCollisionMask() const { return CollisionMask_; }
 
 	/// <summary>
-	/// CollisionMask�̐ݒ�
+	/// CollisionMaskの設定
 	/// </summary>
 	void SetCollisionMask(uint32_t collisionMask) { CollisionMask_ = collisionMask; }
 
