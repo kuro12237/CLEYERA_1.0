@@ -10,18 +10,18 @@
 
 
 
-/* CollisionManagerƒNƒ‰ƒX */
+/* CollisionManagerã‚¯ãƒ©ã‚¹ */
 class CollisionManager {
 
 public:
 
 	/// <summary>
-	/// “o˜^‚³‚ê‚½‚·‚×‚Ä‚ÌƒRƒ‰ƒCƒ_[‚É‘Î‚µ‚ÄÕ“Ë‚ğŒŸo‚·‚éB
+	/// ç™»éŒ²ã•ã‚ŒãŸã™ã¹ã¦ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã«å¯¾ã—ã¦è¡çªã‚’æ¤œå‡ºã™ã‚‹ã€‚
 	/// </summary>
 	void CheckAllCollision();
 
     /// <summary>
-    /// ŠeíƒRƒ‰ƒCƒ_[‚ğƒŠƒXƒg‚É“o˜^‚·‚éƒƒ\ƒbƒh
+    /// å„ç¨®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ãƒªã‚¹ãƒˆã«ç™»éŒ²ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     /// </summary>
     void ColliderSpherePushBack(SphereCollider* collider) { sphereColliders_.push_back(collider); }
     void ColliderSegmentPushBack(SegmentCollider* collider) { segmentColliders_.push_back(collider); }
@@ -29,7 +29,7 @@ public:
     void ColliderOBBPushBack(OBBCollider* collider) { obbColliders_.push_back(collider); }
 
     /// <summary>
-    /// “o˜^‚³‚ê‚½ƒRƒ‰ƒCƒ_[ƒŠƒXƒg‚ğƒNƒŠƒA‚·‚éƒƒ\ƒbƒh
+    /// ç™»éŒ²ã•ã‚ŒãŸã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     /// </summary>
     void ClliderClear()	{
 		sphereColliders_.clear();
@@ -42,9 +42,9 @@ public:
 private:
 
     // -------------------------------------------------------------------------
-    // Õ“ËŒŸoƒƒ\ƒbƒh
+    // è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰
     // -------------------------------------------------------------------------
-    // ŠeíƒRƒ‰ƒCƒ_[“¯m‚ÌÕ“ËŒŸoƒƒ\ƒbƒh
+    // å„ç¨®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼åŒå£«ã®è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰
     // -------------------------------------------------------------------------
     void DetectSphere2SphereList(list<SphereCollider*>::iterator itrA);
     void DetectAABB2AABBList(list<AABBCollider*>::iterator itrA);
@@ -56,9 +56,9 @@ private:
 
 
     // -------------------------------------------------------------------------
-    // Õ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+    // è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
     // -------------------------------------------------------------------------
-    // 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+    // 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
     // -------------------------------------------------------------------------
     void CheckCollisionPair(SphereCollider* cA, SphereCollider* cB);
     void CheckCollisionPair(AABBCollider* cA, AABBCollider* cB);
@@ -71,7 +71,7 @@ private:
 
 private:
 
-	// ƒRƒ‰ƒCƒ_[ƒŠƒXƒg
+	// ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ãƒªã‚¹ãƒˆ
 	list<SphereCollider*> sphereColliders_;
 	list<SegmentCollider*> segmentColliders_;
     list<AABBCollider*> aabbColliders_;

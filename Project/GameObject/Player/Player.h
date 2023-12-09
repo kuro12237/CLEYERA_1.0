@@ -24,10 +24,10 @@ public:
 
 #pragma region Get
 
-	// Rotate�̎擾
+	// Rotateの取得
 	Vector3 GetRotate() { return this->worldTransform_.rotation; }
 
-	// Size�̎擾
+	// Sizeの取得
 	Vector3 GetSize() { return this->size_; }
 
 #pragma endregion 

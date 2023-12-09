@@ -89,15 +89,15 @@ void GameScene::Flont2dSpriteDraw() {
 
 void GameScene::CheckAllCollision() {
 
-	// 登録されたコライダーリストをクリアする
+	// 逋ｻ骭ｲ縺輔ｌ縺溘さ繝ｩ繧､繝繝ｼ繝ｪ繧ｹ繝医ｒ繧ｯ繝ｪ繧｢縺吶ｋ
 	collisionManager_->ClliderClear();
 
-	// コライダーをリストに登録する
+	// 繧ｳ繝ｩ繧､繝繝ｼ繧偵Μ繧ｹ繝医↓逋ｻ骭ｲ縺吶ｋ
 	collisionManager_->ColliderAABBPushBack(player_.get());
 	collisionManager_->ColliderAABBPushBack(enemy_.get());
 	collisionManager_->ColliderOBBPushBack(player_.get());
 	collisionManager_->ColliderOBBPushBack(enemy_.get());
 
-	// すべてのコライダーに対して衝突を検出
+	// 縺吶∋縺ｦ縺ｮ繧ｳ繝ｩ繧､繝繝ｼ縺ｫ蟇ｾ縺励※陦晉ｪ√ｒ讀懷�ｺ
 	collisionManager_->CheckAllCollision();
 }

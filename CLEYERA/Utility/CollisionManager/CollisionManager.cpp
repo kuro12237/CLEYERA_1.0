@@ -2,7 +2,7 @@
 
 
 
-// Õ“Ë”»’è
+// è¡çªåˆ¤å®š
 void CollisionManager::CheckAllCollision()
 {
 
@@ -12,32 +12,32 @@ void CollisionManager::CheckAllCollision()
 	std::list<OBBCollider*>::iterator itrOBB = obbColliders_.begin();
 
 	// list
-	// push_back‚µ‚Ä‚È‚¢‚Ì‚ÅAî•ñ‚ª“ü‚Á‚Ä‚È‚¢
-	// ‚±‚Ìó‘Ô‚ÅÕ“Ë”»’è‚·‚é‚ÆƒGƒ‰[‚Í‚¢‚é
-	// Œã‚Åˆ—‚Ì’†‚Éif•¶ì‚Á‚ÄAî•ñ‚ÍŒ¾‚Á‚Ä‚È‚©‚Á‚½‚ç”²‚¯‚é‚æ‚¤‚É‚·‚é
+	// push_backã—ã¦ãªã„ã®ã§ã€æƒ…å ±ãŒå…¥ã£ã¦ãªã„
+	// ã“ã®çŠ¶æ…‹ã§è¡çªåˆ¤å®šã™ã‚‹ã¨ã‚¨ãƒ©ãƒ¼ã¯ã„ã‚‹
+	// å¾Œã§å‡¦ç†ã®ä¸­ã«ifæ–‡ä½œã£ã¦ã€æƒ…å ±ã¯è¨€ã£ã¦ãªã‹ã£ãŸã‚‰æŠœã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
 
 
-	/* ŠeíƒRƒ‰ƒCƒ_[“¯m‚ÌÕ“ËŒŸoƒƒ\ƒbƒh */
-	// Sphere‚ÆSphere
+	/* å„ç¨®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼åŒå£«ã®è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ */
+	// Sphereã¨Sphere
 	//DetectSphere2SphereList(itrSpherre);
-	// AABB‚ÆAABB
+	// AABBã¨AABB
 	DetectAABB2AABBList(itrAABB);
-	// AABB‚ÆSphere
+	// AABBã¨Sphere
 	//(itrAABB, itrSpherre);
-	// AABB‚ÆSegment
+	// AABBã¨Segment
 	//DetectAABB2SegmentList(itrAABB, itrSegment);
-	// OBB‚ÆSphere
+	// OBBã¨Sphere
 	//DetectOBB2SphereList(itrOBB, itrSpherre);
-	// OBB‚ÆSegmetn
+	// OBBã¨Segmetn
 	//DetectOBB2SegmentList(itrOBB, itrSegment);
-	// OBB‚ÆOBB
+	// OBBã¨OBB
 	//DetectOBB2OBBList(itrOBB);
 }
 
 
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : Sphere2Sphere
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : Sphere2Sphere
 /// </summary>
 void CollisionManager::DetectSphere2SphereList(list<SphereCollider*>::iterator itr1) {
 
@@ -56,7 +56,7 @@ void CollisionManager::DetectSphere2SphereList(list<SphereCollider*>::iterator i
 }
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : AABB2AABB
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : AABB2AABB
 /// </summary>
 void CollisionManager::DetectAABB2AABBList(list<AABBCollider*>::iterator itrA) {
 
@@ -75,7 +75,7 @@ void CollisionManager::DetectAABB2AABBList(list<AABBCollider*>::iterator itrA) {
 }
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : AABB2Sphere
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : AABB2Sphere
 /// </summary>
 void CollisionManager::DetectAABB2SphereList(list<AABBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB) {
 
@@ -94,7 +94,7 @@ void CollisionManager::DetectAABB2SphereList(list<AABBCollider*>::iterator itrA,
 }
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : AABB2Segment
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : AABB2Segment
 /// </summary>
 void CollisionManager::DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB) {
 
@@ -113,7 +113,7 @@ void CollisionManager::DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA
 }
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : OBB2Sphere
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : OBB2Sphere
 /// </summary>
 void CollisionManager::DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB) {
 
@@ -132,7 +132,7 @@ void CollisionManager::DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, l
 }
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : OBB2Segment
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : OBB2Segment
 /// </summary>
 void CollisionManager::DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB) {
 
@@ -151,7 +151,7 @@ void CollisionManager::DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, 
 }
 
 /// <summary>
-/// Õ“ËŒŸoƒƒ\ƒbƒh : OBB2OBB
+/// è¡çªæ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ : OBB2OBB
 /// </summary>
 void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
 
@@ -173,19 +173,19 @@ void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
 
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : Sphere2Sphere
 /// </summary>
 void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB) {
 
-	// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0) 
 	{
 		return;
 	}
 
-	// ’l‚ğ“ü‚ê‚½\‘¢‘Ì‚ğì‚é
+	// å€¤ã‚’å…¥ã‚ŒãŸæ§‹é€ ä½“ã‚’ä½œã‚‹
 	Sphere SphereA = {
 		.center = cA->GetWorldPosition(),
 		.radius = cA->GetRadius(),
@@ -195,7 +195,7 @@ void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB
 		.radius = cB->GetRadius(),
 	};
 
-	// Õ“Ë”»’è
+	// è¡çªåˆ¤å®š
 	if (Collision::IsCollision(SphereA, SphereB)) {
 		cA->OnCollision(cB->GetID());
 		cB->OnCollision(cA->GetID());
@@ -203,23 +203,23 @@ void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB
 }
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : AABB2AABB
 /// </summary>
 void CollisionManager::CheckCollisionPair(AABBCollider* cA, AABBCollider* cB) {
 
-	// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
 
-	// ’l‚ğ“ü‚ê‚½\‘¢‘Ì‚ğì‚é
+	// å€¤ã‚’å…¥ã‚ŒãŸæ§‹é€ ä½“ã‚’ä½œã‚‹
 	AABB aabbA = SettingAABBProperties(cA);
 	AABB aabbB = SettingAABBProperties(cB);
 
-	// Õ“Ë”»’è
+	// è¡çªåˆ¤å®š
 	if (Collision::IsCollision(aabbA, aabbB)) {
 		cA->OnCollision(cB->GetID());
 		cB->OnCollision(cA->GetID());
@@ -227,26 +227,26 @@ void CollisionManager::CheckCollisionPair(AABBCollider* cA, AABBCollider* cB) {
 }
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : AABB2Sphere
 /// </summary>
 void CollisionManager::CheckCollisionPair(AABBCollider* cA, SphereCollider* cB) {
 
-	// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
 
-	// ’l‚ğ“ü‚ê‚½\‘¢‘Ì‚ğì‚é
+	// å€¤ã‚’å…¥ã‚ŒãŸæ§‹é€ ä½“ã‚’ä½œã‚‹
 	AABB aabb = SettingAABBProperties(cA);
 	Sphere sphere = {
 		.center = cB->GetWorldPosition(),
 		.radius = cB->GetRadius(),
 	};
 
-	// Õ“Ë”»’è
+	// è¡çªåˆ¤å®š
 	if (Collision::IsCollision(aabb, sphere)) {
 		cA->OnCollision(cB->GetID());
 		cB->OnCollision(cA->GetID());
@@ -254,7 +254,7 @@ void CollisionManager::CheckCollisionPair(AABBCollider* cA, SphereCollider* cB) 
 }
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : AABB2Segment
 /// </summary>
 void CollisionManager::CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB) {
@@ -272,26 +272,26 @@ void CollisionManager::CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB)
 }
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : OBB2Sphere
 /// </summary>
 void CollisionManager::CheckCollisionPair(OBBCollider* cA, SphereCollider* cB) {
 
-	// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
 
-	// ’l‚ğ“ü‚ê‚½\‘¢‘Ì‚ğì‚é
+	// å€¤ã‚’å…¥ã‚ŒãŸæ§‹é€ ä½“ã‚’ä½œã‚‹
 	OBB obb = SettingOBBProperties(cA);
 	Sphere sphere = {
 		.center = cB->GetWorldPosition(),
 		.radius = cB->GetRadius(),
 	};
 
-	// Õ“Ë”»’è
+	// è¡çªåˆ¤å®š
 	if (Collision::IsCollision(obb, sphere)) {
 		cA->OnCollision(cB->GetID());
 		cB->OnCollision(cA->GetID());
@@ -299,23 +299,23 @@ void CollisionManager::CheckCollisionPair(OBBCollider* cA, SphereCollider* cB) {
 }
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : OBB2Segment
 /// </summary>
 void CollisionManager::CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB) {
 
-	// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
 
-	//// ’l‚ğ“ü‚ê‚½\‘¢‘Ì‚ğì‚é
+	//// å€¤ã‚’å…¥ã‚ŒãŸæ§‹é€ ä½“ã‚’ä½œã‚‹
 	//OBB obb = SettingOBBProperties(cA);
 	//Segment segment = {};
 
-	//// Õ“Ë”»’è
+	//// è¡çªåˆ¤å®š
 	//if (Collision::IsCollision(obb, segment)) {
 	//	cA->OnCollision(cB->GetID());
 	//	cB->OnCollision(cA->GetID());
@@ -323,23 +323,23 @@ void CollisionManager::CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB) 
 }
 
 /// <summary>
-/// 2‚Â‚ÌƒRƒ‰ƒCƒ_[‚ÌÕ“ËŒŸo‚Æ‰“šƒƒ\ƒbƒh
+/// 2ã¤ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¡çªæ¤œå‡ºã¨å¿œç­”ãƒ¡ã‚½ãƒƒãƒ‰
 ///  : OBB2OBB
 /// </summary>
 void CollisionManager::CheckCollisionPair(OBBCollider* cA, OBBCollider* cB) {
 
-	// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
 
-	// ’l‚ğ“ü‚ê‚½\‘¢‘Ì‚ğì‚é
+	// å€¤ã‚’å…¥ã‚ŒãŸæ§‹é€ ä½“ã‚’ä½œã‚‹
 	OBB obbA = SettingOBBProperties(cA);
 	OBB obbB = SettingOBBProperties(cB);
 
-	// Õ“Ë”»’è
+	// è¡çªåˆ¤å®š
 	if (Collision::IsCollision(obbA, obbB)) {
 		cA->OnCollision(cB->GetID());
 		cB->OnCollision(cA->GetID());
