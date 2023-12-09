@@ -57,6 +57,8 @@ void Player::Update()
 		.z = 2.0f * worldTransform_.scale.z,
 	};
 
+	SetRotate(this->worldTransform_.rotation);
+
 #ifdef _DEBUG
 
 	ImGui::Begin("Player");

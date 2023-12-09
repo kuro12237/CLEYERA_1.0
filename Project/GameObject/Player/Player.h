@@ -30,6 +30,7 @@ public:
 	// Sizeの取得
 	Vector3 GetSize() override { return this->size_; }
 
+
 #pragma endregion 
 
 private:

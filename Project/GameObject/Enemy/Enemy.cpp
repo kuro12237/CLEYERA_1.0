@@ -28,6 +28,7 @@ void Enemy::Update()
 		.z = 20.0f * worldTransform_.scale.z
 	};
 
+	SetRotate(this->worldTransform_.rotation);
 
 #ifdef _DEBUG
 
