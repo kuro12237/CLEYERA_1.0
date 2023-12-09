@@ -11,6 +11,7 @@ void CollisionManager::CheckAllCollision()
 	std::list<AABBCollider*>::iterator itrAABB = aabbColliders_.begin();
 	std::list<OBBCollider*>::iterator itrOBB = obbColliders_.begin();
 
+	// list
 	// push_backしてないので、情報が入ってない
 	// この状態で衝突判定するとエラーはいる
 	// 後で処理の中にif文作って、情報は言ってなかったら抜けるようにする
