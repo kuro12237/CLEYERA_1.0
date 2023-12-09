@@ -14,19 +14,19 @@ void CollisionManager::CheckAllCollision()
 
 	/* 各種コライダー同士の衝突検出メソッド */
 	// SphereとSphere
-	DetectSphere2SphereList(itrSpherre);
+	//DetectSphere2SphereList(itrSpherre);
 	// AABBとAABB
 	DetectAABB2AABBList(itrAABB);
 	// AABBとSphere
-	DetectAABB2SphereList(itrAABB, itrSpherre);
+	//(itrAABB, itrSpherre);
 	// AABBとSegment
-	DetectAABB2SegmentList(itrAABB, itrSegment);
+	//DetectAABB2SegmentList(itrAABB, itrSegment);
 	// OBBとSphere
-	DetectOBB2SphereList(itrOBB, itrSpherre);
+	//DetectOBB2SphereList(itrOBB, itrSpherre);
 	// OBBとSegmetn
-	DetectOBB2SegmentList(itrOBB, itrSegment);
+	//DetectOBB2SegmentList(itrOBB, itrSegment);
 	// OBBとOBB
-	DetectOBB2OBBList(itrOBB);
+	//DetectOBB2OBBList(itrOBB);
 }
 
 
@@ -306,15 +306,15 @@ void CollisionManager::CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB) 
 		return;
 	}
 
-	// 値を入れた構造体を作る
-	OBB obb = SettingOBBProperties(cA);
-	Segment segment = {};
+	//// 値を入れた構造体を作る
+	//OBB obb = SettingOBBProperties(cA);
+	//Segment segment = {};
 
-	// 衝突判定
-	if (Collision::IsCollision(obb, segment)) {
-		cA->OnCollision(cB->GetID());
-		cB->OnCollision(cA->GetID());
-	}
+	//// 衝突判定
+	//if (Collision::IsCollision(obb, segment)) {
+	//	cA->OnCollision(cB->GetID());
+	//	cB->OnCollision(cA->GetID());
+	//}
 }
 
 /// <summary>

@@ -10,21 +10,34 @@
 
 
 
-
+/* CollisionManagerクラス */
 class CollisionManager {
+
 public:
 
-
+	/// <summary>
+	/// 登録されたすべてのコライダーに対して衝突を検出する。
+	/// </summary>
 	void CheckAllCollision();
 
-	void ClliderSpherePush(SphereCollider* collider) { sphereColliders_.push_back(collider); }
-	void ClliderAABBPush(AABBCollider* collider) { aabbColliders_.push_back(collider); }
+    /// <summary>
+    /// 各種コライダーをリストに登録するメソッド
+    /// </summary>
+    void ColliderSpherePushBack(SphereCollider* collider) { sphereColliders_.push_back(collider); }
+    void ColliderSegmentPushBack(SegmentCollider* collider) { segmentColliders_.push_back(collider); }
+    void ColliderAABBPushBack(AABBCollider* collider) { aabbColliders_.push_back(collider); }
+    void ColliderOBBPushBack(OBBCollider* collider) { obbColliders_.push_back(collider); }
 
-	void ClliderClear()
-	{
+    /// <summary>
+    /// 登録されたコライダーリストをクリアするメソッド
+    /// </summary>
+    void ClliderClear()	{
 		sphereColliders_.clear();
+        segmentColliders_.clear();
 		aabbColliders_.clear();
+        obbColliders_.clear();
 	}
+
 
 private:
 
@@ -55,13 +68,13 @@ private:
     void CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB);
     void CheckCollisionPair(OBBCollider* cA, OBBCollider* cB);
 
+
 private:
 
 	// コライダーリスト
 	list<SphereCollider*> sphereColliders_;
-	list<AABBCollider*> aabbColliders_;
-	list<OBBCollider*> obbColliders_;
 	list<SegmentCollider*> segmentColliders_;
-
+    list<AABBCollider*> aabbColliders_;
+    list<OBBCollider*> obbColliders_;
 };
 

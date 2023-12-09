@@ -30,12 +30,18 @@ public:
 	void Object3dDraw()override;
 	void Flont2dSpriteDraw()override;
 
+
+private:
+
+	void CheckAllCollision();
+
+
 private:
 
 	ViewProjection viewProjection{};
 	unique_ptr<Player>player_ = nullptr;
 	unique_ptr<Enemy>enemy_ = nullptr;
-	unique_ptr<CollisionManager> collisionManager = nullptr;
+	unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
 };
 

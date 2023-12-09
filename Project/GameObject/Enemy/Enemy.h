@@ -4,7 +4,7 @@
 #include"Collider/AABBCollider.h"
 #include "Collider/OBBCollider.h"
 
-class Enemy : public AABBCollider, OBBCollider
+class Enemy : public AABBCollider, public OBBCollider
 {
 public:
 	Enemy() {};

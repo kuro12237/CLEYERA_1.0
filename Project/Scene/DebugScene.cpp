@@ -211,10 +211,10 @@ void DebugScene::Flont2dSpriteDraw()
 
 void DebugScene::Collisions()
 {
-	collisionManager->ClliderClear();
+	/*collisionManager->ClliderClear();
 	collisionManager->ClliderAABBPush(player_.get());
 	collisionManager->ClliderAABBPush(enemy_.get());
-	collisionManager->CheckAllCollision();
+	collisionManager->CheckAllCollision();*/
 }
 
 

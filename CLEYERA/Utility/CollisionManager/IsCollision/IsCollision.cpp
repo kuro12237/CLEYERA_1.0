@@ -149,8 +149,71 @@ namespace Collision {
 	}
 
 	// OBBと線の当たり判定
-	bool IsCollision(const OBB& obb, const Segment& s);
+	bool IsCollision(const OBB& obb, const Segment& s) {
+
+		Matrix4x4 obbInverse = MatrixTransform::Inverse(CreateOBBWorldMatrix(obb));
+
+		AABB aabbOBBLocal = {
+			.min = { -obb.halfSize.x, -obb.halfSize.y, -obb.halfSize.z },
+			.max = { obb.halfSize.x, obb.halfSize.y, obb.halfSize.z }
+		};
+
+
+		Vector3 localOrigin = VectorTransform::TransformByMatrix(s.origin, obbInverse);
+		Vector3 LocalEnd = VectorTransform::TransformByMatrix(VectorTransform::Add(s.origin, s.diff), obbInverse);
+
+		Segment localSegment = {
+			.origin = localOrigin,
+			.diff = VectorTransform::Subtruct(LocalEnd, localOrigin),
+		};
+
+
+		// AABBとSegmentの当たり判定を使う
+		if (IsCollision(aabbOBBLocal, localSegment)) {
+
+			// 当たってる
+			return true;
+		}
+		else {
+
+			// 当たってない
+			return false;
+		}
+	}
+
 
 	// OBBとOBBの当たり判定
-	bool IsCollision(const OBB& obb1, const OBB& obb2);
+	bool IsCollision(const OBB& obb1, const OBB& obb2) {
+
+		// 分離軸テスト
+		for (const auto& axis : obb1.orientations) {
+			if (!TestAxis(axis, obb1, obb2)) {
+				return false;
+			}
+		}
+
+		for (const auto& axis : obb2.orientations) {
+			if (!TestAxis(axis, obb1, obb2)) {
+				return false;
+			}
+		}
+
+		// OBB1の軸とOBB2の軸に垂直な軸をテスト
+		for (const auto& axis : {
+				Vector3{obb1.orientations[1].x * obb2.orientations[2].x - obb1.orientations[2].x * obb2.orientations[1].x,
+						obb1.orientations[1].y * obb2.orientations[2].y - obb1.orientations[2].y * obb2.orientations[1].y,
+						obb1.orientations[1].z * obb2.orientations[2].z - obb1.orientations[2].z * obb2.orientations[1].z},
+				Vector3{obb1.orientations[2].x * obb2.orientations[0].x - obb1.orientations[0].x * obb2.orientations[2].x,
+						obb1.orientations[2].y * obb2.orientations[0].y - obb1.orientations[0].y * obb2.orientations[2].y,
+						obb1.orientations[2].z * obb2.orientations[0].z - obb1.orientations[0].z * obb2.orientations[2].z},
+				Vector3{obb1.orientations[0].x * obb2.orientations[1].x - obb1.orientations[1].x * obb2.orientations[0].x,
+						obb1.orientations[0].y * obb2.orientations[1].y - obb1.orientations[1].y * obb2.orientations[0].y,
+						obb1.orientations[0].z * obb2.orientations[1].z - obb1.orientations[1].z * obb2.orientations[0].z} }) {
+			if (!TestAxis(axis, obb1, obb2)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

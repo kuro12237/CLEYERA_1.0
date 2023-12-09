@@ -5,7 +5,7 @@
 #include "Collider/OBBCollider.h"
 #include"Input.h"
 
-class Player : public AABBCollider, OBBCollider
+class Player : public AABBCollider, public OBBCollider
 {
 public:
 	Player() {};

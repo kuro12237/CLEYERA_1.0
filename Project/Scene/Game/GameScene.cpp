@@ -22,7 +22,7 @@ void GameScene::Initialize() {
 
 
 	// CollisionManager
-	collisionManager = make_unique<CollisionManager>();
+	collisionManager_ = make_unique<CollisionManager>();
 
 }
 
@@ -38,6 +38,9 @@ void GameScene::Update(GameManager* Scene) {
 
 	// Enemy
 	enemy_->Update();
+
+	// Collision
+	CheckAllCollision();
 
 #ifdef _DEBUG
 
@@ -79,4 +82,22 @@ void GameScene::Flont2dSpriteDraw() {
 
 
 
+}
+
+
+
+
+void GameScene::CheckAllCollision() {
+
+	// 登録されたコライダーリストをクリアする
+	collisionManager_->ClliderClear();
+
+	// コライダーをリストに登録する
+	collisionManager_->ColliderAABBPushBack(player_.get());
+	collisionManager_->ColliderAABBPushBack(enemy_.get());
+	collisionManager_->ColliderOBBPushBack(player_.get());
+	collisionManager_->ColliderOBBPushBack(enemy_.get());
+
+	// すべてのコライダーに対して衝突を検出
+	collisionManager_->CheckAllCollision();
 }
