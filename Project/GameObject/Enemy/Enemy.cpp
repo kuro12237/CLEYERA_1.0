@@ -22,6 +22,12 @@ void Enemy::Update()
 {
 	this->worldTransform_.UpdateMatrix();
 
+	this->size_ = {
+		.x = 20.0f * worldTransform_.scale.x,
+		.y = 2.0f * worldTransform_.scale.y,
+		.z = 20.0f * worldTransform_.scale.z
+	};
+
 
 #ifdef _DEBUG
 

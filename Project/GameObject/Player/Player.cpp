@@ -51,6 +51,12 @@ void Player::Update()
 
 	this->worldTransform_.UpdateMatrix();
 
+	this->size_ = {
+		.x = 2.0f * worldTransform_.scale.x,
+		.y = 2.0f * worldTransform_.scale.y,
+		.z = 2.0f * worldTransform_.scale.z,
+	};
+
 #ifdef _DEBUG
 
 	ImGui::Begin("Player");
