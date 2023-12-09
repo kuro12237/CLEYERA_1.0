@@ -15,12 +15,12 @@ void Input::Initialize()
 		assert(0);
 	}
 
-	//InputDevice�̍쐬
+	//InputDeviceの作成
 	result = DirectInput8Create(WinApp::GetInstance()->GetWc().hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8,
 		(void**)&Input::GetInstance()->directInput, nullptr);
 
 	assert(SUCCEEDED(result));
-	//�L�[�{�[�h�f�o�C�X�̍쐬
+	//キーボードデバイスの作成
 	CreateKeybordDevice();
 	Input::GetInstance()->isInitialize = true;
 }
@@ -64,7 +64,7 @@ void Input::CreateKeybordDevice()
 	Input::GetInstance()->directInput->CreateDevice(GUID_SysKeyboard,
 		&Input::GetInstance()->keyboard, NULL);
 	assert(SUCCEEDED(hr));
-	//���̓f�[�^�`���̃Z�b�g
+	//入力データ形式のセット
 	hr = Input::GetInstance()->keyboard->SetDataFormat(&c_dfDIKeyboard);
 	assert(SUCCEEDED(hr));
 	//

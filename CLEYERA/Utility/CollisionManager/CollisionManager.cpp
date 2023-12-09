@@ -21,7 +21,7 @@ void CollisionManager::CheckAllCollision()
 	// SphereとSphere
 	//DetectSphere2SphereList(itrSpherre);
 	// AABBとAABB
-	DetectAABB2AABBList(itrAABB);
+	//DetectAABB2AABBList(itrAABB);
 	// AABBとSphere
 	//(itrAABB, itrSpherre);
 	// AABBとSegment
@@ -31,7 +31,7 @@ void CollisionManager::CheckAllCollision()
 	// OBBとSegmetn
 	//DetectOBB2SegmentList(itrOBB, itrSegment);
 	// OBBとOBB
-	//DetectOBB2OBBList(itrOBB);
+	DetectOBB2OBBList(itrOBB);
 }
 
 
