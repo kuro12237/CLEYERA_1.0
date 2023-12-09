@@ -58,7 +58,7 @@
 #pragma endregion
 
 using Microsoft::WRL::ComPtr;
-using namespace std;
+using namespace std;;
 using namespace std::chrono;
 
 #include"Vector2.h"

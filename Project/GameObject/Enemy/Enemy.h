@@ -20,6 +20,17 @@ public:
 
 	void OnCollision(uint32_t id)override;
 
+
+#pragma region Get
+
+	// Rotate�̎擾
+	Vector3 GetRotate() { return this->worldTransform_.rotation; }
+
+	// Size�̎擾
+	Vector3 GetSize() { return this->size_; }
+
+#pragma endregion 
+
 private:
 
 	void SettingColliderAttributeAndMask();
@@ -28,6 +39,10 @@ private:
 
 	unique_ptr<Model>model_ = nullptr;
 
+	uint32_t EnemyObjPath_ = 0;
+
 	WorldTransform worldTransform_ = {};
+
+	Vector3 size_{};
 
 };

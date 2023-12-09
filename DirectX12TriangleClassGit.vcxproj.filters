@@ -145,6 +145,15 @@
     <Filter Include="Project\Scene\Game">
       <UniqueIdentifier>{3b1efec7-7c91-4073-b1c0-521c203e8022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Utility\CollisionManager\IsCollision">
+      <UniqueIdentifier>{872bab6c-58e9-4973-8543-f4f3fa31a156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\CollisionManager\GeometryCollision">
+      <UniqueIdentifier>{80420389-8e26-48fc-8742-401d6865dfd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\CollisionManager\CollisionStructures">
+      <UniqueIdentifier>{fca5c863-241a-4653-826c-0404bd43a5ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -302,6 +311,12 @@
     </ClCompile>
     <ClCompile Include="Project\Scene\Game\GameScene.cpp">
       <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager\IsCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager\GeometryCollision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +514,15 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\Game\GameScene.h">
       <Filter>Project\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.h">
+      <Filter>CLEYERA\Utility\CollisionManager\IsCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.h">
+      <Filter>CLEYERA\Utility\CollisionManager\GeometryCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionStructures\CollisionStructures.h">
+      <Filter>CLEYERA\Utility\CollisionManager\CollisionStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,32 +2,27 @@
 
 
 
-GameScene::~GameScene() {
-
-
-	//// Camera
-	//viewProjection.Initialize({ 0,0,0.0f }, { 0.0f,2.0f,-12.0f });
-
-	//// Player
-	//player_ = make_unique<Player>();
-	//player_->Initialize();
-
-
-	//// Enemy
-	//enemy_ = make_unique<Enemy>();
-	//enemy_->Initialize();
-
-
-	//// CollisionManager
-	//collisionManager = make_unique<CollisionManager>();
-
-}
+GameScene::~GameScene() {}
 
 
 
 void GameScene::Initialize() {
 
+	// Camera
+	viewProjection.Initialize({ 0,0,0.0f }, { 0.0f,2.0f,-45.0f });
 
+	// Player
+	player_ = make_unique<Player>();
+	player_->Initialize();
+
+
+	// Enemy
+	enemy_ = make_unique<Enemy>();
+	enemy_->Initialize();
+
+
+	// CollisionManager
+	collisionManager = make_unique<CollisionManager>();
 
 }
 
@@ -38,7 +33,11 @@ void GameScene::Update(GameManager* Scene) {
 	// Camera
 	viewProjection.UpdateMatrix();
 
+	// Player
+	player_->Update();
 
+	// Enemy
+	enemy_->Update();
 
 #ifdef _DEBUG
 
@@ -66,7 +65,11 @@ void GameScene::Back2dSpriteDraw() {
 
 void GameScene::Object3dDraw() {
 
+	// Player
+	player_->Draw(viewProjection);
 
+	// Enemy
+	enemy_->Draw(viewProjection);
 
 }
 

@@ -3,24 +3,46 @@
 void Enemy::Initialize()
 {
 	this->model_ = make_unique<Model>();
-	TextureManager::UnUsedFilePath();
-	uint32_t tex = TextureManager::LoadTexture("Resources/Default/uvChecker.png");
-	this->model_->SetTexHandle(tex);
-	this->model_->CreateModel(make_unique<ModelSphereState>());
+	this->EnemyObjPath_ = ModelManager::LoadObjectFile("Enemy");
+	this->model_->SetModel(EnemyObjPath_);
+	this->model_->CreateModel(make_unique<ModelObjState>());
 	this->worldTransform_.Initialize();
+	this->size_ = {
+		.x = 20.0f * worldTransform_.scale.x,
+		.y = 2.0f * worldTransform_.scale.y,
+		.z = 20.0f * worldTransform_.scale.z
+	};
 
 	SettingColliderAttributeAndMask();
+
 }
+
 
 void Enemy::Update()
 {
 	this->worldTransform_.UpdateMatrix();
+
+
+#ifdef _DEBUG
+
+	ImGui::Begin("Enemy");
+	ImGui::Text("WorldTransform");
+	ImGui::DragFloat3("Scale", &this->worldTransform_.scale.x, 0.01f, 0.0f, 10.0f);
+	ImGui::DragFloat3("Rotate", &this->worldTransform_.rotation.x, 0.01f);
+	ImGui::DragFloat3("Translate", &this->worldTransform_.translate.x, 0.1f);
+	ImGui::Text("Size");
+	ImGui::DragFloat3("Size", &this->size_.x, 0.01f);
+	ImGui::End();
+
+#endif // _DEBUG
 }
+
 
 void Enemy::Draw(ViewProjection view)
 {
 	this->model_->Draw(this->worldTransform_, view);
 }
+
 
 Vector3 Enemy::GetWorldPosition()
 {
@@ -33,11 +55,11 @@ Vector3 Enemy::GetWorldPosition()
 
 }
 
+
 void Enemy::OnCollision(uint32_t id)
 {
 	id;
 }
-
 
 
 void Enemy::SettingColliderAttributeAndMask() {

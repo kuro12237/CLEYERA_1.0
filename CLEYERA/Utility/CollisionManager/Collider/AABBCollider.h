@@ -1,16 +1,6 @@
 #pragma once
-
-
 #include "Pch.h"
-
-
-
-// AABB
-struct AABB {
-	Vector3 min = {-0.5f,-0.5f,-0.5f}; // !< Å­“_
-	Vector3 max = {0.5f,0.5f,0.5f}; // !< Å‘å“_
-};
-
+#include "CollisionStructures/CollisionStructures.h"
 
 
 class AABBCollider {

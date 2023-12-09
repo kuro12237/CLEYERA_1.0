@@ -1,5 +1,7 @@
 #pragma once
 #include"Pch.h"
+#include "CollisionStructures/CollisionStructures.h"
+
 
 class SphereCollider {
 public:

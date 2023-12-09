@@ -6,8 +6,7 @@
 #include"Pch.h"
 #include "VectorTransform.h"
 #include "MatrixTransform.h"
-
-#include <array>
+#include "IsCollision/IsCollision.h"
 
 
 
@@ -35,31 +34,17 @@ private:
 	void CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB);
 	void CheckCollisionPair(OBBCollider* cA, OBBCollider* cB);
 
-	// 球と球の衝突判定
-	bool CheckBallCollosion(Vector3 v1, float vr1, Vector3 v2, float vr2);
+	// 球と球
+	void DetectAllCollisionsInSphere2SphereList(std::list<SphereCollider*>::iterator itrA);
 
+	// AABBとAABB
+	void DetectAllCollisionsInAABB2AABBList(std::list<AABBCollider*>::iterator itrA);
 
-	/// 衝突判定
-	bool IsCollision(const AABB& aabb1, const AABB& aabb2);
-	bool IsCollision(const AABB& aabb, const Segment& s);
-	bool IsCollision(const OBB& obb, const Segment& s);
-	bool IsCollision(const OBB& obb1, const OBB& obb2);
+	// AABBとSegment
+	void DetectAllCollisionsInAABBSegmentList(std::list<OBBCollider*>::iterator itrA);
 
-	// OBBのワールドマトリックス作成
-	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb);
-
-
-	// 射影の重複チェック
-	bool TestAxis(const Vector3& axis, const OBB& obb1, const OBB& obb2);
-
-	// 実際に重なってるかの計算
-	bool projectionOverlap(const std::pair<float, float>& projection1, const std::pair<float, float>& projection2);
-
-	// 頂点を軸に射影
-	std::pair<float, float> obbProjection(const OBB& obb, const Vector3& axis);
-
-	// OBBの設定
-	OBB SettingOBBProperties(OBBCollider* c);
+	// OBBとOBB
+	void DetectAllCollisionsInOBB2OBBList(std::list<SegmentCollider*>::iterator itrA);
 
 
 private:
