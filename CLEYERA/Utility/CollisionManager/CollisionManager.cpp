@@ -11,25 +11,20 @@ void CollisionManager::CheckAllCollision()
 	std::list<AABBCollider*>::iterator itrAABB = aabbColliders_.begin();
 	std::list<OBBCollider*>::iterator itrOBB = obbColliders_.begin();
 
-	// list
-	// push_backしてないので、情報が入ってない
-	// この状態で衝突判定するとエラーはいる
-	// 後で処理の中にif文作って、情報は言ってなかったら抜けるようにする
-
 
 	/* 各種コライダー同士の衝突検出メソッド */
 	// SphereとSphere
-	//DetectSphere2SphereList(itrSpherre);
+	DetectSphere2SphereList(itrSpherre);
 	// AABBとAABB
-	//DetectAABB2AABBList(itrAABB);
+	DetectAABB2AABBList(itrAABB);
 	// AABBとSphere
-	//(itrAABB, itrSpherre);
+	DetectAABB2SphereList(itrAABB, itrSpherre);
 	// AABBとSegment
-	//DetectAABB2SegmentList(itrAABB, itrSegment);
+	DetectAABB2SegmentList(itrAABB, itrSegment);
 	// OBBとSphere
-	//DetectOBB2SphereList(itrOBB, itrSpherre);
+	DetectOBB2SphereList(itrOBB, itrSpherre);
 	// OBBとSegmetn
-	//DetectOBB2SegmentList(itrOBB, itrSegment);
+	DetectOBB2SegmentList(itrOBB, itrSegment);
 	// OBBとOBB
 	DetectOBB2OBBList(itrOBB);
 }
@@ -41,6 +36,10 @@ void CollisionManager::CheckAllCollision()
 /// </summary>
 void CollisionManager::DetectSphere2SphereList(list<SphereCollider*>::iterator itr1) {
 
+	if (itr1 == sphereColliders_.end()) {
+		return;
+	}
+
 	for (; itr1 != sphereColliders_.end(); ++itr1) {
 
 		SphereCollider* colliderA = *itr1;
@@ -50,7 +49,7 @@ void CollisionManager::DetectSphere2SphereList(list<SphereCollider*>::iterator i
 		for (; itr2 != sphereColliders_.end(); ++itr2) {
 			SphereCollider* colliderB = *itr2;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionSpherexSphere(colliderA, colliderB);
 		}
 	}
 }
@@ -59,6 +58,10 @@ void CollisionManager::DetectSphere2SphereList(list<SphereCollider*>::iterator i
 /// 衝突検出メソッド : AABB2AABB
 /// </summary>
 void CollisionManager::DetectAABB2AABBList(list<AABBCollider*>::iterator itrA) {
+
+	if (itrA == aabbColliders_.end()) {
+		return;
+	}
 
 	for (; itrA != aabbColliders_.end(); ++itrA) {
 
@@ -69,7 +72,7 @@ void CollisionManager::DetectAABB2AABBList(list<AABBCollider*>::iterator itrA) {
 		for (; itrB != aabbColliders_.end(); ++itrB) {
 			AABBCollider* colliderB = *itrB;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionAABBxAABB(colliderA, colliderB);
 		}
 	}
 }
@@ -79,6 +82,10 @@ void CollisionManager::DetectAABB2AABBList(list<AABBCollider*>::iterator itrA) {
 /// </summary>
 void CollisionManager::DetectAABB2SphereList(list<AABBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB) {
 
+	if (itrA == aabbColliders_.end() || itrB == sphereColliders_.end()) {
+		return;
+	}
+
 	for (; itrA != aabbColliders_.end(); ++itrA) {
 
 		AABBCollider* colliderA = *itrA;
@@ -88,7 +95,7 @@ void CollisionManager::DetectAABB2SphereList(list<AABBCollider*>::iterator itrA,
 		for (; newItrB != sphereColliders_.end(); ++newItrB) {
 			SphereCollider* colliderB = *newItrB;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionAABBxSphere(colliderA, colliderB);
 		}
 	}
 }
@@ -98,6 +105,10 @@ void CollisionManager::DetectAABB2SphereList(list<AABBCollider*>::iterator itrA,
 /// </summary>
 void CollisionManager::DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB) {
 
+	if (itrA == aabbColliders_.end() || itrB == segmentColliders_.end()) {
+		return;
+	}
+
 	for (; itrA != aabbColliders_.end(); ++itrA) {
 
 		AABBCollider* colliderA = *itrA;
@@ -107,7 +118,7 @@ void CollisionManager::DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA
 		for (; newItrB != segmentColliders_.end(); ++newItrB) {
 			SegmentCollider* colliderB = *newItrB;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionAABBxSegment(colliderA, colliderB);
 		}
 	}
 }
@@ -116,6 +127,10 @@ void CollisionManager::DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA
 /// 衝突検出メソッド : OBB2Sphere
 /// </summary>
 void CollisionManager::DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB) {
+
+	if (itrA == obbColliders_.end() || itrB == sphereColliders_.end()) {
+		return;
+	}
 
 	for (; itrA != obbColliders_.end(); ++itrA) {
 
@@ -126,7 +141,7 @@ void CollisionManager::DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, l
 		for (; newItrB != sphereColliders_.end(); ++newItrB) {
 			SphereCollider* colliderB = *newItrB;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionOBBxSphere(colliderA, colliderB);
 		}
 	}
 }
@@ -135,6 +150,10 @@ void CollisionManager::DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, l
 /// 衝突検出メソッド : OBB2Segment
 /// </summary>
 void CollisionManager::DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB) {
+
+	if (itrA == obbColliders_.end() || itrB == segmentColliders_.end()) {
+		return;
+	}
 
 	for (; itrA != obbColliders_.end(); ++itrA) {
 
@@ -145,7 +164,7 @@ void CollisionManager::DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, 
 		for (; newItrB != segmentColliders_.end(); ++newItrB) {
 			SegmentCollider* colliderB = *newItrB;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionOBBxSegment(colliderA, colliderB);
 		}
 	}
 }
@@ -154,6 +173,10 @@ void CollisionManager::DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, 
 /// 衝突検出メソッド : OBB2OBB
 /// </summary>
 void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
+
+	if (itrA == obbColliders_.end()) {
+		return;
+	}
 
 	for (; itrA != obbColliders_.end(); ++itrA) {
 
@@ -164,7 +187,7 @@ void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
 		for (; itrB != obbColliders_.end(); ++itrB) {
 			OBBCollider* colliderB = *itrB;
 
-			CheckCollisionPair(colliderA, colliderB);
+			CheckCollisionOBBxOBB(colliderA, colliderB);
 		}
 	}
 }
@@ -176,7 +199,7 @@ void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : Sphere2Sphere
 /// </summary>
-void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB) {
+void CollisionManager::CheckCollisionSpherexSphere(SphereCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
@@ -206,7 +229,7 @@ void CollisionManager::CheckCollisionPair(SphereCollider* cA, SphereCollider* cB
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : AABB2AABB
 /// </summary>
-void CollisionManager::CheckCollisionPair(AABBCollider* cA, AABBCollider* cB) {
+void CollisionManager::CheckCollisionAABBxAABB(AABBCollider* cA, AABBCollider* cB) {
 
 	// コリジョンフィルタリング
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
@@ -230,7 +253,7 @@ void CollisionManager::CheckCollisionPair(AABBCollider* cA, AABBCollider* cB) {
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : AABB2Sphere
 /// </summary>
-void CollisionManager::CheckCollisionPair(AABBCollider* cA, SphereCollider* cB) {
+void CollisionManager::CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
@@ -257,7 +280,7 @@ void CollisionManager::CheckCollisionPair(AABBCollider* cA, SphereCollider* cB) 
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : AABB2Segment
 /// </summary>
-void CollisionManager::CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB) {
+void CollisionManager::CheckCollisionAABBxSegment(AABBCollider* cA, SegmentCollider* cB) {
 
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
 		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
@@ -275,7 +298,7 @@ void CollisionManager::CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB)
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : OBB2Sphere
 /// </summary>
-void CollisionManager::CheckCollisionPair(OBBCollider* cA, SphereCollider* cB) {
+void CollisionManager::CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
@@ -302,7 +325,7 @@ void CollisionManager::CheckCollisionPair(OBBCollider* cA, SphereCollider* cB) {
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : OBB2Segment
 /// </summary>
-void CollisionManager::CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB) {
+void CollisionManager::CheckCollisionOBBxSegment(OBBCollider* cA, SegmentCollider* cB) {
 
 	// コリジョンフィルタリング
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
@@ -326,7 +349,7 @@ void CollisionManager::CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB) 
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : OBB2OBB
 /// </summary>
-void CollisionManager::CheckCollisionPair(OBBCollider* cA, OBBCollider* cB) {
+void CollisionManager::CheckCollisionOBBxOBB(OBBCollider* cA, OBBCollider* cB) {
 
 	// コリジョンフィルタリング
 	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||

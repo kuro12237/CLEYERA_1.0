@@ -60,13 +60,13 @@ private:
     // -------------------------------------------------------------------------
     // 2つのコライダーの衝突検出と応答メソッド
     // -------------------------------------------------------------------------
-    void CheckCollisionPair(SphereCollider* cA, SphereCollider* cB);
-    void CheckCollisionPair(AABBCollider* cA, AABBCollider* cB);
-    void CheckCollisionPair(AABBCollider* cA, SphereCollider* cB);
-    void CheckCollisionPair(AABBCollider* cA, SegmentCollider* cB);
-    void CheckCollisionPair(OBBCollider* cA, SphereCollider* cB);
-    void CheckCollisionPair(OBBCollider* cA, SegmentCollider* cB);
-    void CheckCollisionPair(OBBCollider* cA, OBBCollider* cB);
+    void CheckCollisionSpherexSphere(SphereCollider* cA, SphereCollider* cB);
+    void CheckCollisionAABBxAABB(AABBCollider* cA, AABBCollider* cB);
+    void CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollider* cB);
+    void CheckCollisionAABBxSegment(AABBCollider* cA, SegmentCollider* cB);
+    void CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider* cB);
+    void CheckCollisionOBBxSegment(OBBCollider* cA, SegmentCollider* cB);
+    void CheckCollisionOBBxOBB(OBBCollider* cA, OBBCollider* cB);
 
 
 private:
