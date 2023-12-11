@@ -194,7 +194,6 @@ void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
 
 
 
-
 /// <summary>
 /// 2つのコライダーの衝突検出と応答メソッド
 ///  : Sphere2Sphere
