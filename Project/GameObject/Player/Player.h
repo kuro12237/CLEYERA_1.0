@@ -35,6 +35,8 @@ public:
 
 private:
 
+	void SettingProperties();
+
 	void SettingColliderAttributeAndMask();
 
 private:

@@ -22,13 +22,7 @@ void Enemy::Update()
 {
 	this->worldTransform_.UpdateMatrix();
 
-	this->size_ = {
-		.x = 20.0f * worldTransform_.scale.x,
-		.y = 2.0f * worldTransform_.scale.y,
-		.z = 20.0f * worldTransform_.scale.z
-	};
-
-	SetRotate(this->worldTransform_.rotation);
+	SettingProperties();
 
 #ifdef _DEBUG
 
@@ -75,4 +69,17 @@ void Enemy::SettingColliderAttributeAndMask() {
 	AABBCollider::SetCollisionMask(kCollisionMaskEnemy);
 	OBBCollider::SetCollosionAttribute(kCollisionAttributeEnemy);
 	OBBCollider::SetCollisionMask(kCollisionMaskEnemy);
+}
+
+
+void Enemy::SettingProperties() {
+
+	this->size_ = {
+		.x = 20.0f * worldTransform_.scale.x,
+		.y = 2.0f * worldTransform_.scale.y,
+		.z = 20.0f * worldTransform_.scale.z
+	};
+
+	OBBCollider::SetSize(this->size_);
+	OBBCollider::SetRotate(this->worldTransform_.rotation);
 }

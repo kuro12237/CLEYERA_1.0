@@ -51,13 +51,7 @@ void Player::Update()
 
 	this->worldTransform_.UpdateMatrix();
 
-	this->size_ = {
-		.x = 2.0f * worldTransform_.scale.x,
-		.y = 2.0f * worldTransform_.scale.y,
-		.z = 2.0f * worldTransform_.scale.z,
-	};
-
-	SetRotate(this->worldTransform_.rotation);
+	SettingProperties();
 
 #ifdef _DEBUG
 
@@ -105,4 +99,17 @@ void Player::SettingColliderAttributeAndMask() {
 	AABBCollider::SetCollisionMask(kCollisionMaskPlayer);
 	OBBCollider::SetCollosionAttribute(kCollisionAttributePlayer);
 	OBBCollider::SetCollisionMask(kCollisionMaskPlayer);
+}
+
+
+void Player::SettingProperties() {
+
+	this->size_ = {
+		.x = 2.0f * worldTransform_.scale.x,
+		.y = 2.0f * worldTransform_.scale.y,
+		.z = 2.0f * worldTransform_.scale.z,
+	};
+
+	OBBCollider::SetSize(this->size_);
+	OBBCollider::SetRotate(this->worldTransform_.rotation);
 }
