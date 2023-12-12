@@ -35,7 +35,7 @@ void Model::SetModel(uint32_t handle)
 	}
 }
 
-void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
+void Model::Draw(const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	if (state_ == nullptr)
 	{

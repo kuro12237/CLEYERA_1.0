@@ -102,13 +102,13 @@ void DebugScene::Update(GameManager* Scene)
 		//model_->UseLight(NONE);
 	}
 
-
+	model_->SetModel(packageModelHandle_);
 	if (Input::PushKey(DIK_O))
 	{
-		//model_->SetModel(packageModelHandle_);
+		
 	}else
 	{
-		//model_->SetModel(houseModelHandle_);
+		model_->SetModel(houseModelHandle_);
 	}
 
 	ImGui::Begin("TestSphere");
@@ -118,6 +118,7 @@ void DebugScene::Update(GameManager* Scene)
 
 	ImGui::End();
 
+	//毎回モデルを切り替える
 	sprite_->SetTexHandle(SpritemobTexHandle_);
 	if (Input::PushKey(DIK_I))
 	{

@@ -46,7 +46,7 @@ public:
 	/// <param name="ModelHandle"></param>
 	void SetModel(uint32_t handle);
 
-	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
+	void Draw(const WorldTransform &worldTransform, const ViewProjection &viewprojection);
 
 	/// <summary>
 	/// ライトを使うか？

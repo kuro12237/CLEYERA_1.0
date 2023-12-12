@@ -25,7 +25,7 @@ void ModelObjState::Initialize(Model* state)
 	ModelData_.vertices.clear();
 }
 
-void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelObjState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;

@@ -19,7 +19,7 @@ void ModelSphereState::Initialize(Model* state)
 	state;
 }
 
-void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelSphereState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -131,7 +131,7 @@ void ModelSphereState::Draw(Model* state, WorldTransform worldTransform, ViewPro
 	CommandCall(state,worldTransform,viewprojection);
 }
 
-void ModelSphereState::CommandCall(Model*state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelSphereState::CommandCall(Model*state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();

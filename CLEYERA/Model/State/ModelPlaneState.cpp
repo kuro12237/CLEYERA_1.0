@@ -14,7 +14,7 @@ void ModelPlaneState::Initialize(Model* state)
 	state;
 }
 
-void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelPlaneState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -58,7 +58,7 @@ void ModelPlaneState::Draw(Model* state, WorldTransform worldTransform, ViewProj
 
 }
 
-void ModelPlaneState::CommandCall(uint32_t texHandle, WorldTransform worldTransform, ViewProjection viewProjection)
+void ModelPlaneState::CommandCall(uint32_t texHandle, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	
@@ -85,7 +85,7 @@ void ModelPlaneState::CommandCall(uint32_t texHandle, WorldTransform worldTransf
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
-	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewProjection.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 
 	if (!texHandle==0)
 	{

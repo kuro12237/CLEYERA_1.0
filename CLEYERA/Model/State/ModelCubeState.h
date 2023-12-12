@@ -14,12 +14,12 @@ public:
 
 	void Initialize(Model* state)override;
 
-	void Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)override;
+	void Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)override;
 
 
 private:
 
-	void CommandCall(Model* state, WorldTransform worldTransform, ViewProjection viewprojection);
+	void CommandCall(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection);
 
 	const int VertexNum = 8;
 	ResourcePeroperty resource_ = {};

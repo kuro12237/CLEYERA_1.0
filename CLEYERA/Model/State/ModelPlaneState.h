@@ -12,12 +12,12 @@ public:
 	~ModelPlaneState() {};
 	void Initialize(Model* state)override;
 
-	void Draw(Model* state,WorldTransform worldTransform,ViewProjection viewprojection)override;
+	void Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)override;
 
 
 private:
 
-	void CommandCall(uint32_t texHandle,WorldTransform worldTransform,ViewProjection viewProjection);
+	void CommandCall(uint32_t texHandle, const WorldTransform& worldTransform, const ViewProjection& viewprojection);
 
 	const uint32_t VertexSize = 4;
 	const uint32_t IndexSize = 6;
