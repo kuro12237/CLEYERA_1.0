@@ -49,7 +49,6 @@ void ViewProjection::TransfarMatrix()
 	pos.y = matView_.m[3][1];
 	pos.z = matView_.m[3][2];
 
-
 	BufferMatrix_->position = translation_;
 	UnMap();
 }
