@@ -38,9 +38,13 @@ void DebugScene::Initialize()
 	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	houseModelHandle_ = ModelManager::LoadObjectFile("House");
-	packageModelHandle_ = ModelManager::LoadObjectFile("TestGround");
+	GroundModelHandle_ = ModelManager::LoadObjectFile("TestGround");
 	uint32_t testSkydomeModelHandle_= ModelManager::LoadObjectFile("TestSkyDome");
-	model_->SetModel(packageModelHandle_);
+	model_->SetModel(GroundModelHandle_);
+	//handle読み込み
+	//モデルにセットし
+	//handleがきりかわるたびにハンドルに対応したモデルの頂点に作り変える
+
 
 	BallModel_ = make_unique<Model>();
 	BallModel_->UseLight();
@@ -102,7 +106,7 @@ void DebugScene::Update(GameManager* Scene)
 		//model_->UseLight(NONE);
 	}
 
-	model_->SetModel(packageModelHandle_);
+	model_->SetModel(GroundModelHandle_);
 	if (Input::PushKey(DIK_O))
 	{
 		
