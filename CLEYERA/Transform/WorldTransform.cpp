@@ -2,7 +2,7 @@
 
 void WorldTransform::CreateBuffer()
 {
-	CreateResources::CreateBufferResource(sizeof(TransformationMatrix),buffer_);
+	buffer_ = CreateResources::CreateBufferResource(sizeof(TransformationMatrix));
 }
 
 void WorldTransform::Map()

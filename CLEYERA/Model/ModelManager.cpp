@@ -90,12 +90,11 @@ SModelData ModelManager::GetObjData(uint32_t index)
 	SModelData data{};
 	for (const auto& [key, s] : ModelManager::GetInstance()->objModelDatas_)
 	{
-		key;
 		if (s.get()->GetIndex() == index)
 		{
 			data = s.get()->GetData();
+			data.filePath = key;
 			return data;
-			break;
 		}
 	}
 

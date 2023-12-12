@@ -18,4 +18,5 @@ public:
 private:
 	ResourcePeroperty resource_ = {};
 	Vector3 testLightDirection = { 0,-1.0f,0 };
+	SModelData ModelData_ = {};
 };

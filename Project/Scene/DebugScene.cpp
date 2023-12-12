@@ -78,6 +78,8 @@ void DebugScene::Initialize()
 	pointLightB_.intencity = 0;
 	pointLightC_.intencity = 0;
 
+	sunLight_.radious = 30.0f;
+	sunLight_.position.y = 3.0f;
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize(pointFireLightPosition_);
 }
@@ -100,20 +102,15 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Text("ChangeTex :: I key");
 	ImGui::End();
 
-	//model_->UseLight(HARF_LAMBERT);
-	if (Input::PushKey(DIK_L))
-	{
-		//model_->UseLight(NONE);
-	}
 
+
+	//debug用でモデルを毎回切り替え挙動を確認
 	model_->SetModel(GroundModelHandle_);
-	if (Input::PushKey(DIK_O))
-	{
-		
-	}else
+	if (!Input::PushKey(DIK_O))
 	{
 		model_->SetModel(houseModelHandle_);
 	}
+
 
 	ImGui::Begin("TestSphere");
 	ImGui::SliderFloat3("t", &ballModelWorldTransform_.translate.x, -3.0f, 3.0f);
@@ -122,7 +119,7 @@ void DebugScene::Update(GameManager* Scene)
 
 	ImGui::End();
 
-	//毎回モデルを切り替える
+	//画像切り替え
 	sprite_->SetTexHandle(SpritemobTexHandle_);
 	if (Input::PushKey(DIK_I))
 	{
