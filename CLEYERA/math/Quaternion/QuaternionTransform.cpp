@@ -1,5 +1,20 @@
 #include "QuaternionTransform.h"
 
+Quaternion QuaternionTransform::MakeQuaternionRotateAxisAngle(const Vector3& axis, float angle)
+{
+	Quaternion result{};
+	float halfAngle = angle * 0.5f;
+	float sinHalfAngle = sinf(halfAngle);
+	float cosHalfAngle = cosf(halfAngle);
+
+	result.w = cosHalfAngle;
+	result.x = axis.x * sinHalfAngle;
+	result.y = axis.y * sinHalfAngle;
+	result.z = axis.z * sinHalfAngle;
+
+	return result;
+}
+
 Matrix4x4 QuaternionTransform::MakeRotateAxisAngle(const Vector3& axis, float angle)
 {
 	Matrix4x4 result{};
@@ -64,6 +79,18 @@ Matrix4x4 QuaternionTransform::DirectionToDirection(const Vector3& from,const Ve
 	 Matrix4x4 result{};
 
 	 result = MakeRotateAxisAngle(n, sin, cos);
+
+	return result;
+}
+
+Matrix4x4 QuaternionTransform::MakeRotateMatrix(const Quaternion& q)
+{
+	Matrix4x4 result = MatrixTransform::Identity();
+
+	Quaternion powQ = { (q.x * q.x) ,( q.y * q.y) ,(q.z*q.z) ,(q.w*q.w) };
+
+	result.m[0][0] = powQ.w + powQ.x - powQ.y - powQ.z;
+	result.m[0][1] = 2*(( q.x * q.y) + (q.w * q.z));
 
 	return result;
 }
