@@ -45,7 +45,7 @@ private:
 
 	uint32_t playerObjPath_ = 0;
 
-	WorldTransform worldTransform_ = {};
+	WorldTransform worldTransform_{};
 
 	Vector3 size_{};
 
