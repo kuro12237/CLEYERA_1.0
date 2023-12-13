@@ -38,8 +38,6 @@ void ModelObjState::CallPipelinexVertex(Model* state)
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	
 }
 
 void ModelObjState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
