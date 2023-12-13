@@ -36,8 +36,8 @@ void MTScene::Update(GameManager* Scene)
 	ImGui::Text("%0.3f %0.3f %0.3f %0.3f", rotateMatrix.m[2][0], rotateMatrix.m[2][1], rotateMatrix.m[2][2], rotateMatrix.m[2][3]);
 	ImGui::Text("%0.3f %0.3f %0.3f %0.3f", rotateMatrix.m[3][0], rotateMatrix.m[3][1], rotateMatrix.m[3][2], rotateMatrix.m[3][3]);
 
-	ImGui::Text("rotateByQuaternion : %0.2f %0.2f %0.2f %0.2f", rByQuaternion.x, rByQuaternion.y, rByQuaternion.z);
-	ImGui::Text("rotateByMatrix : %0.2f %0.2f %0.2f %0.2f", rByMat.x, rByMat.y, rByMat.z);
+	ImGui::Text("rotateByQuaternion : %0.2f %0.2f %0.2f", rByQuaternion.x, rByQuaternion.y, rByQuaternion.z);
+	ImGui::Text("rotateByMatrix : %0.2f %0.2f %0.2f", rByMat.x, rByMat.y, rByMat.z);
 
 	ImGui::End();
 
