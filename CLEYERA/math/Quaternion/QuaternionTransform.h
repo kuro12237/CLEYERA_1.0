@@ -33,6 +33,8 @@ public:
 
 	static Quaternion Inverse(const Quaternion& quaternion);
 
+	static Vector3 RotateVector(const Vector3& v, const Quaternion& q);
+
 private:
 
 };
