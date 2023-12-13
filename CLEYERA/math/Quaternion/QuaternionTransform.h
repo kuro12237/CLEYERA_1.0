@@ -13,6 +13,10 @@ public:
 	
 	static Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float sin, float cos);
 
+	static Quaternion MakeQuaternionRotateAxisAngle(const Vector3& axis, float angle);
+
+	static Matrix4x4 MakeRotateMatrix(const Quaternion& q);
+
 	static Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to);
 
 	static float Length(Quaternion q);
@@ -28,6 +32,8 @@ public:
 	static Quaternion Normalize(const Quaternion& quaternion);
 
 	static Quaternion Inverse(const Quaternion& quaternion);
+
+	static Vector3 RotateVector(const Vector3& v, const Quaternion& q);
 
 private:
 
