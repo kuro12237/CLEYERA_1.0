@@ -50,9 +50,9 @@
     <ClCompile Include="CLEYERA\math\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp" />
     <ClCompile Include="CLEYERA\math\VectorTransform.cpp" />
+    <ClCompile Include="CLEYERA\Model\Game3dObject.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
-    <ClCompile Include="CLEYERA\Model\State\ModelCubeState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelLineState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp" />
@@ -72,6 +72,7 @@
     <ClCompile Include="Project\GameObject\FireParticles\FireParticle.cpp" />
     <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene.cpp" />
+    <ClCompile Include="Project\Scene\GameObject3dTest.cpp" />
     <ClCompile Include="Project\Scene\MTScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +104,10 @@
     <ClInclude Include="CLEYERA\math\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector4.h" />
     <ClInclude Include="CLEYERA\math\VectorTransform.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dObject.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
     <ClInclude Include="CLEYERA\Model\ModelManager.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
-    <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelLineState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Project\GameObject\FireParticles\FireParticle.h" />
     <ClInclude Include="Project\Scene\CreatePhongModelScene.h" />
     <ClInclude Include="Project\Scene\DebugScene.h" />
+    <ClInclude Include="Project\Scene\GameObject3dTest.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\MTScene.h" />
   </ItemGroup>

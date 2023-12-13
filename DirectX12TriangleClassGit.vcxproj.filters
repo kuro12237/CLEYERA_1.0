@@ -118,9 +118,6 @@
     <Filter Include="CLEYERA\Particle\ParticlePlane">
       <UniqueIdentifier>{c073a108-c039-4bd3-9fbf-37b30c3aeafc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\Model\Cube">
-      <UniqueIdentifier>{e412e551-47a5-42ed-ae39-05603aeb4f80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\Scene\CreatePhongModelScene">
       <UniqueIdentifier>{920f8ac2-e3af-4d13-b3b4-6e11c801e5d7}</UniqueIdentifier>
     </Filter>
@@ -129,9 +126,6 @@
     </Filter>
     <Filter Include="CLEYERA\math\Vector">
       <UniqueIdentifier>{3cb29394-5a40-4ddb-a173-7994b23f6ecf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\Model\Manager">
-      <UniqueIdentifier>{7b19fbfd-8110-4943-bbda-58bd382d0ccd}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\Light">
       <UniqueIdentifier>{fa6556f0-e893-424a-ac19-2af4803be191}</UniqueIdentifier>
@@ -255,9 +249,6 @@
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp">
       <Filter>CLEYERA\Particle\ParticlePlane</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Model\State\ModelCubeState.cpp">
-      <Filter>CLEYERA\Model\Cube</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClCompile>
@@ -290,6 +281,12 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\FireParticles\FireParticle.cpp">
       <Filter>Project\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\Game3dObject.cpp">
+      <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\GameObject3dTest.cpp">
+      <Filter>Project\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +446,6 @@
     <ClInclude Include="CLEYERA\math\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\ModelCubeState.h">
-      <Filter>CLEYERA\Model\Cube</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Model\ModelManager.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
@@ -469,6 +463,12 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\FireParticles\FireParticle.h">
       <Filter>Project\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Game3dObject.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\GameObject3dTest.h">
+      <Filter>Project\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

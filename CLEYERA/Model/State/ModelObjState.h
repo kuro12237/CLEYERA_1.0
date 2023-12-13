@@ -12,11 +12,11 @@ public:
 	~ModelObjState() ;
 
 	void Initialize(Model* state)override;
-
+	void CallPipelinexVertex(Model* state)override;
 	void Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)override;
 
 private:
 	ResourcePeroperty resource_ = {};
 	Vector3 testLightDirection = { 0,-1.0f,0 };
-	SModelData ModelData_ = {};
+
 };

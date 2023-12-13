@@ -11,7 +11,7 @@ public:
 
 	~ModelPlaneState() {};
 	void Initialize(Model* state)override;
-
+	void CallPipelinexVertex(Model* state)override;
 	void Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)override;
 
 

@@ -35,6 +35,18 @@ void Model::SetModel(uint32_t handle)
 	}
 }
 
+void Model::CreateObj(SModelData modeldata)
+{
+	state_ = make_unique<ModelObjState>();
+	modelData_ = modeldata;
+	state_->Initialize(this);
+}
+
+void Model::CommandCallPipelineVertex()
+{
+	state_->CallPipelinexVertex(this);
+}
+
 void Model::Draw(const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	if (state_ == nullptr)

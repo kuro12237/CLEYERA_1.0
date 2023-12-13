@@ -25,6 +25,8 @@ public:
 	/// </summary>
 	static SModelData GetObjData(uint32_t index);
 
+	static Model* GetModel(uint32_t index);
+
 private:
 	
 	static bool ChackLoadObj(string filePath);

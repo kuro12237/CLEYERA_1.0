@@ -6,7 +6,7 @@
 #include"ModelLineState.h"
 #include"ModelSphereState.h"
 #include"ModelObjState.h"
-#include"ModelCubeState.h"
+
 #include"WorldTransform.h"
 #include"ViewProjection.h"
 #include"Light/Light.h"
@@ -45,6 +45,10 @@ public:
 	/// </summary>
 	/// <param name="ModelHandle"></param>
 	void SetModel(uint32_t handle);
+
+	void CreateObj(SModelData modeldata);
+
+	void CommandCallPipelineVertex();
 
 	void Draw(const WorldTransform &worldTransform, const ViewProjection &viewprojection);
 
@@ -101,6 +105,8 @@ public:
 	
 	bool GetUseLight(){return uselight_;}
 
+	SModelData GetModelData() { return modelData_; }
+
 	//Light GetLight() { return testLight_; }
 #pragma endregion 
 
@@ -125,6 +131,7 @@ private:
 	bool uselight_ = false;
 
 	unique_ptr<IModelState> state_ = nullptr;
+	SModelData modelData_;
 
 };
 

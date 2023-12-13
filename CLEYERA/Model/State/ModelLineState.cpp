@@ -10,6 +10,11 @@ void ModelLineState::Initialize(Model* state)
 	state;
 }
 
+void ModelLineState::CallPipelinexVertex(Model* state)
+{
+	state;
+}
+
 void ModelLineState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;

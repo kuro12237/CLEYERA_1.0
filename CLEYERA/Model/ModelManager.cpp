@@ -77,7 +77,10 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		uint32_t texHandle = TextureManager::LoadTexture(modelData.material.textureFilePath);
 		modelData.material.handle = texHandle;
 
-		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle);
+		unique_ptr<Model>model = make_unique <Model>();
+		model->GetUseLight();
+		model->CreateObj(modelData);
+		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle,move(model));
 
 		return modelHandle;
 	}
@@ -99,6 +102,21 @@ SModelData ModelManager::GetObjData(uint32_t index)
 	}
 
 	return data;
+}
+
+Model* ModelManager::GetModel(uint32_t index)
+{
+	Model *data =nullptr;
+	for (const auto& [key, s] : ModelManager::GetInstance()->objModelDatas_)
+	{
+		if (s.get()->GetIndex() == index)
+		{
+			data = s.get()->GetModel();
+			return data;
+		}
+	}
+
+	return nullptr;
 }
 
 bool ModelManager::ChackLoadObj(string filePath)
