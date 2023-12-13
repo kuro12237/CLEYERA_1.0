@@ -38,7 +38,6 @@
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp" />
     <ClCompile Include="CLEYERA\DebugTools\Camera\DebugCamera.cpp" />
     <ClCompile Include="CLEYERA\DebugTools\DebugTools.cpp" />
-    <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
@@ -85,7 +84,6 @@
     <ClInclude Include="CLEYERA\DebugTools\Camera\DebugCamera.h" />
     <ClInclude Include="CLEYERA\DebugTools\Commands\ICommand.h" />
     <ClInclude Include="CLEYERA\DebugTools\DebugTools.h" />
-    <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />

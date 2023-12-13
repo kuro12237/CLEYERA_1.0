@@ -47,7 +47,7 @@ void Model::CommandCallPipelineVertex()
 	state_->CallPipelinexVertex(this);
 }
 
-void Model::Draw(const WorldTransform& worldTransform, const ViewProjection& viewprojection)
+void Model::Draw(const ViewProjection& viewprojection)
 {
 	if (state_ == nullptr)
 	{
@@ -55,7 +55,7 @@ void Model::Draw(const WorldTransform& worldTransform, const ViewProjection& vie
 		assert(0);
 	}
 	
-	state_->Draw(this, worldTransform,viewprojection);
+	state_->Draw(this,viewprojection);
 }
 
 

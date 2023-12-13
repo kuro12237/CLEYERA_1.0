@@ -16,7 +16,6 @@ void ModelSphereState::Initialize(Model* state)
 	uint32_t i = VertexNum * VertexNum * 6;
 	resource_.Index = CreateResources::CreateBufferResource(sizeof(uint32_t) * i);
 	resource_.IndexBufferView = CreateResources::IndexCreateBufferView(sizeof(uint32_t) * i, resource_.Index.Get());
-	state;
 }
 
 void ModelSphereState::CallPipelinexVertex(Model* state)
@@ -44,7 +43,7 @@ void ModelSphereState::CallPipelinexVertex(Model* state)
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-void ModelSphereState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
+void ModelSphereState::Draw(Model* state,const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -153,16 +152,12 @@ void ModelSphereState::Draw(Model* state, const WorldTransform& worldTransform, 
 	}
 
 
-	CommandCall(state,worldTransform,viewprojection);
+	CommandCall(state,viewprojection);
 }
 
-void ModelSphereState::CommandCall(Model*state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
+void ModelSphereState::CommandCall(Model*state, const ViewProjection& viewprojection)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
-
-	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 
 	if (!state->GetTexHandle() == 0)
 	{

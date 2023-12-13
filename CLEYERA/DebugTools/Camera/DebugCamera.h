@@ -5,6 +5,7 @@
 #include"Input.h"
 #include"MatrixTransform.h"
 #include"DebugTools/DebugTools.h"
+#include"Model.h"
 
 class DebugCamera : public ICommand
 {

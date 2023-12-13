@@ -36,7 +36,7 @@ void ModelPlaneState::CallPipelinexVertex(Model* state)
 
 }
 
-void ModelPlaneState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
+void ModelPlaneState::Draw(Model* state, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -76,15 +76,14 @@ void ModelPlaneState::Draw(Model* state, const WorldTransform& worldTransform, c
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 
 
-	CommandCall(state->GetTexHandle(),worldTransform,viewprojection);
+	CommandCall(state->GetTexHandle(),viewprojection);
 
 }
 
-void ModelPlaneState::CommandCall(uint32_t texHandle, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
+void ModelPlaneState::CommandCall(uint32_t texHandle,const ViewProjection& viewprojection)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 
 	if (!texHandle==0)

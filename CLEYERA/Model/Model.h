@@ -50,7 +50,7 @@ public:
 
 	void CommandCallPipelineVertex();
 
-	void Draw(const WorldTransform &worldTransform, const ViewProjection &viewprojection);
+	void Draw( const ViewProjection &viewprojection);
 
 	/// <summary>
 	/// ライトを使うか？

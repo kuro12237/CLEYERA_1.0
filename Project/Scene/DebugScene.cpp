@@ -198,9 +198,6 @@ void DebugScene::Back2dSpriteDraw()
 void DebugScene::Object3dDraw()
 {
 	
-	BallModel_->Draw(ballModelWorldTransform_, viewProjection);
-	model_->Draw(modelWorldTransform_, viewProjection);
-	testSkyDome_->Draw(testSkyDomeWorldTransform_, viewProjection);
 	fireParticle_->Draw(viewProjection);
 }
 void DebugScene::Flont2dSpriteDraw()

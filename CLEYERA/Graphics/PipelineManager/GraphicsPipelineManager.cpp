@@ -1217,7 +1217,7 @@ SPSOProperty GraphicsPipelineManager::CreateLighting(ComPtr<ID3D12Device> device
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material
-	D3D12_ROOT_PARAMETER rootParameters[8] = {};
+	D3D12_ROOT_PARAMETER rootParameters[7] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -1244,14 +1244,11 @@ SPSOProperty GraphicsPipelineManager::CreateLighting(ComPtr<ID3D12Device> device
 	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
-	//rootPrameter�ɓ����
+
+	//view行列
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[4].Descriptor.ShaderRegister = 1;
-	//view行列
-	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[5].Descriptor.ShaderRegister = 2;
+	rootParameters[4].Descriptor.ShaderRegister = 2;
 	//LightData
 
 	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
@@ -1261,15 +1258,15 @@ SPSOProperty GraphicsPipelineManager::CreateLighting(ComPtr<ID3D12Device> device
 	descriptorRangeForInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	
-	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
-	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[5].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
+	rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
 
 	//今のLightの個数
-	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[7].Descriptor.ShaderRegister = 4;
+	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[6].Descriptor.ShaderRegister = 4;
 
 
 	//Sampler�̐ݒ�

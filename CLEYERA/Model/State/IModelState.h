@@ -10,7 +10,7 @@ public:
 
 	
 	virtual void CallPipelinexVertex(Model *state) = 0;
-	virtual void Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection) = 0;
+	virtual void Draw(Model* state, const ViewProjection& viewprojection) = 0;
 private:
 
 };

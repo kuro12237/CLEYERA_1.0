@@ -29,7 +29,6 @@ struct NowLightTotal
 
 ConstantBuffer<Material>gMaterial :register(b0);
 
-ConstantBuffer<DirectionalLight> gDirectionalLight : register(b1);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
 StructuredBuffer<PointLight> gPointLight : register(t1);
 ConstantBuffer<NowLightTotal> gNowLightTotal : register(b4);

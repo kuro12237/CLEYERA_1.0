@@ -200,9 +200,6 @@
     <ClCompile Include="CLEYERA\DebugTools\DebugTools.cpp">
       <Filter>CLEYERA\DebugTools</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\DebugTools\Grid\Grid.cpp">
-      <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp">
       <Filter>CLEYERA\Model\Sphere</Filter>
     </ClCompile>
@@ -352,9 +349,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\DebugTools\Commands\ICommand.h">
       <Filter>CLEYERA\DebugTools</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\DebugTools\Grid\Grid.h">
-      <Filter>CLEYERA\DebugTools\DebugGrid</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h">
       <Filter>CLEYERA\Model\Sphere</Filter>

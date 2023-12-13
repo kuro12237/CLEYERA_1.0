@@ -78,7 +78,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		modelData.material.handle = texHandle;
 
 		unique_ptr<Model>model = make_unique <Model>();
-		model->GetUseLight();
+		//model->UseLight();
 		model->CreateObj(modelData);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle,move(model));
 
