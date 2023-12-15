@@ -22,6 +22,9 @@ void Game3dObject::Draw(WorldTransform worldTransform ,ViewProjection view)
 		return;
 	}
 
+
+	model_->UseLight(UseLight_);
+
 	Material * materialData;
 	MaterialBuffer_->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	materialData->shininess = shininess;

@@ -54,7 +54,7 @@ void FireParticle::Update(Vector3 pos)
 			p1.worldTransform_.scale = { kSize, kSize, kSize };
 
 			uniform_real_distribution<float>distributionAlpha(0.2f, 1.0f);
-			Vector4 color = Model::ColorConversion(0x66cdaaff);
+			Vector4 color = { 1,1,1,1 };
 			p1.color_ = { color.x,color.y,color.z,255 };
 			p1.color_ = { color.x,color.y,color.z,distributionAlpha(randomEngine) };
 		

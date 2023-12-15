@@ -30,9 +30,9 @@ void DebugScene::Initialize()
 	uint32_t ballTexHandle = TextureManager::LoadTexture("testBall.png");
     //model
 	model_ = make_unique<Model>();
-	model_->UseLight();
+
 	modelWorldTransform_.Initialize();
-	model_->SetTexHandle(ballTexHandle);
+
 	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	//model_->CreateModel(make_unique<ModelSphereState>());
@@ -47,16 +47,14 @@ void DebugScene::Initialize()
 
 
 	BallModel_ = make_unique<Model>();
-	BallModel_->UseLight();
 	BallModel_->CreateModel(make_unique<ModelSphereState>());
 
 	//BallModel_->CreateModel(make_unique<ModelSphereState>());
-	BallModel_->SetTexHandle(ballTexHandle);
 
 	ballModelWorldTransform_.Initialize();
 
 	testSkyDome_ = make_unique<Model>();
-	testSkyDome_->UseLight();
+
 	testSkyDome_->SetModel(testSkydomeModelHandle_);
 	testSkyDomeWorldTransform_.Initialize();
 	testSkyDomeWorldTransform_.scale = { 10,10,10 };

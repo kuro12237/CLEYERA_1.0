@@ -7,8 +7,7 @@ ModelObjState::~ModelObjState()
 
 void ModelObjState::Initialize(Model* state)
 {
-	state->SetTexHandle(state->GetModelData().material.handle);
-
+	
 	resource_.Vertex = CreateResources::CreateBufferResource(
 		sizeof(VertexData) * state->GetModelData().vertices.size()
 	);

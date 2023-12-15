@@ -55,19 +55,7 @@ public:
 	/// <summary>
 	/// ライトを使うか？
 	/// </summary>
-	void UseLight() { this->uselight_ = true; };
-
-
-#pragma region Set
-	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
-	void SetUvScale(Vector3 uvScale) { uvScale_ = uvScale; }
-	void SetUvRotate(Vector3 uvRotate) { uvRotate_ = uvRotate; }
-	void SetUvTranslate(Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }
-	void SetColor(Vector4 color) { color_ = color; }
-	//void SetBlendMode(BlendMode blendMode) { blendMode_ = blendMode; }
-	//void SetLight(Light light) { testLight_ = light; }
-
-#pragma endregion 
+	void UseLight(bool flag) { this->uselight_ = flag; };
 
 #pragma region Get
 
@@ -97,12 +85,7 @@ public:
 	/// </summary>
 	float GetSize() { return size_; }
 
-	/// <summary>
-	/// Color変換
-	/// </summary>
-	static Vector4 ColorConversion(uint32_t rgbaValue);
 
-	
 	bool GetUseLight(){return uselight_;}
 
 	SModelData GetModelData() { return modelData_; }

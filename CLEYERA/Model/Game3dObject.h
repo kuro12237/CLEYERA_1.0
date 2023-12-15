@@ -25,6 +25,8 @@ public:
 	void SetShininess(float s) { shininess = s; }
 
 	void SetTexHandle(uint32_t index) { texHandle_ = index; }
+
+	void UseLight(bool flag) { UseLight_ = flag; }
 #pragma endregion
 
 
@@ -40,6 +42,8 @@ private:
 	Vector3 uvRotate = { 0,0,0 };
 	Vector3 uvTranslate = { 0,0,0 };
 	float shininess = 70.0f;
+
+	bool UseLight_ = false;
 
 	uint32_t texHandle_ = 0;
 
