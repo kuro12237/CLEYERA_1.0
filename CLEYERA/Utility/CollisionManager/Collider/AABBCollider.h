@@ -1,9 +1,10 @@
 #pragma once
-#include"Pch.h"
+#include "Pch.h"
 #include "CollisionStructures/CollisionStructures.h"
 
 
-class SphereCollider {
+class AABBCollider {
+
 public:
 
 	/// <summary>
@@ -16,19 +17,33 @@ public:
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
-#pragma region Radius
+#pragma region AABB
 
 	/// <summary>
-	/// Radiusの取得
+	/// OBBの取得
 	/// </summary>
-	float GetRadius() { return radius_; }
+	AABB GetAABB() { return aabb_; }
 
 	/// <summary>
-	/// Radiusの設定
+	/// OBBの設定
 	/// </summary>
-	void SetRadius(float radius) { radius_ = radius; }
+	void SetAABB(AABB aabb) { aabb_ = aabb; }
 
 #pragma endregion 
+
+#pragma region Size
+
+	/// <summary>
+	/// Sizeの取得
+	/// </summary>
+	Vector3 GetSize() { return size_; }
+
+	/// <summary>
+	/// Sizeの設定
+	/// </summary>
+	void SetSize(Vector3 size) { size_ = size; }
+
+#pragma endregion
 
 #pragma region ID
 
@@ -72,13 +87,16 @@ public:
 
 #pragma endregion
 
+
 private:
+
+	AABB aabb_{};
+
+	uint32_t id_ = 0xffffffff;
 
 	uint32_t collisionAttribute_ = 0xffffffff;
 
 	uint32_t CollisionMask_ = 0xffffffff;
 
-	uint32_t id_ = 0xffffffff;
-
-	float radius_ = 0.5f;
+	Vector3 size_ = { 1.0f, 1.0f ,1.0f };
 };

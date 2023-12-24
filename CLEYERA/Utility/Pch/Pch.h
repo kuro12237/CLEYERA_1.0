@@ -58,7 +58,7 @@
 #pragma endregion
 
 using Microsoft::WRL::ComPtr;
-using namespace std;
+using namespace std;;
 using namespace std::chrono;
 
 #include"Vector2.h"
@@ -68,4 +68,3 @@ using namespace std::chrono;
 #include"Matrix2x2.h"
 #include"Matrix3x3.h"
 #include"Matrix4x4.h"
-

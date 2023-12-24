@@ -3,7 +3,7 @@
 #include "CollisionStructures/CollisionStructures.h"
 
 
-class SphereCollider {
+class SegmentCollider {
 public:
 
 	/// <summary>
@@ -16,17 +16,17 @@ public:
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
-#pragma region Radius
+#pragma region Segment
 
 	/// <summary>
 	/// Radiusの取得
 	/// </summary>
-	float GetRadius() { return radius_; }
+	Segment GetSegments() { return segment_; }
 
 	/// <summary>
 	/// Radiusの設定
 	/// </summary>
-	void SetRadius(float radius) { radius_ = radius; }
+	void SetRadius(Segment segment) { segment_ = segment; }
 
 #pragma endregion 
 
@@ -80,5 +80,5 @@ private:
 
 	uint32_t id_ = 0xffffffff;
 
-	float radius_ = 0.5f;
+	Segment segment_{};
 };

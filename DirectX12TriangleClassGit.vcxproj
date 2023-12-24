@@ -64,14 +64,19 @@
     <ClCompile Include="CLEYERA\Transform\ViewProjection.cpp" />
     <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp" />
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp" />
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp" />
     <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
+    <ClCompile Include="Project\GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\FireParticles\FireParticle.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Player.cpp" />
     <ClCompile Include="Project\Scene\CreatePhongModelScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene.cpp" />
+    <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
     <ClCompile Include="Project\Scene\MTScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -121,17 +126,26 @@
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h" />
     <ClInclude Include="CLEYERA\Transform\ViewProjection.h" />
     <ClInclude Include="CLEYERA\Transform\WorldTransform.h" />
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\AABBCollider.h" />
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\OBBCollider.h" />
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SegmentCollider.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SphereCollider.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionManager.h" />
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionStructures\CollisionStructures.h" />
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.h" />
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.h" />
     <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
+    <ClInclude Include="Project\GameObject\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\FireParticles\FireParticle.h" />
+    <ClInclude Include="Project\GameObject\Player\Player.h" />
     <ClInclude Include="Project\Scene\CreatePhongModelScene.h" />
     <ClInclude Include="Project\Scene\DebugScene.h" />
+    <ClInclude Include="Project\Scene\Game\GameScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\MTScene.h" />
   </ItemGroup>
@@ -303,7 +317,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -330,7 +344,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MinSpace</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
