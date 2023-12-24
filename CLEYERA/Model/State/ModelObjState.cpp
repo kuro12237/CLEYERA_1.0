@@ -2,30 +2,29 @@
 
 ModelObjState::~ModelObjState()
 {
-	resource_.Vertex.Reset();
-	resource_.Material.Reset();
-	resource_.Light.Reset();
-	resource_.wvpResource.Reset();
+	
 }
 
 void ModelObjState::Initialize(Model* state)
 {
-	SModelData ModelData_ = {};
+
 	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
 	state->SetTexHandle(ModelData_.material.handle);
 
-	CreateResources::CreateBufferResource(sizeof(VertexData) * ModelData_.vertices.size(),resource_.Vertex);
-    CreateResources::CreateBufferResource(sizeof(Material), resource_.Material);
+	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * ModelData_.vertices.size());
+	resource_.Material = CreateResources::CreateBufferResource(sizeof(Material));
+
+    if (state->GetUseLight())
+	{
+		resource_.Light = CreateResources::CreateBufferResource(sizeof(LightData));
+	}
+
 
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * ModelData_.vertices.size(), resource_.Vertex.Get(), int(ModelData_.vertices.size()));
-	if (state->GetUseLight() != NONE)
-	{
-	    CreateResources::CreateBufferResource(sizeof(LightData), resource_.Light);
-	}
-	ModelData_.vertices.clear();
+
 }
 
-void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelObjState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -33,8 +32,6 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 
-	SModelData ModelData_ = {};
-	ModelData_ = ModelManager::GetObjData(state->GetModelHandle());
 	memcpy(vertexData, ModelData_.vertices.data(), sizeof(VertexData) * ModelData_.vertices.size());
 	//ModelData_.vertices.clear();
 	ImGui::Begin("direction");
@@ -44,7 +41,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	materialData->shininess = 70.0f;
 	materialData->color = state->GetColor();
 	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
-	if (state->GetUseLight() != NONE)
+	if (state->GetUseLight())
 	{
 		LightData* lightData = nullptr;
 		resource_.Light->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
@@ -57,7 +54,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
-	if (state->GetUseLight() == HARF_LAMBERT)
+	if (state->GetUseLight())
 	{
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Lighting;
 	}
@@ -73,7 +70,7 @@ void ModelObjState::Draw(Model* state, WorldTransform worldTransform, ViewProjec
 	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
 	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 	DescriptorManager::rootParamerterCommand(3, state->GetTexHandle());
-	if (state->GetUseLight() != NONE)
+	if (state->GetUseLight())
 	{
 		commands.m_pList->SetGraphicsRootConstantBufferView(4, resource_.Light->GetGPUVirtualAddress());
 		commands.m_pList->SetGraphicsRootConstantBufferView(5, viewprojection.buffer_->GetGPUVirtualAddress());

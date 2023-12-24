@@ -44,6 +44,7 @@ struct  SModelData
 {
 	vector<VertexData> vertices;
 	MaterialData material;
+	string filePath;
 };
 
 

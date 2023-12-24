@@ -46,12 +46,12 @@ public:
 	/// <param name="ModelHandle"></param>
 	void SetModel(uint32_t handle);
 
-	void Draw(WorldTransform worldTransform, ViewProjection viewprojection);
+	void Draw(const WorldTransform &worldTransform, const ViewProjection &viewprojection);
 
 	/// <summary>
 	/// ライトを使うか？
 	/// </summary>
-	void UseLight(SUseLight use);
+	void UseLight() { this->uselight_ = true; };
 
 
 #pragma region Set
@@ -99,7 +99,7 @@ public:
 	static Vector4 ColorConversion(uint32_t rgbaValue);
 
 	
-	SUseLight GetUseLight(){return uselight_;}
+	bool GetUseLight(){return uselight_;}
 
 	//Light GetLight() { return testLight_; }
 #pragma endregion 
@@ -122,7 +122,7 @@ private:
 	Vector3 uvRotate_ = {0,0,0};
 	Vector3 uvTranslate_ = {0,0,0};
 
-	SUseLight uselight_ = NONE;
+	bool uselight_ = false;
 
 	unique_ptr<IModelState> state_ = nullptr;
 

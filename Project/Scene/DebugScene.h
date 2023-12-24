@@ -49,7 +49,7 @@ private:
 	WorldTransform modelWorldTransform_{};
 
 	uint32_t houseModelHandle_ = 0;
-	uint32_t packageModelHandle_ = 0;
+	uint32_t GroundModelHandle_ = 0;
 
 	unique_ptr<Model>BallModel_ = nullptr;
 	WorldTransform ballModelWorldTransform_ = {};

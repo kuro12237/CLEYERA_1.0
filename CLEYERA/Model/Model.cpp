@@ -10,13 +10,13 @@ void Model::CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos , float
 	size_ = size;
 	color_ = color;
 
-	state_.swap(state);
+	state_=move(state);
 	state_->Initialize(this);
 }
 
 void Model::CreateLine(unique_ptr<IModelState> state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
 {
-	state_.swap(state);
+	state_=move(state);
 	StartPos_ = StartPosition;
 	EndPos_ = EndPosition;
 	color_ = Color;
@@ -30,12 +30,12 @@ void Model::SetModel(uint32_t handle)
 
 	if (prevModelHandle_ != modelHandle_)
 	{
-		state_.reset(new ModelObjState);
+		state_=make_unique<ModelObjState>();
 		state_->Initialize(this);
 	}
 }
 
-void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
+void Model::Draw(const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	if (state_ == nullptr)
 	{
@@ -46,10 +46,6 @@ void Model::Draw(WorldTransform worldTransform, ViewProjection viewprojection)
 	state_->Draw(this, worldTransform,viewprojection);
 }
 
-void Model::UseLight(SUseLight use)
-{
-	uselight_ = use;
-}
 
 Vector4 Model::ColorConversion(uint32_t rgbaValue)
 {

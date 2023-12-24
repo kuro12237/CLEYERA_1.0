@@ -5,6 +5,7 @@ ComPtr<ID3D12Resource> CreateResources::CreateBufferResource(size_t sizeInbyte)
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
     ComPtr<ID3D12Resource> result;
 
+
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeap��g��
 

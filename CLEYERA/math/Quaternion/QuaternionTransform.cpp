@@ -1,5 +1,20 @@
 #include "QuaternionTransform.h"
 
+Quaternion QuaternionTransform::MakeQuaternionRotateAxisAngle(const Vector3& axis, float angle)
+{
+	Quaternion result{};
+	float halfAngle = angle * 0.5f;
+	float sinHalfAngle = sinf(halfAngle);
+	float cosHalfAngle = cosf(halfAngle);
+
+	result.w = cosHalfAngle;
+	result.x = axis.x * sinHalfAngle;
+	result.y = axis.y * sinHalfAngle;
+	result.z = axis.z * sinHalfAngle;
+
+	return result;
+}
+
 Matrix4x4 QuaternionTransform::MakeRotateAxisAngle(const Vector3& axis, float angle)
 {
 	Matrix4x4 result{};
@@ -65,6 +80,27 @@ Matrix4x4 QuaternionTransform::DirectionToDirection(const Vector3& from,const Ve
 
 	 result = MakeRotateAxisAngle(n, sin, cos);
 
+	return result;
+}
+
+Matrix4x4 QuaternionTransform::MakeRotateMatrix(const Quaternion& q)
+{
+	Matrix4x4 result = MatrixTransform::Identity();
+
+	Quaternion powQ = { (q.x * q.x) ,( q.y * q.y) ,(q.z*q.z) ,(q.w*q.w) };
+
+	result.m[0][0] = powQ.w + powQ.x - powQ.y - powQ.z;
+	result.m[0][1] = 2 * ((q.x * q.y) + (q.w * q.z));
+	result.m[0][2] = 2 * ((q.x * q.z) - (q.w * q.y));
+
+	result.m[1][0]= 2 * ((q.x * q.y) - (q.w * q.z));
+	result.m[1][1] = powQ.w - powQ.x + powQ.y - powQ.z;
+	result.m[1][2] = 2 * ((q.y * q.z) + (q.w * q.x));
+
+	result.m[2][0] = 2 * ((q.x * q.z) + (q.w * q.y));
+	result.m[2][1] = 2 * ((q.y * q.z) - (q.w * q.x));
+	result.m[2][2] = powQ.w - powQ.x - powQ.y + powQ.z;
+	
 	return result;
 }
 
@@ -144,4 +180,22 @@ Quaternion QuaternionTransform::Inverse(const Quaternion& quaternion)
 	result.w = qC.w / normxnorm;
 
 	return result;
+}
+
+Vector3 QuaternionTransform::RotateVector(const Vector3& v, const Quaternion& q)
+{
+	Quaternion vecQuat{};
+	vecQuat.w = 0.0f;  
+	vecQuat.x = v.x;
+	vecQuat.y = v.y;
+	vecQuat.z = v.z;
+
+	Quaternion conjugate = Conjugation(q);
+
+	// ベクトルを回転する
+	Quaternion rotatedVec = Multiply(q ,Multiply(vecQuat,conjugate));
+
+	// 回転後のベクトルを抽出して返す
+	return { rotatedVec.x, rotatedVec.y, rotatedVec.z };
+
 }

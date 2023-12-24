@@ -30,7 +30,7 @@ void DebugScene::Initialize()
 	uint32_t ballTexHandle = TextureManager::LoadTexture("testBall.png");
     //model
 	model_ = make_unique<Model>();
-	model_->UseLight(HARF_LAMBERT);
+	model_->UseLight();
 	modelWorldTransform_.Initialize();
 	model_->SetTexHandle(ballTexHandle);
 	//model_->CreateModel(make_unique<ModelSphereState>());
@@ -38,12 +38,16 @@ void DebugScene::Initialize()
 	//model_->CreateModel(make_unique<ModelSphereState>());
 	
 	houseModelHandle_ = ModelManager::LoadObjectFile("House");
-	packageModelHandle_ = ModelManager::LoadObjectFile("TestGround");
+	GroundModelHandle_ = ModelManager::LoadObjectFile("TestGround");
 	uint32_t testSkydomeModelHandle_= ModelManager::LoadObjectFile("TestSkyDome");
-	model_->SetModel(packageModelHandle_);
+	model_->SetModel(GroundModelHandle_);
+	//handle読み込み
+	//モデルにセットし
+	//handleがきりかわるたびにハンドルに対応したモデルの頂点に作り変える
+
 
 	BallModel_ = make_unique<Model>();
-	BallModel_->UseLight(HARF_LAMBERT);
+	BallModel_->UseLight();
 	BallModel_->CreateModel(make_unique<ModelSphereState>());
 
 	//BallModel_->CreateModel(make_unique<ModelSphereState>());
@@ -52,7 +56,7 @@ void DebugScene::Initialize()
 	ballModelWorldTransform_.Initialize();
 
 	testSkyDome_ = make_unique<Model>();
-	testSkyDome_->UseLight(HARF_LAMBERT);
+	testSkyDome_->UseLight();
 	testSkyDome_->SetModel(testSkydomeModelHandle_);
 	testSkyDomeWorldTransform_.Initialize();
 	testSkyDomeWorldTransform_.scale = { 10,10,10 };
@@ -70,6 +74,12 @@ void DebugScene::Initialize()
 	pointLightB_.color = { 0.0f,1.0f,0.0f,1.0f };
 	pointLightC_.color = { 0.0f,0.0f,1.0f,1.0f };
 
+	pointLight_.intencity = 0;
+	pointLightB_.intencity = 0;
+	pointLightC_.intencity = 0;
+
+	sunLight_.radious = 30.0f;
+	sunLight_.position.y = 3.0f;
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize(pointFireLightPosition_);
 
@@ -100,20 +110,15 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::Text("ChangeTex :: I key");
 	ImGui::End();
 
-	//model_->UseLight(HARF_LAMBERT);
-	if (Input::PushKey(DIK_L))
-	{
-		//model_->UseLight(NONE);
-	}
 
 
-	if (Input::PushKey(DIK_O))
+	//debug用でモデルを毎回切り替え挙動を確認
+	model_->SetModel(GroundModelHandle_);
+	if (!Input::PushKey(DIK_O))
 	{
-		//model_->SetModel(packageModelHandle_);
-	}else
-	{
-		//model_->SetModel(houseModelHandle_);
+		model_->SetModel(houseModelHandle_);
 	}
+
 
 	ImGui::Begin("TestSphere");
 	ImGui::SliderFloat3("t", &ballModelWorldTransform_.translate.x, -3.0f, 3.0f);
@@ -122,6 +127,7 @@ void DebugScene::Update(GameManager* Scene)
 
 	ImGui::End();
 
+	//画像切り替え
 	sprite_->SetTexHandle(SpritemobTexHandle_);
 	if (Input::PushKey(DIK_I))
 	{
@@ -168,6 +174,9 @@ void DebugScene::Update(GameManager* Scene)
 	ImGui::DragFloat3("pos", &pointFireLightPosition_.x);
 	ImGui::End();
 
+	
+	LightingManager::ClearList();
+
 	fireParticle_->Update(pointFireLightPosition_);
 
 	player_->Update();
@@ -175,13 +184,18 @@ void DebugScene::Update(GameManager* Scene)
 	Collisions();
 
 	LightingManager::ClearList();
+
 	
 	LightingManager::AddList(pointLightB_);
 	LightingManager::AddList(pointLight_);
 	LightingManager::AddList(pointLightC_);
 	LightingManager::AddList(sunLight_);
+	
 	LightingManager::TransfarBuffers();
 
+	ImGui::Begin("LightNum");
+	ImGui::Text("%d", LightingManager::GetNowLight());
+	ImGui::End();
 
 	testSkyDomeWorldTransform_.UpdateMatrix();
 	ballModelWorldTransform_.UpdateMatrix();

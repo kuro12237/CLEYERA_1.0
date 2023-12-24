@@ -10,7 +10,7 @@ void ModelLineState::Initialize(Model* state)
 	state;
 }
 
-void ModelLineState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelLineState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
@@ -27,7 +27,7 @@ void ModelLineState::Draw(Model* state, WorldTransform worldTransform, ViewProje
 	CommandCall(worldTransform,viewprojection);
 }
 
-void ModelLineState::CommandCall(WorldTransform worlTransform,ViewProjection viewProjection)
+void ModelLineState::CommandCall(const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Line;
@@ -42,8 +42,8 @@ void ModelLineState::CommandCall(WorldTransform worlTransform,ViewProjection vie
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 
 	commands.m_pList->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
-	commands.m_pList->SetGraphicsRootConstantBufferView(1, worlTransform.buffer_->GetGPUVirtualAddress());
-	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewProjection.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(1, worldTransform.buffer_->GetGPUVirtualAddress());
+	commands.m_pList->SetGraphicsRootConstantBufferView(2, viewprojection.buffer_->GetGPUVirtualAddress());
 
 	commands.m_pList->DrawInstanced(VertexSize, 1, 0, 0);
 }

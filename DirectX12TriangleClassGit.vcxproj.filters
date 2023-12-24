@@ -553,5 +553,8 @@
     <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shader\LightingObject3d.CS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

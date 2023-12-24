@@ -20,7 +20,7 @@ void ModelCubeState::Initialize(Model* state)
 
 //10
 //23
-void ModelCubeState::Draw(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelCubeState::Draw(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -102,7 +102,7 @@ void ModelCubeState::Draw(Model* state, WorldTransform worldTransform, ViewProje
 	CommandCall(state,worldTransform,viewprojection);
 }
 
-void ModelCubeState::CommandCall(Model* state, WorldTransform worldTransform, ViewProjection viewprojection)
+void ModelCubeState::CommandCall(Model* state, const WorldTransform& worldTransform, const ViewProjection& viewprojection)
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -115,7 +115,7 @@ void ModelCubeState::CommandCall(Model* state, WorldTransform worldTransform, Vi
 	if (!state->GetTexHandle() == 0) {
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
 	}
-	if (state->GetUseLight() == HARF_LAMBERT)
+	if (state->GetUseLight())
 	{
 		//PSO = GraphicsPipelineManager::GetInstance()->GetPso().Herf_Lambert;
 	}

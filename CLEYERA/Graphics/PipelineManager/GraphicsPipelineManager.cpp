@@ -20,7 +20,7 @@ void GraphicsPipelineManager::Initialize()
 
 	Create3dParticlePSOs(pso);
 	LogManager::CompliteLog("Particle3dPSO");
-
+	
 	GraphicsPipelineManager::GetInstance()->pso = pso;
 }
 
@@ -180,6 +180,7 @@ void GraphicsPipelineManager::Create3dParticlePSOs(SPSO& pso)
 	pso.Particle3d.Add = CreateParticle3dAdd(device, commands, shader.Particle);
 
 }
+
 
 SPSOProperty GraphicsPipelineManager::CreateShape(ComPtr<ID3D12Device> device, Commands command, SShaderMode shader)
 {
