@@ -215,9 +215,6 @@
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
       <Filter>CLEYERA\Sprite\state</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\DebugScene.cpp">
-      <Filter>Project\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Input\Input.cpp">
       <Filter>CLEYERA\Input</Filter>
     </ClCompile>
@@ -372,9 +369,6 @@
       <Filter>Project</Filter>
     </ClInclude>
     <ClInclude Include="Project\Scene\IScene.h">
-      <Filter>Project\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Scene\DebugScene.h">
       <Filter>Project\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Input\Input.h">
