@@ -100,14 +100,8 @@
     <Filter Include="CLEYERA\DebugTools\DebugCamera">
       <UniqueIdentifier>{37a1bfe0-2b42-4cbc-b26f-65f851b2677c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\Utility\CollisionManager">
-      <UniqueIdentifier>{ed3e1e6f-dffc-42be-8658-1325a16db11b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Utility\FileLoader">
       <UniqueIdentifier>{13b52452-38fe-4472-b33d-1e13f29e3436}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\Utility\CollisionManager\Collider">
-      <UniqueIdentifier>{21ee60c1-ccf2-421f-a591-bbd6ae2f0d39}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\Particle">
       <UniqueIdentifier>{efaa3838-3aa8-48b6-8460-43d30a48c24c}</UniqueIdentifier>
@@ -135,6 +129,9 @@
     </Filter>
     <Filter Include="Project\GameObject">
       <UniqueIdentifier>{87e2db38-109f-4101-b6bd-93d041c05a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\CollisionManager">
+      <UniqueIdentifier>{fdcd6478-86f6-4622-a9fa-5a063fc9b748}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +225,6 @@
     <ClCompile Include="Project\GameManager\GameManager.cpp">
       <Filter>Project</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp">
-      <Filter>CLEYERA\Utility\CollisionManager</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp">
       <Filter>CLEYERA\Utility\FileLoader</Filter>
     </ClCompile>
@@ -258,9 +252,6 @@
     <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp">
       <Filter>CLEYERA\math\Quaternion</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
-      <Filter>CLEYERA\math\Vector</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp">
       <Filter>CLEYERA\Model</Filter>
     </ClCompile>
@@ -281,6 +272,18 @@
     </ClCompile>
     <ClCompile Include="Project\Scene\GameObject3dTest.cpp">
       <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
+      <Filter>CLEYERA\math\Vector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,15 +383,6 @@
     <ClInclude Include="CLEYERA\DebugTools\Camera\DebugCamera.h">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionManager.h">
-      <Filter>CLEYERA\Utility\CollisionManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SphereCollider.h">
-      <Filter>CLEYERA\Utility\CollisionManager\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h">
-      <Filter>CLEYERA\Utility\CollisionManager\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h">
       <Filter>CLEYERA\Utility\FileLoader</Filter>
     </ClInclude>
@@ -431,9 +425,6 @@
     <ClInclude Include="CLEYERA\math\Vector4.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\VectorTransform.h">
-      <Filter>CLEYERA\math\Vector</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Model\ModelManager.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
@@ -457,6 +448,36 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\GameObject3dTest.h">
       <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionManager.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionStructures\CollisionStructures.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\AABBCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\OBBCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SegmentCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SphereCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\VectorTransform.h">
+      <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
