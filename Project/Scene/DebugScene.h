@@ -14,7 +14,6 @@
 #include "GameObject/Enemy/Enemy.h"
 #include "CollisionManager.h"
 
-
 class DebugScene:public IScene
 {
 public:
