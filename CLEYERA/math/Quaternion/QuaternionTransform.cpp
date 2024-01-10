@@ -213,6 +213,7 @@ Quaternion QuaternionTransform::Slerp(const Quaternion& q1, const Quaternion& q2
 
 	Quaternion qn1 = q1;
 	Quaternion qn2 = q2;
+
 	if (dot < 0.0f)
 	{
 		qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
