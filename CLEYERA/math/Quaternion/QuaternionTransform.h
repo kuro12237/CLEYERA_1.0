@@ -21,6 +21,8 @@ public:
 
 	static float Length(Quaternion q);
 
+	static float Dot(const Quaternion& q1, const Quaternion& q2);
+
 	static Quaternion Multiply(const Quaternion& lhs, const Quaternion& rhs);
 
 	static Quaternion IdentityQuaternion();
@@ -34,6 +36,8 @@ public:
 	static Quaternion Inverse(const Quaternion& quaternion);
 
 	static Vector3 RotateVector(const Vector3& v, const Quaternion& q);
+
+	static Quaternion Slerp(const Quaternion& q1,const Quaternion& q2, float t);
 
 private:
 

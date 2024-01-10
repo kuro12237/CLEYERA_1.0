@@ -111,6 +111,11 @@ float QuaternionTransform::Length(Quaternion q)
 	return result;
 }
 
+float QuaternionTransform::Dot(const Quaternion& q1, const Quaternion& q2)
+{
+	return float(q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z);
+}
+
 Quaternion QuaternionTransform::Multiply(const Quaternion& lhs, const Quaternion& rhs)
 {
 	Quaternion result{};
@@ -198,4 +203,35 @@ Vector3 QuaternionTransform::RotateVector(const Vector3& v, const Quaternion& q)
 	// 回転後のベクトルを抽出して返す
 	return { rotatedVec.x, rotatedVec.y, rotatedVec.z };
 
+}
+
+Quaternion QuaternionTransform::Slerp(const Quaternion& q1, const Quaternion& q2,float t)
+{
+	 
+	// クォータニオンの内積を計算
+	float dot = Dot(q1, q2);
+
+	Quaternion qn1 = q1;
+	Quaternion qn2 = q2;
+	if (dot < 0.0f)
+	{
+		qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
+		dot = -dot;
+	}
+
+	// q1とq2の間の角度を計算
+	float theta = std::acos(dot);
+
+	float sinTheta = std::sin(theta);
+	float scale0 = std::sin((1 - t) * theta) / sinTheta;
+	float scale1 = std::sin(t * theta) / sinTheta;
+
+	// 補間されたクォータニオンを計算して返す
+	return Quaternion(
+		scale0 * qn1.x + scale1 * qn2.x,
+		scale0 * qn1.y + scale1 * qn2.y,
+		scale0 * qn1.z + scale1 * qn2.z,
+		scale0 * qn1.w + scale1 * qn2.w
+	);
+	
 }

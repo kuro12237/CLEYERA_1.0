@@ -15,29 +15,37 @@ void MTScene::Update(GameManager* Scene)
 	Scene;
 
 
-	Quaternion rotation = QuaternionTransform::MakeQuaternionRotateAxisAngle(
-		VectorTransform::Normalize({ 1.0f,0.4f,-0.2f }), 0.45f
-	);
-
-	Vector3 pointY = { 2.1f,-0.9f,1.3f };
-	Matrix4x4 rotateMatrix = QuaternionTransform::MakeRotateMatrix(rotation);
-
-	Vector3 rByQuaternion = QuaternionTransform::RotateVector(pointY, rotation);
-	Vector3 rByMat = VectorTransform::TransformNormal(pointY, rotateMatrix);
-
-	ImGui::Begin("MT_01_04");
-
-	ImGui::Text("rotation : %0.2f %0.2f %0.2f %0.2f",rotation.x, rotation.y, rotation.z, rotation.w);
-	ImGui::Text("RotateMatrix");
 	
+	Vector3 rotateV0 = { 0.71f, 0.71f, 0.0f };
+	Vector3 rotateV1 = { 0.71f, 0.0f, 0.71f };
 
-	ImGui::Text("%0.3f %0.3f %0.3f %0.3f", rotateMatrix.m[0][0], rotateMatrix.m[0][1], rotateMatrix.m[0][2], rotateMatrix.m[0][3]);
-	ImGui::Text("%0.3f %0.3f %0.3f %0.3f", rotateMatrix.m[1][0], rotateMatrix.m[1][1], rotateMatrix.m[1][2], rotateMatrix.m[1][3]);
-	ImGui::Text("%0.3f %0.3f %0.3f %0.3f", rotateMatrix.m[2][0], rotateMatrix.m[2][1], rotateMatrix.m[2][2], rotateMatrix.m[2][3]);
-	ImGui::Text("%0.3f %0.3f %0.3f %0.3f", rotateMatrix.m[3][0], rotateMatrix.m[3][1], rotateMatrix.m[3][2], rotateMatrix.m[3][3]);
+	rotateV0 = VectorTransform::Normalize(rotateV0);
+	rotateV1 = VectorTransform::Normalize(rotateV1);
 
-	ImGui::Text("rotateByQuaternion : %0.2f %0.2f %0.2f", rByQuaternion.x, rByQuaternion.y, rByQuaternion.z);
-	ImGui::Text("rotateByMatrix : %0.2f %0.2f %0.2f", rByMat.x, rByMat.y, rByMat.z);
+
+    Quaternion rotate0 = QuaternionTransform::MakeQuaternionRotateAxisAngle(rotateV0, 0.3f);
+	Quaternion rotate1 = QuaternionTransform::MakeQuaternionRotateAxisAngle(rotateV1,3.141592f);
+
+	rotate0, rotate1;
+
+	ImGui::Begin("MT_01_05");
+
+	Quaternion SR0 = QuaternionTransform::Slerp(rotate0, rotate1, 0.0f);
+
+	Quaternion SR1 = QuaternionTransform::Slerp(rotate0, rotate1, 0.3f);
+
+	Quaternion SR2 = QuaternionTransform::Slerp(rotate0, rotate1, 0.5f);
+
+	Quaternion SR3 = QuaternionTransform::Slerp(rotate0, rotate1, 0.7f);
+
+	Quaternion SR4 = QuaternionTransform::Slerp(rotate0, rotate1, 1.0f);
+
+
+	ImGui::Text("%0.2f %0.2f %0.2f %0.2f", SR0.x, SR0.y, SR0.z, SR0.w);
+	ImGui::Text("%0.2f %0.2f %0.2f %0.2f", SR1.x, SR1.y, SR1.z, SR1.w);
+	ImGui::Text("%0.2f %0.2f %0.2f %0.2f", SR2.x, SR2.y, SR2.z, SR2.w);
+	ImGui::Text("%0.2f %0.2f %0.2f %0.2f", SR3.x, SR3.y, SR3.z, SR3.w);
+	ImGui::Text("%0.2f %0.2f %0.2f %0.2f", SR4.x, SR4.y, SR4.z, SR4.w);
 
 	ImGui::End();
 
